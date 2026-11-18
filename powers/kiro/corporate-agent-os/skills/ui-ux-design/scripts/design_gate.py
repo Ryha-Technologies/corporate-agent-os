@@ -83,7 +83,7 @@ def check(record: Path) -> list[str]:
     if len(prow) < 4:
         problems.append(f"psychology table has {len(prow)} rows; need at least 4 principles with concrete implications")
     dirs = section(text, REQUIRED[4][1])
-    heads = re.findall(r"^### +", dirs, re.M)
+    heads = re.findall(r"^### +Direction\b", dirs, re.M | re.I)
     if len(heads) < 3:
         problems.append(f"directions section has {len(heads)} '###' direction headings; need at least 3 distinct directions")
     for key, why in (("departure", "the deliberate departure from the category template"), ("motion", "a motion table or motion note"), ("risk", "a risk")):
