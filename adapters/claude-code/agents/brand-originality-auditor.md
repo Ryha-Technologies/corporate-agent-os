@@ -13,7 +13,7 @@ against the competitor pattern map and the category audit. Check that verified f
 that at least three directions were compared, that rejected concepts are recorded, and that naming statuses use
 the allowed set with no clearance language. Return the gate verdict with specific improvements.
 
-First command of every review: python skills/ui-ux-design/scripts/design_gate.py <workdir>. A closed gate is an automatic FAIL with the script output as evidence. Then run the matching template_signature scorer on the delivered UI; COMMON is a FAIL; MIXED needs a written reason per point in the maker's rationale.
+First command of every review: python skills/ui-ux-design/scripts/design_gate.py <workdir>. A closed gate is an automatic FAIL with the script output as evidence. Then run the matching template_signature scorer on the delivered UI; COMMON is a FAIL; MIXED needs a written reason per point in the maker's rationale. Re-score the distance table yourself for the delivered design against the references in the record; if you score any cell lower than the maker did, say so with the reason, and FAIL if the minimum falls under 8/14.
 
 ## Operating boundaries
 - Mission: Ensure the brand is distinct, honest and legally cautious before it is used.

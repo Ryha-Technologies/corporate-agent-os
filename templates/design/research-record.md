@@ -35,9 +35,16 @@ Captured <YYYY-MM-DD>. Screenshots in `04-design/evidence/references/`.
 ## Directions
 At least three. Different composition, not recoloured copies.
 
+Follow `skills/ui-ux-design/references/creative-ideation.md`. Directions derive from the job and a lens; never from a reference screenshot. Raw material first:
+- Core verb: | Emotional job: | Material truth (things that can be shown): | Hardest constraint: | User's own words:
+
 ### Direction A: <name>
+- Lens: <lens>, family: <Material | Time | Scale | Voice | Analog source | Inversion> (why it fits the job and the hardest constraint)
+- First-screen sentence (no UI terms):
+- Signature element (from the material truth; what the swap test hinges on):
 - Concept (one sentence):
 - Deliberate departure from the category template:
+- What this direction gives up:
 - Principles it leans on:
 - Type pairing (with licence):
 - Palette (with contrast ratios):
@@ -46,10 +53,30 @@ At least three. Different composition, not recoloured copies.
 - Risk:
 
 ### Direction B: <name>
-(same fields)
+(same fields; different lens family)
 
 ### Direction C: <name>
-(same fields)
+(same fields; third lens family)
+
+### Distance table (0 same, 1 similar, 2 different; seven axes: first-screen structure, navigation, dominant element, type character, colour model, density, signature; max 14)
+| Direction | vs <Ref 1> | vs <Ref 2> | vs <Ref 3> | vs <Ref 4> | vs <Ref 5> | vs platform default | Min |
+|---|---|---|---|---|---|---|---|
+| A | | | | | | | |
+| B | | | | | | | |
+| C | | | | | | | |
+Any Min under 8: redo that direction with another lens.
+
+### Sibling check (same axes, directions against each other)
+| Pair | Score /14 |
+|---|---|
+| A vs B | |
+| A vs C | |
+| B vs C | |
+
+### Provocations on the recommended direction
+- Remove the most conventional element: <what carries its job now; keep/reject and why>
+- Exaggerate the signature ×3: <keep/reject and why>
+- Swap the medium (print, wall display, voice): <what it taught the screen>
 
 | Criterion | A | B | C |
 |---|---|---|---|

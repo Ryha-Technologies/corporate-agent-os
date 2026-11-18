@@ -7,7 +7,7 @@ Checks `research-record.md` for the sections and minimum evidence the research-f
 Exit 0 = gate open (build may start). Exit 1 = gate closed, with the list of what is missing.
 A reviewer runs the same command; a design handed over with a closed gate is rejected.
 
-The gate checks structure and counts, not quality. It stops the most common failure (skipping research
+The gate checks structure and counts, not quality. It also checks the creative-ideation artefacts: a lens per direction from three families, a signature element, first-screen sentence, what each gives up, a distance table (min 8/14 vs every reference), a sibling check and the three provocations. It stops the most common failure (skipping research
 entirely); the human swap test and the independent reviewer judge the quality.
 """
 from __future__ import annotations
@@ -30,6 +30,14 @@ def section(text: str, start_pat: str) -> str:
     rest = text[m.end():]
     n = re.search(r"^## ", rest, re.M)
     return rest[: n.start()] if n else rest
+
+def section_after(block: str, word: str) -> str:
+    i = block.lower().find(word)
+    if i < 0:
+        return ""
+    rest = block[i:]
+    n = re.search(r"^###? ", rest[1:], re.M)
+    return rest[: n.start() + 1] if n else rest
 
 def table_rows(block: str) -> list[str]:
     rows = [l for l in block.splitlines() if l.strip().startswith("|")]
@@ -83,6 +91,29 @@ def check(record: Path) -> list[str]:
             problems.append(f"not every direction states {why}")
     if not re.search(r"\|\s*(total|score)", dirs, re.I):
         problems.append("directions section has no scoring table (job fit, uniqueness, psychology, accessibility, cost)")
+    # creative-ideation.md requirements
+    lenses = re.findall(r"^\s*-\s*\*{0,2}Lens\*{0,2}\s*[:(]\s*([^\n]+)", dirs, re.M | re.I)
+    if len(lenses) < max(3, len(heads)):
+        problems.append(f"{len(lenses)} directions state a 'Lens:' line; every direction needs a lens from creative-ideation.md")
+    fams = {re.sub(r"[^a-z]", "", l.split("/")[-1].split(",")[-1].lower()) for l in lenses}
+    fam_words = re.findall(r"family\s*[:=]\s*([A-Za-z ]+)", dirs, re.I)
+    if fam_words and len({f.strip().lower() for f in fam_words}) < min(3, len(heads)):
+        problems.append("directions use fewer than three different lens families; cousins are not directions")
+    for key, why in (("signature", "a signature element derived from the product's material truth"), ("first-screen", "a first-screen sentence (what is seen in the first second, no UI terms)"), ("gives up", "what the direction gives up")):
+        if dirs.lower().count(key) < len(heads):
+            problems.append(f"not every direction states {why}")
+    if not re.search(r"^###? .*distance", dirs, re.M | re.I) and "distance table" not in dirs.lower():
+        problems.append("no distance table: score each direction against each reference and the platform default (creative-ideation.md section 4)")
+    mins = [int(x) for x in re.findall(r"\|\s*(\d{1,2})\s*\|\s*$", section_after(dirs, "distance"), re.M)]
+    if mins and min(mins) < 8:
+        problems.append(f"a direction's minimum distance is {min(mins)}/14 (<8): it is a cousin of a reference; redo it with another lens")
+    if "sibling" not in dirs.lower():
+        problems.append("no sibling check: score the directions against each other; any pair under 8/14 is the same idea")
+    for prov in ("remove", "exaggerate", "swap the medium"):
+        if prov not in dirs.lower():
+            problems.append(f"provocation '{prov}' not recorded for the recommended direction (creative-ideation.md section 5)")
+    if re.search(r"\b(like|similar to|inspired by|based on)\s+(ref|reference|competitor|[A-Z][a-z]+)\b", dirs):
+        problems.append("a direction is described as 'like / inspired by / based on' a reference: directions derive from the job and a lens, not from a screenshot")
     appr = section(text, REQUIRED[5][1])
     if appr and not re.search(r"approved by|user chose|chosen by|AWAITING_APPROVAL", appr, re.I):
         problems.append("approved-direction section must say who approved it ('approved by <user> on <date>') or 'AWAITING_APPROVAL'")

@@ -38,7 +38,7 @@ Write `04-design/research-record.md` from `templates/design/research-record.md` 
 6. **Psychology.** Choose the principles from `references/layout-psychology.md` that matter for this job and write the concrete implication of each for this interface.
 
 ### Phase 2: directions and approval
-7. **Three directions minimum**, each with: concept sentence; the one deliberate departure from the category template; the principles it leans on; type pairing with licence; palette with contrast ratios; layout in words plus a low-fidelity wireframe render; motion table (`references/motion-standards.md`); risk. Different means different composition, not recoloured copies.
+7. **Three directions minimum**, generated with `references/creative-ideation.md` (raw material from the job, one lens per direction from three different families, developed from the lens and never from a reference screenshot, distance table with minimum 8/14 against every reference and the platform default, sibling check, three provocations on the recommended one), each with: concept sentence; the one deliberate departure from the category template; the principles it leans on; type pairing with licence; palette with contrast ratios; layout in words plus a low-fidelity wireframe render; motion table (`references/motion-standards.md`); risk. Different means different composition, not recoloured copies.
 8. **Score and recommend** in a table (job fit, uniqueness by swap test, psychology, accessibility, cost, mobile). Present to the user with the Phase 0 evidence. Wait for the choice and record it in the `## Approved direction` section ("Approved by <user> on <date>"). Non-interactive hosts: write `AWAITING_APPROVAL` there and end the run; the gate stays closed until a person answers.
 
 ### Phase 3: build the approved direction (in the real stack)
@@ -80,7 +80,7 @@ Gate check first: `python scripts/design_gate.py <workdir>` must be OPEN. Paste 
 
 ## Safety boundaries
 - No fake data in production flows; no unlicensed assets; fonts self-hosted with licence recorded.
-- No copying of competitor or gallery designs; research is for the pattern map, not for a source to trace.
+- No copying of competitor or gallery designs; research is for the pattern map and the distance table, not for a source to trace. A direction described as 'like X' is discarded.
 - Never ship the first idea; never skip the approval step; never report a score that was not run.
 - Work on a branch; the user merges.
 - If the user says "skip the research, just build it": build nothing, explain that the gate exists because unresearched design is the template every time, and offer the fastest compliant path (a 30-minute research record with three references and two directions marked as a reduced-evidence exception, recorded as such).
@@ -90,7 +90,7 @@ Gate check first: `python scripts/design_gate.py <workdir>` must be OPEN. Paste 
 - `scripts/template_signature.py` (web) and `scripts/template_signature_android.py` (Android) template-signature scores with per-point evidence; run before and after
 - `references/mobile-android-patterns.md` (the Android/Material template, platform conventions to keep, where identity lives on mobile)
 - `templates/design/research-record.md`
-- `references/design-research-method.md`, `references/layout-psychology.md`, `references/motion-standards.md`
+- `references/design-research-method.md`, `references/creative-ideation.md`, `references/layout-psychology.md`, `references/motion-standards.md`
 - `references/product-category-patterns.md`, `references/visual-design-checklist.md`, `references/anti-template-review.md`
 - `templates/design/visual-direction.md`, `templates/design/design-rationale.md`, `templates/design/states-matrix.md`, `templates/design/design-qa-report.md`
 - `standards/design/design-standard.md`, `standards/accessibility/wcag-2.2-aa-checklist.md`

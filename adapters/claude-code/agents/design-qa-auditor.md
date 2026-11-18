@@ -13,7 +13,7 @@ size, and whether each decorative element has a job. Compare against the competi
 conventions and say what is distinct. Use screenshots at representative viewports when a browser is available.
 Return the gate verdict.
 
-First command of every review: python skills/ui-ux-design/scripts/design_gate.py <workdir>. A closed gate is an automatic FAIL with the script output as evidence. Then run the matching template_signature scorer on the delivered UI; COMMON is a FAIL; MIXED needs a written reason per point in the maker's rationale.
+First command of every review: python skills/ui-ux-design/scripts/design_gate.py <workdir>. A closed gate is an automatic FAIL with the script output as evidence. Then run the matching template_signature scorer on the delivered UI; COMMON is a FAIL; MIXED needs a written reason per point in the maker's rationale. Re-score the distance table yourself for the delivered design against the references in the record; if you score any cell lower than the maker did, say so with the reason, and FAIL if the minimum falls under 8/14.
 
 ## Operating boundaries
 - Mission: Ensure the experience is intentional, complete, accessible and faithful to the specification.

@@ -31,8 +31,29 @@ def test_gate_opens_on_complete_record(tmp_path):
         f"| {n} | {role} | a | b | c | d | e | f | g | h | https://x.test/{n} | 2026-11-18 |"
         for n, role in [("c1", "direct"), ("c2", "direct"), ("c3", "direct"), ("a1", "adjacent"), ("a2", "adjacent"), ("paper", "non-digital")])
     psych = "\n".join(f"| P{i} | why | implication |" for i in range(4))
+    fams = ["Material", "Time", "Inversion"]
     dirs = "\n".join(
-        f"### Direction {d}: name\n- Concept: x\n- Deliberate departure from the category template: y\n- Motion table: none\n- Risk: z\n" for d in "ABC")
+        f"### Direction {d}: name\n- Lens: the instrument, family: {fams[i]} (fits gloves and glance)\n- First-screen sentence: the next job and minutes to it\n- Signature element: the route strip\n- Concept: x\n- Deliberate departure from the category template: y\n- What this direction gives up: browsing\n- Motion table: none\n- Risk: z\n" for i, d in enumerate("ABC"))
+    dirs += """
+### Distance table
+| Direction | vs c1 | vs c2 | vs c3 | vs a1 | vs a2 | vs platform default | Min |
+|---|---|---|---|---|---|---|---|
+| A | 12 | 11 | 10 | 12 | 13 | 11 | 10 |
+| B | 11 | 12 | 12 | 10 | 11 | 12 | 10 |
+| C | 13 | 12 | 11 | 11 | 12 | 13 | 11 |
+
+### Sibling check
+| Pair | Score /14 |
+|---|---|
+| A vs B | 11 |
+| A vs C | 12 |
+| B vs C | 10 |
+
+### Provocations
+- Remove the nav bar: the route strip carries wayfinding; keep.
+- Exaggerate the route strip x3: works to 60% height; keep at 40%.
+- Swap the medium to print: a departure board; taught us to right-align times.
+"""
     rec = f"""# Research record
 ## Job
 A field technician on a 6-inch phone, outdoors, dispatching the next job while a customer waits, deciding in five seconds whether the job card is theirs and what to do first.
@@ -59,6 +80,16 @@ Approved by Velluraju C on 2026-11-18: Direction A.
     r = run(GATE, tmp_path)
     assert r.returncode == 0, r.stdout
     assert "DESIGN GATE OPEN" in r.stdout
+
+
+def test_gate_rejects_cousin_direction(tmp_path):
+    """A direction whose minimum distance to a reference is under 8/14 closes the gate."""
+    test_gate_opens_on_complete_record(tmp_path)
+    rec = tmp_path / "04-design/research-record.md"
+    s = rec.read_text(encoding="utf-8").replace("| A | 12 | 11 | 10 | 12 | 13 | 11 | 10 |", "| A | 5 | 11 | 10 | 12 | 13 | 11 | 5 |")
+    rec.write_text(s, encoding="utf-8")
+    r = run(GATE, tmp_path)
+    assert r.returncode == 1 and "cousin" in r.stdout, r.stdout
 
 
 def test_android_template_is_common(tmp_path):

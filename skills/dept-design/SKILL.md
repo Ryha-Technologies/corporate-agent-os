@@ -29,6 +29,7 @@ Let a user hand the whole department a request and get the complete result: the 
 3. **Non-negotiables.** Apply the department's rules throughout:
 - Research before design: category table, pattern map, psychology analysis and three scored directions exist and are shown to the user before anything is built (`skills/ui-ux-design/references/design-research-method.md`).
 - An existing UI is scored with `skills/ui-ux-design/scripts/template_signature.py` (web) or `template_signature_android.py` (Android) first; `COMMON` means redesign, not a report. The platform default (Material 3, HIG) counts as part of the category template (`skills/ui-ux-design/references/mobile-android-patterns.md`).
+- Directions come from `skills/ui-ux-design/references/creative-ideation.md`: a lens per direction from three families, derived from the job and never from a reference, with a distance table (minimum 8/14 against every reference) and a sibling check; 'like <competitor>' is discarded.
 - No screen, component, theme, logo or UI code is produced until `python skills/ui-ux-design/scripts/design_gate.py <workdir>` prints `DESIGN GATE OPEN`; a request to skip research is answered with the shortest compliant path, never by skipping.
 - The result is re-scored, swap-tested and screenshotted at 360/768/1280 before it is called done.
 4. **Run the skills** in order, each with its own procedure, outputs and `CHECKS_ACTUALLY_RUN`. Where a skill requires user approval (directions, proposals, names, destructive changes), stop and get it; approval of one step is not approval of the next.
