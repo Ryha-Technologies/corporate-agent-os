@@ -15,7 +15,7 @@ Date: 2026-11-18 · Version 0.2.0 · Auditor: the author's build session (Vellur
 
 | Claim in README | How verified |
 |---|---|
-| 39 skills, 58 agents, 22 departments / 110 roles, 9 workflows, 12 gates, 58 templates, 11 standards, 28 regression cases, 63 tests | Counted from the tree and the validators' output on 2026-11-18 |
+| 50 skills, 58 agents, 22 departments / 110 roles, 9 workflows, 12 gates, 58 templates, 11 standards, 28 regression cases, 63 tests | Counted from the tree and the validators' output on 2026-11-18 |
 | 10/10 validators pass | `python scripts/validate/run_all.py` (after this audit page was added; 9/10 before, the missing link was this file) |
 | Every relative link and image target in README | Scripted check: 0 broken |
 | Quick-start commands and paths | `scripts/validate/run_all.py`, `scripts/install/install.py --dry-run` executed; dry-run shows 113 files to create for `--target kiro` |
