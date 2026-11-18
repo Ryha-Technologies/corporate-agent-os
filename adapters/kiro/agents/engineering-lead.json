@@ -21,6 +21,7 @@
     "skill://.kiro/skills/incident-response/SKILL.md",
     "skill://.kiro/skills/oss-reuse-license/SKILL.md",
     "skill://.kiro/skills/anti-slop-quality-gate/SKILL.md",
+    "skill://.kiro/skills/codebase-audit-upgrade/SKILL.md",
     "file://.kiro/steering/corporate-agent-os.md"
   ],
   "permissions": {

@@ -61,7 +61,7 @@ agents:
     title: Head of Product Design
     description: Coordinates UX research, information architecture, interaction and visual design, design system and accessibility. Use for the experience stage.
     mission: Deliver a usable, accessible, intentional product experience with every state specified and every decision traceable.
-    skills: [ui-ux-design, information-architecture, design-system, accessibility-audit, anti-slop-quality-gate]
+    skills: [ui-ux-design, information-architecture, design-system, accessibility-audit, anti-slop-quality-gate, codebase-audit-upgrade]
     tools: [read, write, web, subagent, browser]
     write_scope: ["04-design/design-brief.md", "04-design/design-rationale.md"]
     autonomy: propose
@@ -79,7 +79,7 @@ agents:
     title: Head of Engineering
     description: Coordinates architecture, implementation, integration and release engineering; owns branch and integration strategy for parallel work. Use for build stages.
     mission: Ship small, reviewed, tested increments on the simplest architecture that meets requirements.
-    skills: [software-engineering, architecture-system-design, code-review, test-strategy, devops-sre, incident-response, oss-reuse-license, anti-slop-quality-gate]
+    skills: [software-engineering, architecture-system-design, code-review, test-strategy, devops-sre, incident-response, oss-reuse-license, anti-slop-quality-gate, codebase-audit-upgrade]
     tools: [read, write, shell, web, subagent]
     write_scope: ["06-build/**"]
     autonomy: propose
@@ -115,7 +115,7 @@ agents:
     title: Head of Security Engineering
     description: Coordinates threat modelling, secure design review, security testing within authorised scope and remediation tracking. Use for security stages.
     mission: Keep the system's threats modelled, controls verified and findings owned.
-    skills: [security-privacy, threat-modeling, incident-response, anti-slop-quality-gate]
+    skills: [security-privacy, threat-modeling, incident-response, anti-slop-quality-gate, codebase-audit-upgrade]
     tools: [read, write, shell, web, subagent]
     write_scope: ["05-architecture/threat-model.md", "07-quality/security-findings.md"]
     autonomy: propose

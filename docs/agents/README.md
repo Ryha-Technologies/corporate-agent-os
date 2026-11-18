@@ -8,7 +8,7 @@ Every agent with its tier, department, skills, tools, write scope and autonomy. 
 
 | Agent | Department | Title | Skills | Tools | Write scope | Reviews gates |
 |---|---|---|---|---|---|---|
-| `corporate-orchestrator` | executive | Corporate Orchestrator (accountable delivery lead) | corporate-orchestrator, anti-slop-quality-gate | read, write, shell, web, subagent | `00-intake/**`<br>`10-decisions/**`<br>`07-quality/gate-index.md` | — |
+| `corporate-orchestrator` | executive | Corporate Orchestrator (accountable delivery lead) | corporate-orchestrator, anti-slop-quality-gate, codebase-audit-upgrade | read, write, shell, web, subagent | `00-intake/**`<br>`10-decisions/**`<br>`07-quality/gate-index.md` | — |
 
 ## Executives (advise only) (8)
 
@@ -28,15 +28,15 @@ Every agent with its tier, department, skills, tools, write scope and autonomy. 
 | Agent | Department | Title | Skills | Tools | Write scope | Reviews gates |
 |---|---|---|---|---|---|---|
 | `brand-creative-director` | branding | Brand and Creative Director | brand-strategy-story, brandbook-identity, creative-production, originality-audit, anti-slop-quality-gate | read, write, web, subagent | `03-brand/creative-brief.md`<br>`03-brand/direction-comparison.md` | — |
-| `design-lead` | design | Head of Product Design | ui-ux-design, information-architecture, design-system, accessibility-audit, anti-slop-quality-gate | read, write, web, subagent, browser | `04-design/design-brief.md`<br>`04-design/design-rationale.md` | — |
-| `engineering-lead` | engineering | Head of Engineering | software-engineering, architecture-system-design, code-review, test-strategy, devops-sre, incident-response, oss-reuse-license, anti-slop-quality-gate | read, write, shell, web, subagent | `06-build/**` | — |
+| `design-lead` | design | Head of Product Design | ui-ux-design, information-architecture, design-system, accessibility-audit, anti-slop-quality-gate, codebase-audit-upgrade | read, write, web, subagent, browser | `04-design/design-brief.md`<br>`04-design/design-rationale.md` | — |
+| `engineering-lead` | engineering | Head of Engineering | software-engineering, architecture-system-design, code-review, test-strategy, devops-sre, incident-response, oss-reuse-license, anti-slop-quality-gate, codebase-audit-upgrade | read, write, shell, web, subagent | `06-build/**` | — |
 | `growth-lead` | marketing | Head of Growth and Go-to-Market | growth-gtm, product-launch, sales-partnerships, customer-success-support, anti-slop-quality-gate | read, write, web, subagent | `09-operations/launch-plan.md`<br>`09-operations/growth-plan.md` | — |
 | `legal-lead` | legal | Head of Legal Research and Compliance (not counsel) | legal-risk-governance, naming-ip-screen, oss-reuse-license, anti-slop-quality-gate | read, write, web, subagent | `08-legal-oss/issue-register.md`<br>`08-legal-oss/counsel-questions.md` | — |
 | `operations-lead` | operations | Head of Business Operations | finance-operations, people-operations, anti-slop-quality-gate | read, write, web, subagent | `09-operations/operating-plan.md`<br>`09-operations/vendor-register.md` | — |
 | `product-lead` | product | Head of Product | product-discovery-prd, business-idea-validation, ux-research, anti-slop-quality-gate | read, write, web, subagent | `02-product/roadmap.md`<br>`02-product/prioritisation.md` | — |
 | `qa-lead` | qa | Head of Quality Engineering | test-strategy, qa-evaluation, accessibility-audit, anti-slop-quality-gate | read, write, shell, web, subagent, browser | `07-quality/test-strategy.md`<br>`07-quality/test-plan.md` | — |
 | `research-lead` | research | Head of Research and Intelligence | research-intelligence, competitive-analysis, anti-slop-quality-gate | read, write, web, subagent | `01-research/research-plan.md`<br>`01-research/research-brief.md` | — |
-| `security-lead` | cybersecurity | Head of Security Engineering | security-privacy, threat-modeling, incident-response, anti-slop-quality-gate | read, write, shell, web, subagent | `05-architecture/threat-model.md`<br>`07-quality/security-findings.md` | — |
+| `security-lead` | cybersecurity | Head of Security Engineering | security-privacy, threat-modeling, incident-response, anti-slop-quality-gate, codebase-audit-upgrade | read, write, shell, web, subagent | `05-architecture/threat-model.md`<br>`07-quality/security-findings.md` | — |
 
 ## Specialists (propose) (28)
 
@@ -54,7 +54,7 @@ Every agent with its tier, department, skills, tools, write scope and autonomy. 
 | `design-systems-engineer` | design | Design Systems Engineer | design-system, accessibility-audit, software-engineering, anti-slop-quality-gate | read, write, shell, web | `04-design/design-tokens.json`<br>`04-design/component-spec.md`<br>`04-design/design-system-docs/**` | — |
 | `devops-engineer` | infrastructure | DevOps and Site Reliability Engineer | devops-sre, incident-response, security-privacy, anti-slop-quality-gate | read, write, shell, web | `09-operations/runbooks/**`<br>`09-operations/release-checklist.md`<br>`06-build/infra-notes.md` | — |
 | `financial-modeler` | finance | Financial Modeller | business-model-unit-economics, finance-operations, anti-slop-quality-gate | read, write, shell, web | `02-product/business-model.md`<br>`02-product/financial-model.*` | — |
-| `frontend-engineer` | engineering | Frontend Engineer | software-engineering, design-system, accessibility-audit, anti-slop-quality-gate | read, write, shell, web, browser | `06-build/frontend-notes.md` | — |
+| `frontend-engineer` | engineering | Frontend Engineer | software-engineering, design-system, accessibility-audit, anti-slop-quality-gate, codebase-audit-upgrade | read, write, shell, web, browser | `06-build/frontend-notes.md` | — |
 | `growth-marketer` | marketing | Growth and Product Marketing Specialist | growth-gtm, product-launch, creative-production, anti-slop-quality-gate | read, write, web | `09-operations/positioning.md`<br>`09-operations/channel-plan.md`<br>`09-operations/experiment-backlog.md`<br>`09-operations/launch-assets/**` | — |
 | `identity-designer` | branding | Visual Identity and Logo Designer | logo-design, brandbook-identity, design-system, creative-production, anti-slop-quality-gate | read, write, web | `03-brand/visual-audit.md`<br>`03-brand/identity-concepts.md`<br>`03-brand/brandbook.md`<br>`03-brand/assets/**` | — |
 | `legal-researcher` | legal | Legal, Privacy and Licensing Researcher | legal-risk-governance, oss-reuse-license, naming-ip-screen, security-privacy, anti-slop-quality-gate | read, write, shell, web | `08-legal-oss/**` | — |
@@ -64,12 +64,12 @@ Every agent with its tier, department, skills, tools, write scope and autonomy. 
 | `product-manager` | product | Product Manager | product-discovery-prd, ux-research, business-idea-validation, anti-slop-quality-gate | read, write, web | `02-product/prd.md`<br>`02-product/acceptance-criteria.md`<br>`02-product/analytics-plan.md`<br>`02-product/validation-plan.md` | — |
 | `research-analyst` | research | Business and Market Research Analyst | research-intelligence, anti-slop-quality-gate | read, write, web | `01-research/evidence-ledger.md`<br>`01-research/problem-statement.md`<br>`01-research/findings-*.md` | — |
 | `sales-specialist` | sales | Sales and Partnerships Specialist | sales-partnerships, growth-gtm, anti-slop-quality-gate | read, write, web | `09-operations/sales-playbook.md`<br>`09-operations/partner-evaluation.md` | — |
-| `security-engineer` | cybersecurity | Application Security Engineer | security-privacy, threat-modeling, code-review, anti-slop-quality-gate | read, write, shell, web | `07-quality/security-review-*.md`<br>`05-architecture/threat-model-updates.md` | — |
+| `security-engineer` | cybersecurity | Application Security Engineer | security-privacy, threat-modeling, code-review, anti-slop-quality-gate, codebase-audit-upgrade | read, write, shell, web | `07-quality/security-review-*.md`<br>`05-architecture/threat-model-updates.md` | — |
 | `software-architect` | architecture | Software Architect | architecture-system-design, api-database-design, threat-modeling, oss-reuse-license, code-review, anti-slop-quality-gate | read, write, web | `05-architecture/architecture.md`<br>`05-architecture/adr/**`<br>`05-architecture/cost-model.md` | — |
 | `technical-writer` | engineering | Technical Writer | technical-documentation, anti-slop-quality-gate | read, write, shell, web | `09-operations/docs/**`<br>`06-build/release-notes.md` | — |
 | `test-engineer` | qa | Test Automation Engineer | test-strategy, qa-evaluation, accessibility-audit, anti-slop-quality-gate | read, write, shell, web, browser | `07-quality/test-report-*.md`<br>`07-quality/traceability-matrix.md` | — |
-| `ui-designer` | design | UI and Visual Designer | ui-ux-design, design-system, brandbook-identity, anti-slop-quality-gate | read, write, web, browser | `04-design/visual-direction.md`<br>`04-design/screens/**`<br>`04-design/responsive-spec.md`<br>`04-design/motion-spec.md` | — |
-| `ux-designer` | design | UX and Interaction Designer | information-architecture, ui-ux-design, ux-research, anti-slop-quality-gate | read, write, web | `04-design/user-flows.md`<br>`04-design/information-architecture.md`<br>`04-design/wireframes/**`<br>`04-design/states-matrix.md` | — |
+| `ui-designer` | design | UI and Visual Designer | ui-ux-design, design-system, brandbook-identity, anti-slop-quality-gate, codebase-audit-upgrade | read, write, web, browser | `04-design/visual-direction.md`<br>`04-design/screens/**`<br>`04-design/responsive-spec.md`<br>`04-design/motion-spec.md` | — |
+| `ux-designer` | design | UX and Interaction Designer | information-architecture, ui-ux-design, ux-research, anti-slop-quality-gate, codebase-audit-upgrade | read, write, web | `04-design/user-flows.md`<br>`04-design/information-architecture.md`<br>`04-design/wireframes/**`<br>`04-design/states-matrix.md` | — |
 
 ## Independent reviewers (read-only) (11)
 
@@ -79,12 +79,12 @@ Every agent with its tier, department, skills, tools, write scope and autonomy. 
 | `brand-originality-auditor` | branding | Brand Originality Auditor | originality-audit, brand-strategy-story, naming-ip-screen, anti-slop-quality-gate | read, web | — | brand |
 | `business-model-auditor` | finance | Business Model Auditor | business-model-unit-economics, strategy-market-sizing, anti-slop-quality-gate | read, shell, web | — | opportunity |
 | `code-reviewer` | engineering | Code Reviewer | code-review, software-engineering, security-privacy, anti-slop-quality-gate | read, shell, web | — | build |
-| `design-qa-auditor` | design | Design QA Auditor | accessibility-audit, ui-ux-design, design-system, originality-audit, anti-slop-quality-gate | read, shell, web, browser | — | design |
+| `design-qa-auditor` | design | Design QA Auditor | accessibility-audit, ui-ux-design, design-system, originality-audit, anti-slop-quality-gate, codebase-audit-upgrade | read, shell, web, browser | — | design |
 | `documentation-auditor` | engineering | Documentation Auditor | technical-documentation, anti-slop-quality-gate | read, shell, web | — | documentation |
 | `legal-licensing-reviewer` | legal | Legal and Licensing Risk Reviewer | oss-reuse-license, legal-risk-governance, naming-ip-screen, anti-slop-quality-gate | read, shell, web | — | legal |
 | `research-auditor` | research | Research Auditor | research-intelligence, originality-audit, anti-slop-quality-gate | read, web | — | discovery |
-| `security-auditor` | cybersecurity | Security Auditor | security-privacy, threat-modeling, anti-slop-quality-gate | read, shell, web | — | security |
+| `security-auditor` | cybersecurity | Security Auditor | security-privacy, threat-modeling, anti-slop-quality-gate, codebase-audit-upgrade | read, shell, web | — | security |
 | `test-auditor` | qa | Test and Release Auditor | qa-evaluation, test-strategy, anti-slop-quality-gate | read, shell, web, browser | — | testing, release |
-| `ux-auditor` | ux-research | UX Auditor | ux-research, product-discovery-prd, information-architecture, accessibility-audit, anti-slop-quality-gate | read, web, browser | — | product |
+| `ux-auditor` | ux-research | UX Auditor | ux-research, product-discovery-prd, information-architecture, accessibility-audit, anti-slop-quality-gate, codebase-audit-upgrade | read, web, browser | — | product |
 
 58 agents.

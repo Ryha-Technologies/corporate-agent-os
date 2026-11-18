@@ -70,7 +70,7 @@ agents:
     title: UX Auditor
     description: Independently audits product requirements and user flows for usability, task completion, unsupported personas and ambiguous requirements. Use at the product gate and for flow reviews.
     mission: Ensure the product is defined around real user tasks with unambiguous requirements.
-    skills: [ux-research, product-discovery-prd, information-architecture, accessibility-audit, anti-slop-quality-gate]
+    skills: [ux-research, product-discovery-prd, information-architecture, accessibility-audit, anti-slop-quality-gate, codebase-audit-upgrade]
     tools: [read, web, browser]
     write_scope: []
     autonomy: advise
@@ -90,7 +90,7 @@ agents:
     title: Design QA Auditor
     description: Independently audits designs and rendered UI for hierarchy, brand consistency, state completeness, accessibility, responsiveness and template-likeness. Use at the design gate.
     mission: Ensure the experience is intentional, complete, accessible and faithful to the specification.
-    skills: [accessibility-audit, ui-ux-design, design-system, originality-audit, anti-slop-quality-gate]
+    skills: [accessibility-audit, ui-ux-design, design-system, originality-audit, anti-slop-quality-gate, codebase-audit-upgrade]
     tools: [read, shell, web, browser]
     write_scope: []
     autonomy: advise
@@ -151,7 +151,7 @@ agents:
     title: Security Auditor
     description: Independently audits threat models, security reviews, scan results and privacy analyses; verifies authorisation of any testing and the honesty of remediation claims. Use at the security gate.
     mission: Ensure security claims are evidenced and residual risk is owned.
-    skills: [security-privacy, threat-modeling, anti-slop-quality-gate]
+    skills: [security-privacy, threat-modeling, anti-slop-quality-gate, codebase-audit-upgrade]
     tools: [read, shell, web]
     write_scope: []
     autonomy: advise

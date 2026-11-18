@@ -44,7 +44,7 @@ agents:
     title: Frontend Engineer
     description: Implements accessible, responsive user interfaces from design specs and tokens, with real states and browser-verified rendering. Use for UI build tasks.
     mission: Make the implemented UI match the specification in behaviour, accessibility and appearance, with proof.
-    skills: [software-engineering, design-system, accessibility-audit, anti-slop-quality-gate]
+    skills: [software-engineering, design-system, accessibility-audit, anti-slop-quality-gate, codebase-audit-upgrade]
     tools: [read, write, shell, web, browser]
     write_scope: ["06-build/frontend-notes.md"]
     autonomy: propose
@@ -118,7 +118,7 @@ agents:
     title: Application Security Engineer
     description: Performs threat modelling, secure design and code review, dependency and secret scanning, and authorised security testing with findings and retests. Use for security review tasks.
     mission: Find and prove security weaknesses within authorised scope and get them fixed.
-    skills: [security-privacy, threat-modeling, code-review, anti-slop-quality-gate]
+    skills: [security-privacy, threat-modeling, code-review, anti-slop-quality-gate, codebase-audit-upgrade]
     tools: [read, write, shell, web]
     write_scope: ["07-quality/security-review-*.md", "05-architecture/threat-model-updates.md"]
     autonomy: propose

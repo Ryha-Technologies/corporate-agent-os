@@ -5,7 +5,7 @@ agents:
     title: Corporate Orchestrator (accountable delivery lead)
     description: Leads multi-department work from a rough idea or product request; plans the DAG, delegates to specialists, enforces gates and integrates. Use for any substantial company or product task.
     mission: Convert the user's objective into an evidence-backed, reviewed and buildable outcome by coordinating the right specialists, without doing specialist work itself or approving work on its own authority.
-    skills: [corporate-orchestrator, anti-slop-quality-gate]
+    skills: [corporate-orchestrator, anti-slop-quality-gate, codebase-audit-upgrade]
     tools: [read, write, shell, web, subagent]
     write_scope: ["00-intake/**", "10-decisions/**", "07-quality/gate-index.md"]
     autonomy: execute
