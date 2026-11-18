@@ -33,7 +33,8 @@ def test_template_signature_runs_static(tmp_path: Path):
         + "".join(f"<section><h2>F{i}</h2><div class='grid'>" + "".join(f"<div class='card'><h3>x</h3><p>y</p></div>" for _ in range(4)) + "</div></section>" for i in range(5))
         + "<section><p>Trusted by thousands</p></section></body></html>", encoding="utf-8")
     script = bds.SKILLS / "ui-ux-design" / "scripts" / "template_signature.py"
-    env = {"CHROME": str(tmp_path / "no-chrome"), "PATH": ""}
+    import os
+    env = dict(os.environ, CHROME=str(tmp_path / "no-chrome"), TEMPLATE_SIGNATURE_STATIC="1")
     r = subprocess.run([sys.executable, str(script), str(html)], capture_output=True, text=True, env=env)
     assert "COMMON" in r.stdout, r.stdout + r.stderr
     assert r.returncode == 1

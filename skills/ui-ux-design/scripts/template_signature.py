@@ -84,6 +84,8 @@ JS = r"""
 """
 
 def find_chrome() -> str | None:
+    if os.environ.get("TEMPLATE_SIGNATURE_STATIC"):
+        return None  # force the static fallback (used by tests and headless CI without a browser)
     env = os.environ.get("CHROME")
     if env and pathlib.Path(env).exists():
         return env
