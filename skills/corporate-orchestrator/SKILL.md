@@ -44,6 +44,7 @@ Do not use for a small isolated change; load the single relevant skill instead.
 - Orchestrator reports at each gate and at completion.
 
 ## Quality criteria
+- No design task (UI, brand, logo, deck, document, motion) is accepted from a specialist without the research record required by `skills/ui-ux-design/references/design-research-method.md`; the orchestrator presents the scored directions to the user and records the approved choice as a decision before build starts.
 - Every consequential claim in the final report traces to a ledger id or a gate verdict.
 - No stage was approved by its creator; every reviewed stage has a verdict file.
 - Every `human_approval` stage has a recorded approval.

@@ -30,7 +30,7 @@ A layout can be both familiar in mechanics and unmistakably this product's. Deci
 - **Colour**: one accent with a job, a surface palette that carries hierarchy, no gradients unless they encode something.
 - **Motion**: see `motion-standards.md`. Three or four considered moments, not an animation on every card.
 
-The swap test (from `skills/ui-ux-design/references/anti-template-review.md`) is the pass criterion: put the page next to three competitors with logos removed. If a stranger cannot pick which is yours, the layout is not finished.
+The swap test (from `anti-template-review.md`) is the pass criterion: put the page next to three competitors with logos removed. If a stranger cannot pick which is yours, the layout is not finished.
 
 ## Measurement checklist for an audit
 

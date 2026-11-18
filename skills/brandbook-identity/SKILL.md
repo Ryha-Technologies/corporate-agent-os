@@ -17,6 +17,7 @@ Turn brand strategy and the chosen mark into a production specification. A brand
 - An existing brand needs documentation or consolidation.
 
 ## Preconditions
+- **Research before design (mandatory).** Follow `skills/ui-ux-design/references/design-research-method.md` steps 1 to 4 before producing any identity element, colour system, type system or layout rule: the job statement; a dated category research table (at least three direct competitors, two adjacent, one non-digital reference) with a pattern map of the category template; the psychology analysis from `skills/ui-ux-design/references/layout-psychology.md` with the concrete implication of each chosen principle; and at least three genuinely different directions scored against job fit, uniqueness (swap test), psychology, accessibility and cost. Present the comparison for approval. The first idea is never built.
 - Approved brand strategy, logo system, competitor pattern map, asset provenance record.
 
 ## Inputs
@@ -42,6 +43,7 @@ Turn brand strategy and the chosen mark into a production specification. A brand
 - `03-brand/brandbook.md` (using `templates/branding/brandbook.md`), token export for design, `03-brand/assets/**`, updated asset provenance.
 
 ## Quality criteria
+- A written research record (job, category table and pattern map, psychology analysis, three scored directions, approved choice) exists and is attached; the result passes the swap test against three competitors and has zero unexplained hits on `evaluations/originality/slop-patterns.md`.
 - Every colour pairing used for text or controls meets the stated contrast target or is marked decorative-only.
 - Every font, icon set, image and illustration has a recorded licence and permitted use.
 - The book contains real applications, not only swatches.
@@ -60,3 +62,4 @@ Turn brand strategy and the chosen mark into a production specification. A brand
 - `templates/branding/brandbook.md`, `templates/branding/asset-provenance.md`
 - `standards/brand/brand-standard.md`, `standards/accessibility/wcag-2.2-aa-checklist.md`
 - `skills/design-system/SKILL.md`
+- `skills/ui-ux-design/references/design-research-method.md`, `skills/ui-ux-design/references/layout-psychology.md`

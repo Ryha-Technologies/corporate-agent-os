@@ -17,6 +17,7 @@ Create a mark that expresses the brand's strategic idea, works as a simple shape
 - An existing logo fails at small sizes, in monochrome or in distinctiveness.
 
 ## Preconditions
+- **Research before design (mandatory).** Follow `skills/ui-ux-design/references/design-research-method.md` steps 1 to 4 before producing any mark, wordmark or logo system: the job statement; a dated category research table (at least three direct competitors, two adjacent, one non-digital reference) with a pattern map of the category template; the psychology analysis from `skills/ui-ux-design/references/layout-psychology.md` with the concrete implication of each chosen principle; and at least three genuinely different directions scored against job fit, uniqueness (swap test), psychology, accessibility and cost. Present the comparison for approval. The first idea is never built.
 - Brand strategy, name candidate(s) with screening status, category visual audit.
 - Access to vector tooling or a designer who will produce vectors from the specification.
 
@@ -40,6 +41,7 @@ Create a mark that expresses the brand's strategic idea, works as a simple shape
 - Input to `brandbook-identity`.
 
 ## Quality criteria
+- A written research record (job, category table and pattern map, psychology analysis, three scored directions, approved choice) exists and is attached; the result passes the swap test against three competitors and has zero unexplained hits on `evaluations/originality/slop-patterns.md`.
 - Works as a simple mark in black and white at 16 px and at signage scale.
 - Three or more distinct territories compared; rejected concepts recorded.
 - Every asset has a recorded licence and origin.
@@ -60,3 +62,4 @@ Create a mark that expresses the brand's strategic idea, works as a simple shape
 - `templates/branding/asset-provenance.md`
 - `evaluations/originality/originality-scorecard.md`
 - `skills/naming-ip-screen/references/trademark-offices.md`
+- `skills/ui-ux-design/references/design-research-method.md`, `skills/ui-ux-design/references/layout-psychology.md`

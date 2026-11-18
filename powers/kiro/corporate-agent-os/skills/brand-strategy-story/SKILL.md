@@ -18,6 +18,7 @@ Build the strategic foundation of a brand so that every later creative decision 
 - Before `naming-ip-screen`, `logo-design`, `brandbook-identity`.
 
 ## Preconditions
+- **Research before design (mandatory).** Follow `skills/ui-ux-design/references/design-research-method.md` steps 1 to 4 before producing any positioning, story or message hierarchy: the job statement; a dated category research table (at least three direct competitors, two adjacent, one non-digital reference) with a pattern map of the category template; the psychology analysis from `skills/ui-ux-design/references/layout-psychology.md` with the concrete implication of each chosen principle; and at least three genuinely different directions scored against job fit, uniqueness (swap test), psychology, accessibility and cost. Present the comparison for approval. The first idea is never built.
 - Research brief and competitor pattern map exist (or this skill's step 1 produces the category audit).
 - Verified facts about the company (founding, team, traction) are listed separately from aspirations.
 
@@ -39,6 +40,7 @@ Build the strategic foundation of a brand so that every later creative decision 
 - Inputs to `brandbook-identity`.
 
 ## Quality criteria
+- A written research record (job, category table and pattern map, psychology analysis, three scored directions, approved choice) exists and is attached; the result passes the swap test against three competitors and has zero unexplained hits on `evaluations/originality/slop-patterns.md`.
 - Category audit has dated references and a cliché list.
 - Verified facts and framing are visibly separated in the narrative.
 - Values are behaviours, not adjectives.
@@ -58,3 +60,4 @@ Build the strategic foundation of a brand so that every later creative decision 
 - `templates/branding/brand-strategy.md`, `templates/branding/competitor-pattern-map.md`
 - `evaluations/originality/originality-scorecard.md`
 - `standards/brand/brand-standard.md`
+- `skills/ui-ux-design/references/design-research-method.md`, `skills/ui-ux-design/references/layout-psychology.md`

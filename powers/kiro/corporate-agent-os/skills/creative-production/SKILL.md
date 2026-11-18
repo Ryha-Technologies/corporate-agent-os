@@ -16,6 +16,7 @@ Deliver creative work that communicates one clear idea to a specific audience, f
 - Decks, documents, web copy, campaigns, social assets, image or video briefs, print.
 
 ## Preconditions
+- **Research before design (mandatory).** Follow `skills/ui-ux-design/references/design-research-method.md` steps 1 to 4 before producing any deck, document, image brief, video brief, poster, email or campaign asset: the job statement; a dated category research table (at least three direct competitors, two adjacent, one non-digital reference) with a pattern map of the category template; the psychology analysis from `skills/ui-ux-design/references/layout-psychology.md` with the concrete implication of each chosen principle; and at least three genuinely different directions scored against job fit, uniqueness (swap test), psychology, accessibility and cost. Present the comparison for approval. The first idea is never built.
 - Brandbook or brand direction; verified facts for any claims; purpose and audience stated.
 
 ## Inputs
@@ -33,6 +34,8 @@ Deliver creative work that communicates one clear idea to a specific audience, f
 - `03-brand/creative/**` or `09-operations/marketing-assets/**` with `asset-provenance.md` entries.
 
 ## Quality criteria
+- A written research record (job, category table and pattern map, psychology analysis, three scored directions, approved choice) exists and is attached; the result passes the swap test against three competitors and has zero unexplained hits on `evaluations/originality/slop-patterns.md`.
+- Any motion follows `skills/ui-ux-design/references/motion-standards.md`: every animated moment names its job, honours `prefers-reduced-motion`, and is listed in a motion table.
 - One clear idea per deliverable; audience-specific language.
 - Every claim substantiated; every third-party element licensed and recorded.
 - Rendered output inspected in its medium; accessibility handled.
@@ -49,3 +52,4 @@ Deliver creative work that communicates one clear idea to a specific audience, f
 ## References
 - `templates/branding/asset-provenance.md`, `templates/branding/creative-brief.md`
 - `standards/brand/brand-standard.md`
+- `skills/ui-ux-design/references/design-research-method.md`, `skills/ui-ux-design/references/layout-psychology.md`, `skills/ui-ux-design/references/motion-standards.md`

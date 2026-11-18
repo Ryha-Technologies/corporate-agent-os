@@ -17,7 +17,7 @@ For each reference capture screenshots at the same widths and record, in a table
 - Motion (what moves, on what trigger, how long).
 - Copy voice (three representative sentences).
 - One thing each does well and one thing each does badly for the job in step 1.
-Then write the **pattern map**: what everyone does the same (the category template), what is required by convention (keep), and what is simply habit (free to change). The category template is what the design must not reproduce. Sources: `skills/competitive-analysis/SKILL.md`, `skills/ui-ux-design/references/product-category-patterns.md`.
+Then write the **pattern map**: what everyone does the same (the category template), what is required by convention (keep), and what is simply habit (free to change). The category template is what the design must not reproduce. Sources: `skills/competitive-analysis/SKILL.md`, `product-category-patterns.md`.
 
 ## 3. Research the people
 Pick the principles in `layout-psychology.md` that matter for this job and say why. For each, write the concrete implication for this design (for example: "Users arrive from a CLI error message; the primary action is 'copy the install command'; by Hick's law the hero carries one action and the nav shrinks to three items"). Add domain reading where the design is specialised: reading research for long-form text, data-visualisation research for dashboards, wayfinding for navigation-heavy products, trust and credibility research for anything that asks for money or data. Cite the source, not a vague "studies show".

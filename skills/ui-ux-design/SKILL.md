@@ -17,6 +17,7 @@ Give the product an experience that completes its users' tasks, fits its brand a
 - When an implemented UI needs review against its specification.
 
 ## Preconditions
+- **Research before design (mandatory).** Follow `references/design-research-method.md` steps 1 to 4 before producing any screen, flow, component or layout: the job statement; a dated category research table (at least three direct competitors, two adjacent, one non-digital reference) with a pattern map of the category template; the psychology analysis from `references/layout-psychology.md` with the concrete implication of each chosen principle; and at least three genuinely different directions scored against job fit, uniqueness (swap test), psychology, accessibility and cost. Present the comparison for approval. The first idea is never built.
 - PRD, brandbook or brand direction, IA and flows, design tokens (or this skill produces the first set with `design-system`).
 
 ## Inputs
@@ -39,6 +40,8 @@ Give the product an experience that completes its users' tasks, fits its brand a
 - `04-design/visual-direction.md`, `04-design/design-rationale.md`, `04-design/wireframes/**`, `04-design/screens/**`, `04-design/responsive-spec.md`, `04-design/motion-spec.md`, `04-design/states-matrix.md`, `07-quality/design-qa-report.md` (review)
 
 ## Quality criteria
+- A written research record (job, category table and pattern map, psychology analysis, three scored directions, approved choice) exists and is attached; the result passes the swap test against three competitors and has zero unexplained hits on `evaluations/originality/slop-patterns.md`.
+- Any motion follows `references/motion-standards.md`: every animated moment names its job, honours `prefers-reduced-motion`, and is listed in a motion table.
 - Direction rationale cites brand and research; pattern-map comparison documented.
 - All states specified per screen; realistic content throughout.
 - Accessibility notes complete for every interactive component.
@@ -59,3 +62,4 @@ Give the product an experience that completes its users' tasks, fits its brand a
 - `references/anti-template-review.md` — structural comparison table, swap test, job test, direction-diversity check
 - `templates/design/visual-direction.md`, `templates/design/design-rationale.md`, `templates/design/states-matrix.md`, `templates/design/design-qa-report.md`
 - `standards/design/design-standard.md`, `standards/accessibility/wcag-2.2-aa-checklist.md`
+- `references/design-research-method.md`, `references/layout-psychology.md`, `references/motion-standards.md`

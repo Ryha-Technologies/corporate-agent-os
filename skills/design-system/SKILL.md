@@ -17,6 +17,7 @@ Encode the visual and interaction decisions as tokens and component rules that b
 - When inconsistency between screens or between design and code appears.
 
 ## Preconditions
+- **Research before design (mandatory).** Follow `skills/ui-ux-design/references/design-research-method.md` steps 1 to 4 before producing any token set, component or pattern: the job statement; a dated category research table (at least three direct competitors, two adjacent, one non-digital reference) with a pattern map of the category template; the psychology analysis from `skills/ui-ux-design/references/layout-psychology.md` with the concrete implication of each chosen principle; and at least three genuinely different directions scored against job fit, uniqueness (swap test), psychology, accessibility and cost. Present the comparison for approval. The first idea is never built.
 - Visual direction and brandbook (or brand direction) exist; accessibility target set (WCAG 2.2 AA default).
 
 ## Inputs
@@ -35,6 +36,8 @@ Encode the visual and interaction decisions as tokens and component rules that b
 - `04-design/design-tokens.json`, `04-design/component-spec.md`, `04-design/design-system-docs/**`
 
 ## Quality criteria
+- A written research record (job, category table and pattern map, psychology analysis, three scored directions, approved choice) exists and is attached; the result passes the swap test against three competitors and has zero unexplained hits on `evaluations/originality/slop-patterns.md`.
+- Any motion follows `skills/ui-ux-design/references/motion-standards.md`: every animated moment names its job, honours `prefers-reduced-motion`, and is listed in a motion table.
 - Tokens machine-readable; no hard-coded values in component specs.
 - Each component lists all states and accessibility requirements.
 - System size justified by the product's needs; no speculative components.
@@ -50,3 +53,4 @@ Encode the visual and interaction decisions as tokens and component rules that b
 ## References
 - `templates/design/design-tokens.schema.json`, `templates/design/component-spec.md`
 - `standards/design/design-standard.md`, `standards/accessibility/wcag-2.2-aa-checklist.md`
+- `skills/ui-ux-design/references/design-research-method.md`, `skills/ui-ux-design/references/layout-psychology.md`, `skills/ui-ux-design/references/motion-standards.md`

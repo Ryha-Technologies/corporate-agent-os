@@ -17,6 +17,7 @@ Organise the product around what users are trying to do and how content relates,
 - When navigation confusion or findability problems are reported.
 
 ## Preconditions
+- **Research before design (mandatory).** Follow `skills/ui-ux-design/references/design-research-method.md` steps 1 to 4 before producing any navigation model, sitemap or labelling system: the job statement; a dated category research table (at least three direct competitors, two adjacent, one non-digital reference) with a pattern map of the category template; the psychology analysis from `skills/ui-ux-design/references/layout-psychology.md` with the concrete implication of each chosen principle; and at least three genuinely different directions scored against job fit, uniqueness (swap test), psychology, accessibility and cost. Present the comparison for approval. The first idea is never built.
 - PRD with user roles, scenarios and content/data entities; research on user goals and language.
 
 ## Inputs
@@ -37,6 +38,7 @@ Organise the product around what users are trying to do and how content relates,
 - `04-design/information-architecture.md`, `04-design/user-flows.md`, inputs to `04-design/states-matrix.md`
 
 ## Quality criteria
+- A written research record (job, category table and pattern map, psychology analysis, three scored directions, approved choice) exists and is attached; the result passes the swap test against three competitors and has zero unexplained hits on `evaluations/originality/slop-patterns.md`.
 - Labels use user language from research, not internal jargon.
 - Every top task has a flow with error and recovery paths.
 - Navigation depth and structure are justified by goals, not org chart.
@@ -52,3 +54,4 @@ Organise the product around what users are trying to do and how content relates,
 ## References
 - `templates/design/information-architecture.md`, `templates/design/states-matrix.md`
 - `standards/design/design-standard.md`
+- `skills/ui-ux-design/references/design-research-method.md`, `skills/ui-ux-design/references/layout-psychology.md`
