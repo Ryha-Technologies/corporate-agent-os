@@ -88,7 +88,8 @@ def render_kiro(agent: dict, agents: dict[str, dict], policy: dict) -> str:
         lines.append(f"    - capability: {r['capability']}")
         lines.append(f"      match: {_yaml_list(r['match'])}")
         lines.append(f"      effect: {r['effect']}")
-    lines.append(f"welcomeMessage: {json.dumps(f'{agent['title']} ready. Tier: {agent['tier']}. Autonomy: {agent['autonomy']}.')}")
+    welcome = agent['title'] + ' ready. Tier: ' + agent['tier'] + '. Autonomy: ' + agent['autonomy'] + '.'
+    lines.append(f"welcomeMessage: {json.dumps(welcome)}")
     lines.append("---")
     lines.append(HEADER)
     lines.append("")
