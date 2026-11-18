@@ -184,6 +184,7 @@ The gate verdict for that run is **FAIL**, and that is the point: the design-QA 
 | [`examples/`](examples/) | Illustrative walkthroughs and one real worked run | Documentation |
 | [`docs/`](docs/) | Guides, platform guides, compatibility, limitations, GitHub metadata | Documentation |
 | [`research/`](research/) | Source register with access dates, input audit, standards mapping | Evidence |
+| [`site/`](site/) | Static showcase website (HTML/CSS/JS, no build step), built by the project's own `corporate-orchestrator` agent on Kiro CLI, with its QA report | Website |
 
 ## Quality and governance
 
@@ -226,6 +227,7 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md). Short version: edit canonical sources, 
 - Bugs and feature requests: GitHub Issues (templates in `.github/ISSUE_TEMPLATE/`)
 - Security reports: [SECURITY.md](SECURITY.md) — private reporting, never a public issue
 - Documentation: [docs/README.md](docs/README.md)
+- Website: [ryha-technologies.github.io/corporate-agent-os](https://ryha-technologies.github.io/corporate-agent-os/) (source in [`site/`](site/), deployed by `.github/workflows/pages.yml`)
 - Releases: [CHANGELOG.md](CHANGELOG.md) and the release process in [docs/governance/release-process.md](docs/governance/release-process.md)
 - Discussions: enable in repository settings after publishing (see [docs/github/repository-metadata.md](docs/github/repository-metadata.md))
 

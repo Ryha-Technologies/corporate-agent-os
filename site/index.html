@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Corporate Agent OS: Build with an AI workforce</title>
+<meta name="description" content="Open-source specialist agents, portable Agent Skills, workflow DAGs and independent review gates for Kiro, Claude Code and Codex.">
+<meta name="color-scheme" content="dark">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">Corporate Agent <span>OS</span></a>
+    <nav aria-label="Main">
+      <ul class="nav-list">
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="agents.html">Agents</a></li>
+        <li><a href="docs.html">Docs</a></li>
+        <li><a href="https://github.com/Ryha-Technologies/corporate-agent-os">GitHub<span class="sr-only"> (opens in a new tab)</span></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<div class="wrap">
+  <section class="hero" aria-labelledby="top">
+    <h1 id="top">Corporate Agent OS</h1>
+    <p class="lede">Build with an AI workforce. Specialist agents, portable skills, workflow DAGs and independent review gates, installed into the coding agent you already use.</p>
+    <ul class="badges" aria-label="Project facts">
+      <li>Open source, MIT licence</li>
+      <li>Version 0.2.0 (beta)</li>
+      <li>Kiro, Claude Code, Codex</li>
+    </ul>
+    <div class="btn-row">
+      <a class="btn primary" href="#quick-start">Quick start</a>
+      <a class="btn secondary" href="https://github.com/Ryha-Technologies/corporate-agent-os">View on GitHub<span class="sr-only"> (opens in a new tab)</span></a>
+    </div>
+    <img src="assets/banner.png" width="1280" height="400" alt="Project banner. Text: Corporate Agent OS, Build with an AI workforce. Diagram: an orchestrator above five departments (research, product, brand, design, engineering), each with specialists, then a dashed box labelled independent reviewers and quality gates, then a box labelled human approval.">
+    <ul class="counts" aria-label="What is in the repository">
+      <li><strong>39</strong>Agent Skills</li>
+      <li><strong>58</strong>agents</li>
+      <li><strong>22</strong>departments, 110 roles</li>
+      <li><strong>9</strong>workflow DAGs</li>
+      <li><strong>12</strong>quality gates</li>
+      <li><strong>58</strong>templates</li>
+      <li><strong>11</strong>standards</li>
+      <li><strong>10</strong>validators</li>
+    </ul>
+  </section>
+
+  <section id="why" aria-labelledby="why-h">
+    <h2 id="why-h">Why it exists</h2>
+    <p>A single AI chat that writes a plan, builds it and then tells you it is good has no one checking it. Corporate Agent OS splits that into roles. An orchestrator plans the work and hands specialists a written task contract. Independent reviewer agents, not the authors, judge each deliverable at a named quality gate.</p>
+    <p>It also keeps unproven things labelled as unproven. Facts, hypotheses and assumptions are kept apart in a ledger, and any check that did not run is reported as <code>NOT_RUN</code> instead of being passed quietly.</p>
+  </section>
+
+  <section id="departments" aria-labelledby="dept-h">
+    <h2 id="dept-h">What it covers, by department</h2>
+    <p>22 departments with 110 roles. Each card below is a department; the text is its mission statement from the repository, and the title links to its page.</p>
+    <ul class="grid">
+      <li class="card"><h3><a href="https://github.com/Ryha-Technologies/corporate-agent-os/blob/main/docs/organization/architecture.md">Software architecture and technical leadership</a></h3><p>Choose the simplest architecture that meets requirements and keep its risks, costs and decisions written down.</p></li>
+      <li class="card"><h3><a href="https://github.com/Ryha-Technologies/corporate-agent-os/blob/main/docs/organization/branding.md">Brand strategy and creative</a></h3><p>Build a brand that is strategically grounded, distinct from its category and reproducible by others.</p></li>
+      <li class="card"><h3><a href="https://github.com/Ryha-Technologies/corporate-agent-os/blob/main/docs/organization/customer-success.md">Customer success, support and community</a></h3><p>Get customers to value quickly, resolve issues honestly and feed real problems back to the product.</p></li>
+      <li class="card"><h3><a href="https://github.com/Ryha-Technologies/corporate-agent-os/blob/main/docs/organization/cybersecurity.md">Cybersecurity and privacy engineering</a></h3><p>Keep threats modelled, controls verified, testing authorised and incidents handled.</p></li>
+      <li class="card"><h3><a href="https://github.com/Ryha-Technologies/corporate-agent-os/blob/main/docs/organization/data-ai.md">Data and AI engineering</a></h3><p>Use data and models where they beat deterministic software, with evaluations, privacy, cost control and guardrails.</p></li>
+      <li class="card"><h3><a href="https://github.com/Ryha-Technologies/corporate-agent-os/blob/main/docs/organization/design.md">Product experience and design</a></h3><p>Make the product usable, accessible, intentional in appearance and faithful in implementation.</p></li>
+      <li class="card"><h3><a href="https://github.com/Ryha-Technologies/corporate-agent-os/blob/main/docs/organization/engineering.md">Software engineering</a></h3><p>Ship maintainable, secure, tested software in small reviewed increments.</p></li>
+      <li class="card"><h3><a href="https://github.com/Ryha-Technologies/corporate-agent-os/blob/main/docs/organization/executive.md">Executive leadership and governance</a></h3><p>Set direction, allocate resources, decide trade-offs between functions and stay accountable to owners and the law.</p></li>
+      <li class="card"><h3><a href="https://github.com/Ryha-Technologies/corporate-agent-os/blob/main/docs/organization/finance.md">Finance and accounting</a></h3><p>Keep the company solvent and honest about its numbers with ranged assumptions and professional review.</p></li>
+      <li class="card"><h3><a href="https://github.com/Ryha-Technologies/corporate-agent-os/blob/main/docs/organization/infrastructure.md">DevOps, platform and site reliability</a></h3><p>Make software deployable, observable, reliable and reversible without unapproved production changes.</p></li>
+      <li class="card"><h3><a href="https://github.com/Ryha-Technologies/corporate-agent-os/blob/main/docs/organization/legal.md">Legal, compliance and licensing research</a></h3><p>Identify legal, IP, licensing and privacy exposure early with sources and jurisdictions, and route conclusions to qualified counsel. This function never gives legal advice.</p></li>
+      <li class="card"><h3><a href="https://github.com/Ryha-Technologies/corporate-agent-os/blob/main/docs/organization/marketing.md">Marketing and growth</a></h3><p>Acquire and activate the right customers with true claims, measured experiments and brand consistency.</p></li>
+      <li class="card"><h3><a href="https://github.com/Ryha-Technologies/corporate-agent-os/blob/main/docs/organization/naming-ip.md">Naming and intellectual-property screening</a></h3><p>Produce distinctive names and preliminary IP screening with honest status, never clearance.</p></li>
+      <li class="card"><h3><a href="https://github.com/Ryha-Technologies/corporate-agent-os/blob/main/docs/organization/operations.md">Business operations, communications, risk and knowledge</a></h3><p>Keep the company running: process, approvals, communication, risk and knowledge continuity.</p></li>
+      <li class="card"><h3><a href="https://github.com/Ryha-Technologies/corporate-agent-os/blob/main/docs/organization/people.md">People, recruitment and people operations</a></h3><p>Build a fair, capable team with clear roles, safe onboarding and healthy operating rituals.</p></li>
+      <li class="card"><h3><a href="https://github.com/Ryha-Technologies/corporate-agent-os/blob/main/docs/organization/procurement.md">Procurement and vendor management</a></h3><p>Buy what the company needs at a known total cost, with contract terms, data handling and exit paths understood.</p></li>
+      <li class="card"><h3><a href="https://github.com/Ryha-Technologies/corporate-agent-os/blob/main/docs/organization/product.md">Product management and operations</a></h3><p>Convert validated problems into testable scope, measurable outcomes and a roadmap people can execute.</p></li>
+      <li class="card"><h3><a href="https://github.com/Ryha-Technologies/corporate-agent-os/blob/main/docs/organization/qa.md">Quality engineering and testing</a></h3><p>Make every acceptance criterion traceable to an executed, reproducible result and keep the release decision independent of the builder.</p></li>
+      <li class="card"><h3><a href="https://github.com/Ryha-Technologies/corporate-agent-os/blob/main/docs/organization/research.md">Research and intelligence</a></h3><p>Give every decision dated, triangulated evidence with honest confidence and the disconfirming case.</p></li>
+      <li class="card"><h3><a href="https://github.com/Ryha-Technologies/corporate-agent-os/blob/main/docs/organization/sales.md">Sales and partnerships</a></h3><p>Sell what exists to customers who need it, with evidence-based forecasts and counsel-reviewed terms.</p></li>
+      <li class="card"><h3><a href="https://github.com/Ryha-Technologies/corporate-agent-os/blob/main/docs/organization/strategy.md">Business and corporate strategy</a></h3><p>State a falsifiable strategic choice, size it honestly and know what would kill it.</p></li>
+      <li class="card"><h3><a href="https://github.com/Ryha-Technologies/corporate-agent-os/blob/main/docs/organization/ux-research.md">UX and customer research</a></h3><p>Learn how real people behave, decide and struggle, and make the evidence usable by product and design.</p></li>
+    </ul>
+  </section>
+
+  <section id="how" aria-labelledby="how-h">
+    <h2 id="how-h">How it works</h2>
+    <p>For substantial work the orchestrator follows the same sequence. The five steps below are the general pattern; the nine workflow DAGs (brand development, business validation, idea to business, product design, product discovery, product launch, product maintenance, security review, software development) arrange the stages differently.</p>
+    <ol class="flow">
+      <li><h3>Intake</h3><p>The orchestrator writes a brief and creates the project workspace and memory ledger.</p></li>
+      <li><h3>Plan</h3><p>Workflow stages become task contracts with owners, write scopes and a named reviewer.</p></li>
+      <li><h3>Delegate</h3><p>Specialists do the work using the host's sub-agent feature, one writer per path.</p></li>
+      <li><h3>Review</h3><p>An independent reviewer judges the result at one of 12 quality gates. A failure goes back as a rework contract.</p></li>
+      <li><h3>Human approval</h3><p>Deploying, publishing, spending, legal filings and similar actions wait for a person.</p></li>
+    </ol>
+    <figure class="diagram">
+      <svg viewBox="0 0 640 250" role="img" aria-labelledby="dg-t dg-d" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, sans-serif" font-size="14">
+        <title id="dg-t">Agent tiers and review</title>
+        <desc id="dg-d">An orchestrator delegates to executives and department leads, who direct specialists. Independent reviewers check specialist output at quality gates. Human approval sits after the gates.</desc>
+        <rect width="640" height="250" fill="#15181C"/>
+        <g fill="#1D2227" stroke="#6E7A87" stroke-width="1.5">
+          <rect x="250" y="12" width="140" height="40" rx="4" fill="#2EE6C5" stroke="#2EE6C5"/>
+          <rect x="20" y="82" width="170" height="40" rx="4"/>
+          <rect x="235" y="82" width="170" height="40" rx="4"/>
+          <rect x="450" y="82" width="170" height="40" rx="4"/>
+          <rect x="235" y="152" width="170" height="40" rx="4"/>
+          <rect x="450" y="152" width="170" height="40" rx="4" stroke-dasharray="6 4" stroke="#2EE6C5"/>
+          <rect x="450" y="206" width="170" height="36" rx="4" stroke="#F4F6F8"/>
+        </g>
+        <g stroke="#AEB7C2" stroke-width="1.5" fill="none">
+          <path d="M320 52 V67 M105 67 H535 M105 67 V82 M320 67 V82 M535 67 V82"/>
+          <path d="M320 122 V152"/>
+          <path d="M405 172 H450"/>
+          <path d="M535 192 V206"/>
+        </g>
+        <g text-anchor="middle">
+          <text x="320" y="37" fill="#15181C" font-weight="700">Orchestrator (1)</text>
+          <text x="105" y="107" fill="#F4F6F8">Executives (8)</text>
+          <text x="320" y="107" fill="#F4F6F8">Department leads (10)</text>
+          <text x="535" y="107" fill="#F4F6F8">Task contracts</text>
+          <text x="320" y="177" fill="#F4F6F8">Specialists (28)</text>
+          <text x="535" y="177" fill="#2EE6C5">Reviewers (11)</text>
+          <text x="535" y="229" fill="#F4F6F8">Human approval</text>
+        </g>
+      </svg>
+      <figcaption class="muted">Simplified view of how the tiers relate. The five-step list above is the full text equivalent.</figcaption>
+    </figure>
+  </section>
+
+  <section id="platforms" aria-labelledby="plat-h">
+    <h2 id="plat-h">Platforms</h2>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Platform support table">
+    <table>
+      <caption>What ships for each host and how far it has been verified</caption>
+      <thead><tr><th scope="col">Host</th><th scope="col">What is installed</th><th scope="col">Verification</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Kiro</th><td>Skills, JSON agents, steering, hooks, and a Power in Agent Plugins 1.0.0 format</td><td>Live-verified on Kiro CLI 3.3.0</td></tr>
+        <tr><th scope="row">Claude Code</th><td>Skills, sub-agents, <code>CLAUDE.md</code></td><td>Format-validated against official docs. Not run live.</td></tr>
+        <tr><th scope="row">Codex</th><td>Skills, <code>AGENTS.md</code></td><td>Format-validated against official docs. Not run live.</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <section id="quick-start" aria-labelledby="qs-h">
+    <h2 id="qs-h">Quick start</h2>
+    <p>Clone the repository, then run the installer with the host you use and the project folder to install into.</p>
+    <pre tabindex="0" aria-label="Clone command"><code>git clone https://github.com/Ryha-Technologies/corporate-agent-os.git</code></pre>
+    <pre tabindex="0" aria-label="Install command for Kiro"><code>python scripts/install/install.py --target kiro --destination /path/to/project</code></pre>
+    <p>Use <code>--target claude</code> or <code>--target codex</code> for the other hosts. Run the installer from the cloned repository folder. Then open the project in your host and ask the <code>corporate-orchestrator</code> agent or skill to start.</p>
+    <p>See the <a href="docs.html">docs page</a> for the installation guide and platform guides.</p>
+  </section>
+
+  <section id="status" aria-labelledby="st-h">
+    <h2 id="st-h">Honest status</h2>
+    <div class="notice">
+      <p><strong>Version 0.2.0 is a beta. Evaluate it before you rely on it.</strong></p>
+      <ul>
+        <li>Only Kiro CLI 3.3.0 has been verified live. The Claude Code and Codex files were checked against official documentation formats, not run in those tools.</li>
+        <li>No model-driven benchmark has been run, so this site shows no performance numbers.</li>
+        <li>The repository includes 63 tests, 28 regression cases, 5 golden benchmarks and 10 validators. They are not model-driven benchmarks.</li>
+        <li>The legal and naming functions produce research and questions for qualified counsel. They are not legal advice or clearance.</li>
+      </ul>
+      <p>Known limits are listed in <a href="https://github.com/Ryha-Technologies/corporate-agent-os/blob/main/docs/known-limitations.md">known-limitations.md</a>.</p>
+    </div>
+  </section>
+
+  <section id="author" aria-labelledby="au-h">
+    <h2 id="au-h">Author</h2>
+    <p>Created and maintained by Velluraju C. <a href="https://github.com/velluraju">GitHub</a> &middot; <a href="https://www.linkedin.com/in/velluraju">LinkedIn</a>. The project is open source under the MIT licence, hosted under the Ryha-Technologies GitHub organisation. Issues and contributions go through <a href="https://github.com/Ryha-Technologies/corporate-agent-os">the repository</a>.</p>
+  </section>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Corporate Agent OS is open source under the MIT licence. Version 0.2.0, beta: evaluate it before relying on it.</p>
+    <ul>
+      <li><a href="https://github.com/Ryha-Technologies/corporate-agent-os">Repository</a></li>
+      <li><a href="https://github.com/Ryha-Technologies/corporate-agent-os/blob/main/LICENSE">MIT licence</a></li>
+      <li><a href="https://github.com/velluraju">Velluraju C on GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/velluraju">Velluraju C on LinkedIn</a></li>
+    </ul>
+    <p>Created and maintained by Velluraju C. Hosted under the Ryha-Technologies GitHub organisation. This site uses a system font stack, no cookies, no analytics and no third-party requests.</p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agents | Corporate Agent OS</title>
+<meta name="description" content="The 58 agents in Corporate Agent OS in five tiers, read from the Kiro agent definitions.">
+<meta name="color-scheme" content="dark">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">Corporate Agent <span>OS</span></a>
+    <nav aria-label="Main">
+      <ul class="nav-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="agents.html" aria-current="page">Agents</a></li>
+        <li><a href="docs.html">Docs</a></li>
+        <li><a href="https://github.com/Ryha-Technologies/corporate-agent-os">GitHub<span class="sr-only"> (opens in a new tab)</span></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<div class="wrap">
+  <div class="page-head">
+    <h1>58 agents in five tiers</h1>
+    <p class="lede">1 orchestrator, 8 executives, 10 department leads, 28 specialists and 11 independent reviewers. Names, tiers, autonomy levels and descriptions below come from the Kiro agent files in <code>.kiro/agents/*.json</code>.</p>
+    <div class="filter" role="search">
+      <label for="q">Filter agents by name or description</label>
+      <input id="q" type="search" data-filter="agent" autocomplete="off">
+      <span id="q-status" role="status" aria-live="polite" class="muted"></span>
+    </div>
+  </div>  <section class="group" id="orchestrator" aria-labelledby="orchestrator-h" data-group>
+    <h2 id="orchestrator-h">Orchestrator <span class="muted">()</span></h2>
+    <p class="muted">Plans the work, writes task contracts, delegates and integrates. It does not approve its own work.</p>
+    <ul class="grid">
+      <li class="card" data-item><span class="tag">corporate-orchestrator &middot; autonomy: execute</span><p>Leads multi-department work from a rough idea or product request; plans the DAG, delegates to specialists, enforces gates and integrates. Use for any substantial company or product task.</p></li>
+    </ul>
+  </section>
+  <section class="group" id="executive" aria-labelledby="executive-h" data-group>
+    <h2 id="executive-h">Executives <span class="muted">(8)</span></h2>
+    <p class="muted">Advise on direction, risk and spend. Autonomy is advise: they recommend, a human decides.</p>
+    <ul class="grid">
+      <li class="card" data-item><span class="tag">ceo-strategy &middot; autonomy: advise</span><p>Sets direction, arbitrates trade-offs between departments and decides go/no-go at the opportunity, product and release gates. Use when a cross-department decision is needed.</p></li>
+      <li class="card" data-item><span class="tag">cfo-finance &middot; autonomy: advise</span><p>Owns financial model review, pricing economics, runway and spend approval policy. Use at the opportunity gate and before any pricing or spend decision.</p></li>
+      <li class="card" data-item><span class="tag">ciso-security &middot; autonomy: advise</span><p>Owns security risk acceptance, testing authorisation and incident policy. Use at the security gate and whenever personal, payment or regulated data is involved.</p></li>
+      <li class="card" data-item><span class="tag">clo-legal &middot; autonomy: advise</span><p>Owns legal, IP, licensing and privacy risk triage and decides what must go to qualified counsel. Use at the brand and legal gates.</p></li>
+      <li class="card" data-item><span class="tag">cmo-marketing &middot; autonomy: advise</span><p>Owns brand, positioning and go-to-market direction. Use at the brand gate and before launch planning.</p></li>
+      <li class="card" data-item><span class="tag">coo-operations &middot; autonomy: advise</span><p>Turns strategy into an operating plan, owns process, capacity, vendors and the operating cadence. Use when planning delivery, operations or cross-team dependencies.</p></li>
+      <li class="card" data-item><span class="tag">cpo-product &middot; autonomy: advise</span><p>Owns product strategy, scope discipline and the definition of success. Use at product gates and when scope, priority or metrics are disputed.</p></li>
+      <li class="card" data-item><span class="tag">cto-technology &middot; autonomy: advise</span><p>Owns technology direction, architecture oversight, build-vs-buy and technical risk acceptance. Use when technology decisions have cost, security or lock-in consequences.</p></li>
+    </ul>
+  </section>
+  <section class="group" id="department" aria-labelledby="department-h" data-group>
+    <h2 id="department-h">Department leads <span class="muted">(10)</span></h2>
+    <p class="muted">Coordinate the specialists in one area and propose plans.</p>
+    <ul class="grid">
+      <li class="card" data-item><span class="tag">brand-creative-director &middot; autonomy: propose</span><p>Directs brand strategy, naming, identity and creative production; ensures research-before-creation and multiple directions. Use for any brand or creative stage.</p></li>
+      <li class="card" data-item><span class="tag">design-lead &middot; autonomy: propose</span><p>Coordinates UX research, information architecture, interaction and visual design, design system and accessibility. Use for the experience stage.</p></li>
+      <li class="card" data-item><span class="tag">engineering-lead &middot; autonomy: propose</span><p>Coordinates architecture, implementation, integration and release engineering; owns branch and integration strategy for parallel work. Use for build stages.</p></li>
+      <li class="card" data-item><span class="tag">growth-lead &middot; autonomy: propose</span><p>Coordinates positioning, launch, channels, sales enablement and customer success planning. Use for launch and growth stages.</p></li>
+      <li class="card" data-item><span class="tag">legal-lead &middot; autonomy: propose</span><p>Coordinates IP screening, licensing review, privacy analysis and the counsel question list. Use for naming, OSS and legal stages.</p></li>
+      <li class="card" data-item><span class="tag">operations-lead &middot; autonomy: propose</span><p>Coordinates finance operations, people operations, procurement, vendor management and internal process. Use when the plan needs budgets, roles, vendors or operating cadence.</p></li>
+      <li class="card" data-item><span class="tag">product-lead &middot; autonomy: propose</span><p>Coordinates product discovery, PRD, prioritisation and validation planning. Use when turning evidence into product scope.</p></li>
+      <li class="card" data-item><span class="tag">qa-lead &middot; autonomy: propose</span><p>Plans test strategy and coordinates independent verification across functional, accessibility, performance and AI behaviour. Use when planning or staffing verification.</p></li>
+      <li class="card" data-item><span class="tag">research-lead &middot; autonomy: propose</span><p>Plans and coordinates research tracks (customer, market, competitor, technology), owns the evidence ledger quality. Use when a discovery stage needs several research tasks.</p></li>
+      <li class="card" data-item><span class="tag">security-lead &middot; autonomy: propose</span><p>Coordinates threat modelling, secure design review, security testing within authorised scope and remediation tracking. Use for security stages.</p></li>
+    </ul>
+  </section>
+  <section class="group" id="specialist" aria-labelledby="specialist-h" data-group>
+    <h2 id="specialist-h">Specialists <span class="muted">(28)</span></h2>
+    <p class="muted">Do the work inside an assigned write scope.</p>
+    <ul class="grid">
+      <li class="card" data-item><span class="tag">accessibility-specialist &middot; autonomy: propose</span><p>Reviews designs and implementations against WCAG 2.2 AA with automated and manual checks, and specifies fixes. Use at design and testing stages.</p></li>
+      <li class="card" data-item><span class="tag">backend-engineer &middot; autonomy: propose</span><p>Implements server-side features, APIs, data access and migrations with tests, following repository conventions and secure defaults. Use for backend build tasks.</p></li>
+      <li class="card" data-item><span class="tag">brand-strategist &middot; autonomy: propose</span><p>Builds brand foundation, positioning, personality, promise, narrative and messaging system from a category audit. Use for brand strategy work before naming or identity.</p></li>
+      <li class="card" data-item><span class="tag">business-strategist &middot; autonomy: propose</span><p>Develops positioning, segment choice, differentiation and the opportunity assessment with confidence levels and kill criteria. Use at the opportunity stage.</p></li>
+      <li class="card" data-item><span class="tag">competitive-analyst &middot; autonomy: propose</span><p>Maps competitors, alternatives, substitutes and workarounds with sourced pricing, distribution, switching costs and positioning gaps. Use for competitor maps and differentiation.</p></li>
+      <li class="card" data-item><span class="tag">creative-producer &middot; autonomy: propose</span><p>Produces documents, presentations, web copy, campaign assets and creative briefs for images or video, with brand, rights and verification gates. Use for any creative deliverable beyond product UI.</p></li>
+      <li class="card" data-item><span class="tag">customer-researcher &middot; autonomy: propose</span><p>Plans and synthesises customer interviews, surveys and usability tests; builds evidence-based personas and journeys. Use when primary research with real users is planned or analysed.</p></li>
+      <li class="card" data-item><span class="tag">customer-success-specialist &middot; autonomy: propose</span><p>Designs onboarding, support operations, knowledge base, issue taxonomy, escalation and feedback loops. Use for post-launch customer operations.</p></li>
+      <li class="card" data-item><span class="tag">data-ai-engineer &middot; autonomy: propose</span><p>Designs data pipelines and AI features with evaluation sets, guardrails, cost controls and privacy; compares deterministic options first. Use when a feature involves data processing or model calls.</p></li>
+      <li class="card" data-item><span class="tag">design-systems-engineer &middot; autonomy: propose</span><p>Defines design tokens, typography scale, spacing, component specifications with variants and states, and documentation. Use when a reusable system is needed for implementation.</p></li>
+      <li class="card" data-item><span class="tag">devops-engineer &middot; autonomy: propose</span><p>Sets up CI/CD, environments, infrastructure, observability, backup and release processes with least privilege and rollback. Use for deployment and operations tasks.</p></li>
+      <li class="card" data-item><span class="tag">financial-modeler &middot; autonomy: propose</span><p>Builds business model and unit-economics models with explicit assumptions, scenarios, sensitivity and break-even. Use when revenue, cost, pricing or runway figures are needed.</p></li>
+      <li class="card" data-item><span class="tag">frontend-engineer &middot; autonomy: propose</span><p>Implements accessible, responsive user interfaces from design specs and tokens, with real states and browser-verified rendering. Use for UI build tasks.</p></li>
+      <li class="card" data-item><span class="tag">growth-marketer &middot; autonomy: propose</span><p>Builds positioning, launch messaging, channel plans, experiments and analytics plans from verified product capability and research. Use for marketing and launch content.</p></li>
+      <li class="card" data-item><span class="tag">identity-designer &middot; autonomy: propose</span><p>Develops logo concepts, identity system, colour, typography, imagery direction and the brandbook specification with distinctiveness and rights checks. Use for visual identity work.</p></li>
+      <li class="card" data-item><span class="tag">legal-researcher &middot; autonomy: propose</span><p>Researches IP, licensing, privacy and regulatory questions against official sources and maintains the component register, asset provenance and issue register. Use for legal gate evidence.</p></li>
+      <li class="card" data-item><span class="tag">naming-specialist &middot; autonomy: propose</span><p>Generates name territories and candidates, screens linguistics, domains, handles and runs preliminary trademark searches with explicit status per jurisdiction. Use before any name is used publicly.</p></li>
+      <li class="card" data-item><span class="tag">operations-analyst &middot; autonomy: propose</span><p>Builds operating budgets, approval matrices, vendor registers and procurement evaluations. Use when the plan needs budgets, vendors or process definitions.</p></li>
+      <li class="card" data-item><span class="tag">people-ops-specialist &middot; autonomy: propose</span><p>Designs lean organisation structures, role charters, hiring criteria, onboarding and operating cadence. Use when roles, capacity or team process are planned.</p></li>
+      <li class="card" data-item><span class="tag">product-manager &middot; autonomy: propose</span><p>Writes the product thesis, PRD, user journeys, acceptance criteria and analytics plan from evidence. Use when requirements must be made testable.</p></li>
+      <li class="card" data-item><span class="tag">research-analyst &middot; autonomy: propose</span><p>Runs desk research with primary-source triangulation, evidence ledger and disconfirming evidence for markets, customers and technology. Use for any research task that must be sourced.</p></li>
+      <li class="card" data-item><span class="tag">sales-specialist &middot; autonomy: propose</span><p>Defines ICP, qualification, discovery questions, pipeline stages, proposals and partner evaluation. Use when a sales motion or partnership is planned.</p></li>
+      <li class="card" data-item><span class="tag">security-engineer &middot; autonomy: propose</span><p>Performs threat modelling, secure design and code review, dependency and secret scanning, and authorised security testing with findings and retests. Use for security review tasks.</p></li>
+      <li class="card" data-item><span class="tag">software-architect &middot; autonomy: propose</span><p>Designs system architecture, boundaries, data flow, trust boundaries, ADRs and cost model from requirements. Use before implementation of anything non-trivial.</p></li>
+      <li class="card" data-item><span class="tag">technical-writer &middot; autonomy: propose</span><p>Writes user documentation, API references, runbooks and release notes verified against the shipped behaviour. Use when documentation must match the product.</p></li>
+      <li class="card" data-item><span class="tag">test-engineer &middot; autonomy: propose</span><p>Designs and implements unit, integration, contract, end-to-end, performance and accessibility tests with traceability to acceptance criteria. Use for verification tasks.</p></li>
+      <li class="card" data-item><span class="tag">ui-designer &middot; autonomy: propose</span><p>Creates the visual design direction, high-fidelity screens, responsive layouts and motion within the brand and design system. Use after flows and IA exist.</p></li>
+      <li class="card" data-item><span class="tag">ux-designer &middot; autonomy: propose</span><p>Designs user flows, information architecture, wireframes, interaction models and all screen states from research and the PRD. Use before any visual design.</p></li>
+    </ul>
+  </section>
+  <section class="group" id="reviewer" aria-labelledby="reviewer-h" data-group>
+    <h2 id="reviewer-h">Independent reviewers <span class="muted">(11)</span></h2>
+    <p class="muted">Judge deliverables at quality gates. The creator of a deliverable never approves it.</p>
+    <ul class="grid">
+      <li class="card" data-item><span class="tag">architecture-reviewer &middot; autonomy: advise</span><p>Independently reviews architecture, ADRs, data and API contracts, threat and cost models for unjustified complexity and missing failure modes. Use at the architecture gate.</p></li>
+      <li class="card" data-item><span class="tag">brand-originality-auditor &middot; autonomy: advise</span><p>Independently audits brand strategy, names, logos and identity for competitor imitation, generic narrative, invented facts, missing category research and clearance overclaims. Use at the brand gate.</p></li>
+      <li class="card" data-item><span class="tag">business-model-auditor &middot; autonomy: advise</span><p>Independently audits opportunity assessments and financial models for hidden assumptions, false precision, missing costs and absent kill criteria. Use at the opportunity gate.</p></li>
+      <li class="card" data-item><span class="tag">code-reviewer &middot; autonomy: advise</span><p>Independently reviews diffs for correctness, security, maintainability, tests, scope and secrets, and re-runs reported build and test commands. Use at the build gate.</p></li>
+      <li class="card" data-item><span class="tag">design-qa-auditor &middot; autonomy: advise</span><p>Independently audits designs and rendered UI for hierarchy, brand consistency, state completeness, accessibility, responsiveness and template-likeness. Use at the design gate.</p></li>
+      <li class="card" data-item><span class="tag">documentation-auditor &middot; autonomy: advise</span><p>Independently verifies documentation against shipped behaviour by executing documented commands and checking paths, features and limitations. Use at the documentation gate.</p></li>
+      <li class="card" data-item><span class="tag">legal-licensing-reviewer &middot; autonomy: advise</span><p>Independently reviews component registers, asset provenance, naming and issue registers for unknown licences, unanalysed obligations and clearance overclaims. Use at the legal gate.</p></li>
+      <li class="card" data-item><span class="tag">research-auditor &middot; autonomy: advise</span><p>Independently audits research artefacts for source quality, fabrication, confirmation bias, missing disconfirming evidence and unsupported market sizing. Use at the discovery gate.</p></li>
+      <li class="card" data-item><span class="tag">security-auditor &middot; autonomy: advise</span><p>Independently audits threat models, security reviews, scan results and privacy analyses; verifies authorisation of any testing and the honesty of remediation claims. Use at the security gate.</p></li>
+      <li class="card" data-item><span class="tag">test-auditor &middot; autonomy: advise</span><p>Independently audits test evidence, traceability and release readiness; converts no NOT_RUN into PASS and issues GO / GO_WITH_ACCEPTED_RISKS / NO_GO. Use at the testing and release gates.</p></li>
+      <li class="card" data-item><span class="tag">ux-auditor &middot; autonomy: advise</span><p>Independently audits product requirements and user flows for usability, task completion, unsupported personas and ambiguous requirements. Use at the product gate and for flow reviews.</p></li>
+    </ul>
+  </section>
+  <section aria-labelledby="rules">
+    <h2 id="rules">Rules the agents work under</h2>
+    <ul>
+      <li>One writer per path. Parallel code work goes into separate worktrees.</li>
+      <li>Delegation uses the host's real sub-agent feature. If it is unavailable, the work runs as sequential passes and says so.</li>
+      <li>Anything not executed is reported as <code>NOT_RUN</code>.</li>
+      <li>Human approval is required before production deployment, publishing, spending, legal or IP filings, customer communications, processing real personal data, deleting data or changing access.</li>
+    </ul>
+    <p>These rules are from the project's workspace steering file. Full definitions: <a href="https://github.com/Ryha-Technologies/corporate-agent-os/tree/main/agents">the <code>agents/</code> directory</a>.</p>
+  </section>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Corporate Agent OS is open source under the MIT licence. Version 0.2.0, beta: evaluate it before relying on it.</p>
+    <ul>
+      <li><a href="https://github.com/Ryha-Technologies/corporate-agent-os">Repository</a></li>
+      <li><a href="https://github.com/Ryha-Technologies/corporate-agent-os/blob/main/LICENSE">MIT licence</a></li>
+      <li><a href="https://github.com/velluraju">Velluraju C on GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/velluraju">Velluraju C on LinkedIn</a></li>
+    </ul>
+    <p>Created and maintained by Velluraju C. Hosted under the Ryha-Technologies GitHub organisation. This site uses a system font stack, no cookies, no analytics and no third-party requests.</p>
+  </div>
+</footer>
+<script src="assets/filter.js"></script>
+</body>
+</html>
