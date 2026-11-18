@@ -1,0 +1,222 @@
+id: idea-to-business
+name: Idea to business (end-to-end spine)
+summary: Take a rough idea through evidence-based discovery, opportunity assessment, product definition, brand foundation, experience and architecture, build planning and launch planning, with independent review at every gate and human approval where the policy requires it.
+trigger: A user describes an idea for a product, service or company with little detail and wants to pursue it.
+inputs_required:
+  - The idea as stated, including motivation and constraints
+  - Geography, budget, timeline, platform preferences if known
+final_deliverables:
+  - 01-research/opportunity-assessment.md
+  - 02-product/strategy-memo.md
+  - 02-product/prd.md
+  - 03-brand/brand-strategy.md and 03-brand/naming-report.md
+  - 04-design/visual-direction.md and 04-design/design-tokens.json
+  - 05-architecture/architecture.md
+  - 09-operations/launch-plan.md
+retry_policy:
+  max_review_loops: 3
+  on_exhausted: escalate-to-human
+stages:
+  - id: intake
+    agent: corporate-orchestrator
+    skills: [corporate-orchestrator]
+    objective: Clarify the idea into a brief with problem, users, workaround, outcome, constraints and success definition; create workspace and ledger
+    depends_on: []
+    inputs: [user request]
+    outputs: ["00-intake/brief.md", "10-decisions/memory-ledger.jsonl"]
+    risk: low
+
+  - id: research-plan
+    agent: research-lead
+    skills: [research-intelligence]
+    objective: Frame the decisions and plan research tracks with disconfirming evidence per question
+    depends_on: [intake]
+    inputs: ["00-intake/brief.md"]
+    outputs: ["01-research/research-plan.md"]
+    risk: low
+
+  - id: desk-research
+    agent: research-analyst
+    skills: [research-intelligence]
+    objective: Gather sourced evidence on problem, customers, market and technology with an evidence ledger
+    depends_on: [research-plan]
+    inputs: ["01-research/research-plan.md"]
+    outputs: ["01-research/evidence-ledger.md", "01-research/problem-statement.md", "01-research/findings-market.md"]
+    parallel_group: discovery
+    timeout_minutes: 90
+    risk: medium
+
+  - id: competitor-map
+    agent: competitive-analyst
+    skills: [competitive-analysis, research-intelligence]
+    objective: Map competitors, substitutes and workarounds; produce the competitor pattern map
+    depends_on: [research-plan]
+    inputs: ["01-research/research-plan.md"]
+    outputs: ["01-research/competitor-map.md", "01-research/competitor-pattern-map.md"]
+    parallel_group: discovery
+    timeout_minutes: 90
+    risk: medium
+
+  - id: customer-research-plan
+    agent: customer-researcher
+    skills: [ux-research]
+    objective: Write the interview plan, screener and script; synthesise any customer evidence the user already has; label the rest as hypotheses
+    depends_on: [research-plan]
+    inputs: ["01-research/research-plan.md"]
+    outputs: ["01-research/customer-research-plan.md", "01-research/customer-findings.md"]
+    parallel_group: discovery
+    risk: low
+
+  - id: discovery-synthesis
+    agent: research-lead
+    skills: [research-intelligence]
+    objective: Synthesise the discovery tracks into a one-page research brief with confidence and open questions
+    depends_on: [desk-research, competitor-map, customer-research-plan]
+    inputs: ["01-research/evidence-ledger.md", "01-research/competitor-map.md", "01-research/customer-findings.md"]
+    outputs: ["01-research/research-brief.md"]
+    gate: discovery
+    review: research-auditor
+    risk: medium
+
+  - id: opportunity-assessment
+    agent: business-strategist
+    skills: [business-idea-validation, strategy-market-sizing]
+    objective: Reframe the idea as problems, grade evidence, size bottom-up, state differentiation, define kill criteria and MVP proposal
+    depends_on: [discovery-synthesis]
+    inputs: ["01-research/research-brief.md", "01-research/competitor-map.md"]
+    outputs: ["01-research/problem-statements.md", "01-research/opportunity-assessment.md", "02-product/validation-plan.md"]
+    parallel_group: opportunity
+    risk: high
+
+  - id: business-model
+    agent: financial-modeler
+    skills: [business-model-unit-economics]
+    objective: Compare business models and build ranged unit economics with sensitivity and break-even
+    depends_on: [discovery-synthesis]
+    inputs: ["01-research/research-brief.md", "01-research/competitor-map.md"]
+    outputs: ["02-product/business-model.md", "02-product/financial-model.csv"]
+    parallel_group: opportunity
+    risk: high
+
+  - id: opportunity-decision
+    agent: ceo-strategy
+    skills: [strategy-market-sizing, business-idea-validation]
+    objective: Recommend pursue, test first, pivot or stop with evidence ids and what would change the decision
+    depends_on: [opportunity-assessment, business-model]
+    inputs: ["01-research/opportunity-assessment.md", "02-product/business-model.md"]
+    outputs: ["10-decisions/opportunity-decision.md"]
+    gate: opportunity
+    review: business-model-auditor
+    human_approval: true
+    risk: high
+
+  - id: strategy-memo
+    agent: business-strategist
+    skills: [strategy-market-sizing]
+    objective: Write the one-sentence strategic choice, wedge, KPIs, kill thresholds and pre-mortem
+    depends_on: [opportunity-decision]
+    condition: "opportunity-decision recommends pursue or test first"
+    inputs: ["10-decisions/opportunity-decision.md"]
+    outputs: ["02-product/strategy-memo.md"]
+    risk: medium
+
+  - id: product-definition
+    agent: product-manager
+    skills: [product-discovery-prd]
+    objective: Produce thesis, PRD, acceptance criteria and analytics plan narrow enough to test the critical hypothesis
+    depends_on: [strategy-memo]
+    inputs: ["02-product/strategy-memo.md", "01-research/customer-findings.md"]
+    outputs: ["02-product/prd.md", "02-product/acceptance-criteria.md", "02-product/analytics-plan.md", "02-product/roadmap.md"]
+    parallel_group: definition
+    gate: product
+    review: ux-auditor
+    human_approval: true
+    risk: high
+
+  - id: brand-foundation
+    agent: brand-strategist
+    skills: [brand-strategy-story]
+    objective: Category audit, brand strategy, narrative and messaging with facts separated from framing
+    depends_on: [strategy-memo]
+    inputs: ["02-product/strategy-memo.md", "01-research/competitor-pattern-map.md"]
+    outputs: ["03-brand/category-audit.md", "03-brand/brand-strategy.md", "03-brand/messaging.md", "03-brand/rejected-concepts.md"]
+    parallel_group: definition
+    risk: medium
+
+  - id: naming
+    agent: naming-specialist
+    skills: [naming-ip-screen]
+    objective: Generate territories and candidates; run preliminary screening per jurisdiction with allowed statuses
+    depends_on: [brand-foundation]
+    inputs: ["03-brand/brand-strategy.md"]
+    outputs: ["03-brand/naming-report.md", "03-brand/naming-screens/README.md"]
+    gate: brand
+    review: brand-originality-auditor
+    human_approval: true
+    risk: high
+
+  - id: experience-design
+    agent: design-lead
+    skills: [information-architecture, ui-ux-design, design-system, accessibility-audit]
+    objective: Flows, IA, states matrix, visual direction with rationale, tokens and component spec, accessibility review
+    depends_on: [product-definition, brand-foundation]
+    inputs: ["02-product/prd.md", "03-brand/brand-strategy.md", "01-research/competitor-pattern-map.md"]
+    outputs: ["04-design/user-flows.md", "04-design/information-architecture.md", "04-design/states-matrix.md", "04-design/visual-direction.md", "04-design/design-rationale.md", "04-design/design-tokens.json", "04-design/component-spec.md", "04-design/accessibility-review.md"]
+    parallel_group: shaping
+    gate: design
+    review: design-qa-auditor
+    timeout_minutes: 180
+    risk: medium
+
+  - id: architecture
+    agent: software-architect
+    skills: [architecture-system-design, api-database-design, threat-modeling, oss-reuse-license]
+    objective: Simplest viable architecture with ADRs, data model, API contract, threat model and cost model
+    depends_on: [product-definition]
+    inputs: ["02-product/prd.md", "02-product/business-model.md"]
+    outputs: ["05-architecture/architecture.md", "05-architecture/adr/README.md", "05-architecture/data-model.md", "05-architecture/api-contract.md", "05-architecture/threat-model.md", "05-architecture/cost-model.md"]
+    parallel_group: shaping
+    gate: architecture
+    review: architecture-reviewer
+    timeout_minutes: 180
+    risk: high
+
+  - id: build-plan
+    agent: engineering-lead
+    skills: [software-engineering, test-strategy]
+    objective: Slice the build into vertical increments with disjoint ownership, test strategy and integration plan; hand off to the software-development workflow
+    depends_on: [experience-design, architecture]
+    inputs: ["05-architecture/architecture.md", "04-design/component-spec.md", "02-product/acceptance-criteria.md"]
+    outputs: ["06-build/build-plan.md", "07-quality/test-strategy.md"]
+    risk: medium
+
+  - id: legal-foundation
+    agent: legal-researcher
+    skills: [legal-risk-governance, oss-reuse-license]
+    objective: Issue register, jurisdiction map, counsel questions, component and asset provenance registers started
+    depends_on: [architecture, naming]
+    inputs: ["05-architecture/architecture.md", "03-brand/naming-report.md"]
+    outputs: ["08-legal-oss/issue-register.md", "08-legal-oss/jurisdiction-map.md", "08-legal-oss/counsel-questions.md", "08-legal-oss/component-register.md", "08-legal-oss/asset-provenance.md"]
+    gate: legal
+    review: legal-licensing-reviewer
+    human_approval: true
+    risk: high
+
+  - id: launch-plan
+    agent: growth-lead
+    skills: [growth-gtm, product-launch]
+    objective: Positioning, channel plan, experiment backlog and launch plan from verified scope and brand
+    depends_on: [product-definition, brand-foundation, build-plan]
+    inputs: ["02-product/prd.md", "03-brand/messaging.md", "06-build/build-plan.md"]
+    outputs: ["09-operations/positioning.md", "09-operations/channel-plan.md", "09-operations/experiment-backlog.md", "09-operations/launch-plan.md"]
+    risk: medium
+
+  - id: final-report
+    agent: corporate-orchestrator
+    skills: [corporate-orchestrator, anti-slop-quality-gate]
+    objective: Ten-part orchestrator report with decision, deliverables, verification, unknowns, approvals and what was not run
+    depends_on: [legal-foundation, launch-plan]
+    inputs: ["07-quality/gate-index.md", "10-decisions/memory-ledger.jsonl"]
+    outputs: ["10-decisions/final-report.md"]
+    human_approval: true
+    risk: medium

@@ -1,0 +1,42 @@
+{
+  "task_id": "T-003",
+  "project_id": "fieldnote-2026-11",
+  "assigned_agent": "competitive-analyst",
+  "reviewer": "research-auditor",
+  "objective": "Produce a competitor and alternatives map for field-service scheduling tools used by Indian SMEs with 5-50 technicians, so the product lead can decide the positioning wedge.",
+  "context": "Discovery stage of workflow idea-to-business. Informs decision D-002 (segment choice). Hypothesis H-004 says incumbents under-serve WhatsApp-first dispatch; this task must try to disconfirm it.",
+  "inputs": [
+    "00-intake/brief.md",
+    "01-research/research-plan.md",
+    "memory:H-004"
+  ],
+  "outputs": [
+    "01-research/competitor-map.md",
+    "01-research/evidence-ledger.md"
+  ],
+  "file_ownership": [
+    "01-research/competitor-map.md",
+    "01-research/evidence-ledger.md"
+  ],
+  "dependencies": ["T-001"],
+  "constraints": [
+    "Cite URL and access date for every competitor fact.",
+    "Include manual and spreadsheet workarounds as alternatives.",
+    "Do not estimate competitor revenue without a disclosed source."
+  ],
+  "tools": ["read", "write", "web"],
+  "budget": { "max_model_calls": 40, "max_retries": 1, "max_cost_usd": 3.0 },
+  "timeout_minutes": 45,
+  "acceptance_criteria": [
+    "At least 6 direct competitors and 3 substitutes are listed with segment, pricing (or 'not public'), distribution and switching cost.",
+    "Every row has a dated source in the evidence ledger.",
+    "The map names at least one positioning gap and at least one piece of evidence against H-004.",
+    "No unsourced market-size or revenue figures appear."
+  ],
+  "verification": "research-auditor opens three random ledger URLs, checks dates, and confirms the disconfirming-evidence section exists.",
+  "risk": "low",
+  "approval": ["none"],
+  "status": "READY",
+  "created_at": "2026-11-18T09:30:00Z",
+  "updated_at": "2026-11-18T09:30:00Z"
+}

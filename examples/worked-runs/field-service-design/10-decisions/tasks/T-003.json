@@ -1,0 +1,46 @@
+{
+  "task_id": "T-003",
+  "project_id": "design-run-field-service",
+  "assigned_agent": "ux-designer",
+  "reviewer": "ux-auditor",
+  "objective": "Produce low-fidelity text wireframes for the critical flows validated against IA and tasks.",
+  "context": "Stage wireframes. Depends on T-002.",
+  "inputs": [
+    "04-design/user-flows.md",
+    "04-design/information-architecture.md"
+  ],
+  "outputs": [
+    "04-design/wireframes/README.md"
+  ],
+  "file_ownership": [
+    "04-design/wireframes/**"
+  ],
+  "dependencies": [
+    "T-002"
+  ],
+  "constraints": [
+    "Label every persona and finding HYPOTHESIS where no research exists.",
+    "Write only inside file_ownership."
+  ],
+  "tools": [
+    "read",
+    "write"
+  ],
+  "budget": {
+    "max_model_calls": 60,
+    "max_retries": 2
+  },
+  "timeout_minutes": 60,
+  "acceptance_criteria": [
+    "Each wireframe lists regions in order, the single primary action and the states it covers.",
+    "Mobile wireframes fit 360 px width without horizontal scroll."
+  ],
+  "verification": "ux-auditor compares wireframes against flows and the states matrix.",
+  "risk": "medium",
+  "approval": [
+    "department-lead"
+  ],
+  "status": "ACCEPTED",
+  "created_at": "2026-11-18T14:03:00Z",
+  "updated_at": "2026-11-18T16:00:00Z"
+}

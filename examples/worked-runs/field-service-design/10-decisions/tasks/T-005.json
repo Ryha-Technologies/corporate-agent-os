@@ -1,0 +1,50 @@
+{
+  "task_id": "T-005",
+  "project_id": "design-run-field-service",
+  "assigned_agent": "design-systems-engineer",
+  "reviewer": "design-qa-auditor",
+  "objective": "Produce machine-readable tokens with computed contrast and a component spec with all states and accessibility requirements.",
+  "context": "Stage tokens-and-components. Depends on T-003.",
+  "inputs": [
+    "04-design/wireframes/README.md",
+    "04-design/visual-direction.md"
+  ],
+  "outputs": [
+    "04-design/design-tokens.json",
+    "04-design/component-spec.md"
+  ],
+  "file_ownership": [
+    "04-design/design-tokens.json",
+    "04-design/component-spec.md"
+  ],
+  "dependencies": [
+    "T-003"
+  ],
+  "constraints": [
+    "Label every persona and finding HYPOTHESIS where no research exists.",
+    "Write only inside file_ownership."
+  ],
+  "tools": [
+    "read",
+    "write",
+    "shell"
+  ],
+  "budget": {
+    "max_model_calls": 60,
+    "max_retries": 2
+  },
+  "timeout_minutes": 60,
+  "acceptance_criteria": [
+    "design-tokens.json validates against templates/design/design-tokens.schema.json.",
+    "contrast_check.py reports 0 roles below threshold.",
+    "Each component lists all states from the states matrix and keyboard behaviour."
+  ],
+  "verification": "Run the schema validator and contrast_check.py; auditor spot-checks three components against the matrix.",
+  "risk": "medium",
+  "approval": [
+    "department-lead"
+  ],
+  "status": "ACCEPTED",
+  "created_at": "2026-11-18T14:03:00Z",
+  "updated_at": "2026-11-18T16:00:00Z"
+}

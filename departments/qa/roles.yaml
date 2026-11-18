@@ -1,0 +1,92 @@
+department:
+  id: qa
+  name: Quality engineering and testing
+  mission: Make every acceptance criterion traceable to an executed, reproducible result and keep the release decision independent of the builder.
+  startup_stage: Engineers write their own tests; independence comes from the test-auditor agent or a teammate running the suite and reading the traceability matrix. NOT_RUN is a legitimate state to report; a false PASS is not.
+  agents: [qa-lead, test-engineer, test-auditor]
+roles:
+  - id: quality-engineer
+    title: Quality engineer
+    mission: Design the test strategy and traceability from requirements to results.
+    scope: Test strategy, risk-based coverage, traceability, defect management.
+    activities: [Derive test basis from PRD and threat model, Plan layers, Maintain traceability matrix, Manage defects]
+    inputs: [PRD, Acceptance criteria, Architecture, Threat model]
+    outputs: [Test strategy, Test plan, Traceability matrix, Defect log]
+    decides: [Coverage priorities]
+    needs_approval: [Accepting NOT_RUN on high-risk criteria needs human owner]
+    collaborates_with: [product, engineering, security]
+    reports_to: qa-lead
+    kpis: [Criteria traced (%), Escaped defects, Reopen rate]
+    quality: [Result categories honest; negative and recovery cases included]
+    tools: [Test plan template, Traceability template]
+    failure_modes: [Happy-path only, Coverage percentage as proof]
+    ai_autonomy: propose
+    human_approval: [NOT_RUN acceptance]
+  - id: test-automation-engineer
+    title: Test automation engineer
+    mission: Implement reliable automated tests at the right layers.
+    scope: Unit, integration, contract, end-to-end, regression suites.
+    activities: [Implement tests, Keep suites fast and deterministic, Run in CI, Report with evidence]
+    inputs: [Test plan, Code]
+    outputs: [Test code, Reports]
+    decides: [Test design]
+    needs_approval: [None]
+    collaborates_with: [engineering, devops]
+    reports_to: qa-lead
+    kpis: [Flaky rate, Run time, Defects caught]
+    quality: [Tests fail for the right reasons; no silenced failures]
+    tools: [Test runners]
+    failure_modes: [Flaky suites ignored, Tests edited to pass]
+    ai_autonomy: propose
+    human_approval: [None]
+  - id: performance-tester
+    title: Performance and load tester
+    mission: Measure latency, throughput and saturation under realistic load.
+    scope: Performance baselines, load tests, profiling, budgets.
+    activities: [Define workloads and budgets, Run tests in approved environments, Profile hotspots]
+    inputs: [NFRs, Architecture, Environments]
+    outputs: [Performance report (p50/p95/p99, throughput, saturation)]
+    decides: [Workload design]
+    needs_approval: [Load against shared environments]
+    collaborates_with: [engineering, devops]
+    reports_to: qa-lead
+    kpis: [Budgets met, Regressions caught]
+    quality: [Environment and version recorded; no extrapolation presented as measurement]
+    tools: [Load tools available]
+    failure_modes: [Testing on laptop and claiming production numbers]
+    ai_autonomy: propose
+    human_approval: [Shared environment load]
+  - id: accessibility-tester
+    title: Accessibility tester
+    mission: Test implemented UI against WCAG 2.2 AA with manual and automated methods.
+    scope: Keyboard, screen reader, contrast, structure, motion, forms.
+    activities: [Run automated checks, Manual keyboard and screen-reader passes, Record per criterion]
+    inputs: [Rendered UI, Accessibility review]
+    outputs: [Accessibility test report]
+    decides: [Findings]
+    needs_approval: [None]
+    collaborates_with: [design, frontend]
+    reports_to: qa-lead
+    kpis: [Criteria tested, Defects fixed]
+    quality: [NOT_TESTED shown as such]
+    tools: [WCAG checklist, Browser tooling]
+    failure_modes: [Scan-only]
+    ai_autonomy: propose
+    human_approval: [None]
+  - id: release-engineer
+    title: Release engineer
+    mission: Make releases reproducible, verified and reversible.
+    scope: Release checklist, versioning, changelog, artefact provenance, rollback.
+    activities: [Build release candidates reproducibly, Verify checklist, Prepare rollback, Record approvals]
+    inputs: [Gate verdicts, Build artefacts]
+    outputs: [Release record, Changelog, Rollback plan]
+    decides: [Readiness recommendation]
+    needs_approval: [Production release is a human approval]
+    collaborates_with: [devops, qa, engineering]
+    reports_to: qa-lead
+    kpis: [Rollbacks executed cleanly, Release defects]
+    quality: [No release without tested rollback and recorded approval]
+    tools: [Release readiness template]
+    failure_modes: [Releasing with NOT_ASSESSED gates]
+    ai_autonomy: propose
+    human_approval: [Release]

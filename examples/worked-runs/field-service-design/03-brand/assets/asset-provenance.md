@@ -1,0 +1,7 @@
+# Asset provenance record
+
+| Asset | Type | Where used | Source | Rights holder | Licence | Permitted uses | Licence evidence (accessed 2026-11-18) | Generated? | Modifications | Reviewer | Status |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| Anek (Latin, Devanagari, Tamil and seven other Indic scripts; variable wght/wdth) | Font | UI, wordmark, brandbook | https://github.com/EkType/Anek (also on Google Fonts) | The Anek Project Authors / Ek Type | SIL Open Font License 1.1 | Use, embed, bundle, modify under OFL terms; cannot be sold alone; reserved-font-name rules apply if modified | OFL.txt in the repository (fetched 2026-11-18); README confirms weight and width axes and ten scripts | no | none | identity-designer | cleared for use pending version pin (record exact release tag before shipping) |
+| symbol.svg, symbol-mono.svg, symbol-16.svg, wordmark-horizontal.svg | Vector marks | Identity | Drawn in this run | project owner | project's own | all | n/a | no (hand-authored SVG) | — | identity-designer | cleared; design-mark screening NOT_RUN |
+| Competitor homepage captures (`01-research/competitor-capture.json`) | Research data (colours, fonts, headlines) | Pattern map only | Public homepages listed in the file | respective companies | fair-use research reference | reference only, never reproduced in product | URLs and access date in file | no | extracted values only | competitive-analyst | reference only |

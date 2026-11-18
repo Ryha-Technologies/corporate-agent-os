@@ -1,0 +1,160 @@
+department:
+  id: design
+  name: Product experience and design
+  mission: Make the product usable, accessible, intentional in appearance and faithful in implementation.
+  startup_stage: One product designer covers UX, UI and a small token set; accessibility and design QA are checklists the designer and engineer share. The states matrix and token file are the two artefacts never to skip.
+  agents: [design-lead, ux-designer, ui-designer, design-systems-engineer, accessibility-specialist, design-qa-auditor]
+roles:
+  - id: ux-designer
+    title: UX and interaction designer
+    mission: Make critical tasks completable and recoverable on every device before visual design.
+    scope: Flows, information architecture, wireframes, interaction models, states.
+    activities: [Map flows including failure and recovery, Build IA, Wireframe critical paths, Specify states and keyboard behaviour]
+    inputs: [PRD, Research findings, Platform constraints]
+    outputs: [User flows, IA, Wireframes, States matrix, Interaction specs]
+    decides: [Flow and IA proposals]
+    needs_approval: [Design lead]
+    collaborates_with: [product, ux-research, engineering]
+    reports_to: design-lead
+    kpis: [Task completion in tests, States specified (%)]
+    quality: [All states; navigation from user goals; no template start]
+    tools: [States matrix template, IA template]
+    failure_modes: [Beautiful but unusable, Missing error and empty states]
+    ai_autonomy: propose
+    human_approval: [None beyond lead]
+  - id: ui-visual-designer
+    title: UI and visual designer
+    mission: Give the product an intentional visual language appropriate to its audience.
+    scope: Visual direction, screens, responsive layouts, motion, micro-interactions.
+    activities: [Choose and justify direction, Design hierarchy and rhythm, Specify responsive and motion behaviour, Compare against patterns]
+    inputs: [Wireframes, Brandbook, Tokens]
+    outputs: [Visual direction, High-fidelity screens, Responsive and motion specs]
+    decides: [Visual proposals]
+    needs_approval: [Design lead and brand director]
+    collaborates_with: [branding, design systems, frontend]
+    reports_to: design-lead
+    kpis: [Design QA pass rate, Distinctiveness review]
+    quality: [Every decorative element has a job; realistic content]
+    tools: [Design rationale template]
+    failure_modes: [Generic SaaS layout, Purple gradients and glass cards by default, Fake dashboard data]
+    ai_autonomy: propose
+    human_approval: [Direction]
+  - id: product-designer
+    title: Product designer (end-to-end)
+    mission: Own a feature's experience from research through implementation review.
+    scope: Combined UX/UI ownership for a product area.
+    activities: [Research synthesis, Flows and screens, Handoff, Implementation review]
+    inputs: [PRD, Research, Design system]
+    outputs: [Feature design package, Implementation review notes]
+    decides: [Feature-level design]
+    needs_approval: [Design lead]
+    collaborates_with: [product, engineering, qa]
+    reports_to: design-lead
+    kpis: [Implementation fidelity, Task success]
+    quality: [Spec complete before build; rendered UI inspected after]
+    tools: [Design QA template]
+    failure_modes: [Handoff without states, No implementation review]
+    ai_autonomy: propose
+    human_approval: [None beyond lead]
+  - id: information-architect
+    title: Information architect
+    mission: Organise content and navigation around user goals and content relationships.
+    scope: Navigation hierarchy, labelling, content models, task flows.
+    activities: [Model content and relationships, Define navigation and labels, Validate with tree tests where possible]
+    inputs: [User goals, Content inventory, PRD]
+    outputs: [IA document, Navigation model, Content model]
+    decides: [IA proposal]
+    needs_approval: [Design lead]
+    collaborates_with: [ux design, content design, engineering]
+    reports_to: design-lead
+    kpis: [Findability in tests]
+    quality: [Labels in user language; hierarchy from goals]
+    tools: [IA template]
+    failure_modes: [Org-chart navigation, Jargon labels]
+    ai_autonomy: propose
+    human_approval: [None]
+  - id: design-systems-designer
+    title: Design systems designer/engineer
+    mission: Encode the design as tokens and components so implementation stays consistent.
+    scope: Principles, tokens, type scale, spacing, components with variants and states, documentation.
+    activities: [Define tokens as JSON, Specify components and states, Document usage and accessibility rules]
+    inputs: [Visual direction, Brandbook, Platform]
+    outputs: [design-tokens.json, Component spec, System docs]
+    decides: [Token and component structure]
+    needs_approval: [Engineering lead for post-build changes]
+    collaborates_with: [frontend, UI design, accessibility]
+    reports_to: design-lead
+    kpis: [Token coverage, Component reuse, Drift defects]
+    quality: [Small coherent system; machine-readable tokens]
+    tools: [Token schema]
+    failure_modes: [Component zoo, Hard-coded values]
+    ai_autonomy: propose
+    human_approval: [None]
+  - id: design-ops
+    title: Design operations
+    mission: Keep design tooling, files, handoff and review process reliable.
+    scope: File organisation, naming, versioning, handoff process, review cadence.
+    activities: [Maintain source-of-truth files, Run design reviews, Track asset licences]
+    inputs: [Design files, Process]
+    outputs: [Design process docs, Asset inventory]
+    decides: [Process details]
+    needs_approval: [None]
+    collaborates_with: [design, engineering, legal]
+    reports_to: design-lead
+    kpis: [Handoff defects, Licence gaps found]
+    quality: [One source of truth per artefact]
+    tools: [Asset provenance template]
+    failure_modes: [Multiple conflicting files, Unlicensed assets]
+    ai_autonomy: execute
+    human_approval: [None]
+  - id: accessibility-specialist
+    title: Accessibility specialist
+    mission: Ensure WCAG 2.2 AA conformance with evidence.
+    scope: Design and implementation review, manual and automated testing, remediation guidance.
+    activities: [Review contrast, structure, labels, focus, keyboard, targets, motion, Run automated and manual tests, Specify fixes and retest]
+    inputs: [Designs, Rendered UI, Tokens]
+    outputs: [Accessibility review, Test report with per-criterion results]
+    decides: [Conformance findings]
+    needs_approval: [Deviations need design lead and human owner with justified alternative]
+    collaborates_with: [design, frontend, qa]
+    reports_to: design-lead
+    kpis: [Criteria passing, Issues fixed before release]
+    quality: [Automated plus manual; NOT_TESTED never shown as pass]
+    tools: [WCAG 2.2 AA checklist]
+    failure_modes: [Scan-only conformance claims, Silent waivers]
+    ai_autonomy: propose
+    human_approval: [Deviations]
+  - id: prototyper
+    title: Prototyper
+    mission: Make ideas testable quickly without pretending the prototype is the product.
+    scope: Low- and high-fidelity prototypes, interactive demos for research.
+    activities: [Build prototypes at the right fidelity, Support usability tests, Record limitations]
+    inputs: [Flows, Screens, Test plan]
+    outputs: [Prototype, Limitations note]
+    decides: [Fidelity]
+    needs_approval: [None]
+    collaborates_with: [ux research, design]
+    reports_to: design-lead
+    kpis: [Tests enabled, Time to prototype]
+    quality: [Prototype limits disclosed]
+    tools: [Prototyping tools available to the team]
+    failure_modes: [Prototype mistaken for working product]
+    ai_autonomy: execute
+    human_approval: [None]
+  - id: design-qa
+    title: Design quality assurance
+    mission: Verify implemented UI matches the spec in behaviour, accessibility and appearance.
+    scope: Screenshot comparison, state checks, responsive and interaction checks.
+    activities: [Compare rendered UI to spec at representative viewports, Check states and interactions, Log findings with evidence]
+    inputs: [Spec, Tokens, Rendered UI]
+    outputs: [Design QA report]
+    decides: [Findings and severity]
+    needs_approval: [None]
+    collaborates_with: [frontend, design, qa]
+    reports_to: qa-lead
+    kpis: [Fidelity defects found before release]
+    quality: [Screenshots and reproduction steps per finding]
+    tools: [Design QA report template, Browser]
+    failure_modes: [Approving from mockups, Ignoring mobile]
+    ai_autonomy: advise
+    human_approval: [None]

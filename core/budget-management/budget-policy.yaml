@@ -1,0 +1,46 @@
+# Budget and resource governance. Ceilings the orchestrator applies when writing task contracts.
+# Component type: specification. Values are defaults; a project charter may lower them, and may raise them only with
+# a human decision recorded in 10-decisions/approvals.md.
+version: 0.2.0
+
+project_defaults:
+  max_parallel_agents: 4            # concurrent sub-agents; Kiro and Claude Code both degrade with many parallel writers
+  max_active_specialists: 8         # distinct specialist agents engaged per workflow run; use the minimum needed
+  max_review_loops_per_stage: 3
+  max_total_review_loops: 12
+  escalate_on_exhausted: human
+  context_budget_note: Keep every specialist prompt under the host's recommended skill-listing budget; Codex caps the skill list at about 2% of context, so install only the skills a project needs.
+
+task_defaults:
+  by_risk:
+    low:      { max_model_calls: 30,  max_retries: 1, timeout_minutes: 30 }
+    medium:   { max_model_calls: 60,  max_retries: 2, timeout_minutes: 60 }
+    high:     { max_model_calls: 120, max_retries: 2, timeout_minutes: 120 }
+    critical: { max_model_calls: 120, max_retries: 1, timeout_minutes: 120 }   # critical work is split, not stretched
+
+tool_rate_limits:
+  web_fetch_per_task: 60
+  web_search_per_task: 30
+  shell_commands_per_task: 200
+  note: Hosts enforce their own limits; these are ceilings the agent should self-apply and report against.
+
+cost_tracking:
+  log_file: 10-decisions/budget-log.md
+  record_per_task: [task_id, agent, model_class, model_calls, tokens_if_available, cost_if_available, wall_minutes, retries]
+  when_unavailable: NOT_MEASURED      # never estimate silently
+
+stop_conditions:
+  - A stage exceeds its timeout twice.
+  - Total review loops reach max_total_review_loops.
+  - Any task reports a critical finding in security, legal or testing gates.
+  - A human approval request is pending for more than the project's agreed wait time.
+  - The same defect returns after two REWORK cycles (indicates a specification problem, not an execution problem).
+
+audit_trail:
+  required_logs:
+    - 10-decisions/tasks/*.json            # every contract with status history
+    - 10-decisions/memory-ledger.jsonl      # claims with provenance
+    - 07-quality/gate-*.md                  # every gate verdict
+    - 10-decisions/approvals.md             # human approvals with name, date, scope
+    - 10-decisions/budget-log.md
+  rule: Logs are append-only. Corrections are new entries.

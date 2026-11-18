@@ -1,0 +1,39 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Corporate Agent OS: validate task contracts on save",
+      "description": "When a task contract JSON under 10-decisions/tasks is saved, validate it against the task schema.",
+      "trigger": "PostFileSave",
+      "matcher": "10-decisions/tasks/.*\\.json$",
+      "action": {
+        "type": "command",
+        "command": "python .corporate-agent-os/validators/validate_tasks.py 10-decisions/tasks"
+      },
+      "timeout": 60,
+      "enabled": false
+    },
+    {
+      "name": "Corporate Agent OS: validate memory ledger on save",
+      "description": "When the project memory ledger is saved, validate ids, types and fact provenance.",
+      "trigger": "PostFileSave",
+      "matcher": "10-decisions/memory-ledger\\.jsonl$",
+      "action": {
+        "type": "command",
+        "command": "python .corporate-agent-os/validators/validate_memory.py 10-decisions/memory-ledger.jsonl"
+      },
+      "timeout": 60,
+      "enabled": false
+    },
+    {
+      "name": "Corporate Agent OS: remind about gates before stopping",
+      "description": "Before the agent finishes a turn in an orchestrated project, remind it to report gate status and NOT_RUN items.",
+      "trigger": "Stop",
+      "action": {
+        "type": "agent",
+        "prompt": "Before finishing: list every quality gate touched in this session with its verdict file path, every human approval obtained or still required, and every test, scan or review that was NOT_RUN. Do not describe anything as production-ready while a gate is NOT_ASSESSED."
+      },
+      "enabled": true
+    }
+  ]
+}

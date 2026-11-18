@@ -1,0 +1,82 @@
+id: business-validation
+name: Business idea validation
+summary: Decide whether an idea is worth pursuing by discovering the problem, grading evidence, assessing the opportunity, modelling the business and defining validation experiments with kill criteria, reviewed independently and decided by a human.
+trigger: A user wants a go, test-first, pivot or stop decision on a business idea.
+inputs_required:
+  - The idea and the user's motivation
+  - Target geography and constraints
+final_deliverables:
+  - 01-research/problem-statements.md
+  - 01-research/opportunity-assessment.md
+  - 02-product/business-model.md
+  - 02-product/validation-plan.md
+  - 10-decisions/opportunity-decision.md
+retry_policy:
+  max_review_loops: 2
+  on_exhausted: escalate-to-human
+stages:
+  - id: intake
+    agent: corporate-orchestrator
+    skills: [corporate-orchestrator]
+    objective: Write the brief and ledger; choose jurisdictions and segment hypotheses to test
+    depends_on: []
+    outputs: ["00-intake/brief.md", "10-decisions/memory-ledger.jsonl"]
+    risk: low
+  - id: problem-reframing
+    agent: business-strategist
+    skills: [business-idea-validation]
+    objective: Write at least three problem statements with person, situation, workaround and cost, each labelled evidence-based or hypothesis
+    depends_on: [intake]
+    outputs: ["01-research/problem-statements.md"]
+    risk: low
+  - id: evidence
+    agent: research-analyst
+    skills: [research-intelligence]
+    objective: Gather sourced evidence for each problem statement including spending, workarounds and disconfirming cases
+    depends_on: [problem-reframing]
+    outputs: ["01-research/evidence-ledger.md", "01-research/findings-problem.md"]
+    parallel_group: discovery
+    risk: medium
+  - id: competitors
+    agent: competitive-analyst
+    skills: [competitive-analysis]
+    objective: Map alternatives and workarounds; name positioning gaps with counter-evidence
+    depends_on: [problem-reframing]
+    outputs: ["01-research/competitor-map.md", "01-research/competitor-pattern-map.md"]
+    parallel_group: discovery
+    risk: medium
+  - id: synthesis
+    agent: research-lead
+    skills: [research-intelligence]
+    objective: One-page research brief with confidence per pillar
+    depends_on: [evidence, competitors]
+    outputs: ["01-research/research-brief.md"]
+    gate: discovery
+    review: research-auditor
+    risk: medium
+  - id: assessment
+    agent: business-strategist
+    skills: [business-idea-validation, strategy-market-sizing]
+    objective: Opportunity assessment with sizing, differentiation, evidence grades, risks, kill criteria, MVP proposal and pivots
+    depends_on: [synthesis]
+    outputs: ["01-research/opportunity-assessment.md", "02-product/validation-plan.md"]
+    parallel_group: opportunity
+    risk: high
+  - id: model
+    agent: financial-modeler
+    skills: [business-model-unit-economics]
+    objective: Business model comparison and ranged unit economics with sensitivity
+    depends_on: [synthesis]
+    outputs: ["02-product/business-model.md", "02-product/financial-model.csv"]
+    parallel_group: opportunity
+    risk: high
+  - id: decision
+    agent: ceo-strategy
+    skills: [business-idea-validation]
+    objective: Recommend pursue, test first, pivot or stop with evidence and the assumption that matters most
+    depends_on: [assessment, model]
+    outputs: ["10-decisions/opportunity-decision.md"]
+    gate: opportunity
+    review: business-model-auditor
+    human_approval: true
+    risk: high

@@ -1,0 +1,58 @@
+department:
+  id: people
+  name: People, recruitment and people operations
+  mission: Build a fair, capable team with clear roles, safe onboarding and healthy operating rituals.
+  startup_stage: Founders hire with structured criteria and a two-page role charter; employment law goes to a local professional. Agents are tools with human owners, never employees.
+  agents: [people-ops-specialist, operations-lead]
+roles:
+  - id: people-operations-manager
+    title: People operations manager
+    mission: Run hiring, onboarding, performance and offboarding processes fairly and securely.
+    scope: Org model, role charters, hiring process, onboarding, performance feedback, offboarding.
+    activities: [Write role charters with decision rights, Run structured hiring, Onboard with access and security training, Offboard with access removal]
+    inputs: [Capacity plan, Role needs]
+    outputs: [Org model, Role charters, Onboarding plan, Offboarding checklist]
+    decides: [Process]
+    needs_approval: [Employment decisions are human; law via professionals]
+    collaborates_with: [all leads, security, legal]
+    reports_to: chro
+    kpis: [Time to productivity, Retention, Access removed on exit (%)]
+    quality: [Job-related criteria; no surveillance metrics]
+    tools: [Role charter template, RACI]
+    failure_modes: [Biased criteria, Enterprise org chart, Agents as staff]
+    ai_autonomy: propose
+    human_approval: [Employment decisions]
+  - id: recruiter
+    title: Recruiter
+    mission: Attract and evaluate candidates against job-related criteria.
+    scope: Sourcing, screening, interview coordination, candidate experience.
+    activities: [Write accurate job descriptions, Source broadly, Structured screening, Coordinate interviews]
+    inputs: [Role charter, Criteria]
+    outputs: [Candidate pipeline, Screening notes]
+    decides: [Screening against criteria]
+    needs_approval: [Offers are human decisions]
+    collaborates_with: [hiring managers]
+    reports_to: people-operations-manager
+    kpis: [Time to hire, Candidate experience, Fairness audit]
+    quality: [No personality inferences; no discriminatory criteria]
+    tools: [Structured interview template]
+    failure_modes: [Keyword screening bias]
+    ai_autonomy: propose
+    human_approval: [Offers]
+  - id: learning-development
+    title: Learning and development lead
+    mission: Grow team capability where the work needs it.
+    scope: Skills gaps, training plans, security and privacy training.
+    activities: [Assess gaps from work, Plan training, Track completion]
+    inputs: [Role charters, Incident learnings]
+    outputs: [Training plan, Records]
+    decides: [Plan]
+    needs_approval: [Spend]
+    collaborates_with: [security, leads]
+    reports_to: people-operations-manager
+    kpis: [Training completion, Skills gaps closed]
+    quality: [Training tied to real needs]
+    tools: [Training records]
+    failure_modes: [Generic courses]
+    ai_autonomy: propose
+    human_approval: [Spend]

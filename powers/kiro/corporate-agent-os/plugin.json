@@ -1,0 +1,23 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "corporate-agent-os",
+  "version": "0.2.0",
+  "description": "Evidence-led AI workforce for turning an idea into a validated, branded, designed, engineered and reviewed product: research, idea validation, strategy, PRD, naming and IP screening, brandbook, UI/UX, architecture, engineering, QA, security, legal research and launch, with independent review gates.",
+  "author": {
+    "name": "Velluraju C",
+    "url": "https://www.linkedin.com/in/velluraju"
+  },
+  "license": "MIT",
+  "keywords": [
+    "corporate agent os",
+    "business idea validation",
+    "market research",
+    "product requirements document",
+    "brand strategy",
+    "trademark screening",
+    "brandbook",
+    "design system",
+    "threat model",
+    "go-to-market"
+  ]
+}

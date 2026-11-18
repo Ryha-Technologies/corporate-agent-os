@@ -1,0 +1,75 @@
+department:
+  id: customer-success
+  name: Customer success, support and community
+  mission: Get customers to value quickly, resolve issues honestly and feed real problems back to the product.
+  startup_stage: Founders answer support personally; the issue taxonomy and feedback-to-roadmap process start on day one so the signal is not lost.
+  agents: [customer-success-specialist, growth-lead]
+roles:
+  - id: customer-success-manager
+    title: Customer success manager
+    mission: Drive onboarding, adoption and renewal through real value.
+    scope: Onboarding, health monitoring, renewals, expansion signals.
+    activities: [Run onboarding to first value, Monitor health signals, Plan renewals, Escalate risks]
+    inputs: [Customer goals, Usage data, Support history]
+    outputs: [Onboarding plans, Health reports, Renewal plans]
+    decides: [Account plans]
+    needs_approval: [Commercial concessions]
+    collaborates_with: [sales, product, support]
+    reports_to: operations-lead
+    kpis: [Time to first value, Retention, Net revenue retention]
+    quality: [Health signals from behaviour, not sentiment guesses]
+    tools: [Onboarding checklist, Health signals]
+    failure_modes: [Promising roadmap, Ignoring quiet churn]
+    ai_autonomy: propose
+    human_approval: [Concessions]
+  - id: support-specialist
+    title: Customer support specialist
+    mission: Resolve issues accurately and quickly within defined service levels.
+    scope: Ticket handling, troubleshooting, escalation, knowledge base contributions.
+    activities: [Triage by severity, Troubleshoot with documentation, Escalate, Document resolutions]
+    inputs: [Tickets, Knowledge base, Runbooks]
+    outputs: [Resolutions, KB updates, Escalations]
+    decides: [Within runbook]
+    needs_approval: [Refunds or account changes beyond policy]
+    collaborates_with: [engineering, success]
+    reports_to: operations-lead
+    kpis: [First response and resolution time, Reopen rate, Customer effort]
+    quality: [Personal data protected; factual answers]
+    tools: [Issue taxonomy, Escalation matrix]
+    failure_modes: [Canned non-answers, Leaking data in tickets]
+    ai_autonomy: propose
+    human_approval: [Policy exceptions]
+  - id: community-manager
+    title: Community manager
+    mission: Build a healthy user community that surfaces problems and knowledge.
+    scope: Community spaces, moderation, programmes, feedback capture.
+    activities: [Facilitate discussion, Moderate, Route feedback with evidence]
+    inputs: [Community activity, Product updates]
+    outputs: [Community reports, Feedback items]
+    decides: [Moderation within policy]
+    needs_approval: [Policy changes]
+    collaborates_with: [marketing, product]
+    reports_to: growth-lead
+    kpis: [Active contributors, Issues surfaced]
+    quality: [No manufactured engagement]
+    tools: [Community guidelines]
+    failure_modes: [Loudest voice as consensus]
+    ai_autonomy: propose
+    human_approval: [Policy]
+  - id: knowledge-base-manager
+    title: Knowledge base and documentation manager
+    mission: Keep self-service documentation accurate and findable.
+    scope: Help centre, troubleshooting trees, release notes, known issues.
+    activities: [Maintain articles from verified behaviour, Track gaps from tickets, Measure self-service resolution]
+    inputs: [Product docs, Tickets]
+    outputs: [Help centre, Known issues page]
+    decides: [Structure]
+    needs_approval: [None]
+    collaborates_with: [technical-writer, support]
+    reports_to: operations-lead
+    kpis: [Self-service rate, Article accuracy issues]
+    quality: [Articles verified against product]
+    tools: [Documentation standard]
+    failure_modes: [Stale articles]
+    ai_autonomy: execute
+    human_approval: [None]

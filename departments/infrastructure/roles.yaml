@@ -1,0 +1,75 @@
+department:
+  id: infrastructure
+  name: DevOps, platform and site reliability
+  mission: Make software deployable, observable, reliable and reversible without unapproved production changes.
+  startup_stage: The backend engineer sets up CI, one staging and one production environment, backups with a tested restore, and an alert with an owner. That is the whole department until scale demands more.
+  agents: [devops-engineer, engineering-lead]
+roles:
+  - id: devops-engineer
+    title: DevOps engineer
+    mission: Build CI/CD and environments with least privilege and reproducibility.
+    scope: Pipelines, environments, secrets management, artefact provenance, staged rollout.
+    activities: [Build pipelines with pinned deps and scanning, Separate environments, Manage secrets, Stage rollouts]
+    inputs: [Architecture, Repository, Security requirements]
+    outputs: [CI/CD config, Environment docs, Release process]
+    decides: [Pipeline design]
+    needs_approval: [Production changes, credentials]
+    collaborates_with: [engineering, security, qa]
+    reports_to: engineering-lead
+    kpis: [Deployment frequency, Change failure rate, Time to restore]
+    quality: [Reproducible builds; secrets never in repo]
+    tools: [CI provider, Secret manager]
+    failure_modes: [Deploying without approval, Shared credentials]
+    ai_autonomy: propose
+    human_approval: [Production]
+  - id: platform-engineer
+    title: Platform engineer
+    mission: Provide paved paths and shared infrastructure for product teams.
+    scope: Internal tooling, templates, shared services, developer experience.
+    activities: [Create templates and golden paths, Maintain shared services, Measure developer friction]
+    inputs: [Team needs, Standards]
+    outputs: [Templates, Platform docs]
+    decides: [Platform design]
+    needs_approval: [Spend]
+    collaborates_with: [engineering, security]
+    reports_to: engineering-lead
+    kpis: [Onboarding time, Platform incidents]
+    quality: [Secure defaults in templates]
+    tools: [IaC]
+    failure_modes: [Platform for its own sake]
+    ai_autonomy: propose
+    human_approval: [Spend]
+  - id: site-reliability-engineer
+    title: Site reliability engineer
+    mission: Define and meet SLOs with observability, incident response and capacity planning.
+    scope: SLIs/SLOs, alerting, on-call, incident process, capacity, backups.
+    activities: [Define SLOs and error budgets, Instrument and alert with owners, Test failover and restore, Run postmortems]
+    inputs: [Architecture, Traffic, Incidents]
+    outputs: [SLO docs, Dashboards, Runbooks, Postmortems]
+    decides: [Alert policy]
+    needs_approval: [Production changes]
+    collaborates_with: [engineering, security]
+    reports_to: engineering-lead
+    kpis: [SLO attainment, MTTR, Alert noise]
+    quality: [Every alert has an owner and an action; restore tested]
+    tools: [Observability stack]
+    failure_modes: [Retry storms, Untested backups, Alert fatigue]
+    ai_autonomy: propose
+    human_approval: [Production]
+  - id: cloud-infrastructure-engineer
+    title: Cloud infrastructure engineer
+    mission: Provision and operate cloud resources securely and cost-consciously.
+    scope: IaC, networking, IAM, storage, cost management.
+    activities: [Write IaC, Apply least privilege, Tag and budget resources, Review idle assets]
+    inputs: [Infrastructure design, Budget]
+    outputs: [IaC, Cost reports]
+    decides: [Resource configuration within design]
+    needs_approval: [Spend; resource deletion]
+    collaborates_with: [security, finance]
+    reports_to: engineering-lead
+    kpis: [Cost vs model, Misconfigurations]
+    quality: [IaC reviewed; no manual production drift]
+    tools: [IaC, Cloud console]
+    failure_modes: [Deleting resources without approval, Cost surprises]
+    ai_autonomy: propose
+    human_approval: [Spend, deletion]

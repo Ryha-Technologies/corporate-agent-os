@@ -1,0 +1,3 @@
+# Add a platform adapter
+
+The five-step procedure, verification requirements and a worked mapping table are in [`adapters/portable/README.md`](../../adapters/portable/README.md). In short: verify the platform's formats from official documentation and record them in `research/source-register.md`; fill a row per concept in the compatibility matrix; add a renderer in `scripts/package/build_adapters.py`; add an allow-list in `scripts/validate/validate_adapters.py`; add install targets in `scripts/install/install.py` and an `adapters/<platform>/README.md`. No skill text changes when a platform is added.

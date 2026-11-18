@@ -1,0 +1,75 @@
+id: product-maintenance
+name: Existing product audit and improvement
+summary: Audit an existing product across product fit, UX, technical quality and security, consolidate findings into a prioritised improvement roadmap with evidence, and feed the maintenance cycle of monitoring, incident learning and dependency hygiene.
+trigger: An existing application needs assessment, improvement planning or ongoing maintenance.
+inputs_required:
+  - Access to the product, repository, analytics and support data
+  - Current PRD or feature list, brandbook if any
+final_deliverables:
+  - 02-product/product-audit.md
+  - 07-quality/ux-audit.md
+  - 07-quality/technical-audit.md
+  - 07-quality/security-review-*.md
+  - 02-product/improvement-roadmap.md
+retry_policy:
+  max_review_loops: 2
+  on_exhausted: escalate-to-executive
+stages:
+  - id: intake
+    agent: corporate-orchestrator
+    skills: [corporate-orchestrator]
+    objective: Brief with goals of the audit, access available, constraints and decision owner
+    depends_on: []
+    outputs: ["00-intake/brief.md", "10-decisions/memory-ledger.jsonl"]
+    risk: low
+  - id: product-audit
+    agent: product-manager
+    skills: [product-discovery-prd, business-idea-validation]
+    objective: Compare the product to evidenced user problems and metrics; identify gaps, unused scope and unvalidated assumptions
+    depends_on: [intake]
+    outputs: ["02-product/product-audit.md"]
+    parallel_group: audit
+    risk: medium
+  - id: ux-audit
+    agent: ux-auditor
+    skills: [ux-research, accessibility-audit, information-architecture]
+    objective: Heuristic and task-based UX audit with accessibility findings from the rendered product
+    depends_on: [intake]
+    outputs: ["07-quality/ux-audit.md"]
+    parallel_group: audit
+    risk: medium
+  - id: technical-audit
+    agent: software-architect
+    skills: [architecture-system-design, code-review, oss-reuse-license]
+    objective: Architecture, code quality, test coverage as evidence, dependency and licence inventory, operability gaps
+    depends_on: [intake]
+    outputs: ["07-quality/technical-audit.md", "08-legal-oss/component-register.md"]
+    parallel_group: audit
+    timeout_minutes: 180
+    risk: medium
+  - id: security-audit
+    agent: security-engineer
+    skills: [security-privacy, threat-modeling]
+    objective: Threat model and defensive review within written scope; findings with severity and evidence
+    depends_on: [intake]
+    outputs: ["05-architecture/threat-model.md", "07-quality/security-review-audit.md"]
+    parallel_group: audit
+    human_approval: true
+    risk: high
+  - id: consolidation
+    agent: product-lead
+    skills: [product-discovery-prd]
+    objective: Prioritised improvement roadmap with evidence, effort, risk and the hypothesis each item tests
+    depends_on: [product-audit, ux-audit, technical-audit, security-audit]
+    outputs: ["02-product/improvement-roadmap.md"]
+    gate: product
+    review: architecture-reviewer
+    human_approval: true
+    risk: medium
+  - id: maintenance-cycle
+    agent: engineering-lead
+    skills: [devops-sre, incident-response, oss-reuse-license]
+    objective: "Define the ongoing cycle: monitoring review, dependency updates with licence checks, incident learning, periodic security review and documentation refresh"
+    depends_on: [consolidation]
+    outputs: ["09-operations/maintenance-plan.md"]
+    risk: low

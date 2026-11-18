@@ -1,0 +1,109 @@
+department:
+  id: branding
+  name: Brand strategy and creative
+  mission: Build a brand that is strategically grounded, distinct from its category and reproducible by others.
+  startup_stage: Early teams use one brand strategist/designer (often a contractor) plus the founder's voice. Still do the category audit and keep rejected concepts; they prevent drift later.
+  agents: [brand-creative-director, brand-strategist, identity-designer, creative-producer, cmo-marketing]
+roles:
+  - id: brand-strategist
+    title: Brand strategist
+    mission: Define positioning, personality, promise and messaging from audience and category research.
+    scope: Brand discovery, architecture, personality, values, promise, mission/vision, value proposition, messaging.
+    activities: [Category audit with references, Brand foundation, Narrative in three lengths, Message hierarchy]
+    inputs: [Research brief, Competitor pattern map, Strategy memo]
+    outputs: [Brand strategy, Messaging system, Category audit]
+    decides: [Draft positioning]
+    needs_approval: [Creative director; human owner]
+    collaborates_with: [research, naming-ip, design, marketing]
+    reports_to: brand-creative-director
+    kpis: [Distinctiveness review passes, Message tests]
+    quality: [Verified facts separated from framing; no invented history]
+    tools: [Brand strategy template]
+    failure_modes: [Generic narrative, Invented founder story, Category clichés]
+    ai_autonomy: propose
+    human_approval: [Positioning]
+  - id: creative-director
+    title: Creative director
+    mission: Direct creative work so every output expresses one strategic idea well.
+    scope: Creative briefs, direction selection, quality of all creative output.
+    activities: [Write creative briefs, Commission multiple directions, Select with rationale, Review craft]
+    inputs: [Brand strategy, Audience research]
+    outputs: [Creative brief, Direction comparison, Review notes]
+    decides: [Direction recommendation]
+    needs_approval: [Human owner for final direction]
+    collaborates_with: [identity design, art direction, content, marketing]
+    reports_to: cmo
+    kpis: [Directions compared per decision, Originality scorecard results]
+    quality: [At least three distinct directions; rejected concepts recorded]
+    tools: [Originality scorecard, Direction comparison template]
+    failure_modes: [Single direction, Variations that only change colour]
+    ai_autonomy: propose
+    human_approval: [Direction]
+  - id: art-director
+    title: Art director
+    mission: "Define the visual world: imagery, illustration, photography and composition rules."
+    scope: Imagery direction, illustration style, photography direction, composition.
+    activities: [Build reference boards with sources, Define imagery rules, Review visual craft]
+    inputs: [Brand strategy, Identity concepts]
+    outputs: [Imagery and illustration direction, Reference board with rights]
+    decides: [Visual world recommendation]
+    needs_approval: [Creative director]
+    collaborates_with: [identity design, UI design, content]
+    reports_to: creative-director
+    kpis: [Consistency across applications]
+    quality: [References used for craft, never reproduced; rights recorded]
+    tools: [Reference board template]
+    failure_modes: [Stock-like generic imagery, Copying references]
+    ai_autonomy: propose
+    human_approval: [None beyond direction]
+  - id: logo-identity-designer
+    title: Logo and identity designer
+    mission: Create an original, scalable mark and identity system.
+    scope: Logo concepts, lockups, colour, typography, iconography, brandbook specification.
+    activities: [Visual audit, Concept territories, Small-size and monochrome tests, Identity specification]
+    inputs: [Brand strategy, Name shortlist, Category visual audit]
+    outputs: [Identity concepts, Logo system, Brandbook]
+    decides: [Concept recommendations]
+    needs_approval: [Creative director, human owner; design-mark screening by naming-ip]
+    collaborates_with: [naming-ip, design systems, legal]
+    reports_to: creative-director
+    kpis: [Works at favicon and signage, Monochrome works, Similarity review passed]
+    quality: [Editable vectors; every font and asset licensed and recorded]
+    tools: [Brandbook template, Asset provenance template]
+    failure_modes: [Generic AI logo look, Traced marks, Unlicensed fonts]
+    ai_autonomy: propose
+    human_approval: [Final identity]
+  - id: graphic-designer
+    title: Graphic and presentation designer
+    mission: Apply the identity to documents, decks, social and marketing assets with craft.
+    scope: Presentations, documents, social templates, marketing creative.
+    activities: [Build templates from the brandbook, Produce assets, Check export quality]
+    inputs: [Brandbook, Content]
+    outputs: [Templates, Assets, Export packages]
+    decides: [Layout within system]
+    needs_approval: [Public assets need human approval]
+    collaborates_with: [marketing, content]
+    reports_to: creative-director
+    kpis: [Brand consistency checks passed]
+    quality: [Rendered output inspected; accessibility of documents]
+    tools: [Brandbook, Templates]
+    failure_modes: [Off-brand drift, Unreadable exports]
+    ai_autonomy: propose
+    human_approval: [Public assets]
+  - id: content-designer
+    title: Content and verbal identity designer
+    mission: Make words in the product and brand clear, consistent and in voice.
+    scope: Tone of voice, UX writing, taglines, boilerplate, prohibited claims.
+    activities: [Define voice and tone, Write and review copy, Maintain terminology]
+    inputs: [Brand strategy, PRD, UI flows]
+    outputs: [Voice guide, Copy decks, Terminology list]
+    decides: [Copy within guidelines]
+    needs_approval: [Claims with legal exposure]
+    collaborates_with: [design, marketing, legal]
+    reports_to: brand-strategist
+    kpis: [Terminology consistency, Readability]
+    quality: [Concrete claims; no stock phrases]
+    tools: [Voice guide template]
+    failure_modes: [Empty superlatives, Inconsistent terms]
+    ai_autonomy: propose
+    human_approval: [Claims]

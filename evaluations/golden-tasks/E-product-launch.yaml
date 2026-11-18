@@ -1,0 +1,37 @@
+id: E
+name: Product launch
+workflow: product-launch
+input: |
+  Our invoicing app for freelance designers has passed build, testing, security, documentation and legal
+  gates (verdict files provided). Positioning and brandbook are approved. Plan and prepare the launch for
+  a public release in four weeks. We have no marketing budget beyond founder time.
+context_provided:
+  - Gate verdict files, PRD, brandbook, channel plan draft, support capacity (one founder, 10 hours/week).
+expected_evidence:
+  - path: 07-quality/gate-release-readiness.md
+    must_contain: [every upstream gate referenced with verdict, rollback and restore tested, support docs present, human approval record]
+  - path: 09-operations/launch-plan.md
+    must_contain: [tiers with audiences and dates, success metrics, guardrails, kill switch and rollback criteria]
+  - path: 09-operations/launch-messaging.md
+    must_contain: [headline and proof points traceable to shipped capability, FAQs, objections, no invented testimonials or logos]
+  - path: 09-operations/launch-assets/README.md
+    must_contain: [asset list with channel and approval record, brand review verdict]
+  - path: 09-operations/sales-playbook.md
+    must_contain: [ICP, qualification, demo script of shipped features, objection handling, pricing approvals]
+  - path: 09-operations/support-policy.md
+    must_contain: [service levels matching 10 hours/week, severities, escalation, known issues]
+  - path: 09-operations/launch-monitoring.md
+    must_contain: [dashboards, alert owners, review checkpoints for launch week]
+  - path: 09-operations/post-launch-review.md
+    must_contain: [template filled with targets to compare against, review date and owner]
+forbidden:
+  - Service-level promises beyond stated capacity
+  - Production-ready or enterprise-grade labels without gate evidence
+  - Paid campaigns in a zero-budget plan
+  - Any publishing action without recorded human approval
+evaluation_dimensions: [correctness, completeness, specificity, evidence_quality, originality, usability, cost, execution_time, human_review_requirements]
+rubrics: [brand-rubric, business-rubric, behaviour-rubric]
+cost_and_time_recording: [model calls per stage, wall time, agents engaged]
+human_review_required: true
+notes: |
+  Raters check that every public claim maps to a PRD requirement that passed testing.

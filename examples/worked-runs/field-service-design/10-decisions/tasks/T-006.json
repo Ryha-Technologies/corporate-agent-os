@@ -1,0 +1,47 @@
+{
+  "task_id": "T-006",
+  "project_id": "design-run-field-service",
+  "assigned_agent": "accessibility-specialist",
+  "reviewer": "design-qa-auditor",
+  "objective": "Design-stage WCAG 2.2 AA review of wireframes, tokens and component spec with per-criterion results.",
+  "context": "Stage accessibility-review. Depends on T-005.",
+  "inputs": [
+    "04-design/design-tokens.json",
+    "04-design/component-spec.md",
+    "04-design/wireframes/README.md"
+  ],
+  "outputs": [
+    "04-design/accessibility-review.md"
+  ],
+  "file_ownership": [
+    "04-design/accessibility-review.md"
+  ],
+  "dependencies": [
+    "T-005"
+  ],
+  "constraints": [
+    "Label every persona and finding HYPOTHESIS where no research exists.",
+    "Write only inside file_ownership."
+  ],
+  "tools": [
+    "read",
+    "write"
+  ],
+  "budget": {
+    "max_model_calls": 60,
+    "max_retries": 2
+  },
+  "timeout_minutes": 60,
+  "acceptance_criteria": [
+    "Every applicable criterion has PASS/FAIL/NOT_TESTED/NOT_APPLICABLE.",
+    "Implementation-only criteria are NOT_TESTED, not PASS."
+  ],
+  "verification": "design-qa-auditor checks that no implementation criterion is marked PASS.",
+  "risk": "medium",
+  "approval": [
+    "department-lead"
+  ],
+  "status": "ACCEPTED",
+  "created_at": "2026-11-18T14:03:00Z",
+  "updated_at": "2026-11-18T16:00:00Z"
+}

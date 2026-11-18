@@ -1,0 +1,48 @@
+{
+  "task_id": "T-007",
+  "project_id": "design-run-field-service",
+  "assigned_agent": "design-qa-auditor",
+  "reviewer": "ux-auditor",
+  "objective": "Independent design QA of the specification set and the design gate verdict.",
+  "context": "Stage design-qa. Depends on T-004, T-005, T-006.",
+  "inputs": [
+    "04-design/**"
+  ],
+  "outputs": [
+    "07-quality/gate-design-spec.md"
+  ],
+  "file_ownership": [
+    "07-quality/gate-design-spec.md"
+  ],
+  "dependencies": [
+    "T-004",
+    "T-005",
+    "T-006"
+  ],
+  "constraints": [
+    "Label every persona and finding HYPOTHESIS where no research exists.",
+    "Write only inside file_ownership."
+  ],
+  "tools": [
+    "read",
+    "shell"
+  ],
+  "budget": {
+    "max_model_calls": 60,
+    "max_retries": 2
+  },
+  "timeout_minutes": 60,
+  "acceptance_criteria": [
+    "Verdict uses the gate format with evidence per finding.",
+    "Differentiation is NOT_ASSESSABLE if the pattern map is missing and this is a high finding."
+  ],
+  "verification": "ux-auditor reads the verdict for evidence completeness.",
+  "risk": "high",
+  "approval": [
+    "department-lead",
+    "human"
+  ],
+  "status": "REVIEW",
+  "created_at": "2026-11-18T14:03:00Z",
+  "updated_at": "2026-11-18T16:00:00Z"
+}

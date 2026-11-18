@@ -1,0 +1,44 @@
+{
+  "task_id": "T-001",
+  "project_id": "design-run-field-service",
+  "assigned_agent": "design-lead",
+  "reviewer": "ux-auditor",
+  "objective": "Produce the design brief stating category, top tasks, audience, constraints and the visual-direction hypothesis so the design stages have a shared basis despite the missing PRD.",
+  "context": "Stage design-brief of product-design. Inputs are hypotheses (A-001..A-008).",
+  "inputs": [
+    "00-intake/brief.md",
+    "memory:A-001..A-008"
+  ],
+  "outputs": [
+    "04-design/design-brief.md"
+  ],
+  "file_ownership": [
+    "04-design/design-brief.md"
+  ],
+  "dependencies": [],
+  "constraints": [
+    "Label every persona and finding HYPOTHESIS where no research exists.",
+    "Write only inside file_ownership."
+  ],
+  "tools": [
+    "read",
+    "write"
+  ],
+  "budget": {
+    "max_model_calls": 60,
+    "max_retries": 2
+  },
+  "timeout_minutes": 60,
+  "acceptance_criteria": [
+    "Brief names category, three top tasks per role and the accessibility target.",
+    "Every claim about users is marked F, A or H with a ledger id."
+  ],
+  "verification": "ux-auditor reads the brief and checks each user claim has a ledger id.",
+  "risk": "medium",
+  "approval": [
+    "department-lead"
+  ],
+  "status": "ACCEPTED",
+  "created_at": "2026-11-18T14:03:00Z",
+  "updated_at": "2026-11-18T16:00:00Z"
+}

@@ -1,0 +1,58 @@
+department:
+  id: data-ai
+  name: Data and AI engineering
+  mission: Use data and models where they beat deterministic software, with evaluations, privacy, cost control and guardrails.
+  startup_stage: Usually the backend engineer with an evaluation spreadsheet. The non-negotiables are a representative test set before shipping a model feature and a cost ceiling per feature.
+  agents: [data-ai-engineer, cto-technology]
+roles:
+  - id: data-engineer
+    title: Data engineer
+    mission: Build reliable, governed data pipelines.
+    scope: Ingestion, transformation, lineage, quality, retention, access.
+    activities: [Inventory sources and rights, Build validated pipelines, Define lineage and deletion propagation]
+    inputs: [Data sources, Requirements, Data classification]
+    outputs: [Pipelines, Data catalogue, Quality checks]
+    decides: [Pipeline design]
+    needs_approval: [Use of personal or third-party data]
+    collaborates_with: [backend, security, legal]
+    reports_to: engineering-lead
+    kpis: [Data quality incidents, Freshness, Deletion SLA]
+    quality: [Rights and consent recorded per source]
+    tools: [Data catalogue template]
+    failure_modes: [Training or retrieval over data without rights, Silent schema drift]
+    ai_autonomy: propose
+    human_approval: [Personal data]
+  - id: ai-engineer
+    title: AI engineer
+    mission: Integrate models safely with structured outputs, constrained tools and evaluations.
+    scope: Model selection, prompts, tool use, retrieval, guardrails, evaluation, monitoring, cost.
+    activities: [Compare deterministic vs model, Evaluate candidates on representative set, Build guardrails and fallbacks, Monitor drift and cost]
+    inputs: [Task definition, Test set, Privacy requirements]
+    outputs: [AI design, Eval report, Prompt and model versions, Cost model]
+    decides: [Design within policy]
+    needs_approval: [Vendor and data-rights decisions by CTO; consequential automated decisions need human oversight design]
+    collaborates_with: [architecture, security, product]
+    reports_to: engineering-lead
+    kpis: [Task success on eval set, Cost per request, Incidents]
+    quality: [Model output treated as untrusted; eval before ship]
+    tools: [Eval template]
+    failure_modes: [AI where rules suffice, Benchmark mismatch, Prompt injection, Cost surprises]
+    ai_autonomy: propose
+    human_approval: [Vendor, data rights]
+  - id: machine-learning-engineer
+    title: Machine learning engineer
+    mission: Train, evaluate and operate models when off-the-shelf options are insufficient.
+    scope: Training data, features, training, evaluation, deployment, monitoring.
+    activities: [Prepare rights-cleared data, Train and evaluate with holdouts, Deploy with monitoring]
+    inputs: [Datasets, Task definition]
+    outputs: [Models, Eval reports, Model cards]
+    decides: [Method]
+    needs_approval: [Dataset rights; consequential use]
+    collaborates_with: [data-engineer, ai-engineer, legal]
+    reports_to: engineering-lead
+    kpis: [Eval metrics on holdout, Drift detected]
+    quality: [Data leakage checked; limitations documented]
+    tools: [Model card template]
+    failure_modes: [Leakage, Overfitting to benchmark, Unlicensed data]
+    ai_autonomy: propose
+    human_approval: [Dataset rights]

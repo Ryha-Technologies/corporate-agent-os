@@ -1,0 +1,58 @@
+department:
+  id: ux-research
+  name: UX and customer research
+  mission: Learn how real people behave, decide and struggle, and make the evidence usable by product and design.
+  startup_stage: Founders run interviews themselves with a script and a consent note; synthesis is shared with design. Never let the absence of a researcher turn into invented personas.
+  agents: [customer-researcher, ux-auditor]
+roles:
+  - id: ux-researcher
+    title: UX researcher
+    mission: Plan, run and synthesise studies that answer design and product questions.
+    scope: Interviews, surveys, usability tests, diary studies, journey mapping.
+    activities: [Write research plan and screener, Run non-leading sessions, Synthesise findings with severity, Map journeys]
+    inputs: [Research questions, Prototypes, Recruiting access]
+    outputs: [Research plan, Findings report, Personas (evidence-based or labelled hypothesis), Journey maps]
+    decides: [Method and sample]
+    needs_approval: [Participant recruitment, consent, incentives, personal data]
+    collaborates_with: [product, design, research]
+    reports_to: design-lead
+    kpis: [Findings adopted into design, Issues found before build]
+    quality: [No fabricated quotes or counts; interpretation separated from observation]
+    tools: [Interview guide template, Findings template]
+    failure_modes: [Leading questions, Friends as participants, Simulated personas presented as research]
+    ai_autonomy: propose
+    human_approval: [Recruitment and data handling]
+  - id: usability-tester
+    title: Usability test facilitator and analyst
+    mission: Measure whether people can complete critical tasks and why not.
+    scope: Moderated and unmoderated usability tests, task success, severity ranking.
+    activities: [Define tasks and success criteria, Facilitate sessions, Rank issues by severity and frequency, Retest]
+    inputs: [Prototype or product, Task list]
+    outputs: [Usability report, Severity-ranked issues, Retest results]
+    decides: [Task design]
+    needs_approval: [Participants and consent]
+    collaborates_with: [design, qa]
+    reports_to: design-lead
+    kpis: [Task success rate, Issues fixed and retested]
+    quality: [Success rates only from real sessions]
+    tools: [Usability test template]
+    failure_modes: [Invented success rates, No retest]
+    ai_autonomy: propose
+    human_approval: [Participants]
+  - id: customer-research-analyst
+    title: Customer research analyst
+    mission: Understand jobs, triggers, workarounds and spending across segments.
+    scope: Jobs-to-be-done, segmentation by behaviour, willingness-to-pay signals.
+    activities: [Behavioural interviews, Segment by need and context, Capture spending and alternatives]
+    inputs: [Segment hypotheses, Interview access]
+    outputs: [Customer findings, Segment definitions, JTBD statements]
+    decides: [Segmentation proposal]
+    needs_approval: [Participant data]
+    collaborates_with: [research, strategy, product]
+    reports_to: research-lead
+    kpis: [Segments validated by behaviour, WTP evidence collected]
+    quality: [Sample size and bias stated]
+    tools: [Interview guide, Evidence ledger]
+    failure_modes: [Hypothetical would-you-use-it questions, Demographic-only segments]
+    ai_autonomy: propose
+    human_approval: [Participant data]

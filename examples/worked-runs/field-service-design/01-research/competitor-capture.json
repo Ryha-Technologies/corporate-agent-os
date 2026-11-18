@@ -1,0 +1,410 @@
+{
+  "accessed": "2026-11-18",
+  "sites": {
+    "Zuper": {
+      "url": "https://www.zuper.co/",
+      "top_colours": [
+        [
+          "#fbd9c4",
+          8
+        ],
+        [
+          "#f2400a",
+          6
+        ],
+        [
+          "#fffaea",
+          5
+        ],
+        [
+          "#f9a06a",
+          4
+        ],
+        [
+          "#d9c2c2",
+          3
+        ],
+        [
+          "#ea580c",
+          3
+        ],
+        [
+          "#111827",
+          2
+        ],
+        [
+          "#6b7280",
+          2
+        ]
+      ],
+      "fonts": [],
+      "h1": [
+        "The AI Operating System to Run Your Service Business"
+      ],
+      "ctas": [
+        "Sign in",
+        "Schedule Demo",
+        "Schedule a Demo",
+        "60+ Integrations"
+      ],
+      "title": "All in One Field Service Management Software &amp; App - Zuper"
+    },
+    "FieldEZ": {
+      "url": "https://www.fieldez.com/",
+      "top_colours": [
+        [
+          "#fbf7f1",
+          9
+        ],
+        [
+          "#575f6c",
+          6
+        ],
+        [
+          "#06302a",
+          4
+        ],
+        [
+          "#fffaf8",
+          4
+        ],
+        [
+          "#f37b20",
+          4
+        ],
+        [
+          "#0e6b5c",
+          3
+        ],
+        [
+          "#0a4a40",
+          2
+        ],
+        [
+          "#e15a3c",
+          2
+        ]
+      ],
+      "fonts": [],
+      "h1": [
+        "The unified operations platform for enterprise equipment and field operations \u2013 in the office and in the field."
+      ],
+      "ctas": [
+        "Request a demo",
+        "Request a demo \u2192",
+        "Explore the platform",
+        "Explore the platform \u2192",
+        "Why teams choose FieldEZ \u2192"
+      ],
+      "title": "FieldEZ \u2013 The Unified Operations Platform for Enterprise Equipment"
+    },
+    "Fieldproxy": {
+      "url": "https://www.fieldproxy.com/",
+      "top_colours": [
+        [
+          "#0a1628",
+          230
+        ],
+        [
+          "#ea580c",
+          229
+        ],
+        [
+          "#dfe3f7",
+          216
+        ],
+        [
+          "#111",
+          88
+        ],
+        [
+          "#1f1f1f",
+          71
+        ],
+        [
+          "#475569",
+          57
+        ],
+        [
+          "#94a3b8",
+          41
+        ],
+        [
+          "#05145c",
+          29
+        ]
+      ],
+      "fonts": [
+        [
+          "Geist Mono",
+          8
+        ],
+        [
+          "Geist",
+          6
+        ],
+        [
+          "Instrument Serif",
+          5
+        ],
+        [
+          "Outfit",
+          3
+        ]
+      ],
+      "h1": [
+        "Fieldproxy is AI field service software that we configure around your workflows, whatever you run on today, from spreadsheets to off-the-shelf tools, so it&#x27"
+      ],
+      "ctas": [
+        "Get Demo"
+      ],
+      "title": "Fieldproxy | AI Field Service Software Built Around Your Work"
+    },
+    "Jobber": {
+      "url": "https://www.getjobber.com/",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    "Housecall Pro": {
+      "url": "https://www.housecallpro.com/",
+      "top_colours": [
+        [
+          "#05f",
+          34
+        ],
+        [
+          "#002942",
+          32
+        ],
+        [
+          "#13191e",
+          30
+        ],
+        [
+          "#0f77cc",
+          22
+        ],
+        [
+          "#eceff1",
+          18
+        ],
+        [
+          "#f5f5f5",
+          18
+        ],
+        [
+          "#ffb706",
+          18
+        ],
+        [
+          "#e0e0e0",
+          17
+        ]
+      ],
+      "fonts": [
+        [
+          "Manrope",
+          17
+        ],
+        [
+          "Helvetica Neue LT Pro Condensed",
+          1
+        ],
+        [
+          "Helvetica Neue LT Pro",
+          1
+        ],
+        [
+          "Courier\\ 10 Pitch",
+          1
+        ]
+      ],
+      "h1": [
+        "Everything to run and grow your business"
+      ],
+      "ctas": [
+        "Login",
+        "Start free trial",
+        "Join the conversation\n\t\t\t\t&rarr;",
+        "View all testimonials\t\t\t\t&rarr;",
+        "START NOW"
+      ],
+      "title": "Home Services Business Management Software - Housecall Pro"
+    },
+    "ReachOut Suite": {
+      "url": "https://www.reachoutsuite.com/",
+      "top_colours": [
+        [
+          "#585858",
+          66
+        ],
+        [
+          "#34b2ed",
+          54
+        ],
+        [
+          "#4a90e2",
+          14
+        ],
+        [
+          "#f7f7f7",
+          14
+        ],
+        [
+          "#161240",
+          14
+        ],
+        [
+          "#f9f9f9",
+          12
+        ],
+        [
+          "#3bb7f4",
+          12
+        ],
+        [
+          "#2d2d2d",
+          11
+        ]
+      ],
+      "fonts": [
+        [
+          "Figtree",
+          6
+        ],
+        [
+          "Poppins",
+          4
+        ],
+        [
+          "Times New Roman",
+          3
+        ],
+        [
+          "Arial",
+          1
+        ]
+      ],
+      "h1": [
+        "SERVICE BUSINESS SOFTWARE"
+      ],
+      "ctas": [
+        "Request a Demo",
+        "Contact us for pricing",
+        "More Industries"
+      ],
+      "title": "Service Business Software for India | ReachOut Suite"
+    },
+    "FieldVibe": {
+      "url": "https://www.fieldvibe.com/",
+      "top_colours": [
+        [
+          "#232427",
+          6
+        ],
+        [
+          "#272424",
+          4
+        ],
+        [
+          "#211f2a",
+          4
+        ],
+        [
+          "#3b5ffa",
+          3
+        ],
+        [
+          "#2f4fe0",
+          3
+        ],
+        [
+          "#112136",
+          3
+        ],
+        [
+          "#242126",
+          3
+        ],
+        [
+          "#3d4045",
+          3
+        ]
+      ],
+      "fonts": [
+        [
+          "Work Sans\\:Bold",
+          1
+        ]
+      ],
+      "h1": [
+        "Simple field service software built for solo pros and small teams"
+      ],
+      "ctas": [],
+      "title": "Field Service Software for Solo Pros &amp; Small Teams | FieldVibe"
+    },
+    "FieldCamp": {
+      "url": "https://fieldcamp.ai/",
+      "top_colours": [
+        [
+          "#111827",
+          85
+        ],
+        [
+          "#fafafa",
+          68
+        ],
+        [
+          "#ff791b",
+          60
+        ],
+        [
+          "#067a47",
+          52
+        ],
+        [
+          "#038",
+          45
+        ],
+        [
+          "#e5e7eb",
+          44
+        ],
+        [
+          "#fdf1e7",
+          44
+        ],
+        [
+          "#4b5563",
+          44
+        ]
+      ],
+      "fonts": [
+        [
+          "__Inter_176161",
+          29
+        ],
+        [
+          "__Fraunces_dd45d0",
+          13
+        ],
+        [
+          "ui-monospace",
+          1
+        ],
+        [
+          "__Inter_Fallback_176161",
+          1
+        ]
+      ],
+      "h1": [
+        "The AI-native field operations platform"
+      ],
+      "ctas": [
+        "Book a 15-minute call",
+        "Book a demo",
+        "Explore the AI Dispatcher \u2192"
+      ],
+      "title": "FieldCamp \u2014 AI-First Field Service Management Software"
+    }
+  }
+}

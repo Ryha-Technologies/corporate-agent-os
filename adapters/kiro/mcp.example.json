@@ -1,0 +1,12 @@
+{
+  "_comment": "Example workspace MCP configuration for .kiro/settings/mcp.json. Optional. Lets design QA agents take screenshots through a Playwright MCP server. Review the server's own documentation and licence before use; nothing here is installed automatically.",
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"],
+      "env": {},
+      "disabled": true,
+      "autoApprove": []
+    }
+  }
+}

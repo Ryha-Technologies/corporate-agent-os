@@ -1,0 +1,119 @@
+id: software-development
+name: Software development
+summary: "Build the product from architecture to reviewed, tested increments: ADRs, API and data design, threat model, implementation slices in isolated worktrees, independent code review, test execution and the build gate, with human approval before any production action."
+trigger: PRD and design exist and the software must be implemented or substantially changed.
+inputs_required:
+  - PRD and acceptance criteria
+  - Design package (tokens, component spec, screens) for UI work
+  - Repository access and conventions
+final_deliverables:
+  - 05-architecture/architecture.md and ADRs
+  - 05-architecture/api-contract.md and data-model.md
+  - Implemented code with tests in the product repository
+  - 07-quality/traceability-matrix.md and test reports
+  - 07-quality/gate-build-*.md
+retry_policy:
+  max_review_loops: 3
+  on_exhausted: escalate-to-executive
+stages:
+  - id: architecture
+    agent: software-architect
+    skills: [architecture-system-design, oss-reuse-license]
+    objective: Simplest viable architecture, ADRs, cost model, component candidates with licence review
+    depends_on: []
+    outputs: ["05-architecture/architecture.md", "05-architecture/adr/README.md", "05-architecture/cost-model.md"]
+    gate: architecture
+    review: architecture-reviewer
+    risk: high
+  - id: contracts
+    agent: software-architect
+    skills: [api-database-design]
+    objective: API contract with auth, errors, idempotency, pagination, versioning; schema with constraints, indexes and migration plan
+    depends_on: [architecture]
+    outputs: ["05-architecture/api-contract.md", "05-architecture/data-model.md"]
+    parallel_group: design
+    risk: high
+  - id: threat-model
+    agent: security-engineer
+    skills: [threat-modeling]
+    objective: Threat model with trust boundaries, abuse cases, controls and verification tests
+    depends_on: [architecture]
+    outputs: ["05-architecture/threat-model.md"]
+    parallel_group: design
+    risk: high
+  - id: test-strategy
+    agent: qa-lead
+    skills: [test-strategy]
+    objective: Risk-based test strategy and traceability matrix skeleton from acceptance criteria and threat model
+    depends_on: [contracts, threat-model]
+    outputs: ["07-quality/test-strategy.md", "07-quality/traceability-matrix.md"]
+    risk: medium
+  - id: build-plan
+    agent: engineering-lead
+    skills: [software-engineering]
+    objective: Vertical slices with disjoint file ownership, worktree strategy, interfaces and integration order
+    depends_on: [test-strategy]
+    outputs: ["06-build/build-plan.md"]
+    risk: medium
+  - id: backend-slice
+    agent: backend-engineer
+    skills: [software-engineering, api-database-design]
+    objective: Implement the backend of the first vertical slice with tests, in an isolated worktree, within assigned files
+    depends_on: [build-plan]
+    outputs: ["06-build/backend-notes.md"]
+    parallel_group: slice-1
+    timeout_minutes: 180
+    risk: high
+  - id: frontend-slice
+    agent: frontend-engineer
+    skills: [software-engineering, design-system, accessibility-audit]
+    objective: Implement the UI of the first vertical slice from tokens and specs with all states, verified in a browser, within assigned files
+    depends_on: [build-plan]
+    outputs: ["06-build/frontend-notes.md"]
+    parallel_group: slice-1
+    timeout_minutes: 180
+    risk: high
+  - id: integration
+    agent: engineering-lead
+    skills: [software-engineering, code-review]
+    objective: Integrate slice branches, resolve interface drift, run the full build and tests, record commands and results
+    depends_on: [backend-slice, frontend-slice]
+    outputs: ["06-build/integration-notes.md"]
+    risk: high
+  - id: code-review
+    agent: code-reviewer
+    skills: [code-review]
+    objective: Independent review of the integrated diff with re-run of build and tests; severity-ranked findings
+    depends_on: [integration]
+    outputs: ["07-quality/gate-build-slice-1.md"]
+    gate: build
+    review: test-auditor
+    risk: high
+  - id: test-execution
+    agent: test-engineer
+    skills: [test-strategy, accessibility-audit]
+    objective: Execute planned tests with traceability; PASS/FAIL/BLOCKED/NOT_RUN per criterion; accessibility and responsive checks for UI
+    depends_on: [code-review]
+    outputs: ["07-quality/test-report-slice-1.md", "07-quality/accessibility-test-report.md"]
+    gate: testing
+    review: test-auditor
+    risk: high
+  - id: documentation
+    agent: technical-writer
+    skills: [technical-documentation]
+    objective: Developer and user documentation verified by execution; release notes
+    depends_on: [test-execution]
+    outputs: ["06-build/release-notes.md", "09-operations/docs/README.md"]
+    gate: documentation
+    review: documentation-auditor
+    risk: medium
+  - id: release-readiness
+    agent: devops-engineer
+    skills: [devops-sre]
+    objective: CI/CD, environments, observability, backup/restore test, rollback and release checklist; no production action
+    depends_on: [documentation]
+    outputs: ["09-operations/release-checklist.md", "09-operations/runbooks/README.md"]
+    gate: release
+    review: test-auditor
+    human_approval: true
+    risk: critical

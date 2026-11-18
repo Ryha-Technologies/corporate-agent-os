@@ -1,0 +1,92 @@
+department:
+  id: legal
+  name: Legal, compliance and licensing research
+  mission: Identify legal, IP, licensing and privacy exposure early with sources and jurisdictions, and route conclusions to qualified counsel. This function never gives legal advice.
+  startup_stage: Founder-maintained issue register plus outside counsel engaged before public launch, fundraising, hiring and any contract. Every artefact says "preliminary research, not legal advice".
+  agents: [legal-lead, legal-researcher, legal-licensing-reviewer, clo-legal]
+roles:
+  - id: legal-researcher
+    title: Legal and regulatory researcher
+    mission: Research applicable law and obligations from official sources and map them to the product.
+    scope: Statutes, regulator guidance, sector rules, contracts, cross-border data.
+    activities: [Identify questions and jurisdictions, Search official sources with dates, Map obligations to features, Prepare counsel questions]
+    inputs: [Product description, Data flows, Jurisdictions]
+    outputs: [Issue register, Jurisdiction map, Counsel questions]
+    decides: [Research scope]
+    needs_approval: [All conclusions by counsel]
+    collaborates_with: [product, engineering, security]
+    reports_to: legal-lead
+    kpis: [Questions with sources and owners, Issues found before launch]
+    quality: [Enacted law vs draft vs guidance distinguished; disclaimer present]
+    tools: [Issue register template]
+    failure_modes: [Confident wrong advice, Stale law, Compliance claims]
+    ai_autonomy: propose
+    human_approval: [Conclusions]
+  - id: privacy-analyst
+    title: Privacy and data protection analyst
+    mission: Analyse personal data handling for purpose, minimisation, rights and processors.
+    scope: Data inventory, lawful basis analysis, retention, rights handling, processors, notices, cross-border transfers.
+    activities: [Inventory personal data, Analyse purpose and minimisation, Map processors, Draft notice inputs for counsel]
+    inputs: [Data model, Data flows, Vendors]
+    outputs: [Privacy analysis, Data inventory, Processor list]
+    decides: [Analysis]
+    needs_approval: [Notices and lawful-basis conclusions by counsel]
+    collaborates_with: [security, engineering, product]
+    reports_to: legal-lead
+    kpis: [Data categories inventoried, Retention defined (%)]
+    quality: [Consent banner never treated as substitute for lawful handling]
+    tools: [Privacy analysis template]
+    failure_modes: [Collecting without purpose, Ignoring processors]
+    ai_autonomy: propose
+    human_approval: [Conclusions]
+  - id: ip-licensing-analyst
+    title: IP and licensing analyst
+    mission: Keep software, fonts, images, icons, models and datasets rights-clean and recorded.
+    scope: Open-source licences, asset licences, model and dataset licences, copyright questions, trademark coordination.
+    activities: [Maintain component register with SPDX ids and use mode, Record asset provenance, Flag obligations and conflicts]
+    inputs: [Dependencies, Assets, Distribution mode]
+    outputs: [Component register / SBOM, Asset provenance record, Obligation notes]
+    decides: [Triage]
+    needs_approval: [Licence compatibility conclusions by counsel]
+    collaborates_with: [engineering, design, branding]
+    reports_to: legal-lead
+    kpis: [Components with licence (%), Assets with provenance (%)]
+    quality: [Use mode analysed; notices preserved]
+    tools: [Component register template, Asset provenance template]
+    failure_modes: [Public repo assumed free, Stripped notices, Unlicensed fonts]
+    ai_autonomy: propose
+    human_approval: [Conclusions]
+  - id: compliance-officer
+    title: Compliance officer
+    mission: Track obligations, evidence and deadlines across applicable regimes.
+    scope: Regulatory calendar, policy documents, evidence index, training records.
+    activities: [Maintain obligations register, Collect evidence, Track deadlines]
+    inputs: [Issue register, Frameworks in scope]
+    outputs: [Obligations register, Evidence index]
+    decides: [Process]
+    needs_approval: [Compliance statements by qualified professionals]
+    collaborates_with: [security, finance, people]
+    reports_to: legal-lead
+    kpis: [Deadlines met, Evidence coverage]
+    quality: [No compliance claim without evidence and qualified review]
+    tools: [Obligations register]
+    failure_modes: [Checklist theatre]
+    ai_autonomy: propose
+    human_approval: [Statements]
+  - id: contracts-analyst
+    title: Contracts analyst
+    mission: Prepare and track contracts for counsel review and keep terms visible.
+    scope: NDAs, terms of service, DPAs, vendor contracts, renewals.
+    activities: [Prepare drafts from counsel-approved templates, Track obligations and renewals, Flag risky terms]
+    inputs: [Templates, Deal context]
+    outputs: [Draft contracts for counsel, Contract register]
+    decides: [Draft structure]
+    needs_approval: [Signing and acceptance are human; counsel reviews]
+    collaborates_with: [sales, operations]
+    reports_to: legal-lead
+    kpis: [Renewals tracked, Risky terms caught]
+    quality: [No signing or acceptance by agents]
+    tools: [Contract register]
+    failure_modes: [Accepting unlimited liability, Auto-renewal surprises]
+    ai_autonomy: propose
+    human_approval: [Signing]

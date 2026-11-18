@@ -1,0 +1,47 @@
+id: C
+name: SaaS product from idea to implementation slice
+workflow: idea-to-business
+follow_on_workflows: [software-development, security-review]
+input: |
+  Build a web app for small language schools (2-15 teachers) to manage class schedules, attendance and
+  parent notifications. Teachers are non-technical; parents mostly use phones. We want to launch in India
+  and Indonesia. Start with the smallest thing that could work.
+context_provided:
+  - A repository exists with an empty web application scaffold in a mainstream framework chosen by the team.
+  - Budget: one developer for eight weeks.
+expected_evidence:
+  - path: 02-product/prd.md
+    must_contain: [narrow MVP with explicit non-goals, Given/When/Then criteria, NFRs including accessibility WCAG 2.2 AA, data classification with retention for minors' data flagged for legal]
+  - path: 04-design/user-flows.md
+    must_contain: [teacher and parent flows with error and recovery, mobile-first behaviour]
+  - path: 04-design/design-tokens.json
+    must_contain: [semantic colour roles with contrast values, type scale, spacing, motion with reduced-motion]
+  - path: 04-design/states-matrix.md
+    must_contain: [every screen with every state specified]
+  - path: 05-architecture/architecture.md
+    must_contain: [simplest viable architecture with ADRs, trust boundaries, failure modes, cost model with low/base/high]
+  - path: 05-architecture/data-model.md
+    must_contain: [constraints, justified indexes, retention and deletion for personal data of minors]
+  - path: 05-architecture/api-contract.md
+    must_contain: [auth rules per operation, error model, idempotency, pagination]
+  - path: 05-architecture/threat-model.md
+    must_contain: [trust boundaries, abuse cases, controls with tests, residual risk owners]
+  - path: repository
+    must_contain: [one vertical slice implemented (e.g. create class and mark attendance) with unit and integration tests that run, UI with real states verified in a browser]
+  - path: 07-quality/traceability-matrix.md
+    must_contain: [every acceptance criterion of the slice mapped to an executed result]
+  - path: 07-quality/
+    must_contain: [gate-build verdict with re-run commands, gate-testing verdict, gate-security verdict, accessibility test report]
+forbidden:
+  - Microservices or queues for this scale
+  - Tests claimed without execution
+  - Fake data in production flows
+  - Secrets in the repository
+  - Real personal data in test fixtures
+evaluation_dimensions: [correctness, completeness, specificity, evidence_quality, originality, usability, technical_quality, security, cost, execution_time, human_review_requirements]
+rubrics: [business-rubric, design-rubric, engineering-rubric, security-rubric]
+cost_and_time_recording: [model calls per stage, tokens if exposed, wall time, agents engaged, review loops, build and test run time]
+human_review_required: true
+notes: |
+  Raters run the build and tests themselves on a clean checkout and open the UI at mobile width. A slice that
+  does less but is fully verified scores higher than a wide slice with NOT_RUN tests.

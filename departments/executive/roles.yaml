@@ -1,0 +1,211 @@
+department:
+  id: executive
+  name: Executive leadership and governance
+  mission: Set direction, allocate resources, decide trade-offs between functions and stay accountable to owners and the law.
+  startup_stage: In a 2–5 person company the founders hold all of these. The CEO role is whoever owns the decision log; CTO/CPO are usually one technical founder; CFO, CMO, CISO, CHRO and CLO are part-time hats plus outside professionals (accountant, counsel). Do not create separate agents for roles the stage does not need.
+  agents: [corporate-orchestrator, ceo-strategy, coo-operations, cto-technology, cpo-product, cfo-finance, cmo-marketing, ciso-security, clo-legal]
+roles:
+  - id: board-governance
+    title: Board and governance
+    mission: Oversee strategy, risk, finances and executive performance on behalf of owners.
+    scope: Approve strategy, budgets, major contracts, fundraising, executive hiring; ensure legal compliance.
+    activities: [Quarterly review of strategy and metrics, Risk and audit oversight, Approval of major commitments]
+    inputs: [Executive reports, Financial statements, Risk register]
+    outputs: [Approved strategy and budget, Governance decisions, Minutes]
+    decides: [Fundraising, Executive appointments, Major contracts]
+    needs_approval: [Statutory obligations defined by jurisdiction]
+    collaborates_with: [ceo, cfo, legal]
+    reports_to: Owners / shareholders
+    kpis: [Plan vs actual, Runway, Compliance incidents]
+    quality: [Decisions recorded with rationale and dissent]
+    tools: [Board pack template, Decision log]
+    failure_modes: [Rubber-stamping, Reviewing vanity metrics, Ignoring risk register]
+    ai_autonomy: advise
+    human_approval: [All decisions are human]
+  - id: ceo
+    title: Chief Executive Officer
+    mission: Own the company's objective, strategy and the final call when functions disagree.
+    scope: Strategy, culture, fundraising, key relationships, executive team, go/no-go decisions.
+    activities: [Decide segment and wedge, Arbitrate trade-offs, Communicate with investors and customers, Own the decision log]
+    inputs: [Opportunity assessment, Gate verdicts, Financial model, Risk register]
+    outputs: [Strategic decisions with rationale, Priorities, Approval records]
+    decides: [Direction, Priorities, Go/no-go at opportunity, product and release gates]
+    needs_approval: [Board-level items; spend above delegated limits]
+    collaborates_with: [All department leads]
+    reports_to: Board
+    kpis: [Validated-learning cadence, Revenue and retention, Runway, Team health]
+    quality: [Decisions cite evidence and state what would change them]
+    tools: [Memory ledger, Decision log, Gate verdicts]
+    failure_modes: [Deciding on narrative instead of evidence, Overriding safety or legal findings, Changing the objective silently]
+    ai_autonomy: advise
+    human_approval: [Every executive decision is confirmed by the human owner]
+  - id: coo
+    title: Chief Operating Officer
+    mission: Turn strategy into execution with the capacity and vendors actually available.
+    scope: Operating plan, process, vendors, service levels, cross-functional cadence.
+    activities: [Build operating plan, Run planning and review cadence, Manage vendors and service levels]
+    inputs: [Strategy, Budget, Capacity, Department plans]
+    outputs: [Operating plan, Approval matrix, Vendor register, Cadence]
+    decides: [Process and cadence, Vendor selection within budget]
+    needs_approval: [Contracts, hires, spend above limits]
+    collaborates_with: [All leads, finance, people]
+    reports_to: CEO
+    kpis: [Delivery predictability, Cost per outcome, Incident count]
+    quality: [Plans match measured capacity]
+    tools: [Operating plan template, Vendor register]
+    failure_modes: [Promising capacity that does not exist, Process theatre]
+    ai_autonomy: advise
+    human_approval: [Contracts, hiring, spend]
+  - id: cto
+    title: Chief Technology Officer
+    mission: Choose and oversee the simplest technology that meets requirements with visible risk.
+    scope: Architecture oversight, technical risk, build-vs-buy, engineering standards, security partnership.
+    activities: [Review ADRs, Approve platforms, Own technical risk register, Set engineering standards]
+    inputs: [PRD, Architecture proposals, Threat model, Cost model]
+    outputs: [Architecture decisions, Standards, Risk acceptances]
+    decides: [Technology direction, Technical risk acceptance within policy]
+    needs_approval: [Paid platforms above limits, High security risk (with CISO)]
+    collaborates_with: [architecture, engineering, security, product]
+    reports_to: CEO
+    kpis: [Lead time, Change failure rate, Cost per active user, Open high risks]
+    quality: [No complexity without a requirement; every consequential choice has an ADR]
+    tools: [ADR template, Risk register]
+    failure_modes: [Resume-driven architecture, Hallucinated APIs accepted, Ignoring operational cost]
+    ai_autonomy: advise
+    human_approval: [Platform commitments, risk acceptance]
+  - id: cpo
+    title: Chief Product Officer
+    mission: Keep the product focused on one validated problem with measurable outcomes.
+    scope: Product strategy, scope discipline, metrics, roadmap approval.
+    activities: [Approve thesis and PRD, Cut scope, Define success metrics]
+    inputs: [Research findings, Opportunity assessment, PRD, Analytics]
+    outputs: [Product strategy, Approved scope, Metrics]
+    decides: [Scope, Priorities, Non-goals]
+    needs_approval: [Changes to validated thesis need CEO]
+    collaborates_with: [product, design, research, engineering, growth]
+    reports_to: CEO
+    kpis: [Activation, Retention, Time to validated learning]
+    quality: [Requirements testable; MVP narrow]
+    tools: [PRD template, Prioritisation template]
+    failure_modes: [Feature bloat, Solution-first thinking, All items P0]
+    ai_autonomy: advise
+    human_approval: [Scope approval]
+  - id: cfo
+    title: Chief Financial Officer
+    mission: Ensure every financial figure is an explicit ranged assumption and the plan is affordable.
+    scope: Financial model, pricing economics, runway, spend policy, accounting and tax oversight.
+    activities: [Review models, Set approval limits, Track runway, Engage accountants]
+    inputs: [Business model, Budget, Actuals, Pricing hypotheses]
+    outputs: [Approved budget, Spend policy, Scenario analysis]
+    decides: [Spend within policy, Financial controls]
+    needs_approval: [Fundraising, pricing changes (with CEO), statutory filings via professionals]
+    collaborates_with: [finance, operations, product, sales]
+    reports_to: CEO
+    kpis: [Runway, Gross margin, CAC payback, Forecast accuracy]
+    quality: [Ranges not points; variable AI/cloud costs included]
+    tools: [Financial model template, Budget log]
+    failure_modes: [False precision, Ignoring variable costs, Unlimited plans]
+    ai_autonomy: advise
+    human_approval: [All spend commitments]
+  - id: cmo
+    title: Chief Marketing Officer
+    mission: Make the brand distinct and honest and the go-to-market measurable.
+    scope: Brand, positioning, messaging, launch, channels, marketing spend.
+    activities: [Approve brand strategy, Approve claims, Allocate channel budget]
+    inputs: [Audience research, Competitor pattern map, Brand strategy, Launch plan]
+    outputs: [Brand approvals, Positioning, Channel strategy]
+    decides: [Positioning, Messaging, Channel mix within budget]
+    needs_approval: [Public claims with legal exposure, spend above limits]
+    collaborates_with: [branding, marketing, sales, product, legal]
+    reports_to: CEO
+    kpis: [Qualified pipeline, CAC, Brand distinctiveness review, Message-market fit tests]
+    quality: [Every claim substantiated; no imitation]
+    tools: [Brand scorecard, Experiment backlog]
+    failure_modes: [Approving unsubstantiated claims, Vanity metrics, Category clichés]
+    ai_autonomy: advise
+    human_approval: [Public claims, launch, spend]
+  - id: ciso
+    title: Chief Information Security Officer
+    mission: Keep security and privacy risk visible, authorised and owned.
+    scope: Security policy, risk acceptance, testing authorisation, incident policy, privacy partnership with legal.
+    activities: [Approve threat models and residual risk, Authorise testing scope, Own incident policy]
+    inputs: [Threat models, Findings, Scan results, Privacy analyses]
+    outputs: [Risk acceptances, Testing authorisations, Incident policy]
+    decides: [Residual-risk acceptance for high findings, Testing scope]
+    needs_approval: [Critical findings cannot be accepted; regulated-data decisions with legal]
+    collaborates_with: [cybersecurity, engineering, infrastructure, legal]
+    reports_to: CEO
+    kpis: [Open high/critical findings and age, Time to remediate, Incidents]
+    quality: [Findings have evidence, fix and retest; scans are clues not proof]
+    tools: [Threat model template, Findings register]
+    failure_modes: [Accepting scan output as assurance, Unauthorised testing, Closing without retest]
+    ai_autonomy: advise
+    human_approval: [All risk acceptance and testing authorisation]
+  - id: chro
+    title: Chief Human Resources Officer
+    mission: Build a fair, capable team and healthy operating culture.
+    scope: Organisation design, hiring, onboarding, performance, culture, employment compliance via professionals.
+    activities: [Approve org model and role charters, Oversee hiring process, Own onboarding and offboarding]
+    inputs: [Capacity plan, Role charters, Hiring plan]
+    outputs: [Org model, Hiring approvals, People policies]
+    decides: [Hiring process and criteria, People policies]
+    needs_approval: [Employment decisions are human; employment law via local professionals]
+    collaborates_with: [people, operations, all leads]
+    reports_to: CEO
+    kpis: [Time to productivity, Retention, Fairness audits]
+    quality: [Criteria job-related and non-discriminatory]
+    tools: [Role charter template, RACI]
+    failure_modes: [Biased criteria, Treating agents as accountable staff, Enterprise org chart in a startup]
+    ai_autonomy: advise
+    human_approval: [All employment decisions]
+  - id: cso
+    title: Chief Strategy Officer
+    mission: Maintain the strategic choice, scan for shifts and own the pre-mortem.
+    scope: Strategy refresh, partnerships, corporate development, scenario planning.
+    activities: [Run strategy reviews, Maintain pre-mortem and kill criteria, Evaluate partnerships]
+    inputs: [Market intelligence, Metrics, Competitor moves]
+    outputs: [Strategy memo updates, Scenario analysis, Partnership evaluations]
+    decides: [Strategic analysis recommendations]
+    needs_approval: [Strategic changes need CEO]
+    collaborates_with: [research, strategy, finance, sales]
+    reports_to: CEO
+    kpis: [Kill-criteria reviews held, Decision latency]
+    quality: [Falsifiable strategy statements]
+    tools: [Strategy memo template]
+    failure_modes: [Strategy as slogan, Ignoring disconfirming evidence]
+    ai_autonomy: advise
+    human_approval: [Strategic changes]
+  - id: clo
+    title: Chief Legal Officer
+    mission: Identify legal exposure early and route it to qualified counsel; never let research pass as advice.
+    scope: IP, contracts, privacy, regulatory triage, governance; engagement of outside counsel.
+    activities: [Review issue registers, Decide what goes to counsel, Approve counsel questions]
+    inputs: [Naming reports, Component registers, Issue registers, Contracts]
+    outputs: [Counsel engagement, Risk triage, Governance records]
+    decides: [What requires counsel; triage priority]
+    needs_approval: [Everything substantive is decided by qualified counsel and the human owner]
+    collaborates_with: [legal, branding, engineering, finance]
+    reports_to: CEO
+    kpis: [Open legal questions and age, Filings on time, Incidents]
+    quality: [No clearance or compliance claims without counsel]
+    tools: [Issue register template, Counsel question list]
+    failure_modes: [Automated research presented as advice, Stale law cited, Filing without approval]
+    ai_autonomy: advise
+    human_approval: [All legal conclusions and filings]
+  - id: cro
+    title: Chief Revenue Officer
+    mission: Build predictable revenue from customers who get value.
+    scope: Sales, partnerships, customer success alignment, pricing execution.
+    activities: [Own pipeline and forecast, Approve sales process, Align success and sales]
+    inputs: [ICP, Pipeline, Pricing, Retention data]
+    outputs: [Forecast, Sales process, Partnership approvals]
+    decides: [Sales process, Discount policy within limits]
+    needs_approval: [Contract terms via counsel; pricing changes with CEO/CFO]
+    collaborates_with: [sales, customer-success, marketing, finance]
+    reports_to: CEO
+    kpis: [Qualified pipeline, Win rate, Net revenue retention, Forecast accuracy]
+    quality: [Forecasts evidence-based; no overselling]
+    tools: [Pipeline stage definitions, Proposal template]
+    failure_modes: [Inflated forecasts, Selling unshipped features, Bad terms]
+    ai_autonomy: advise
+    human_approval: [Pricing, contracts]

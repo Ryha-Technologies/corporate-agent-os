@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://corporate-agent-os.local/schemas/workflow.schema.json",
+  "title": "Corporate Agent OS workflow definition",
+  "description": "A directed acyclic graph of stages. Stages in the same parallel_group may run concurrently and must not write the same paths.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "summary", "trigger", "stages"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "name": { "type": "string", "minLength": 3 },
+    "summary": { "type": "string", "minLength": 20 },
+    "trigger": { "type": "string", "minLength": 5, "description": "The user request shape that starts this workflow." },
+    "inputs_required": { "type": "array", "items": { "type": "string" } },
+    "final_deliverables": { "type": "array", "items": { "type": "string" } },
+    "retry_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "max_review_loops": { "type": "integer", "minimum": 1, "maximum": 10 },
+        "on_exhausted": { "type": "string", "enum": ["escalate-to-human", "escalate-to-executive", "stop"] }
+      }
+    },
+    "stages": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "agent", "objective", "depends_on", "outputs"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+          "agent": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "skills": { "type": "array", "items": { "type": "string", "pattern": "^[a-z0-9-]+$" } },
+          "objective": { "type": "string", "minLength": 15 },
+          "depends_on": { "type": "array", "items": { "type": "string" } },
+          "inputs": { "type": "array", "items": { "type": "string" } },
+          "outputs": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+          "parallel_group": { "type": "string" },
+          "condition": { "type": "string", "description": "Plain-language condition evaluated by the orchestrator; stage is skipped when false." },
+          "gate": { "type": "string", "pattern": "^[a-z0-9-]+$", "description": "Quality gate id from core/quality-gates/gates.yaml that must pass before dependants start." },
+          "review": { "type": "string", "pattern": "^[a-z0-9-]+$", "description": "Independent reviewer agent id. Must differ from agent." },
+          "human_approval": { "type": "boolean" },
+          "timeout_minutes": { "type": "integer", "minimum": 1 },
+          "risk": { "type": "string", "enum": ["low", "medium", "high", "critical"] }
+        }
+      }
+    }
+  }
+}

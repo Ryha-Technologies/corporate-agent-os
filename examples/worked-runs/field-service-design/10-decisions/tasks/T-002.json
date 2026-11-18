@@ -1,0 +1,50 @@
+{
+  "task_id": "T-002",
+  "project_id": "design-run-field-service",
+  "assigned_agent": "ux-designer",
+  "reviewer": "ux-auditor",
+  "objective": "Produce IA, user flows with error and recovery paths and a complete states matrix for dispatcher and technician roles.",
+  "context": "Stage ia-and-flows. Depends on T-001.",
+  "inputs": [
+    "04-design/design-brief.md"
+  ],
+  "outputs": [
+    "04-design/information-architecture.md",
+    "04-design/user-flows.md",
+    "04-design/states-matrix.md"
+  ],
+  "file_ownership": [
+    "04-design/information-architecture.md",
+    "04-design/user-flows.md",
+    "04-design/states-matrix.md"
+  ],
+  "dependencies": [
+    "T-001"
+  ],
+  "constraints": [
+    "Label every persona and finding HYPOTHESIS where no research exists.",
+    "Write only inside file_ownership."
+  ],
+  "tools": [
+    "read",
+    "write"
+  ],
+  "budget": {
+    "max_model_calls": 60,
+    "max_retries": 2
+  },
+  "timeout_minutes": 60,
+  "acceptance_criteria": [
+    "Every top task has a flow with at least one error and one recovery path.",
+    "States matrix has no 'missing' cell for screens in scope.",
+    "Labels use plain words a dispatcher would say; jargon flagged."
+  ],
+  "verification": "ux-auditor walks each flow as the role and checks the matrix for missing cells.",
+  "risk": "medium",
+  "approval": [
+    "department-lead"
+  ],
+  "status": "ACCEPTED",
+  "created_at": "2026-11-18T14:03:00Z",
+  "updated_at": "2026-11-18T16:00:00Z"
+}

@@ -1,0 +1,54 @@
+id: product-discovery
+name: Product discovery and definition
+summary: Turn research and strategy into a product thesis, PRD with testable acceptance criteria, analytics plan and roadmap, reviewed by an independent UX auditor and approved by a human before design and build.
+trigger: Evidence and strategy exist and the product (or a major feature) needs definition.
+inputs_required:
+  - Strategy memo or validated opportunity
+  - Customer findings or labelled hypotheses
+final_deliverables:
+  - 02-product/prd.md
+  - 02-product/acceptance-criteria.md
+  - 02-product/roadmap.md
+retry_policy:
+  max_review_loops: 3
+  on_exhausted: escalate-to-executive
+stages:
+  - id: discovery-synthesis
+    agent: product-lead
+    skills: [product-discovery-prd, ux-research]
+    objective: Consolidate research, strategy and constraints into the discovery summary and the critical hypothesis
+    depends_on: []
+    outputs: ["02-product/discovery-summary.md"]
+    risk: low
+  - id: user-research-gaps
+    agent: customer-researcher
+    skills: [ux-research]
+    objective: Identify evidence gaps and plan or run the interviews or tests that close them; label simulated personas as hypotheses
+    depends_on: [discovery-synthesis]
+    outputs: ["01-research/customer-research-plan.md", "04-design/personas-and-journeys.md"]
+    risk: medium
+  - id: prd
+    agent: product-manager
+    skills: [product-discovery-prd]
+    objective: Thesis, PRD, acceptance criteria, analytics plan, validation plan with narrow MVP boundary
+    depends_on: [user-research-gaps]
+    outputs: ["02-product/prd.md", "02-product/acceptance-criteria.md", "02-product/analytics-plan.md", "02-product/validation-plan.md"]
+    gate: product
+    review: ux-auditor
+    human_approval: true
+    risk: high
+  - id: roadmap
+    agent: product-lead
+    skills: [product-discovery-prd]
+    objective: Prioritised roadmap of vertical slices, each naming the hypothesis it tests, with rejected scope recorded
+    depends_on: [prd]
+    outputs: ["02-product/roadmap.md", "02-product/prioritisation.md"]
+    risk: medium
+  - id: executive-review
+    agent: cpo-product
+    skills: [product-discovery-prd]
+    objective: Confirm thesis, scope discipline and metrics; cut scope that does not serve the thesis
+    depends_on: [roadmap]
+    outputs: ["10-decisions/product-decision.md"]
+    human_approval: true
+    risk: medium

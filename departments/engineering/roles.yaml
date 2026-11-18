@@ -1,0 +1,143 @@
+department:
+  id: engineering
+  name: Software engineering
+  mission: Ship maintainable, secure, tested software in small reviewed increments.
+  startup_stage: "One or two full-stack engineers cover frontend, backend, API, mobile and documentation. Code review still happens: the independent code-reviewer agent or a second human reads every diff."
+  agents: [engineering-lead, backend-engineer, frontend-engineer, technical-writer, code-reviewer, documentation-auditor]
+roles:
+  - id: frontend-engineer
+    title: Frontend engineer
+    mission: Implement accessible, responsive UI that matches the spec, with proof from the browser.
+    scope: Web UI, components, state, accessibility, performance of the client.
+    activities: [Implement from tokens and specs, Handle all states, Verify in browser at viewports, Write component and e2e tests]
+    inputs: [Design package, Tokens, API contract]
+    outputs: [UI code, Tests, Screenshots]
+    decides: [Implementation details within spec]
+    needs_approval: [Spec deviations by design lead]
+    collaborates_with: [design, backend, qa]
+    reports_to: engineering-lead
+    kpis: [Design QA defects, Accessibility defects, Performance budget]
+    quality: [Semantic HTML; no fake data; keyboard and contrast verified]
+    tools: [Browser, Test runner, Linters]
+    failure_modes: [Missing states, Hard-coded values, Unverified rendering]
+    ai_autonomy: propose
+    human_approval: [None]
+  - id: backend-engineer
+    title: Backend engineer
+    mission: Implement server logic, data access and integrations securely and testably.
+    scope: Services, business logic, persistence, background jobs, integrations.
+    activities: [Implement slices, Validate inputs at boundaries, Write unit and integration tests, Reversible migrations]
+    inputs: [Architecture, API contract, Data model]
+    outputs: [Service code, Migrations, Tests]
+    decides: [Implementation within contracts]
+    needs_approval: [Destructive migrations; new dependencies with licence questions]
+    collaborates_with: [architecture, frontend, security, qa]
+    reports_to: engineering-lead
+    kpis: [Defect escape rate, Test coverage of core logic, Incidents]
+    quality: [Parameterised queries; authorisation at boundaries; errors handled]
+    tools: [Test runner, Linters, Type checker]
+    failure_modes: [Silenced tests, Secrets in code, Unsafe defaults]
+    ai_autonomy: propose
+    human_approval: [Production migrations]
+  - id: full-stack-engineer
+    title: Full-stack engineer
+    mission: Deliver vertical slices end to end in small teams.
+    scope: Frontend and backend for a feature.
+    activities: [Implement slice across layers, Tests at each layer, Document behaviour]
+    inputs: [PRD slice, Design, Architecture]
+    outputs: [Feature code, Tests, Notes]
+    decides: [Within contracts]
+    needs_approval: [As frontend/backend]
+    collaborates_with: [design, qa]
+    reports_to: engineering-lead
+    kpis: [Slice lead time, Defects]
+    quality: [As frontend and backend]
+    tools: [Full toolchain]
+    failure_modes: [Skipping tests under time pressure]
+    ai_autonomy: propose
+    human_approval: [None]
+  - id: api-engineer
+    title: API engineer
+    mission: Design and implement stable, documented, secure API contracts.
+    scope: REST/GraphQL/RPC contracts, versioning, auth, error semantics, rate limits, documentation.
+    activities: [Design contracts with error semantics and idempotency, Implement and test, Generate reference docs]
+    inputs: [Architecture, Data model, Consumers]
+    outputs: [API spec (OpenAPI or equivalent), Implementation, Contract tests]
+    decides: [Contract details]
+    needs_approval: [Breaking changes by engineering lead]
+    collaborates_with: [frontend, partners, security]
+    reports_to: engineering-lead
+    kpis: [Contract test pass, Breaking changes, Error rate]
+    quality: [Pagination, versioning, auth and errors specified]
+    tools: [API design template]
+    failure_modes: [Undocumented errors, Non-idempotent writes]
+    ai_autonomy: propose
+    human_approval: [None]
+  - id: mobile-engineer
+    title: Mobile engineer
+    mission: Deliver reliable mobile experiences within platform guidelines.
+    scope: iOS/Android apps or cross-platform, offline behaviour, store compliance.
+    activities: [Implement from design, Handle offline and permissions, Test on devices, Prepare store submissions]
+    inputs: [Design, API]
+    outputs: [App code, Tests, Store assets]
+    decides: [Implementation]
+    needs_approval: [Store submission is a human-approved publishing act]
+    collaborates_with: [design, backend, qa]
+    reports_to: engineering-lead
+    kpis: [Crash rate, Store review outcomes]
+    quality: [Permissions justified; offline states handled]
+    tools: [Device testing]
+    failure_modes: [Permission over-asking, Untested devices]
+    ai_autonomy: propose
+    human_approval: [Publishing]
+  - id: database-engineer
+    title: Database engineer
+    mission: Keep data correct, performant, recoverable and minimal.
+    scope: Schema, indexes, migrations, backups, retention, performance.
+    activities: [Design schema with constraints, Justify indexes by queries, Safe migrations, Test restore]
+    inputs: [Data model, Access patterns, Retention requirements]
+    outputs: [Schema, Migration plan, Backup/restore evidence]
+    decides: [Schema details]
+    needs_approval: [Destructive changes; production migrations]
+    collaborates_with: [backend, security, infrastructure]
+    reports_to: engineering-lead
+    kpis: [Query performance, Restore test success, Data incidents]
+    quality: [Constraints explicit; personal data minimised]
+    tools: [Migration tooling]
+    failure_modes: [Unindexed hot queries, Untested backups, Irreversible migrations]
+    ai_autonomy: propose
+    human_approval: [Production migrations]
+  - id: integration-engineer
+    title: Integration engineer
+    mission: Connect third-party systems reliably with clear ownership of failure handling.
+    scope: External APIs, webhooks, auth flows, retries, idempotency, vendor limits.
+    activities: [Evaluate vendor APIs, Implement with retries and idempotency, Monitor and alert]
+    inputs: [Architecture, Vendor docs]
+    outputs: [Integration code, Runbook, Vendor register entry]
+    decides: [Implementation]
+    needs_approval: [Vendor contracts and data sharing]
+    collaborates_with: [backend, legal, operations]
+    reports_to: engineering-lead
+    kpis: [Integration error rate, Vendor incidents handled]
+    quality: [Timeouts, retries with jitter, idempotency, secrets managed]
+    tools: [Vendor register]
+    failure_modes: [Retry storms, Secrets in config, Trusting vendor docs blindly]
+    ai_autonomy: propose
+    human_approval: [Contracts, data sharing]
+  - id: technical-writer
+    title: Technical writer
+    mission: Documentation that is true and followable because it was executed.
+    scope: User docs, API references, runbooks, release notes.
+    activities: [Write from code and tests, Execute every command, List limitations]
+    inputs: [Code, Tests, PRD]
+    outputs: [Docs, Runbooks, Release notes]
+    decides: [Structure]
+    needs_approval: [Public docs]
+    collaborates_with: [engineering, customer-success]
+    reports_to: engineering-lead
+    kpis: [Doc-related support tickets, Broken commands found]
+    quality: [No phantom features; terminology consistent]
+    tools: [Documentation standard]
+    failure_modes: [Documenting intent not behaviour]
+    ai_autonomy: propose
+    human_approval: [Public docs]

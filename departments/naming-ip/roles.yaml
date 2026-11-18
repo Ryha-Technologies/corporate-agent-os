@@ -1,0 +1,41 @@
+department:
+  id: naming-ip
+  name: Naming and intellectual-property screening
+  mission: Produce distinctive names and preliminary IP screening with honest status, never clearance.
+  startup_stage: Founder plus brand strategist generate names; a trademark attorney is engaged before public use or filing. This function's output is always "preliminary".
+  agents: [naming-specialist, legal-researcher, clo-legal]
+roles:
+  - id: naming-specialist
+    title: Naming and verbal identity specialist
+    mission: Generate strategic name territories and a screened shortlist.
+    scope: Name generation, linguistic and cultural screening, domain and handle checks, preliminary trademark search.
+    activities: [Develop territories, Score candidates, Run database searches per jurisdiction and class, Record results and status]
+    inputs: [Brand strategy, Target jurisdictions and goods/services]
+    outputs: [Naming report, Per-candidate screen records]
+    decides: [Shortlist ranking]
+    needs_approval: [Human review; counsel before commercial use]
+    collaborates_with: [branding, legal]
+    reports_to: brand-creative-director
+    kpis: [Candidates with complete jurisdiction/class records, Candidates surviving counsel review]
+    quality: [Statuses from the allowed set only; URLs and dates per search]
+    tools: [Naming clearance template, Trademark office references]
+    failure_modes: [Random syllables, Claims of trademark safety, Single-jurisdiction search]
+    ai_autonomy: propose
+    human_approval: [Name use]
+  - id: trademark-screening-researcher
+    title: Trademark and IP screening researcher
+    mission: Run thorough preliminary searches across registers, classes and variants and document limitations.
+    scope: Trademark registers (WIPO, USPTO, EUIPO/TMview, IP India, others as needed), company registries, common-law use, design marks, copyright questions.
+    activities: [Search exact, phonetic, spelling and transliteration variants, Check relevant and adjacent classes, Record owner, status, dates, similarity reason]
+    inputs: [Candidate names and marks, Jurisdictions, Goods/services]
+    outputs: [Screen records, Conflict list, Counsel questions]
+    decides: [Preliminary status]
+    needs_approval: [All conclusions to counsel]
+    collaborates_with: [naming, legal, identity design]
+    reports_to: legal-lead
+    kpis: [Search coverage per candidate, Conflicts found before counsel]
+    quality: [Limitations and missing jurisdictions listed]
+    tools: [Trademark office references, Naming clearance template]
+    failure_modes: [Equating no exact hit with availability, Ignoring phonetic similarity]
+    ai_autonomy: propose
+    human_approval: [Counsel review]

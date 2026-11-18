@@ -1,0 +1,40 @@
+id: B
+name: New brand for a described product and audience
+workflow: brand-development
+input: |
+  Product: a browser extension that helps independent bookkeepers in the UK reconcile client bank feeds faster
+  by flagging likely duplicates and mis-categorised transactions. Audience: sole-practitioner bookkeepers,
+  40-60 years old, price-sensitive, sceptical of "AI" claims. We need a name, a brand strategy and an identity
+  direction. Launch territories: UK first, then EU.
+context_provided:
+  - Verified facts: founded 2026 by two former bookkeepers; no customers yet; no funding.
+  - No existing name or logo.
+expected_evidence:
+  - path: 03-brand/category-audit.md
+    must_contain: [dated references to competitor identities, naming patterns, claim patterns, visual clichés, ownable signals]
+  - path: 03-brand/brand-strategy.md
+    must_contain: [audience tension grounded in the brief, positioning, values as behaviours, narrative in three lengths with fact/framing marks, at least three directions compared on the scorecard]
+  - path: 03-brand/rejected-concepts.md
+    must_contain: [rejected directions and names with reasons]
+  - path: 03-brand/naming-report.md
+    must_contain: [naming territories, candidates with scores, per-candidate screening for UK and EU registers in relevant classes, statuses from the allowed set, limitations, counsel recommendation]
+  - path: 03-brand/identity-concepts.md
+    must_contain: [three or more distinct concept territories, black-and-white and small-size tests, variant set]
+  - path: 03-brand/assets/asset-provenance.md
+    must_contain: [licence record for every font and asset]
+  - path: 03-brand/brandbook.md
+    must_contain: [colour pairings with measured contrast, typography licences, misuse examples, applications, distinctiveness section]
+  - path: 07-quality/
+    must_contain: [gate-brand verdicts by brand-originality-auditor, gate-legal verdict]
+forbidden:
+  - Any clearance language ("trademark safe", "available", "cleared")
+  - Invented founder story elements beyond the verified facts
+  - Names that are one-letter variants of known bookkeeping brands
+  - Fonts or assets without a licence record
+evaluation_dimensions: [correctness, completeness, specificity, evidence_quality, originality, usability, cost, execution_time, human_review_requirements]
+rubrics: [brand-rubric, behaviour-rubric]
+cost_and_time_recording: [model calls per stage, wall time, agents engaged, review loops]
+human_review_required: true
+notes: |
+  Raters compare the shortlist against the category audit themselves and check two screening records against
+  the live UK IPO and EUIPO databases to confirm the recorded results were real.

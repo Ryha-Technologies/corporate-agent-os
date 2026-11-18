@@ -1,0 +1,80 @@
+id: security-review
+name: Security and privacy review
+summary: "Review a system's security and privacy posture: scope and authorisation, threat model update, application and infrastructure review, dependency and secret scanning, privacy analysis, findings with retests, and the security gate decided by an independent auditor with CISO risk acceptance."
+trigger: A system approaching release, handling new data categories, or needing a periodic security review.
+inputs_required:
+  - Architecture, threat model (or none yet), code and configuration access
+  - Written scope naming systems, environments and permitted methods
+final_deliverables:
+  - 05-architecture/threat-model.md (updated)
+  - 07-quality/security-review-*.md
+  - 08-legal-oss/privacy-analysis.md
+  - 07-quality/gate-security-*.md
+retry_policy:
+  max_review_loops: 3
+  on_exhausted: escalate-to-human
+stages:
+  - id: scope
+    agent: security-lead
+    skills: [security-privacy]
+    objective: Record written scope, environments, permitted methods and the human authorisation; define what is out of scope
+    depends_on: []
+    outputs: ["07-quality/security-scope.md"]
+    human_approval: true
+    risk: high
+  - id: threat-model
+    agent: security-engineer
+    skills: [threat-modeling]
+    objective: Create or update the threat model to the implemented system including AI components
+    depends_on: [scope]
+    outputs: ["05-architecture/threat-model.md"]
+    risk: high
+  - id: application-review
+    agent: security-engineer
+    skills: [security-privacy, code-review]
+    objective: Review authentication, session, authorisation, validation, injection, secrets, cryptography, logging and supply chain against ASVS; run dependency and secret scans with tool and date
+    depends_on: [threat-model]
+    outputs: ["07-quality/security-review-application.md"]
+    parallel_group: review
+    timeout_minutes: 180
+    risk: high
+  - id: infrastructure-review
+    agent: devops-engineer
+    skills: [devops-sre, security-privacy]
+    objective: Review IAM, network exposure, TLS, configuration baselines, backups, logging and admin access
+    depends_on: [threat-model]
+    outputs: ["07-quality/security-review-infrastructure.md"]
+    parallel_group: review
+    risk: high
+  - id: privacy-analysis
+    agent: legal-researcher
+    skills: [legal-risk-governance, security-privacy]
+    objective: Data inventory, purpose, minimisation, retention, rights, processors, transfers; questions for counsel
+    depends_on: [threat-model]
+    outputs: ["08-legal-oss/privacy-analysis.md", "08-legal-oss/counsel-questions.md"]
+    parallel_group: review
+    risk: high
+  - id: findings
+    agent: security-lead
+    skills: [security-privacy]
+    objective: Consolidated findings with severity, evidence, fix, owner and retest plan; residual-risk register
+    depends_on: [application-review, infrastructure-review, privacy-analysis]
+    outputs: ["07-quality/security-findings.md"]
+    risk: high
+  - id: remediation-retest
+    agent: security-engineer
+    skills: [security-privacy]
+    objective: Retest fixes delivered by owners; update finding status with evidence
+    depends_on: [findings]
+    outputs: ["07-quality/security-retest.md"]
+    risk: high
+  - id: security-gate
+    agent: ciso-security
+    skills: [security-privacy]
+    objective: Decide residual-risk acceptance for high findings; critical findings block; record acceptances with names
+    depends_on: [remediation-retest]
+    outputs: ["10-decisions/accepted-risks.md"]
+    gate: security
+    review: security-auditor
+    human_approval: true
+    risk: critical

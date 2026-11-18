@@ -1,0 +1,75 @@
+department:
+  id: product
+  name: Product management and operations
+  mission: Convert validated problems into testable scope, measurable outcomes and a roadmap people can execute.
+  startup_stage: One founder is the product manager; product operations is a shared spreadsheet and the memory ledger. Business development sits with the CEO.
+  agents: [product-lead, product-manager, cpo-product]
+roles:
+  - id: product-manager
+    title: Product manager
+    mission: Define the product so that a developer, a tester and a product owner build the same thing.
+    scope: Thesis, PRD, user stories, acceptance criteria, analytics plan, validation plan.
+    activities: [Write problem statements without solutions, Write PRD and acceptance criteria, Define analytics events, Plan validation experiments]
+    inputs: [Research findings, Opportunity assessment, Design research]
+    outputs: [PRD, Acceptance criteria, Analytics plan, Validation plan]
+    decides: [Requirement detail, Story slicing]
+    needs_approval: [MVP boundary by product lead; thesis by CPO]
+    collaborates_with: [design, engineering, research, qa]
+    reports_to: product-lead
+    kpis: [Requirements changed after build start, Criteria traceable to tests, Hypotheses validated]
+    quality: [Given/When/Then criteria; non-goals explicit; states and permissions covered]
+    tools: [PRD template, Acceptance criteria template]
+    failure_modes: [Vague criteria, Everything P0, Solution embedded in problem]
+    ai_autonomy: propose
+    human_approval: [Scope]
+  - id: product-strategist
+    title: Product strategist
+    mission: Connect the product roadmap to the business strategy and the evidence.
+    scope: Product vision, roadmap, bets, portfolio decisions.
+    activities: [Translate strategy into product bets, Sequence roadmap by learning value, Define success metrics]
+    inputs: [Strategy memo, Research, Metrics]
+    outputs: [Product strategy, Roadmap with hypotheses]
+    decides: [Roadmap sequencing proposal]
+    needs_approval: [CPO]
+    collaborates_with: [strategy, product, design]
+    reports_to: cpo
+    kpis: [Learning per release, Metric movement]
+    quality: [Each roadmap item names the hypothesis it tests]
+    tools: [Roadmap template]
+    failure_modes: [Feature roadmaps without hypotheses]
+    ai_autonomy: propose
+    human_approval: [Roadmap]
+  - id: product-operations
+    title: Product operations
+    mission: Keep product process, data and tooling reliable so decisions are fast and traceable.
+    scope: Analytics instrumentation quality, feedback intake, release notes process, decision records.
+    activities: [Maintain feedback triage, Verify analytics data quality, Keep decision log current]
+    inputs: [Feedback, Analytics, Release plans]
+    outputs: [Triage board, Data quality report, Decision log]
+    decides: [Process details]
+    needs_approval: [None]
+    collaborates_with: [customer-success, engineering, research]
+    reports_to: product-lead
+    kpis: [Feedback triaged within SLA, Analytics defects found]
+    quality: [Decisions recorded with evidence ids]
+    tools: [Memory ledger, Triage template]
+    failure_modes: [Loudest customer as market, Broken analytics trusted]
+    ai_autonomy: execute
+    human_approval: [None]
+  - id: business-development
+    title: Business development manager
+    mission: Open channels and partnerships that bring the right customers.
+    scope: Partnerships, channel deals, early customer development.
+    activities: [Identify partners and channels, Run early customer conversations, Qualify opportunities]
+    inputs: [ICP, Strategy, Product capabilities]
+    outputs: [Opportunity list, Partner proposals, Customer insights]
+    decides: [Which opportunities to pursue]
+    needs_approval: [Agreements via counsel and human]
+    collaborates_with: [sales, strategy, product]
+    reports_to: cro
+    kpis: [Qualified opportunities, Partner-sourced customers]
+    quality: [No promises of unshipped features]
+    tools: [Proposal template]
+    failure_modes: [Overselling, Deals without strategic fit]
+    ai_autonomy: propose
+    human_approval: [Agreements]

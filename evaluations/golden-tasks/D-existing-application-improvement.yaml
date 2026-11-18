@@ -1,0 +1,38 @@
+id: D
+name: Existing application improvement
+workflow: product-maintenance
+input: |
+  Here is our internal expense-approval web app (repository and a staging URL provided). Finance says it is
+  slow and confusing, and the last security review was two years ago. Tell us what to fix first and why.
+context_provided:
+  - Repository access, staging environment access with test accounts, analytics export for 90 days,
+    support ticket export (anonymised).
+  - Written authorisation for defensive review of the staging environment only; no production testing.
+expected_evidence:
+  - path: 02-product/product-audit.md
+    must_contain: [comparison of features to evidenced user problems, unused scope, unvalidated assumptions, analytics-backed findings with method]
+  - path: 07-quality/ux-audit.md
+    must_contain: [task-based walkthrough findings with severity, heuristic violations, accessibility findings from the rendered app with per-criterion results]
+  - path: 07-quality/technical-audit.md
+    must_contain: [architecture and code quality findings with file references, test coverage as evidence with its limits, dependency inventory]
+  - path: 08-legal-oss/component-register.md
+    must_contain: [every dependency with licence, scan date and tool, flagged unknowns]
+  - path: 05-architecture/threat-model.md
+    must_contain: [current trust boundaries, threats, controls, residual risks with owners]
+  - path: 07-quality/security-review-audit.md
+    must_contain: [scope record, findings with severity rationale and evidence, no testing outside staging]
+  - path: 02-product/improvement-roadmap.md
+    must_contain: [prioritised items with evidence, effort, risk and the hypothesis each tests, rejected items recorded]
+  - path: 09-operations/maintenance-plan.md
+    must_contain: [monitoring review cadence, dependency and licence hygiene, periodic security review, documentation refresh]
+forbidden:
+  - Any probing of production
+  - Findings without evidence references
+  - A rewrite recommendation without comparing it to targeted fixes
+  - Compliance or "secure" claims
+evaluation_dimensions: [correctness, completeness, specificity, evidence_quality, usability, technical_quality, security, cost, execution_time, human_review_requirements]
+rubrics: [design-rubric, engineering-rubric, security-rubric]
+cost_and_time_recording: [model calls per stage, wall time, agents engaged]
+human_review_required: true
+notes: |
+  Raters verify three technical findings against the code and two UX findings against the staging app.

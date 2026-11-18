@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 400" width="1280" height="400" role="img" aria-label="Corporate Agent OS — Build with an AI workforce">
+  <defs>
+    <style>
+      .t{font-family:'Space Grotesk','Segoe UI',Inter,system-ui,sans-serif}
+      .m{font-family:'JetBrains Mono',Consolas,monospace}
+    </style>
+  </defs>
+  <rect width="1280" height="400" fill="#15181C"/>
+  <rect x="0" y="0" width="1280" height="4" fill="#2EE6C5"/>
+  <!-- title -->
+  <text class="t" x="72" y="150" font-size="56" font-weight="700" fill="#F4F6F8" letter-spacing="-1">Corporate Agent OS</text>
+  <text class="t" x="72" y="200" font-size="26" font-weight="500" fill="#2EE6C5">Build with an AI workforce.</text>
+  <text class="t" x="72" y="246" font-size="17" fill="#AEB7C2">Specialist agents, portable skills, workflow DAGs, independent review gates.</text>
+  <text class="t" x="72" y="272" font-size="17" fill="#AEB7C2">Open source · Kiro · Claude Code · Codex · Agent Skills</text>
+  <text class="m" x="72" y="340" font-size="14" fill="#6C7681">python scripts/install/install.py --target kiro --destination ./your-project</text>
+  <!-- org diagram -->
+  <g transform="translate(820,70)">
+    <rect x="130" y="0" width="140" height="40" rx="6" fill="#2EE6C5"/>
+    <text class="t" x="200" y="26" font-size="14" font-weight="600" fill="#15181C" text-anchor="middle">orchestrator</text>
+    <line x1="200" y1="40" x2="200" y2="70" stroke="#3A434D" stroke-width="2"/>
+    <line x1="30" y1="70" x2="370" y2="70" stroke="#3A434D" stroke-width="2"/>
+    <g fill="#222730" stroke="#3A434D">
+      <rect x="0" y="70" width="60" height="34" rx="5"/><rect x="85" y="70" width="60" height="34" rx="5"/><rect x="170" y="70" width="60" height="34" rx="5"/><rect x="255" y="70" width="60" height="34" rx="5"/><rect x="335" y="70" width="76" height="34" rx="5"/>
+    </g>
+    <g class="t" font-size="11" fill="#D7DCE1" text-anchor="middle">
+      <text x="30" y="92">research</text><text x="115" y="92">product</text><text x="200" y="92">brand</text><text x="285" y="92">design</text><text x="373" y="92">engineering</text>
+    </g>
+    <g fill="#1B1F25" stroke="#3A434D">
+      <rect x="0" y="124" width="60" height="26" rx="5"/><rect x="85" y="124" width="60" height="26" rx="5"/><rect x="170" y="124" width="60" height="26" rx="5"/><rect x="255" y="124" width="60" height="26" rx="5"/><rect x="340" y="124" width="60" height="26" rx="5"/>
+    </g>
+    <g class="t" font-size="10" fill="#AEB7C2" text-anchor="middle">
+      <text x="30" y="141">specialists</text><text x="115" y="141">specialists</text><text x="200" y="141">specialists</text><text x="285" y="141">specialists</text><text x="370" y="141">specialists</text>
+    </g>
+    <rect x="80" y="180" width="240" height="34" rx="6" fill="none" stroke="#2EE6C5" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text class="t" x="200" y="202" font-size="12" font-weight="600" fill="#2EE6C5" text-anchor="middle">independent reviewers · quality gates</text>
+    <rect x="110" y="236" width="180" height="30" rx="6" fill="none" stroke="#6C7681" stroke-width="1.5"/>
+    <text class="t" x="200" y="256" font-size="12" fill="#D7DCE1" text-anchor="middle">human approval</text>
+  </g>
+  <text class="t" x="72" y="376" font-size="12" fill="#6C7681">Created and maintained by Velluraju C · MIT licence</text>
+</svg>

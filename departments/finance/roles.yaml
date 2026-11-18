@@ -1,0 +1,75 @@
+department:
+  id: finance
+  name: Finance and accounting
+  mission: Keep the company solvent and honest about its numbers with ranged assumptions and professional review.
+  startup_stage: Founder plus an external accountant. The financial model lives in a spreadsheet with visible formulas; the approval matrix is one page.
+  agents: [financial-modeler, business-model-auditor, cfo-finance, operations-analyst]
+roles:
+  - id: financial-planning-analyst
+    title: Financial planning and analysis
+    mission: Build and maintain the operating model, scenarios and variance analysis.
+    scope: Budget, forecast, scenarios, unit economics, variance.
+    activities: [Build bottom-up budget, Model scenarios and sensitivity, Compare actuals, Explain variance]
+    inputs: [Plans, Actuals, Pricing, Usage]
+    outputs: [Operating model, Scenario analysis, Variance reports]
+    decides: [Model structure]
+    needs_approval: [Budget approval by CFO/CEO]
+    collaborates_with: [strategy, operations, product]
+    reports_to: cfo
+    kpis: [Forecast accuracy, Runway visibility]
+    quality: [Ranges and sources per input; variable AI/cloud costs included]
+    tools: [Financial model template]
+    failure_modes: [False precision, Single scenario]
+    ai_autonomy: propose
+    human_approval: [Budget]
+  - id: accountant
+    title: Accountant and bookkeeper
+    mission: Record transactions correctly and meet statutory obligations via qualified professionals.
+    scope: Bookkeeping, reconciliations, tax filings, statutory accounts.
+    activities: [Record and reconcile, Prepare filings with professionals, Maintain controls]
+    inputs: [Transactions, Contracts]
+    outputs: [Books, Filings, Reconciliations]
+    decides: [Classification within policy]
+    needs_approval: [Filings and payments are human-approved]
+    collaborates_with: [operations, legal]
+    reports_to: cfo
+    kpis: [Reconciliation timeliness, Filing accuracy]
+    quality: [Qualified professional review for tax and statutory matters]
+    tools: [Accounting system]
+    failure_modes: [Invented tax advice, Missed filings]
+    ai_autonomy: advise
+    human_approval: [Filings, payments]
+  - id: pricing-analyst
+    title: Pricing and unit economics analyst
+    mission: Keep pricing tied to value, cost-to-serve and willingness to pay.
+    scope: Plan economics, margin by plan, discount analysis, usage cost tracking.
+    activities: [Model margin by plan including variable costs, Analyse discounts, Track cost-to-serve]
+    inputs: [Cost model, Usage telemetry, Pricing]
+    outputs: [Unit economics report, Pricing recommendations]
+    decides: [Analysis]
+    needs_approval: [Price changes]
+    collaborates_with: [product, sales, data-ai]
+    reports_to: cfo
+    kpis: [Gross margin by plan, Discount leakage]
+    quality: [Cost per active user measured, not guessed]
+    tools: [Business model template]
+    failure_modes: [Ignoring AI token costs, Unlimited plans]
+    ai_autonomy: propose
+    human_approval: [Prices]
+  - id: treasury-cash-manager
+    title: Treasury and cash management
+    mission: Keep cash visible and controlled.
+    scope: Cash forecasting, banking, payment approvals, runway monitoring.
+    activities: [Forecast cash weekly, Maintain approval controls, Monitor runway triggers]
+    inputs: [Operating model, Bank data]
+    outputs: [Cash forecast, Runway alerts]
+    decides: [Forecast method]
+    needs_approval: [All payments]
+    collaborates_with: [operations, cfo]
+    reports_to: cfo
+    kpis: [Cash forecast accuracy, Runway months]
+    quality: [Triggers defined for scenario switches]
+    tools: [Cash forecast]
+    failure_modes: [Surprise runway cliff]
+    ai_autonomy: advise
+    human_approval: [Payments]

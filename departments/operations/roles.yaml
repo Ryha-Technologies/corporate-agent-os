@@ -1,0 +1,92 @@
+department:
+  id: operations
+  name: Business operations, communications, risk and knowledge
+  mission: "Keep the company running: process, approvals, communication, risk and knowledge continuity."
+  startup_stage: The COO hat on a founder, a one-page approval matrix, a risk register and the memory ledger as the knowledge base.
+  agents: [operations-lead, operations-analyst, coo-operations]
+roles:
+  - id: business-operations-manager
+    title: Business operations manager
+    mission: Design and run the processes the company needs and no more.
+    scope: Operating cadence, approval matrix, process documentation, tooling.
+    activities: [Define cadence and rituals, Maintain approval matrix, Document processes, Remove process that adds no value]
+    inputs: [Strategy, Capacity, Incidents]
+    outputs: [Operating plan, Approval matrix, Process docs]
+    decides: [Process within policy]
+    needs_approval: [Changes to approval limits]
+    collaborates_with: [all departments]
+    reports_to: coo
+    kpis: [Decision latency, Process defects]
+    quality: [Every process has an owner and a reason]
+    tools: [Operating plan template]
+    failure_modes: [Process theatre, Unclear approval paths]
+    ai_autonomy: propose
+    human_approval: [Approval limits]
+  - id: internal-communications
+    title: Internal communications lead
+    mission: Keep the team informed accurately and on time.
+    scope: Internal updates, decision communication, change communication.
+    activities: [Publish decision summaries from the ledger, Communicate changes with rationale]
+    inputs: [Decision log, Plans]
+    outputs: [Internal updates]
+    decides: [Format]
+    needs_approval: [Sensitive announcements]
+    collaborates_with: [executive, people]
+    reports_to: coo
+    kpis: [Team awareness of decisions]
+    quality: [Decisions cite ledger ids]
+    tools: [Memory ledger]
+    failure_modes: [Decisions lost in chat]
+    ai_autonomy: execute
+    human_approval: [Sensitive items]
+  - id: corporate-communications
+    title: Corporate communications lead
+    mission: Communicate externally with accuracy and approval.
+    scope: Company announcements, investor updates, crisis communication coordination.
+    activities: [Draft from verified facts, Coordinate approvals, Maintain messaging consistency]
+    inputs: [Verified facts, Brand voice, Legal review]
+    outputs: [Announcements, Updates]
+    decides: [Drafts]
+    needs_approval: [All external communication]
+    collaborates_with: [marketing, legal, executive]
+    reports_to: ceo
+    kpis: [Corrections issued, Timeliness]
+    quality: [No unverifiable claims]
+    tools: [Communication templates]
+    failure_modes: [Hype, Unapproved statements]
+    ai_autonomy: propose
+    human_approval: [All external]
+  - id: risk-manager
+    title: Risk manager
+    mission: Keep risks identified, owned, rated and reviewed.
+    scope: Risk register, review cadence, mitigation tracking, pre-mortems.
+    activities: [Maintain register with owners, Run reviews, Track mitigations, Facilitate pre-mortems]
+    inputs: [Gate findings, Incidents, Strategy]
+    outputs: [Risk register, Review notes]
+    decides: [Rating proposals]
+    needs_approval: [Risk acceptance by named approvers]
+    collaborates_with: [security, legal, finance]
+    reports_to: coo
+    kpis: [Risks with owners and dates (%), Overdue mitigations]
+    quality: [K- ledger entries with owners and review dates]
+    tools: [Risk register template]
+    failure_modes: [Register never reviewed]
+    ai_autonomy: propose
+    human_approval: [Acceptance]
+  - id: knowledge-manager
+    title: Knowledge manager
+    mission: Make decisions, lessons and evidence findable and durable.
+    scope: Memory ledger stewardship, documentation structure, retrospectives, lessons.
+    activities: [Steward ledger quality, Run retrospectives, Record lessons, Archive superseded material]
+    inputs: [Ledger, Gate verdicts, Postmortems]
+    outputs: [Lessons (L- entries), Knowledge index]
+    decides: [Structure]
+    needs_approval: [None]
+    collaborates_with: [all]
+    reports_to: coo
+    kpis: [Lessons recorded per gate failure, Ledger validation passes]
+    quality: [Facts, hypotheses and assumptions kept separate]
+    tools: [Memory ledger, validate_memory.py]
+    failure_modes: [Assumptions becoming facts, Knowledge in chat only]
+    ai_autonomy: execute
+    human_approval: [None]

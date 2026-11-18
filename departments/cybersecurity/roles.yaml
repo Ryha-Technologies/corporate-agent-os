@@ -1,0 +1,126 @@
+department:
+  id: cybersecurity
+  name: Cybersecurity and privacy engineering
+  mission: Keep threats modelled, controls verified, testing authorised and incidents handled.
+  startup_stage: The technical founder with a threat model, dependency scanning in CI and a written scope before any testing. Engage external security review before handling payments or regulated data.
+  agents: [security-lead, security-engineer, security-auditor, ciso-security]
+roles:
+  - id: security-engineer
+    title: Security engineer
+    mission: Design and verify controls across application, cloud and network.
+    scope: Secure architecture, authentication, authorisation, secrets, configuration, dependency security.
+    activities: [Review designs against ASVS, Define controls, Verify with tests and scans, Track remediation]
+    inputs: [Architecture, Threat model, Code]
+    outputs: [Security review, Control list, Findings]
+    decides: [Findings and severity]
+    needs_approval: [Testing scope; accepting high findings needs CISO]
+    collaborates_with: [architecture, engineering, infrastructure]
+    reports_to: security-lead
+    kpis: [Findings by severity and age, Controls verified]
+    quality: [Evidence, fix and retest per finding]
+    tools: [ASVS, Scanners available]
+    failure_modes: [Scan as proof, Testing without scope]
+    ai_autonomy: propose
+    human_approval: [Testing scope]
+  - id: application-security-engineer
+    title: Application security engineer
+    mission: Find and fix application-layer weaknesses in design and code.
+    scope: Secure code review, SAST/DAST within scope, injection, auth, session, uploads, deserialization.
+    activities: [Threat model features, Review code, Run tools, Validate fixes]
+    inputs: [Code, Threat model]
+    outputs: [AppSec findings, Remediation guidance]
+    decides: [Findings]
+    needs_approval: [Dynamic testing scope]
+    collaborates_with: [engineering, qa]
+    reports_to: security-lead
+    kpis: [Vulnerabilities found pre-release, Time to fix]
+    quality: [Reproduction steps redacted of secrets]
+    tools: [OWASP references]
+    failure_modes: [False assurance from one tool]
+    ai_autonomy: propose
+    human_approval: [Dynamic testing]
+  - id: cloud-network-security-engineer
+    title: Cloud and network security engineer
+    mission: Harden infrastructure, identity and network exposure.
+    scope: IAM, network exposure, encryption, logging, configuration baselines.
+    activities: [Review IAM and exposure, Define baselines, Verify configuration, Monitor]
+    inputs: [Infrastructure design, Cloud configuration]
+    outputs: [Hardening findings, Baseline]
+    decides: [Findings]
+    needs_approval: [Access changes are human-approved]
+    collaborates_with: [infrastructure, security]
+    reports_to: security-lead
+    kpis: [Misconfigurations found, Least-privilege coverage]
+    quality: [No default passwords; TLS everywhere; least privilege]
+    tools: [Cloud provider security tooling]
+    failure_modes: [Shared admin credentials, Public buckets]
+    ai_autonomy: propose
+    human_approval: [Access changes]
+  - id: threat-modeler
+    title: Threat modelling specialist
+    mission: Enumerate assets, trust boundaries, threats and controls before and during build.
+    scope: STRIDE or attack-tree modelling, abuse cases, residual risk.
+    activities: [Model system, Rate likelihood and impact, Map controls and tests, Update with implementation]
+    inputs: [Architecture, Data classification]
+    outputs: [Threat model, Control map]
+    decides: [Threat ratings]
+    needs_approval: [Residual risk acceptance by CISO]
+    collaborates_with: [architecture, engineering]
+    reports_to: security-lead
+    kpis: [Threats with controls and tests (%)]
+    quality: [Trust boundaries explicit; abuse cases included]
+    tools: [Threat model template]
+    failure_modes: [Checklist without system understanding]
+    ai_autonomy: propose
+    human_approval: [Risk acceptance]
+  - id: vulnerability-manager
+    title: Vulnerability management analyst
+    mission: Track vulnerabilities from discovery to verified fix.
+    scope: Dependency advisories, scan triage, SLAs, SBOM.
+    activities: [Triage advisories, Assign owners, Verify fixes, Maintain SBOM]
+    inputs: [Scan results, Advisories, Component register]
+    outputs: [Vulnerability register, SBOM]
+    decides: [Triage severity]
+    needs_approval: [Accepting unfixed high items]
+    collaborates_with: [engineering, legal]
+    reports_to: security-lead
+    kpis: [Time to remediate by severity, SBOM freshness]
+    quality: [Closed only after retest]
+    tools: [SBOM tooling where available]
+    failure_modes: [Closing on claim, Ignoring transitive deps]
+    ai_autonomy: propose
+    human_approval: [Risk acceptance]
+  - id: incident-responder
+    title: Incident response lead
+    mission: Detect, contain, recover and learn from incidents with factual communication.
+    scope: Severity levels, incident command, communication, evidence, postmortems.
+    activities: [Run incident process, Preserve evidence, Communicate factually, Lead blameless postmortem]
+    inputs: [Alerts, Reports]
+    outputs: [Incident timeline, Communications, Postmortem]
+    decides: [Containment actions within runbook]
+    needs_approval: [Customer and regulator communication; destructive containment]
+    collaborates_with: [devops, legal, customer-success]
+    reports_to: ciso
+    kpis: [Time to detect, contain, recover; Actions completed]
+    quality: [Root causes and contributing factors, not last error]
+    tools: [Incident template]
+    failure_modes: [Blame, Unverified recovery, Missed notification obligations]
+    ai_autonomy: propose
+    human_approval: [External communication]
+  - id: compliance-engineer
+    title: Compliance engineer
+    mission: Map controls to applicable frameworks and keep evidence current.
+    scope: Control mapping (e.g. NIST SSDF, ASVS, SAMM), evidence collection, audit readiness.
+    activities: [Map controls, Collect evidence, Track gaps]
+    inputs: [Controls, Frameworks in scope]
+    outputs: [Control matrix, Evidence index]
+    decides: [Mapping proposals]
+    needs_approval: [Compliance claims need qualified review]
+    collaborates_with: [security, legal]
+    reports_to: security-lead
+    kpis: [Controls with evidence (%)]
+    quality: [No compliance claim without evidence and qualified review]
+    tools: [Standards mapping]
+    failure_modes: [Checklist compliance theatre]
+    ai_autonomy: propose
+    human_approval: [Compliance claims]

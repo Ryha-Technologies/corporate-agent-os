@@ -1,0 +1,88 @@
+id: brand-development
+name: Brand development
+summary: Build a brand from category research through strategy, naming with preliminary IP screening, identity concepts and a production brandbook, with originality review and human approval before any public use.
+trigger: A company, product or feature needs a brand, name or identity.
+inputs_required:
+  - Strategy memo or positioning inputs
+  - Verified company facts
+  - Target jurisdictions and goods/services for naming
+final_deliverables:
+  - 03-brand/brand-strategy.md
+  - 03-brand/naming-report.md
+  - 03-brand/identity-concepts.md
+  - 03-brand/brandbook.md
+retry_policy:
+  max_review_loops: 3
+  on_exhausted: escalate-to-human
+stages:
+  - id: brief
+    agent: brand-creative-director
+    skills: [brand-strategy-story, creative-production]
+    objective: Creative brief with audience, constraints, verified facts, jurisdictions and the decision owner
+    depends_on: []
+    outputs: ["03-brand/creative-brief.md"]
+    risk: low
+  - id: category-audit
+    agent: brand-strategist
+    skills: [brand-strategy-story, competitive-analysis]
+    objective: Audit category conventions, competitor identities and clichés with dated references
+    depends_on: [brief]
+    outputs: ["03-brand/category-audit.md"]
+    risk: low
+  - id: strategy
+    agent: brand-strategist
+    skills: [brand-strategy-story]
+    objective: Brand foundation, narrative in three lengths and messaging system; three directions compared
+    depends_on: [category-audit]
+    outputs: ["03-brand/brand-strategy.md", "03-brand/messaging.md", "03-brand/rejected-concepts.md"]
+    gate: brand
+    review: brand-originality-auditor
+    human_approval: true
+    risk: medium
+  - id: naming
+    agent: naming-specialist
+    skills: [naming-ip-screen]
+    objective: Territories, candidates, linguistic screen and preliminary trademark screening per jurisdiction
+    depends_on: [strategy]
+    outputs: ["03-brand/naming-report.md", "03-brand/naming-screens/README.md"]
+    parallel_group: identity
+    timeout_minutes: 180
+    risk: high
+  - id: visual-audit
+    agent: identity-designer
+    skills: [logo-design]
+    objective: Visual audit of competitor and category marks with clichés to avoid
+    depends_on: [strategy]
+    outputs: ["03-brand/visual-audit.md"]
+    parallel_group: identity
+    risk: low
+  - id: naming-review
+    agent: legal-researcher
+    skills: [legal-risk-governance, naming-ip-screen]
+    objective: Verify screening completeness per jurisdiction and prepare counsel questions
+    depends_on: [naming]
+    outputs: ["08-legal-oss/counsel-questions.md"]
+    gate: legal
+    review: legal-licensing-reviewer
+    human_approval: true
+    risk: high
+  - id: identity-concepts
+    agent: identity-designer
+    skills: [logo-design, brandbook-identity]
+    objective: Three or more distinct concept territories tested at small size and in monochrome, with asset provenance
+    depends_on: [naming-review, visual-audit]
+    outputs: ["03-brand/identity-concepts.md", "03-brand/assets/asset-provenance.md"]
+    gate: brand
+    review: brand-originality-auditor
+    human_approval: true
+    risk: medium
+  - id: brandbook
+    agent: identity-designer
+    skills: [brandbook-identity, design-system]
+    objective: Production brandbook with logo system, colour with contrast pairings, licensed typography, grid, imagery, motion, voice, tokens, applications, misuse and governance
+    depends_on: [identity-concepts]
+    outputs: ["03-brand/brandbook.md", "03-brand/brand-tokens.json"]
+    gate: brand
+    review: brand-originality-auditor
+    human_approval: true
+    risk: medium

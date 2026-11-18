@@ -1,0 +1,85 @@
+id: product-launch
+name: Product launch
+summary: "Take a verified product to market: confirm gate readiness, define launch strategy and tiers, produce truthful positioning and assets, prepare sales enablement, support and monitoring, execute by tier with rollback criteria, and run a post-launch review."
+trigger: A product or major feature has passed build, testing, security, documentation and legal gates and is ready to go to market.
+inputs_required:
+  - Gate verdicts for build, testing, security, documentation, legal
+  - Positioning, brandbook, channel plan
+  - Support and operations owners
+final_deliverables:
+  - 09-operations/launch-plan.md
+  - 09-operations/launch-assets/README.md
+  - 09-operations/sales-playbook.md
+  - 09-operations/support-policy.md
+  - 09-operations/post-launch-review.md
+retry_policy:
+  max_review_loops: 2
+  on_exhausted: escalate-to-human
+stages:
+  - id: readiness
+    agent: test-auditor
+    skills: [qa-evaluation]
+    objective: Confirm every upstream gate is PASS or has signed accepted risks; rollback, monitoring, backups and support docs exist
+    depends_on: []
+    outputs: ["07-quality/gate-release-readiness.md"]
+    gate: release
+    review: security-auditor
+    human_approval: true
+    risk: critical
+  - id: launch-strategy
+    agent: growth-lead
+    skills: [product-launch, growth-gtm]
+    objective: Launch tiers, audiences, success metrics, guardrails, kill switch and rollback criteria
+    depends_on: [readiness]
+    outputs: ["09-operations/launch-plan.md", "09-operations/launch-calendar.md"]
+    risk: medium
+  - id: messaging-and-assets
+    agent: growth-marketer
+    skills: [product-launch, creative-production]
+    objective: Launch messaging and assets from shipped capability and the brandbook; approvals recorded
+    depends_on: [launch-strategy]
+    outputs: ["09-operations/launch-assets/README.md", "09-operations/launch-messaging.md"]
+    parallel_group: prepare
+    gate: brand
+    review: brand-originality-auditor
+    human_approval: true
+    risk: medium
+  - id: sales-enablement
+    agent: sales-specialist
+    skills: [sales-partnerships]
+    objective: Playbook, demo script from shipped features, pricing and objection handling
+    depends_on: [launch-strategy]
+    outputs: ["09-operations/sales-playbook.md"]
+    parallel_group: prepare
+    risk: medium
+  - id: support-readiness
+    agent: customer-success-specialist
+    skills: [customer-success-support, technical-documentation]
+    objective: Support policy, knowledge base outline, known issues, escalation matrix, incident communication templates
+    depends_on: [launch-strategy]
+    outputs: ["09-operations/support-policy.md", "09-operations/knowledge-base-outline.md", "09-operations/escalation-matrix.md"]
+    parallel_group: prepare
+    risk: medium
+  - id: monitoring
+    agent: devops-engineer
+    skills: [devops-sre, incident-response]
+    objective: Launch dashboards, alert owners, review cadence and incident runbooks for launch week
+    depends_on: [launch-strategy]
+    outputs: ["09-operations/launch-monitoring.md", "09-operations/runbooks/incident-launch.md"]
+    parallel_group: prepare
+    risk: high
+  - id: go-live
+    agent: corporate-orchestrator
+    skills: [corporate-orchestrator]
+    objective: Execute the first tier after recorded human approval; hold checkpoint reviews; apply rollback criteria
+    depends_on: [messaging-and-assets, sales-enablement, support-readiness, monitoring]
+    outputs: ["09-operations/launch-log.md"]
+    human_approval: true
+    risk: critical
+  - id: post-launch-review
+    agent: growth-lead
+    skills: [product-launch]
+    objective: Metrics vs targets, incidents, feedback, lessons and roadmap inputs
+    depends_on: [go-live]
+    outputs: ["09-operations/post-launch-review.md"]
+    risk: low

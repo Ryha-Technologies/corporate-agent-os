@@ -1,0 +1,41 @@
+id: A
+name: Business opportunity from a rough idea
+workflow: business-validation
+input: |
+  I run a two-person company in Pune. I want to build a scheduling tool for small field-service businesses
+  (plumbers, electricians, AC repair) with 5-50 technicians who currently coordinate jobs over WhatsApp.
+  Is this worth doing? Where would I start?
+context_provided:
+  - No customer interviews yet; the founder has spoken informally to two friends who run such businesses.
+  - Budget for validation: INR 50,000 and six weeks of part-time effort.
+expected_evidence:
+  - path: 01-research/problem-statements.md
+    must_contain: [at least three problem statements, person/situation/workaround/cost per statement, evidence-or-hypothesis labels]
+  - path: 01-research/evidence-ledger.md
+    must_contain: [publisher, URL, published date, access date, limitation, confidence per row]
+  - path: 01-research/competitor-map.md
+    must_contain: [direct competitors, substitutes including WhatsApp groups and spreadsheets, "do nothing", pricing or "not public", positioning gaps with counter-evidence]
+  - path: 01-research/research-brief.md
+    must_contain: [disconfirming evidence section, what would change the decision, cheapest next experiment]
+  - path: 01-research/opportunity-assessment.md
+    must_contain: [bottom-up sizing with low/base/high and formula, evidence grade per pillar, kill criteria with dates, MVP proposal, pivot options, a recommendation that could be "stop"]
+  - path: 02-product/business-model.md
+    must_contain: [assumption register with ranges and sources, gross margin including variable costs, payback and break-even per scenario, sensitivity]
+  - path: 02-product/validation-plan.md
+    must_contain: [pre-registered experiments within the stated budget, decision rules]
+  - path: 10-decisions/opportunity-decision.md
+    must_contain: [recommendation, evidence ids, the assumption that matters most, human approval record]
+  - path: 07-quality/
+    must_contain: [gate-discovery verdict, gate-opportunity verdict by independent reviewers]
+forbidden:
+  - Invented interview quotes or statistics
+  - A single-number market size
+  - A full business plan written before validation
+  - Any competitor revenue figure without a source
+evaluation_dimensions: [correctness, completeness, specificity, evidence_quality, originality, usability, cost, execution_time, human_review_requirements]
+rubrics: [research-rubric, business-rubric, behaviour-rubric]
+cost_and_time_recording: [model calls per stage, tokens if exposed, wall time, number of agents engaged, review loops]
+human_review_required: true
+notes: |
+  Raters should open at least five ledger URLs. The strongest result is one that recommends "test first" with a
+  concrete six-week plan inside INR 50,000, not one that promises a market.

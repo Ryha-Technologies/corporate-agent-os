@@ -1,0 +1,92 @@
+id: product-design
+name: Product experience and interface design
+summary: Design the product experience from research and PRD through IA, flows, states, visual direction, design system, screens and accessibility, with design QA against the specification and later against the implementation.
+trigger: A PRD exists and the product experience needs design, or an implemented UI needs design review.
+inputs_required:
+  - PRD and acceptance criteria
+  - Brandbook or brand direction
+  - Competitor pattern map
+final_deliverables:
+  - 04-design/information-architecture.md
+  - 04-design/states-matrix.md
+  - 04-design/design-tokens.json
+  - 04-design/component-spec.md
+  - 04-design/screens/README.md
+  - 04-design/accessibility-review.md
+retry_policy:
+  max_review_loops: 3
+  on_exhausted: escalate-to-human
+stages:
+  - id: design-brief
+    agent: design-lead
+    skills: [ui-ux-design]
+    objective: Design brief with category, top tasks, audience, constraints, accessibility target and the intended visual direction hypothesis
+    depends_on: []
+    outputs: ["04-design/design-brief.md"]
+    risk: low
+  - id: ia-and-flows
+    agent: ux-designer
+    skills: [information-architecture, ux-research]
+    objective: Information architecture, user flows with error and recovery paths, states matrix
+    depends_on: [design-brief]
+    outputs: ["04-design/information-architecture.md", "04-design/user-flows.md", "04-design/states-matrix.md"]
+    risk: medium
+  - id: wireframes
+    agent: ux-designer
+    skills: [ui-ux-design]
+    objective: Low-fidelity wireframes for critical flows validated against IA and tasks
+    depends_on: [ia-and-flows]
+    outputs: ["04-design/wireframes/README.md"]
+    review: ux-auditor
+    risk: medium
+  - id: visual-direction
+    agent: ui-designer
+    skills: [ui-ux-design, brandbook-identity]
+    objective: Intentional visual direction for this category and audience with rationale and pattern-map comparison
+    depends_on: [wireframes]
+    outputs: ["04-design/visual-direction.md", "04-design/design-rationale.md"]
+    parallel_group: system
+    gate: design
+    review: design-qa-auditor
+    human_approval: true
+    risk: medium
+  - id: tokens-and-components
+    agent: design-systems-engineer
+    skills: [design-system, accessibility-audit]
+    objective: Machine-readable tokens with contrast data and component specs with all states and accessibility requirements
+    depends_on: [wireframes]
+    outputs: ["04-design/design-tokens.json", "04-design/component-spec.md"]
+    parallel_group: system
+    risk: medium
+  - id: screens
+    agent: ui-designer
+    skills: [ui-ux-design, design-system]
+    objective: High-fidelity screens for all states, responsive and motion specs, realistic content
+    depends_on: [visual-direction, tokens-and-components]
+    outputs: ["04-design/screens/README.md", "04-design/responsive-spec.md", "04-design/motion-spec.md"]
+    timeout_minutes: 180
+    risk: medium
+  - id: accessibility-review
+    agent: accessibility-specialist
+    skills: [accessibility-audit]
+    objective: WCAG 2.2 AA design review with per-criterion results and fixes
+    depends_on: [screens]
+    outputs: ["04-design/accessibility-review.md"]
+    risk: medium
+  - id: design-qa
+    agent: design-qa-auditor
+    skills: [accessibility-audit, ui-ux-design, originality-audit]
+    objective: "Independent design QA of the specification: hierarchy, states, brand consistency, template-likeness, accessibility"
+    depends_on: [accessibility-review]
+    outputs: ["07-quality/gate-design-spec.md"]
+    gate: design
+    review: ux-auditor
+    risk: medium
+  - id: implementation-review
+    agent: design-qa-auditor
+    skills: [accessibility-audit, ui-ux-design]
+    objective: Compare rendered UI to the specification at representative viewports when an implementation exists
+    depends_on: [design-qa]
+    condition: "optional: an implemented UI is available to inspect"
+    outputs: ["07-quality/design-qa-report.md"]
+    risk: medium

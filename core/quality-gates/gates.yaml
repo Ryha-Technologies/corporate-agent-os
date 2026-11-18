@@ -1,0 +1,242 @@
+# Quality gates. Referenced by workflows/*/workflow.yaml (stage.gate) and by reviewer agents.
+# A gate PASSES only when every item in `evidence` exists and no `fail` condition holds.
+# Severity: critical = blocks release and cannot be waived by the orchestrator; high = blocks the gate until fixed or
+# accepted by the named approver; medium = must be fixed before release, may proceed to next stage; low = recorded.
+version: 0.2.0
+severity_levels: [critical, high, medium, low]
+default_owner: corporate-orchestrator
+
+gates:
+  - id: discovery
+    name: Discovery and evidence
+    reviewer: research-auditor
+    evidence:
+      - 01-research/research-brief.md with the decision the research informs
+      - 01-research/evidence-ledger.md with URL, publisher, published date, access date, limitation and confidence per claim
+      - 01-research/problem-statement.md separating observed evidence from hypotheses
+      - 01-research/competitor-map.md including substitutes and "do nothing"
+    pass:
+      - Every consequential claim is linked to a ledger row or labelled ASSUMPTION
+      - Disconfirming evidence was searched for and recorded
+      - Market sizing shows formula, inputs and low/base/high cases
+    fail:
+      - severity: critical
+        condition: Any fabricated source, quote, statistic or interview
+      - severity: high
+        condition: Demand asserted without behavioural evidence
+      - severity: medium
+        condition: Only one source type used for a consequential claim
+    remediation: Re-run targeted research for the failed claims; downgrade confidence; move unsupported statements to hypotheses.
+    human_approval: false
+
+  - id: opportunity
+    name: Opportunity and business model
+    reviewer: business-model-auditor
+    evidence:
+      - 01-research/opportunity-assessment.md with confidence, evidence quality and kill criteria
+      - 02-product/business-model.md with revenue model options, CAC/LTV/payback assumptions and sensitivity
+      - 02-product/validation-plan.md with experiments, metrics and decision rules
+    pass:
+      - TAM/SAM/SOM assumptions are explicit and sourced
+      - Unit economics show ranges, not single points
+      - Kill criteria and pivot options are written down
+    fail:
+      - severity: high
+        condition: Any revenue or market figure presented as fact without a source or formula
+      - severity: high
+        condition: No kill criteria
+      - severity: medium
+        condition: Differentiation rests on feature-list differences only
+    remediation: Rebuild the model bottom-up; add sensitivity; write kill criteria.
+    human_approval: true
+
+  - id: product
+    name: Product definition
+    reviewer: ux-auditor
+    evidence:
+      - 02-product/prd.md with goals, non-goals, user roles, scenarios, requirements, NFRs, data, edge states, metrics
+      - 02-product/acceptance-criteria.md in testable form
+    pass:
+      - A developer, a tester and a product owner would implement the same behaviour from the PRD
+      - MVP boundary is narrow enough to test one critical hypothesis
+    fail:
+      - severity: high
+        condition: Requirements that two competent readers would implement differently
+      - severity: medium
+        condition: Every requirement marked P0
+    remediation: Refine ambiguous requirements; cut scope to the thesis.
+    human_approval: true
+
+  - id: brand
+    name: Brand strategy and naming
+    reviewer: brand-originality-auditor
+    evidence:
+      - 03-brand/brand-strategy.md with positioning, audience, personality, promise, messaging
+      - 03-brand/category-audit.md with dated references and a cliché list
+      - 03-brand/naming-report.md with shortlist and preliminary screening status per candidate
+      - 03-brand/rejected-concepts.md
+    pass:
+      - Verified facts and brand framing are separated in the narrative
+      - Each name candidate has a status from the allowed set and a jurisdiction/class scope
+      - At least three genuinely different directions were compared on the scorecard
+    fail:
+      - severity: critical
+        condition: Any claim of legal clearance, "trademark safe" or "copyright free"
+      - severity: high
+        condition: Invented founder history, testimonials, traction or awards
+      - severity: high
+        condition: Name or mark closely resembles a known competitor
+    remediation: Remove clearance language; replace invented facts; generate new directions from the category gaps.
+    human_approval: true
+
+  - id: design
+    name: Experience and interface
+    reviewer: design-qa-auditor
+    evidence:
+      - 04-design/user-flows.md and information-architecture.md
+      - 04-design/design-tokens.json and component-spec.md
+      - 04-design/states-matrix.md (initial, loading, empty, error, success, offline, permission denied)
+      - 04-design/accessibility-review.md against WCAG 2.2 AA
+      - 04-design/design-rationale.md tracing visual decisions to brand and research
+    pass:
+      - Every screen has all states specified
+      - Contrast, focus order, labels, target size and reduced-motion behaviour are specified
+      - Visual decisions are traceable; the design is compared to competitor and template patterns
+    fail:
+      - severity: high
+        condition: Template-like layout with no rationale, or fake data in production flows
+      - severity: high
+        condition: Any WCAG 2.2 AA failure without a documented justified alternative
+      - severity: medium
+        condition: Decorative elements with no stated purpose
+    remediation: Remove or justify elements; complete states; fix accessibility findings and re-review.
+    human_approval: false
+
+  - id: architecture
+    name: Architecture and data
+    reviewer: architecture-reviewer
+    evidence:
+      - 05-architecture/architecture.md with context, boundaries, data flow, trust boundaries
+      - 05-architecture/adr/*.md for consequential choices
+      - 05-architecture/data-model.md and api-contract.(yaml|md)
+      - 05-architecture/threat-model.md
+      - 05-architecture/cost-model.md
+    pass:
+      - The chosen architecture is the simplest that meets stated requirements
+      - Trust boundaries and failure modes are enumerated with controls
+      - Cost model has low/base/high usage
+    fail:
+      - severity: high
+        condition: Microservices, Kubernetes, queues or AI components without a demonstrated requirement
+      - severity: high
+        condition: No threat model for a system handling personal or payment data
+    remediation: Simplify; record ADRs; complete the threat model.
+    human_approval: false
+
+  - id: build
+    name: Implementation
+    reviewer: code-reviewer
+    evidence:
+      - Reproducible build command and output
+      - Test results with commands (unit, integration, e2e as applicable)
+      - Reviewed diff limited to the task's file ownership
+      - Dependency inventory with licences
+    pass:
+      - Build and tests run and pass, or failures are disclosed
+      - No secrets, debug output or unrelated changes in the diff
+      - Input validation, error handling and authorisation present at trust boundaries
+    fail:
+      - severity: critical
+        condition: Secrets committed, or tests claimed without execution
+      - severity: high
+        condition: Failing tests silenced or skipped without disclosure
+    remediation: Fix or disclose; rerun; re-review.
+    human_approval: false
+
+  - id: security
+    name: Security and privacy
+    reviewer: security-auditor
+    evidence:
+      - Threat model updated to implementation
+      - Dependency and secret scan results with tool, version and date
+      - Authentication, authorisation, session, input-validation and logging review notes
+      - Privacy review (purpose, minimisation, retention, rights, processors)
+    pass:
+      - No open critical or high findings without an accepted-risk record signed by the security lead
+      - Scope of any testing was authorised and recorded
+    fail:
+      - severity: critical
+        condition: Exploitable critical vulnerability, or testing outside authorised scope
+      - severity: high
+        condition: Personal data collected without purpose and lawful-basis analysis
+    remediation: Fix, retest, record residual risk.
+    human_approval: true
+
+  - id: testing
+    name: Independent verification
+    reviewer: test-auditor
+    evidence:
+      - Traceability from acceptance criteria to test results
+      - Results marked PASS / FAIL / BLOCKED / NOT_RUN / NOT_APPLICABLE
+      - Accessibility, responsive and performance evidence for UI work
+    pass:
+      - Every acceptance criterion maps to a result
+      - No NOT_RUN converted to PASS
+    fail:
+      - severity: critical
+        condition: Any test result that was not actually executed reported as PASS
+      - severity: high
+        condition: Happy-path only coverage on a high-risk feature
+    remediation: Run the missing tests; disclose what cannot be run.
+    human_approval: false
+
+  - id: documentation
+    name: Documentation
+    reviewer: documentation-auditor
+    evidence:
+      - README / user docs / runbooks matching the shipped behaviour
+      - Commands verified by execution
+    pass:
+      - Install and usage instructions were executed as written
+      - Known limitations are listed
+    fail:
+      - severity: high
+        condition: Documented features that do not exist
+      - severity: medium
+        condition: Paths or commands that do not work
+    remediation: Correct docs; remove phantom features.
+    human_approval: false
+
+  - id: legal
+    name: Legal, IP and licensing
+    reviewer: legal-licensing-reviewer
+    evidence:
+      - 08-legal-oss/component-register.md (or SBOM) with licence per component
+      - 08-legal-oss/asset-provenance.md for fonts, images, icons, models, datasets
+      - 08-legal-oss/issue-register.md with jurisdiction and counsel questions
+    pass:
+      - Every third-party component and asset has a licence and permitted-use record
+      - Unresolved items are flagged for counsel, not closed
+    fail:
+      - severity: critical
+        condition: Component with unknown licence shipped, or legal advice presented as clearance
+      - severity: high
+        condition: Copyleft obligations unanalysed for the actual distribution mode
+    remediation: Resolve or replace components; route questions to counsel.
+    human_approval: true
+
+  - id: release
+    name: Release readiness
+    reviewer: test-auditor
+    evidence:
+      - Release checklist with rollback, monitoring, backups, support docs, incident contacts
+      - Gate results for build, security, testing, documentation, legal
+      - Explicit human approval record
+    pass:
+      - All upstream gates passed or have signed accepted-risk records
+      - Rollback tested; backup restore tested
+    fail:
+      - severity: critical
+        condition: Production release without human approval or without rollback
+    remediation: Complete the checklist; obtain approval.
+    human_approval: true

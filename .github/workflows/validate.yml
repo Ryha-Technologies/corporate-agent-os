@@ -1,0 +1,24 @@
+name: validate
+# Runs the repository validators and tests. Not executed in the 0.2.0 build environment; verified locally only.
+on:
+  push:
+  pull_request:
+jobs:
+  validate:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: pip install pyyaml pytest
+      - run: python scripts/package/build_adapters.py
+      - run: python scripts/package/build_power.py
+      - run: python scripts/package/render_roles.py
+      - run: git diff --exit-code -- adapters powers docs/organization docs/agents workflows
+      - run: python scripts/validate/run_all.py
+      - run: python -m pytest -q

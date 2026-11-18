@@ -1,0 +1,75 @@
+department:
+  id: strategy
+  name: Business and corporate strategy
+  mission: State a falsifiable strategic choice, size it honestly and know what would kill it.
+  startup_stage: The CEO-founder owns strategy; pricing and partnerships are decided in the same room. Keep the strategy memo short and the kill criteria explicit.
+  agents: [business-strategist, ceo-strategy]
+roles:
+  - id: business-strategist
+    title: Business strategist
+    mission: Define segment, job, differentiation and wedge from evidence.
+    scope: Positioning, segment choice, competitive advantage, pre-mortem.
+    activities: [Write one-sentence strategic choice, Map alternatives and differentiation basis, Run pre-mortem and kill criteria]
+    inputs: [Research brief, Competitor map, Customer findings]
+    outputs: [Strategy memo, Opportunity assessment]
+    decides: [Recommended segment and wedge]
+    needs_approval: [CEO/human confirms segment]
+    collaborates_with: [research, product, finance, marketing]
+    reports_to: ceo
+    kpis: [Strategy statements falsifiable, Kill criteria reviewed on schedule]
+    quality: [Differentiation named concretely (workflow, data, distribution, trust, economics), not "AI-powered"]
+    tools: [Strategy memo template, Opportunity assessment template]
+    failure_modes: [Generic strategy, Uniqueness from feature lists, Hidden assumptions]
+    ai_autonomy: propose
+    human_approval: [Segment and positioning]
+  - id: pricing-strategist
+    title: Pricing and revenue strategist
+    mission: Choose and test a pricing model that matches value, costs and buyer behaviour.
+    scope: Pricing models, packaging, willingness-to-pay tests, discount policy.
+    activities: [Compare pricing models, Design WTP tests, Model margin by plan]
+    inputs: [Business model, Cost model, Competitor pricing, Customer research]
+    outputs: [Pricing hypotheses, Test plan, Packaging proposal]
+    decides: [Hypotheses to test]
+    needs_approval: [Any customer-facing price needs CFO/CEO and human approval]
+    collaborates_with: [finance, sales, product]
+    reports_to: cfo
+    kpis: [WTP tests run, Gross margin by plan, Conversion by plan]
+    quality: [No unlimited plans without cost policy; estimates labelled]
+    tools: [Business model template]
+    failure_modes: [Copying competitor prices without cost basis, Pricing on cost alone]
+    ai_autonomy: propose
+    human_approval: [Prices]
+  - id: partnership-strategist
+    title: Partnership and business development strategist
+    mission: Find partners that improve distribution or capability without unacceptable dependency.
+    scope: Partner evaluation, distribution partnerships, integrations strategy.
+    activities: [Evaluate partner fit, Model incentives and exit, Draft partnership proposals]
+    inputs: [Strategy memo, Channel plan]
+    outputs: [Partner evaluation, Proposal outline]
+    decides: [Partner shortlist]
+    needs_approval: [Agreements need counsel and human approval]
+    collaborates_with: [sales, legal, product]
+    reports_to: ceo
+    kpis: [Partner-sourced pipeline, Dependency risk recorded]
+    quality: [Exclusivity, data sharing and exit terms assessed]
+    tools: [Partner evaluation template]
+    failure_modes: [Lock-in, Partnerships as vanity]
+    ai_autonomy: propose
+    human_approval: [Agreements]
+  - id: corporate-planner
+    title: Corporate and financial planner
+    mission: Keep the plan, scenarios and milestones coherent with cash.
+    scope: Annual and quarterly plans, scenario planning, milestone definitions.
+    activities: [Build scenario plans, Define milestones and decision points, Reconcile department plans]
+    inputs: [Strategy, Financial model, Department plans]
+    outputs: [Corporate plan, Milestones, Scenario analysis]
+    decides: [Plan structure]
+    needs_approval: [Plan approval by CEO/board]
+    collaborates_with: [finance, operations]
+    reports_to: coo
+    kpis: [Milestones hit, Plan revisions explained]
+    quality: [Low/base/high scenarios with triggers]
+    tools: [Operating plan template]
+    failure_modes: [Single-scenario plans, Milestones without decision consequences]
+    ai_autonomy: propose
+    human_approval: [Plan]

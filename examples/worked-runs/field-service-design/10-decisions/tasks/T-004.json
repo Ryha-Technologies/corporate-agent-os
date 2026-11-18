@@ -1,0 +1,50 @@
+{
+  "task_id": "T-004",
+  "project_id": "design-run-field-service",
+  "assigned_agent": "ui-designer",
+  "reviewer": "design-qa-auditor",
+  "objective": "Choose and justify a visual direction for a dense operations tool used in the field, and document the rationale and the comparison set.",
+  "context": "Stage visual-direction. Depends on T-003. No brandbook or pattern map exists (Q-002, Q-003).",
+  "inputs": [
+    "04-design/wireframes/README.md",
+    "04-design/design-brief.md"
+  ],
+  "outputs": [
+    "04-design/visual-direction.md",
+    "04-design/design-rationale.md"
+  ],
+  "file_ownership": [
+    "04-design/visual-direction.md",
+    "04-design/design-rationale.md"
+  ],
+  "dependencies": [
+    "T-003"
+  ],
+  "constraints": [
+    "Label every persona and finding HYPOTHESIS where no research exists.",
+    "Write only inside file_ownership."
+  ],
+  "tools": [
+    "read",
+    "write"
+  ],
+  "budget": {
+    "max_model_calls": 60,
+    "max_retries": 2
+  },
+  "timeout_minutes": 60,
+  "acceptance_criteria": [
+    "Direction statement ties each adjective to a trait or research id or marks it HYPOTHESIS.",
+    "Comparison set section states NOT_ASSESSABLE if no pattern map exists.",
+    "Every decorative element has a stated job or is absent."
+  ],
+  "verification": "design-qa-auditor runs the anti-template review and the job test.",
+  "risk": "high",
+  "approval": [
+    "department-lead",
+    "human"
+  ],
+  "status": "REVIEW",
+  "created_at": "2026-11-18T14:03:00Z",
+  "updated_at": "2026-11-18T16:00:00Z"
+}

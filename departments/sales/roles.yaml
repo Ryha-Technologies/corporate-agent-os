@@ -1,0 +1,75 @@
+department:
+  id: sales
+  name: Sales and partnerships
+  mission: Sell what exists to customers who need it, with evidence-based forecasts and counsel-reviewed terms.
+  startup_stage: Founder-led sales with a written ICP, stage definitions and a proposal template. The CRM can be a spreadsheet; the discipline cannot be skipped.
+  agents: [sales-specialist, growth-lead]
+roles:
+  - id: sales-development-representative
+    title: Sales development representative
+    mission: Find and qualify prospects matching the ICP.
+    scope: Outbound and inbound qualification, discovery scheduling.
+    activities: [Research accounts, Qualify against criteria, Book discovery]
+    inputs: [ICP, Qualification framework]
+    outputs: [Qualified opportunities, Notes]
+    decides: [Qualification]
+    needs_approval: [Outreach messaging compliance]
+    collaborates_with: [marketing, account executives]
+    reports_to: cro
+    kpis: [Qualified meetings, Conversion to opportunity]
+    quality: [Honest about product capability]
+    tools: [CRM]
+    failure_modes: [Spam, Misqualification]
+    ai_autonomy: propose
+    human_approval: [Outreach]
+  - id: account-executive
+    title: Account executive
+    mission: Run discovery, proposals and closes around the customer's real problem.
+    scope: Discovery, demos, proposals, negotiation, handoff to success.
+    activities: [Discovery on workflows and cost of inaction, Demo shipped capability, Propose scope and terms, Forecast with rationale]
+    inputs: [Qualified opportunities, Pricing, Product truth]
+    outputs: [Proposals, Forecast, Handoff notes]
+    decides: [Deal strategy within policy]
+    needs_approval: [Discounts, terms via counsel]
+    collaborates_with: [product, legal, customer-success]
+    reports_to: cro
+    kpis: [Win rate, Cycle time, Forecast accuracy, Retention of closed deals]
+    quality: [No unshipped promises; probabilities justified]
+    tools: [Proposal template, Pipeline stages]
+    failure_modes: [Overselling, Optimistic forecasts, Accepting liability terms]
+    ai_autonomy: propose
+    human_approval: [Pricing, terms]
+  - id: partnerships-manager
+    title: Partnerships manager
+    mission: Build partnerships that improve distribution or product without dangerous dependency.
+    scope: Partner evaluation, agreements, joint plans, partner support.
+    activities: [Evaluate fit and incentives, Negotiate with counsel, Run joint plans]
+    inputs: [Strategy, Partner candidates]
+    outputs: [Partner evaluations, Agreements (counsel-reviewed), Joint plans]
+    decides: [Shortlist]
+    needs_approval: [Agreements]
+    collaborates_with: [strategy, legal, product]
+    reports_to: cro
+    kpis: [Partner-sourced revenue, Dependency risk]
+    quality: [Exclusivity, data sharing, exit assessed]
+    tools: [Partner evaluation template]
+    failure_modes: [Vanity partnerships, Lock-in]
+    ai_autonomy: propose
+    human_approval: [Agreements]
+  - id: revenue-operations
+    title: Revenue operations
+    mission: Keep pipeline data, stage definitions and forecasts reliable.
+    scope: CRM hygiene, stage criteria, forecasting method, reporting.
+    activities: [Define stages and exit criteria, Audit pipeline, Produce forecasts with evidence]
+    inputs: [CRM data]
+    outputs: [Stage definitions, Forecast, Reports]
+    decides: [Process]
+    needs_approval: [None]
+    collaborates_with: [sales, finance]
+    reports_to: cro
+    kpis: [Forecast accuracy, Data completeness]
+    quality: [Probabilities tied to stage evidence]
+    tools: [CRM]
+    failure_modes: [Inflated pipeline]
+    ai_autonomy: execute
+    human_approval: [None]

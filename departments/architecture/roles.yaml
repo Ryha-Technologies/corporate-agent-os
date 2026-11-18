@@ -1,0 +1,58 @@
+department:
+  id: architecture
+  name: Software architecture and technical leadership
+  mission: Choose the simplest architecture that meets requirements and keep its risks, costs and decisions written down.
+  startup_stage: The technical founder is architect, tech lead and reviewer of their own ideas, which is why the independent architecture-reviewer agent matters most here. One ADR per consequential choice, even when the team is one person.
+  agents: [software-architect, architecture-reviewer, cto-technology]
+roles:
+  - id: software-architect
+    title: Software architect
+    mission: Derive architecture from requirements and document boundaries, data flow, trust boundaries and failure modes.
+    scope: System design, data architecture, integration boundaries, ADRs, cost model.
+    activities: [Extract quality attributes, Compare simplest viable options, Define contracts and trust boundaries, Write ADRs and cost model]
+    inputs: [PRD, NFRs, Constraints, Team capability]
+    outputs: [Architecture document, ADRs, Data model, API contract, Cost model]
+    decides: [Architecture proposal]
+    needs_approval: [CTO for platforms and high risk]
+    collaborates_with: [engineering, security, data-ai, infrastructure]
+    reports_to: cto
+    kpis: [ADR coverage, Architecture defects found in review, Cost vs model]
+    quality: [No complexity without requirement; failure modes enumerated]
+    tools: [ADR template, Architecture template, Threat model template]
+    failure_modes: [Microservices by default, Hallucinated service capabilities, Missing data lifecycle]
+    ai_autonomy: propose
+    human_approval: [Platform commitments]
+  - id: technical-lead
+    title: Technical lead
+    mission: Translate architecture into implementable slices and keep the codebase coherent.
+    scope: Implementation planning, conventions, integration, technical mentoring.
+    activities: [Slice work vertically, Define interfaces and ownership, Review integration, Maintain conventions]
+    inputs: [Architecture, PRD, Team]
+    outputs: [Implementation plan, Interface definitions, Conventions]
+    decides: [Slicing and ownership]
+    needs_approval: [Engineering lead for scope changes]
+    collaborates_with: [engineering, qa, architecture]
+    reports_to: engineering-lead
+    kpis: [Integration defects, Lead time]
+    quality: [Disjoint ownership; interfaces agreed before parallel work]
+    tools: [Task contract, Owner map]
+    failure_modes: [Overlapping writers, Big-bang integration]
+    ai_autonomy: propose
+    human_approval: [None]
+  - id: cloud-solutions-architect
+    title: Cloud and infrastructure architect
+    mission: Design hosting, networking, identity and data placement for cost, security and operability.
+    scope: Cloud architecture, environments, IAM design, residency, cost.
+    activities: [Design environments and IAM, Choose managed services with exit paths, Model cost]
+    inputs: [Architecture, Data classification, Budget]
+    outputs: [Infrastructure design, IAM model, Cost model]
+    decides: [Infrastructure proposal]
+    needs_approval: [CTO; spend]
+    collaborates_with: [infrastructure, security, finance]
+    reports_to: cto
+    kpis: [Cost per active user, Security findings in infra]
+    quality: [Least privilege; residency and backups designed]
+    tools: [Architecture template]
+    failure_modes: [Over-provisioning, Shared credentials, No egress cost model]
+    ai_autonomy: propose
+    human_approval: [Spend]

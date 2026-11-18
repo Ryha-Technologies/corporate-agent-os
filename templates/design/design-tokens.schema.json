@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://corporate-agent-os.local/schemas/design-tokens.schema.json",
+  "title": "Design tokens",
+  "description": "Minimal token file shape used by design-system and validated by projects. Values are strings so units stay explicit.",
+  "type": "object",
+  "required": ["meta", "color", "typography", "spacing", "radius", "motion", "focus"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["product", "version", "contrast_target"],
+      "properties": {
+        "product": { "type": "string" },
+        "version": { "type": "string" },
+        "contrast_target": { "type": "string", "enum": ["WCAG 2.2 AA", "WCAG 2.2 AAA"] },
+        "brandbook": { "type": "string" }
+      }
+    },
+    "color": {
+      "type": "object",
+      "description": "Semantic roles. Each role has light and dark values and, for text/control roles, the measured contrast against its background role.",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["light", "dark"],
+        "properties": {
+          "light": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+          "dark": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+          "contrast_against": { "type": "string" },
+          "contrast_light": { "type": "number" },
+          "contrast_dark": { "type": "number" },
+          "decorative_only": { "type": "boolean" }
+        }
+      }
+    },
+    "typography": {
+      "type": "object",
+      "required": ["families", "scale"],
+      "properties": {
+        "families": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["stack", "license"],
+            "properties": {
+              "stack": { "type": "string" },
+              "license": { "type": "string" },
+              "weights": { "type": "array", "items": { "type": "integer" } }
+            }
+          }
+        },
+        "scale": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["size", "line_height"],
+            "properties": {
+              "size": { "type": "string" },
+              "line_height": { "type": "string" },
+              "weight": { "type": "integer" },
+              "tracking": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "spacing": { "type": "object", "additionalProperties": { "type": "string" } },
+    "radius": { "type": "object", "additionalProperties": { "type": "string" } },
+    "elevation": { "type": "object", "additionalProperties": { "type": "string" } },
+    "motion": {
+      "type": "object",
+      "required": ["durations", "easings", "reduced_motion"],
+      "properties": {
+        "durations": { "type": "object", "additionalProperties": { "type": "string" } },
+        "easings": { "type": "object", "additionalProperties": { "type": "string" } },
+        "reduced_motion": { "type": "string" }
+      }
+    },
+    "focus": {
+      "type": "object",
+      "required": ["ring"],
+      "properties": { "ring": { "type": "string" }, "offset": { "type": "string" } }
+    },
+    "breakpoints": { "type": "object", "additionalProperties": { "type": "string" } }
+  }
+}

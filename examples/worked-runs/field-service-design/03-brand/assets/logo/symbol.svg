@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Kaamline symbol (working title)">
+  <rect x="4" y="4" width="56" height="56" rx="10" fill="#1F1A2E"/>
+  <rect x="14" y="17" width="36" height="7" rx="2" fill="#FFFFFF" opacity="0.55"/>
+  <rect x="14" y="28.5" width="14" height="7" rx="2" fill="#FFFFFF" opacity="0.55"/>
+  <rect x="31" y="28.5" width="19" height="7" rx="2" fill="#FFD23F"/>
+  <rect x="14" y="40" width="36" height="7" rx="2" fill="#FFFFFF" opacity="0.55"/>
+</svg>

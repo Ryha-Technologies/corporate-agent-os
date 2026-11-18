@@ -1,0 +1,109 @@
+department:
+  id: research
+  name: Research and intelligence
+  mission: Give every decision dated, triangulated evidence with honest confidence and the disconfirming case.
+  startup_stage: One founder or the first product person does all of this part-time. Keep the evidence ledger even when the team is one person; it is what later hires and investors will check.
+  agents: [research-lead, research-analyst, competitive-analyst]
+roles:
+  - id: business-research-analyst
+    title: Business and market research analyst
+    mission: Answer framed research questions from primary sources.
+    scope: Desk research on markets, customers, regulation, technology; evidence ledger.
+    activities: [Frame decision and questions, Plan evidence that could disprove, Search and read primary sources, Triangulate and label confidence]
+    inputs: [Brief, Hypotheses, Research plan]
+    outputs: [Evidence ledger, Findings memo, Problem statement]
+    decides: [Source selection and confidence labels]
+    needs_approval: [Paid data purchases]
+    collaborates_with: [strategy, product, competitive-intelligence]
+    reports_to: research-lead
+    kpis: [Claims with dated sources (%), Disconfirming cases found, Findings later overturned]
+    quality: [Publisher, URL, dates, method and limitation per source; observation vs interpretation separated]
+    tools: [Evidence ledger template, Search, Official databases]
+    failure_modes: [Hallucinated sources, Confirmation bias, SEO pages as evidence, Search volume as demand]
+    ai_autonomy: propose
+    human_approval: [None beyond spend]
+  - id: competitive-intelligence-analyst
+    title: Competitive intelligence analyst
+    mission: Show what customers choose today, why, and where the gaps are.
+    scope: Direct and indirect competitors, substitutes, manual workarounds, pattern maps for brand and design.
+    activities: [Build competitor matrix, Capture pricing and packaging, Map common patterns, Identify positioning gaps]
+    inputs: [Segment definition, Research plan]
+    outputs: [Competitor map, Competitor pattern map, Gap analysis]
+    decides: [Which alternatives to include]
+    needs_approval: [None]
+    collaborates_with: [strategy, branding, design]
+    reports_to: research-lead
+    kpis: [Competitors and substitutes covered, Dated screenshots or captures, Gaps validated later]
+    quality: [Every row sourced; "do nothing" and spreadsheets included]
+    tools: [Competitor matrix template]
+    failure_modes: [Claims of no competitors, Guessed revenue, Feature-list comparison only]
+    ai_autonomy: propose
+    human_approval: [None]
+  - id: scientific-technical-researcher
+    title: Scientific and technical researcher
+    mission: Verify technical feasibility and claims against official documentation, standards and reproducible tests.
+    scope: Standards, API capabilities, benchmarks, model comparisons, proof-of-concept spikes.
+    activities: [Read official docs and release notes, Inspect benchmark methodology, Run small reproducible spikes]
+    inputs: [Technical questions, Candidate technologies]
+    outputs: [Feasibility memo, Spike results, Source register]
+    decides: [What to test]
+    needs_approval: [Spend on paid APIs]
+    collaborates_with: [architecture, data-ai]
+    reports_to: research-lead
+    kpis: [Claims verified against primary docs, Spikes reproducible]
+    quality: [No benchmark headline copied without its setup]
+    tools: [Source register, Spike template]
+    failure_modes: [Trusting vendor marketing, Outdated docs, Benchmark mismatch]
+    ai_autonomy: propose
+    human_approval: [Spend]
+  - id: market-trend-analyst
+    title: Market and trend analyst
+    mission: Separate durable shifts from noise and connect them to opportunities.
+    scope: Market changes, regulatory changes, technology shifts, distribution changes.
+    activities: [Track signals with sources, Distinguish trend from fad with evidence, Link to opportunity hypotheses]
+    inputs: [Research plan, Industry sources]
+    outputs: [Trend brief with confidence, Opportunity hypotheses]
+    decides: [Signal relevance]
+    needs_approval: [None]
+    collaborates_with: [strategy, product]
+    reports_to: research-lead
+    kpis: [Hypotheses later tested, Signals sourced]
+    quality: [Trends labelled hypothesis until behavioural evidence exists]
+    tools: [Evidence ledger]
+    failure_modes: [Hype as trend, Single-source narratives]
+    ai_autonomy: propose
+    human_approval: [None]
+  - id: data-analyst
+    title: Data analyst
+    mission: Turn product and market data into honest, reproducible analysis.
+    scope: Analytics data, survey data, public datasets, experiment results.
+    activities: [Clean and validate data, Analyse with stated methods, Report uncertainty]
+    inputs: [Datasets, Analytics events, Experiment designs]
+    outputs: [Analysis notebooks or scripts, Findings with confidence intervals or caveats]
+    decides: [Methods]
+    needs_approval: [Access to personal data]
+    collaborates_with: [product, growth, finance]
+    reports_to: research-lead
+    kpis: [Analyses reproducible, Data quality issues caught]
+    quality: [Sample size, bias and limitations stated; correlation not called causation]
+    tools: [Scripts or spreadsheets with formulas visible]
+    failure_modes: [Fabricated numbers, Cherry-picked windows, Vanity metrics]
+    ai_autonomy: propose
+    human_approval: [Personal data access]
+  - id: opportunity-discovery-lead
+    title: Opportunity discovery and innovation researcher
+    mission: Find and frame problems worth solving before anyone proposes a solution.
+    scope: Problem discovery, unmet needs, customer spending, emerging enablers.
+    activities: [Problem interviews synthesis, Spending and workaround analysis, Opportunity framing with kill criteria]
+    inputs: [Customer research, Trend briefs, Competitor map]
+    outputs: [Problem map, Opportunity hypotheses with evidence grade]
+    decides: [Which hypotheses to carry forward]
+    needs_approval: [None]
+    collaborates_with: [strategy, product, ux-research]
+    reports_to: research-lead
+    kpis: [Hypotheses with behavioural evidence, Time to disconfirm weak ideas]
+    quality: [Observed evidence and AI-generated hypotheses clearly separated]
+    tools: [Opportunity assessment template]
+    failure_modes: [Solution-first framing, Invented customer pain]
+    ai_autonomy: propose
+    human_approval: [None]

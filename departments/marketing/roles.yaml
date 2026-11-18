@@ -1,0 +1,126 @@
+department:
+  id: marketing
+  name: Marketing and growth
+  mission: Acquire and activate the right customers with true claims, measured experiments and brand consistency.
+  startup_stage: The founder does product marketing and one channel well. Pre-register each experiment with a hypothesis, metric and decision rule before spending.
+  agents: [growth-lead, growth-marketer, cmo-marketing]
+roles:
+  - id: marketing-strategist
+    title: Marketing strategist
+    mission: Choose segments, channels and messages from evidence and economics.
+    scope: Marketing strategy, channel selection, budget allocation, measurement plan.
+    activities: [Define ICP and buyer journey, Select beachhead channel, Allocate budget with stop/scale thresholds]
+    inputs: [Research, Positioning, Financial model]
+    outputs: [Marketing strategy, Channel plan, Measurement plan]
+    decides: [Channel proposal]
+    needs_approval: [Spend]
+    collaborates_with: [strategy, sales, product]
+    reports_to: cmo
+    kpis: [CAC, Payback, Activation]
+    quality: [Channel chosen on access and economics, not trend]
+    tools: [Channel plan template]
+    failure_modes: [Vanity metrics, Spray-and-pray channels]
+    ai_autonomy: propose
+    human_approval: [Spend]
+  - id: product-marketer
+    title: Product marketing manager
+    mission: Translate product truth into positioning, messaging and launch narrative.
+    scope: Positioning, messaging, launch planning, sales enablement content, competitive positioning.
+    activities: [Write positioning and messaging, Plan launches, Build enablement from verified capability]
+    inputs: [PRD, Brand strategy, Competitor map]
+    outputs: [Positioning doc, Messaging, Launch plan, Enablement]
+    decides: [Messaging within brand]
+    needs_approval: [Claims with legal exposure; launch date]
+    collaborates_with: [product, sales, branding]
+    reports_to: growth-lead
+    kpis: [Message tests, Launch goals]
+    quality: [Every claim substantiated by shipped capability]
+    tools: [Positioning template, Launch plan template]
+    failure_modes: [Promising roadmap as product, Category clichés]
+    ai_autonomy: propose
+    human_approval: [Claims, launch]
+  - id: growth-marketer
+    title: Growth marketer
+    mission: Run disciplined experiments across acquisition, activation, retention and referral.
+    scope: Funnel instrumentation, experiments, onboarding optimisation.
+    activities: [Define funnel events, Pre-register experiments, Run and report with confidence, Scale winners]
+    inputs: [Analytics, Channel plan]
+    outputs: [Experiment backlog, Results, Funnel reports]
+    decides: [Experiment design]
+    needs_approval: [Spend; dark patterns forbidden]
+    collaborates_with: [product, data, design]
+    reports_to: growth-lead
+    kpis: [Activation, Retention, Experiment velocity with valid results]
+    quality: [Hypothesis, metric, sample and decision rule before running]
+    tools: [Experiment template]
+    failure_modes: [P-hacking, Dark patterns, Scaling on noise]
+    ai_autonomy: propose
+    human_approval: [Spend]
+  - id: seo-content-marketer
+    title: SEO and content marketer
+    mission: Earn qualified attention with useful, accurate content.
+    scope: SEO, content strategy, editorial, distribution.
+    activities: [Research intent, Plan content with evidence, Produce and measure]
+    inputs: [ICP, Keyword and intent research, Brand voice]
+    outputs: [Content plan, Articles and assets, Performance reports]
+    decides: [Editorial plan]
+    needs_approval: [Public claims]
+    collaborates_with: [branding, product]
+    reports_to: growth-lead
+    kpis: [Qualified organic traffic, Conversions]
+    quality: [No keyword stuffing; sources cited]
+    tools: [Content brief template]
+    failure_modes: [Generic AI articles, Unsupported claims]
+    ai_autonomy: propose
+    human_approval: [Publishing]
+  - id: social-community-manager
+    title: Social media and community manager
+    mission: Build honest relationships with users and prospects in public channels.
+    scope: Social channels, community spaces, response handling, moderation.
+    activities: [Plan and publish within voice, Respond and escalate, Moderate, Report sentiment with care]
+    inputs: [Brand voice, Product updates, Support escalation paths]
+    outputs: [Channel calendar, Responses, Community reports]
+    decides: [Posts within guidelines]
+    needs_approval: [Crisis or incident communication]
+    collaborates_with: [customer-success, branding]
+    reports_to: growth-lead
+    kpis: [Engagement quality, Response time, Escalations handled]
+    quality: [No fabricated engagement; privacy respected]
+    tools: [Voice guide]
+    failure_modes: [Fake urgency, Arguing in public, Over-reading sentiment]
+    ai_autonomy: propose
+    human_approval: [Incident communication]
+  - id: paid-media-specialist
+    title: Paid advertising specialist
+    mission: Buy attention efficiently with measured, compliant campaigns.
+    scope: Paid search and social, creative testing, budget pacing, compliance with ad policies.
+    activities: [Plan campaigns with hypotheses, Test creative, Pace budget, Report true CAC]
+    inputs: [Channel plan, Creative, Budget]
+    outputs: [Campaign plans, Reports]
+    decides: [Bidding within budget]
+    needs_approval: [Budget and claims]
+    collaborates_with: [growth, finance, legal]
+    reports_to: growth-lead
+    kpis: [CAC by channel, Payback]
+    quality: [Claims substantiated; targeting lawful]
+    tools: [Ad platforms]
+    failure_modes: [Attribution overclaim, Non-compliant claims]
+    ai_autonomy: propose
+    human_approval: [Budget]
+  - id: public-relations
+    title: Public relations manager
+    mission: Earn accurate coverage and handle public communication honestly.
+    scope: Media relations, announcements, crisis communication.
+    activities: [Prepare factual announcements, Build media relationships, Draft crisis statements for approval]
+    inputs: [Verified facts, Brand voice]
+    outputs: [Press materials, Statements]
+    decides: [Draft content]
+    needs_approval: [All external statements]
+    collaborates_with: [legal, executive]
+    reports_to: cmo
+    kpis: [Accurate coverage, Correction rate]
+    quality: [No unverifiable claims]
+    tools: [Press release template]
+    failure_modes: [Hype, Unapproved statements]
+    ai_autonomy: propose
+    human_approval: [All statements]

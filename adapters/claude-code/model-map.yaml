@@ -1,0 +1,8 @@
+# Maps the platform-neutral model classes in agents/**/*.yaml to Claude Code `model:` values.
+# Valid values per code.claude.com/docs/en/sub-agents (2026-11-18): sonnet, opus, haiku, inherit, or a full model id.
+# `inherit` keeps the parent session's model so users control cost from one place. Change `fast` to `haiku` to
+# route mechanical sub-agents to a cheaper model.
+model_class:
+  reasoning: inherit
+  balanced: inherit
+  fast: haiku

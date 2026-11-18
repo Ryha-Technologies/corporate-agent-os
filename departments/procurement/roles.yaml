@@ -1,0 +1,41 @@
+department:
+  id: procurement
+  name: Procurement and vendor management
+  mission: Buy what the company needs at a known total cost, with contract terms, data handling and exit paths understood.
+  startup_stage: Whoever signs up for a SaaS tool records it in the vendor register with cost, renewal date, data shared and how to leave. That register is the whole department.
+  agents: [operations-analyst, operations-lead]
+roles:
+  - id: procurement-specialist
+    title: Procurement specialist
+    mission: Evaluate purchases on total lifecycle cost and risk.
+    scope: Vendor evaluation, purchasing process, approval compliance.
+    activities: [Compare options on total cost and lock-in, Check security and data terms, Route through approval matrix]
+    inputs: [Requirement, Budget, Candidates]
+    outputs: [Procurement evaluation, Purchase request]
+    decides: [Recommendation]
+    needs_approval: [All purchases are human-approved]
+    collaborates_with: [finance, legal, security]
+    reports_to: operations-lead
+    kpis: [Spend within budget, Evaluations with exit path]
+    quality: [Security, privacy and licence terms reviewed before purchase]
+    tools: [Procurement evaluation template]
+    failure_modes: [Buying on features alone, Ignoring data processing terms]
+    ai_autonomy: propose
+    human_approval: [Purchases]
+  - id: vendor-manager
+    title: Vendor manager
+    mission: Keep vendor relationships, renewals, SLAs and exit options under control.
+    scope: Vendor register, renewals, SLA tracking, data processing terms, offboarding vendors.
+    activities: [Maintain register, Track renewals and SLAs, Review incidents, Plan exits]
+    inputs: [Contracts, Usage, Incidents]
+    outputs: [Vendor register, Renewal calendar, Exit plans]
+    decides: [Register content]
+    needs_approval: [Renewals and cancellations]
+    collaborates_with: [finance, legal, engineering]
+    reports_to: operations-lead
+    kpis: [Renewals handled on time, Vendor incidents resolved]
+    quality: [Data export and deletion path known per vendor]
+    tools: [Vendor register template]
+    failure_modes: [Auto-renew surprises, Lock-in discovered late]
+    ai_autonomy: propose
+    human_approval: [Renewals]
