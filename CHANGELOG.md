@@ -37,6 +37,10 @@ Beta. Evaluation required. Not labelled 1.0.0 because no model-driven benchmark 
 - Worked design and brand run shipped as `examples/worked-runs/field-service-design/`.
 - Author credit: Velluraju C in the licence, Power manifest, every skill and the docs.
 
+### Changed (after first publish)
+- Kiro agents are rendered as JSON instead of Markdown: Kiro CLI 3.3.0 did not discover Markdown agent files in a live install; all 58 JSON agents pass `kiro-cli agent validate` and are listed by `kiro-cli agent list`.
+- CI (`validate` workflow) runs on ubuntu, windows and macos for Python 3.10 and 3.12 and passes; a Python 3.10 nested f-string bug found by CI was fixed.
+
 ### Known gaps
 See `docs/known-limitations.md`.
 

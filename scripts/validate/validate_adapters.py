@@ -37,16 +37,20 @@ def run() -> Report:
         elif p.read_text(encoding="utf-8").replace("\r\n", "\n") != content:
             report.error(f"{rel(p)}: differs from a fresh render; run scripts/package/build_adapters.py")
     # Stale generated files
-    for d in (ROOT / "adapters/kiro/agents", ROOT / "adapters/claude-code/agents"):
-        for f in d.glob("*.md"):
+    for d, ext in ((ROOT / "adapters/kiro/agents", "*.json"), (ROOT / "adapters/claude-code/agents", "*.md")):
+        for f in d.glob(ext):
             if str(f) not in rendered:
                 report.error(f"{rel(f)}: not produced by the generator (stale agent)")
+    for f in (ROOT / "adapters/kiro/agents").glob("*.md"):
+        report.error(f"{rel(f)}: Kiro agents must be JSON (Kiro CLI 3.3.0 ignores Markdown agents); delete and rebuild")
 
     # Kiro agent frontmatter
-    for f in sorted((ROOT / "adapters/kiro/agents").glob("*.md")):
-        fm, _ = parse_frontmatter(f.read_text(encoding="utf-8"), f, report)
-        if not fm:
+    for f in sorted((ROOT / "adapters/kiro/agents").glob("*.json")):
+        fm = load_json(f, report)
+        if not isinstance(fm, dict):
             continue
+        if not fm.get("prompt") or not fm.get("description"):
+            report.error(f"{rel(f)}: prompt and description required")
         unknown = set(fm) - KIRO_AGENT_FIELDS
         legacy = set(fm) & KIRO_LEGACY_FIELDS
         if unknown - KIRO_LEGACY_FIELDS:

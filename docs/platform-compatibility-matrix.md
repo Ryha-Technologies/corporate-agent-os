@@ -6,11 +6,11 @@ Verification date for all platform facts: 2026-11-18 (`research/source-register.
 
 | Capability | Kiro IDE 1.x | Kiro CLI v3 | Claude Code | Codex CLI / IDE | Other Agent Skills clients |
 |---|---|---|---|---|---|
-| Skills discovered from project folder | Supported format (`.kiro/skills/`) — not yet tested live | Supported format — not yet tested live | Supported format (`.claude/skills/`) — not yet tested live | Supported format (`.agents/skills/`) — not yet tested live | Limited: copy `skills/<name>/`; frontmatter uses only spec fields |
+| Skills discovered from project folder | Supported format (`.kiro/skills/`) — not yet tested live | Supported format — live install performed with CLI 3.3.0 (see platform guide) | Supported format (`.claude/skills/`) — not yet tested live | Supported format (`.agents/skills/`) — not yet tested live | Limited: copy `skills/<name>/`; frontmatter uses only spec fields |
 | Skills at user scope | `~/.kiro/skills/` | `~/.kiro/skills/` | `~/.claude/skills/` | `~/.agents/skills/` | Varies |
 | Skill frontmatter fields used | 6 spec fields | 6 spec fields | 6 spec fields (Claude extensions not used) | 2 required + 4 optional spec fields | 6 spec fields |
 | Explicit skill invocation | `/skill-name` | `/skill-name` (CLI also `$ARGUMENTS`) | `/skill-name` | `$skill-name` | Varies |
-| Custom agents / sub-agents | Adapter: `.kiro/agents/<id>.md` (generated) — not yet tested live | Adapter: same files — not yet tested live | Adapter: `.claude/agents/<id>.md` (generated) — not yet tested live | Not supported (roles in `AGENTS.md`) | Not supported |
+| Custom agents / sub-agents | Adapter: `.kiro/agents/<id>.json` (generated) — JSON validated by `kiro-cli agent validate` | Adapter: same files — **live: listed by `kiro-cli agent list` 3.3.0** (Markdown agents were NOT discovered by CLI 3.3.0, so JSON is shipped) | Adapter: `.claude/agents/<id>.md` (generated) — not yet tested live | Not supported (roles in `AGENTS.md`) | Not supported |
 | Parallel delegation | Supported by host (`subagent` tool, DAG, review loops) — not yet tested live | Supported by host — not yet tested live | Supported by host (Agent tool, worktree isolation) — not yet tested live | Not supported; sequential passes | Not supported |
 | Restrict which agents an orchestrator may spawn | Supported: `subagent/<id>` tool entries + `subagent` permission rules | Supported | Not supported as a field; description-driven | n/a | n/a |
 | Path-scoped write permission | Supported: `permissions.rules` `fs_write` matchers | Supported | Not supported; instruction + review | Not supported; sandbox modes only | Not supported |

@@ -2,7 +2,7 @@
 """Render platform adapters from the canonical agent definitions and permission policy.
 
 Outputs (deterministic, so the validator can detect drift):
-  adapters/kiro/agents/<id>.md          Kiro custom agent, Markdown format (IDE 1.x / CLI v3)
+  adapters/kiro/agents/<id>.json        Kiro custom agent, JSON format (IDE 1.x / CLI v3; CLI 3.3.0 loads JSON only)
   adapters/claude-code/agents/<id>.md   Claude Code sub-agent
   adapters/codex/AGENTS.md              Codex repository instructions with the role table
 
@@ -54,6 +54,8 @@ def _delegates(agent: dict, agents: dict[str, dict]) -> list[str]:
 
 
 def render_kiro(agent: dict, agents: dict[str, dict], policy: dict) -> str:
+    """Kiro custom agent in JSON. Kiro documents Markdown and JSON with identical fields; Kiro CLI 3.3.0 was observed
+    (2026-11-18) to discover only JSON files under .kiro/agents, so JSON is the shipped format."""
     tools: list[str] = []
     for t in agent["tools"]:
         if t == "subagent":
@@ -74,34 +76,25 @@ def render_kiro(agent: dict, agents: dict[str, dict], policy: dict) -> str:
     delegates = _delegates(agent, agents)
     if delegates:
         rules.append({"capability": "subagent", "match": delegates, "effect": "ask"})
-    lines = [
-        "---",
-        f"name: {agent['id']}",
-        f"description: {json.dumps(agent['description'])}",
-        f"tools: {_yaml_list(tools)}",
-        "resources:",
+    boundaries = [
+        "",
+        "## Operating boundaries",
+        f"- Mission: {agent['mission']}",
+        f"- Autonomy: {agent['autonomy']}. Write scope: {', '.join(agent.get('write_scope') or ['none'])}.",
+        "- Approval required for: " + "; ".join(agent.get("approval_required") or ["as per core/permissions/policy.yaml"]),
+        "- Never: " + "; ".join(agent["never"]),
+        "- Report using core/orchestrator/report-format.md. Mark anything not executed as NOT_RUN.",
     ]
-    lines += [f"  - {r}" for r in resources]
-    lines.append("permissions:")
-    lines.append("  rules:")
-    for r in rules:
-        lines.append(f"    - capability: {r['capability']}")
-        lines.append(f"      match: {_yaml_list(r['match'])}")
-        lines.append(f"      effect: {r['effect']}")
-    welcome = agent['title'] + ' ready. Tier: ' + agent['tier'] + '. Autonomy: ' + agent['autonomy'] + '.'
-    lines.append(f"welcomeMessage: {json.dumps(welcome)}")
-    lines.append("---")
-    lines.append(HEADER)
-    lines.append("")
-    lines.append(agent["prompt"].rstrip())
-    lines.append("")
-    lines.append("## Operating boundaries")
-    lines.append(f"- Mission: {agent['mission']}")
-    lines.append(f"- Autonomy: {agent['autonomy']}. Write scope: {', '.join(agent.get('write_scope') or ['none'])}.")
-    lines.append("- Approval required for: " + "; ".join(agent.get("approval_required") or ["as per core/permissions/policy.yaml"]))
-    lines.append("- Never: " + "; ".join(agent["never"]))
-    lines.append("- Report using core/orchestrator/report-format.md. Mark anything not executed as NOT_RUN.")
-    return "\n".join(lines) + "\n"
+    data = {
+        "name": agent["id"],
+        "description": agent["description"],
+        "tools": tools,
+        "resources": resources,
+        "permissions": {"rules": rules},
+        "prompt": agent["prompt"].rstrip() + "\n" + "\n".join(boundaries),
+        "welcomeMessage": agent["title"] + " ready. Tier: " + agent["tier"] + ". Autonomy: " + agent["autonomy"] + ".",
+    }
+    return json.dumps(data, indent=2, ensure_ascii=False) + "\n"
 
 
 def render_claude(agent: dict, model_map: dict) -> str:
@@ -184,7 +177,7 @@ def build(write: bool = True) -> dict[str, str]:
     claude_model_map = (load_yaml(ROOT / "adapters/claude-code/model-map.yaml", report) or {}).get("model_class", {})
     rendered: dict[str, str] = {}
     for aid, a in agents.items():
-        rendered[str(KIRO_DIR / f"{aid}.md")] = render_kiro(a, agents, policy)
+        rendered[str(KIRO_DIR / f"{aid}.json")] = render_kiro(a, agents, policy)
         rendered[str(CLAUDE_DIR / f"{aid}.md")] = render_claude(a, claude_model_map)
     rendered[str(CODEX_FILE)] = render_codex(agents, policy)
     if write:
@@ -192,10 +185,12 @@ def build(write: bool = True) -> dict[str, str]:
         CLAUDE_DIR.mkdir(parents=True, exist_ok=True)
         CODEX_FILE.parent.mkdir(parents=True, exist_ok=True)
         # remove stale generated agent files
-        for d in (KIRO_DIR, CLAUDE_DIR):
-            for f in d.glob("*.md"):
+        for d, ext in ((KIRO_DIR, "*.json"), (CLAUDE_DIR, "*.md")):
+            for f in d.glob(ext):
                 if f.stem not in agents:
                     f.unlink()
+        for f in KIRO_DIR.glob("*.md"):
+            f.unlink()  # legacy Markdown renderings
         for path, content in rendered.items():
             Path(path).write_text(content, encoding="utf-8", newline="\n")
         print(f"Rendered {len(agents)} agents for Kiro and Claude Code, plus Codex AGENTS.md")

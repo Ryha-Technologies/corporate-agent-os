@@ -1,3 +1,4 @@
+import json
 """Security tests: permission policy content, agent tool ceilings, generated adapter safety, no secrets."""
 import re
 
@@ -34,8 +35,8 @@ def test_every_gate_has_reviewer_and_only_reviewers_review():
 
 
 def test_generated_kiro_agents_deny_destructive_shell():
-    for f in (ROOT / "adapters/kiro/agents").glob("*.md"):
-        fm, _ = parse_frontmatter(f.read_text(encoding="utf-8"), f, Report("k"))
+    for f in (ROOT / "adapters/kiro/agents").glob("*.json"):
+        fm = json.loads(f.read_text(encoding="utf-8"))
         denies = [r for r in fm["permissions"]["rules"] if r["capability"] == "shell" and r["effect"] == "deny"]
         assert denies, f.name
         assert any("rm -rf *" in r["match"] for r in denies), f.name

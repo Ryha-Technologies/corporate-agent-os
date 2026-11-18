@@ -7,7 +7,7 @@ Installs Corporate Agent OS into a Kiro IDE (1.x) or Kiro CLI (v3) workspace. Fo
 | Component | Source here | Installed to | Kiro feature |
 |---|---|---|---|
 | Skills | `../../skills/` | `.kiro/skills/<name>/` | Agent Skills (`/skill-name`, auto-activation) |
-| Custom agents | `agents/*.md` (generated) | `.kiro/agents/<id>.md` | Custom agents, usable as primary agent or sub-agents |
+| Custom agents | `agents/*.json` (generated) | `.kiro/agents/<id>.json` | Custom agents, usable as primary agent or sub-agents. JSON, because Kiro CLI 3.3.0 was observed to load only JSON agent files (Markdown agents were not listed); IDE accepts both |
 | Steering | `steering/corporate-agent-os.md` | `.kiro/steering/` | Steering with `inclusion: always` |
 | Hooks | `hooks/corporate-agent-os-guards.json` | `.kiro/hooks/` | Hooks v1 (two validators disabled by default, one Stop reminder enabled) |
 | Project validators | `../../scripts/validate/` (subset) | `.corporate-agent-os/validators/` | Used by the hooks |

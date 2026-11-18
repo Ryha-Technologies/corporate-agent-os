@@ -1,3 +1,4 @@
+import json
 """Compatibility tests: generated files use only verified platform fields and skills use only spec fields."""
 from common import ROOT, Report, parse_frontmatter
 import validate_adapters
@@ -36,8 +37,8 @@ def test_power_validator_passes():
 
 
 def test_kiro_agent_resources_point_to_installed_paths():
-    for f in (ROOT / "adapters/kiro/agents").glob("*.md"):
-        fm, _ = parse_frontmatter(f.read_text(encoding="utf-8"), f, Report("k"))
+    for f in (ROOT / "adapters/kiro/agents").glob("*.json"):
+        fm = json.loads(f.read_text(encoding="utf-8"))
         for r in fm["resources"]:
             if r.startswith("skill://"):
                 skill = r.split("/")[-2]

@@ -21,7 +21,7 @@ def test_install_kiro_creates_expected_files(project_dir: Path):
     code = _run(["--target", "kiro", "--destination", str(project_dir), "--yes"])
     assert code == 0
     assert (project_dir / ".kiro/skills/corporate-orchestrator/SKILL.md").exists()
-    assert (project_dir / ".kiro/agents/corporate-orchestrator.md").exists()
+    assert (project_dir / ".kiro/agents/corporate-orchestrator.json").exists()
     assert (project_dir / ".kiro/steering/corporate-agent-os.md").exists()
     assert (project_dir / ".kiro/hooks/corporate-agent-os-guards.json").exists()
     assert (project_dir / ".corporate-agent-os/validators/validate_tasks.py").exists()

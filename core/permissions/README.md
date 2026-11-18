@@ -8,7 +8,7 @@
 
 | Policy element | Kiro | Claude Code | Codex |
 |---|---|---|---|
-| `tools` per agent | `tools:` selectors in `.kiro/agents/<id>.md` (`read`, `write`, `shell`, `web`, `subagent/<name>`) | `tools:` list in `.claude/agents/<id>.md` (`Read, Grep, Glob, Write, Edit, Bash, WebFetch, WebSearch`) | No per-agent config; stated in `AGENTS.md` |
+| `tools` per agent | `tools` selectors in `.kiro/agents/<id>.json` (`read`, `write`, `shell`, `web`, `subagent/<name>`) | `tools:` list in `.claude/agents/<id>.md` (`Read, Grep, Glob, Write, Edit, Bash, WebFetch, WebSearch`) | No per-agent config; stated in `AGENTS.md` |
 | `write_scope` | `permissions.rules: {capability: fs_write, match: [...], effect: allow}` plus a deny for everything else is not expressible, so the host prompts for writes outside the match | Not enforceable per path; the prompt instructs and the reviewer checks the diff | Instruction only |
 | `shell.allow_without_prompt` | `permissions.rules: {capability: shell, match: [...], effect: allow}` | `allowed-tools` in skills for the invoking turn, or project `settings.json` permissions (not shipped) | Codex sandbox and approval modes (user-configured) |
 | `shell.deny` | `effect: deny` rules | `disallowedTools` cannot match command text; rely on user settings `permissions.deny` | Instruction only |

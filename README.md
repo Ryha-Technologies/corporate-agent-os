@@ -15,8 +15,9 @@ An open-source operating system for coordinating specialist AI agents, reusable 
 [![Agent Skills](https://img.shields.io/badge/format-Agent%20Skills-15181C?style=flat-square)](https://agentskills.io/specification)
 [![Agent Plugins 1.0.0](https://img.shields.io/badge/Kiro%20Power-Agent%20Plugins%201.0.0-15181C?style=flat-square)](powers/kiro/corporate-agent-os/)
 
-<!-- Dynamic badges (stars, forks, issues, Actions) are added after the repository is published; static badges above are
-     the only ones whose values are true today. See docs/github/repository-metadata.md. -->
+[![validate](https://github.com/Ryha-Technologies/corporate-agent-os/actions/workflows/validate.yml/badge.svg)](https://github.com/Ryha-Technologies/corporate-agent-os/actions/workflows/validate.yml)
+[![GitHub stars](https://img.shields.io/github/stars/Ryha-Technologies/corporate-agent-os?style=flat-square&labelColor=15181C)](https://github.com/Ryha-Technologies/corporate-agent-os/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/Ryha-Technologies/corporate-agent-os?style=flat-square&labelColor=15181C)](https://github.com/Ryha-Technologies/corporate-agent-os/issues)
 
 **Quick links:** [Install](docs/installation/INSTALLATION.md) · [Getting started](docs/getting-started/README.md) · [Concepts](docs/architecture/concepts.md) · [Compatibility](docs/platform-compatibility-matrix.md) · [Worked run](examples/worked-runs/field-service-design/) · [Known limitations](docs/known-limitations.md) · [Contributing](CONTRIBUTING.md)
 
@@ -118,8 +119,8 @@ Verified against official documentation on 2026-11-18. "Live" means an agent ses
 
 | Platform | Skills | Agents / sub-agents | Always-on instructions | Hooks | Packaging | Status |
 |---|---|---|---|---|---|---|
-| Kiro IDE 1.x | `.kiro/skills/` | `.kiro/agents/*.md` with `permissions.rules` and `subagent/<id>` allow-lists | `.kiro/steering/` | `.kiro/hooks/*.json` v1 | Kiro Power (Agent Plugins 1.0.0) | Implemented; format-validated; live run pending |
-| Kiro CLI v3 | same | same | same | same (global hooks too) | same | Implemented; format-validated; live run pending |
+| Kiro IDE 1.x | `.kiro/skills/` | `.kiro/agents/*.json` with `permissions.rules` and `subagent/<id>` allow-lists | `.kiro/steering/` | `.kiro/hooks/*.json` v1 | Kiro Power (Agent Plugins 1.0.0) | Implemented; format-validated; IDE live run pending |
+| Kiro CLI v3 | same | same | same | same (global hooks too) | same | **Live-verified on CLI 3.3.0**: all 58 agents pass `kiro-cli agent validate` and appear in `kiro-cli agent list` |
 | Claude Code | `.claude/skills/` | `.claude/agents/*.md` (tools, preloaded skills, `model: inherit`) | `CLAUDE.md` | not shipped (documented) | plugin not shipped | Implemented; format-validated; live run pending |
 | Codex CLI / IDE | `.agents/skills/` | none (roles in `AGENTS.md`; sequential passes) | `AGENTS.md` | n/a | plugin not shipped | Implemented with limits; live run pending |
 | Other Agent Skills clients | copy `skills/<name>/` | n/a | n/a | n/a | Power folder loads in Agent Plugins clients | Portable by spec; untested |
@@ -211,8 +212,8 @@ Regression dataset (28 behavioural cases), seven rubrics with 0–3 anchors, fiv
 | Status | Item |
 |---|---|
 | Completed | Canonical skills, agents, departments, workflows, core schemas and validators, adapters for Kiro / Claude Code / Codex, Kiro Power, installer, tests, release builder, worked design run |
-| In progress | Live installation verification on Kiro CLI; first regression and golden-task runs with human raters |
-| Planned | Linux/macOS installer runs in CI; Claude Code and Codex plugin packaging; product-UI competitor captures for the worked run; more `references/` depth per skill |
+| In progress | Live verification on Kiro IDE, Claude Code and Codex (Kiro CLI done); first regression and golden-task runs with human raters |
+| Planned | Claude Code and Codex plugin packaging; product-UI competitor captures for the worked run; more `references/` depth per skill |
 | Under investigation | Portable hook equivalents outside Kiro; cost telemetry per host; a thin MCP server exposing skills to MCP-only clients |
 | 1.0 criteria | Benchmarks A–E run on at least two hosts with published reports; live installs verified on all three hosts; no open high findings in `docs/known-limitations.md` |
 

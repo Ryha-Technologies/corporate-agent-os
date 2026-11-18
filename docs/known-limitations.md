@@ -4,8 +4,8 @@ Listed so nobody mistakes this build for more than it is.
 
 ## Not executed in this build
 - **No model-driven benchmark has been run.** The regression dataset, rubrics and golden tasks exist; results are NOT_RUN. Quality of model behaviour on these skills is unmeasured.
-- **No live installation test on Kiro IDE, Claude Code or Codex was performed by a running agent session.** The installer was tested by its pytest suite on Windows (file placement, manifest, backup, uninstall). Format conformance was checked against official documentation, not by observing each host load the files.
-- **Linux and macOS installer runs were not executed** in this build; the installer uses only pathlib and shutil and is expected to work, but that is untested.
+- **Kiro CLI 3.3.0 live install performed** (agents listed and validated by the CLI). Kiro IDE, Claude Code and Codex have not loaded the files in a live session; format conformance there rests on official documentation.
+- Linux and macOS: validators and the full test suite (including installer tests) pass in GitHub Actions on ubuntu-latest, windows-latest and macos-latest for Python 3.10 and 3.12; no interactive host run on those platforms.
 - **No trademark database queries, SBOM generations or browser screenshot tests** were run; those are procedures the skills describe.
 
 ## Design limits

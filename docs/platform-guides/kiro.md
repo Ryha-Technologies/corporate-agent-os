@@ -2,9 +2,13 @@
 
 Formats verified 2026-11-18 (`research/source-register.md` S5–S13). Live host testing was not performed in this build.
 
+## Live verification (Kiro CLI 3.3.0, 2026-11-18)
+
+Installed with `install.py --target kiro` into a fresh project. Finding: `kiro-cli agent list` showed none of the Markdown agents and `kiro-cli agent validate` parsed `.md` as JSON. A minimal JSON agent in the same folder was listed. The adapter therefore renders Kiro agents as **JSON**; all 58 pass `kiro-cli agent validate`. Markdown agent files may work on newer builds or the IDE, but are not shipped.
+
 ## Install options
 
-1. **Workspace install** (`python scripts/install/install.py --target kiro --destination <project>`): skills to `.kiro/skills/`, agents to `.kiro/agents/`, steering to `.kiro/steering/`, hooks to `.kiro/hooks/`, project validators to `.corporate-agent-os/validators/`.
+1. **Workspace install** (`python scripts/install/install.py --target kiro --destination <project>`): skills to `.kiro/skills/`, agents (JSON) to `.kiro/agents/`, steering to `.kiro/steering/`, hooks to `.kiro/hooks/`, project validators to `.corporate-agent-os/validators/`.
 2. **Power import**: Powers → Add Custom Power → Import power from a folder → `powers/kiro/corporate-agent-os`. Keyword-activated; skills only.
 3. Both: fine, but the skills will appear twice.
 
