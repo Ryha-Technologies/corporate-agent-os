@@ -55,6 +55,7 @@ It is **not** a company, a guarantee, or legal/financial/security clearance. Ski
 | **Growth and operations** | growth-gtm, product-launch, sales-partnerships, customer-success-support, finance-operations, people-operations, technical-documentation | Launch plan, playbooks, budgets, role charters, verified docs |
 | **Legal research** | legal-risk-governance, oss-reuse-license | Issue register, component register, counsel questions (never legal advice) |
 | **Coordination** | corporate-orchestrator | Brief, workspace, task contracts, gate verdicts, ten-part report |
+| **Department entry points** | dept-design, dept-branding, dept-engineering, dept-security, dept-quality, dept-research, dept-strategy-product, dept-growth, dept-operations, dept-legal | Hand a whole department any request in its scope; it routes to its skills, enforces its non-negotiables, gets independent review. Generated from the member skills. |
 
 39 skills · 58 agents · 22 departments / 110 roles · 9 workflows · 12 gates · 58 templates · 11 standards. Full lists: [agents directory](docs/agents/README.md), [organisation directory](docs/organization/README.md).
 
