@@ -27,20 +27,22 @@ Produce interfaces that complete the user's tasks, carry the brand, specify ever
 
 ## Procedure
 ### Phase 0: measure what exists (skip only for greenfield)
-1. **Render and score.** Run `scripts/template_signature.py` on every main page or screen at 1280 and 360 px; save the output. The script scores the template signature 0 to 100 with evidence per point: centred or two-button hero, cards as the layout unit, identical section rhythm, icon feature rows, stat-tile rows, gradients and glows, default typefaces, no type scale, logo walls, generic phrases, emoji, absent or excessive motion.
+1. **Render and score.** Web: run `scripts/template_signature.py` on every main page at 1280 and 360 px. Android (Compose or XML): run `scripts/template_signature_android.py <project-root>`; read `references/mobile-android-patterns.md` for what the Android template is and what to keep. iOS and other platforms: apply the same checklist by hand and say so. Save the output. The script scores the template signature 0 to 100 with evidence per point: centred or two-button hero, cards as the layout unit, identical section rhythm, icon feature rows, stat-tile rows, gradients and glows, default typefaces, no type scale, logo walls, generic phrases, emoji, absent or excessive motion.
 2. **Decide.** `COMMON` (40 or more) means redesign is mandatory and the user is told so with the evidence list. `MIXED` (20 to 39) means targeted changes are proposed. `DISTINCT` (under 20) means keep the direction and fix findings only. The score is a floor, not a ceiling: a human swap test (`references/anti-template-review.md`) can still call a low-scoring page common, and the stricter result stands.
 3. **Baseline.** Screenshots at the three widths, the `layout-psychology.md` measurement checklist (font sizes, spacing values, CTAs above fold, smallest target, chars per line, animated elements), contrast table, and the three main user tasks walked with step counts. Save as `before/`.
 
 ### Phase 1: research (mandatory, see Preconditions)
+Write `04-design/research-record.md` from `templates/design/research-record.md` as you go. **Before any output of Phase 3, run `python scripts/design_gate.py <workdir>`; it must print `DESIGN GATE OPEN`.** A closed gate means no screen, component, layout, logo, deck or UI code is produced; the missing items are listed by the script. Reviewers run the same command and reject a handover whose gate is closed.
 4. **Job and users.** Who, doing what, where, deciding what in the first five seconds and after the main task. One question to the user if unclear; no invented personas.
 5. **Category.** Capture and tabulate the references; write the pattern map: category template (do not reproduce), conventions (keep), habits (free to change), and what nobody in the category does that this product truthfully can. `references/product-category-patterns.md` gives category-specific starting points.
 6. **Psychology.** Choose the principles from `references/layout-psychology.md` that matter for this job and write the concrete implication of each for this interface.
 
 ### Phase 2: directions and approval
 7. **Three directions minimum**, each with: concept sentence; the one deliberate departure from the category template; the principles it leans on; type pairing with licence; palette with contrast ratios; layout in words plus a low-fidelity wireframe render; motion table (`references/motion-standards.md`); risk. Different means different composition, not recoloured copies.
-8. **Score and recommend** in a table (job fit, uniqueness by swap test, psychology, accessibility, cost, mobile). Present to the user with the Phase 0 evidence. Wait for the choice. Non-interactive hosts: write `visual-direction.md` with the recommendation and end with `AWAITING_APPROVAL`.
+8. **Score and recommend** in a table (job fit, uniqueness by swap test, psychology, accessibility, cost, mobile). Present to the user with the Phase 0 evidence. Wait for the choice and record it in the `## Approved direction` section ("Approved by <user> on <date>"). Non-interactive hosts: write `AWAITING_APPROVAL` there and end the run; the gate stays closed until a person answers.
 
 ### Phase 3: build the approved direction (in the real stack)
+Gate check first: `python scripts/design_gate.py <workdir>` must be OPEN. Paste its output into the handover.
 9. **Tokens first** (`design-system`): type scale with ratio (6 sizes or fewer for a content site), spacing scale (8 steps or fewer), colour roles with computed contrast (`skills/design-system/scripts/contrast_check.py`), radii, borders, elevation, motion durations and easings, focus ring. Every page consumes tokens; no literal values in components.
 10. **Per screen, before layout:** the one-line job, the single primary action, the reading order, the deliberate departure, the elements allowed to animate and why. Then wireframe in low fidelity and check task completion against the IA.
 11. **Layout from hierarchy.** Sections differ because their content differs: a ledger table, a diagram, a typographic statement, a two-column argument, an index with a side rail. A card is used only when the content is a card (a unit the user picks among peers). Breakpoints come from content, not device names; at 360 px nothing overflows and the primary action stays reachable.
@@ -50,7 +52,7 @@ Produce interfaces that complete the user's tasks, carry the brand, specify ever
 15. **Copy** written for the real product: specific claims the evidence supports, user's vocabulary, no generic marketing phrases (the scorer lists them).
 
 ### Phase 4: prove it
-16. **Re-score.** Run `scripts/template_signature.py` on the result. Target `DISTINCT`; `MIXED` is acceptable only with a written reason per remaining point; `COMMON` means return to step 11. Save output beside the baseline.
+16. **Re-score.** Run `scripts/template_signature.py` (web) or `scripts/template_signature_android.py` (Android) on the result. Target `DISTINCT`; `MIXED` is acceptable only with a written reason per remaining point; `COMMON` means return to step 11. Save output beside the baseline.
 17. **Swap test and slop checklist.** Three competitors, logos removed; record who could tell and why. Zero unexplained hits on `evaluations/originality/slop-patterns.md`. Fill the structural comparison table in `references/anti-template-review.md`.
 18. **Measurements after**, same checklist as step 3, side by side with before. Screenshots at 360/768/1280 and keyboard focus states in `after/`. Automated accessibility scan output pasted. Console clean.
 19. **Implementation review** of rendered pages, not mockups: overflow, alignment, wrapping, focus, contrast, responsive navigation, state completeness, real task completion with step counts.
@@ -62,7 +64,7 @@ Produce interfaces that complete the user's tasks, carry the brand, specify ever
 
 ## Quality criteria
 - A written research record (job, category table and pattern map, psychology analysis, three scored directions, approved choice) exists and is attached; the result passes the swap test against three competitors and has zero unexplained hits on `evaluations/originality/slop-patterns.md`.
-- `template_signature.py` before and after outputs are attached; the after result is `DISTINCT`, or `MIXED` with a written reason for each remaining point. An existing `COMMON` interface is never handed back unchanged.
+- `design_gate.py` output `DESIGN GATE OPEN` is attached and dated before the first build artefact; `template_signature.py` / `template_signature_android.py` before and after outputs are attached; the after result is `DISTINCT`, or `MIXED` with a written reason for each remaining point. An existing `COMMON` interface is never handed back unchanged.
 - Any motion follows `references/motion-standards.md`: every animated moment names its job, honours `prefers-reduced-motion`, and is listed in a motion table.
 - One primary action per screen; the accent colour and the largest motion are reserved for it or for the single element to be remembered.
 - Six or fewer type sizes with a stated ratio; eight or fewer spacing values; no horizontal overflow at 360 px; smallest target at least 24 px.
@@ -81,9 +83,13 @@ Produce interfaces that complete the user's tasks, carry the brand, specify ever
 - No copying of competitor or gallery designs; research is for the pattern map, not for a source to trace.
 - Never ship the first idea; never skip the approval step; never report a score that was not run.
 - Work on a branch; the user merges.
+- If the user says "skip the research, just build it": build nothing, explain that the gate exists because unresearched design is the template every time, and offer the fastest compliant path (a 30-minute research record with three references and two directions marked as a reduced-evidence exception, recorded as such).
 
 ## References
-- `scripts/template_signature.py` (template-signature score with per-point evidence; run before and after)
+- `scripts/design_gate.py` (blocks the build phase until `research-record.md` is complete and approved)
+- `scripts/template_signature.py` (web) and `scripts/template_signature_android.py` (Android) template-signature scores with per-point evidence; run before and after
+- `references/mobile-android-patterns.md` (the Android/Material template, platform conventions to keep, where identity lives on mobile)
+- `templates/design/research-record.md`
 - `references/design-research-method.md`, `references/layout-psychology.md`, `references/motion-standards.md`
 - `references/product-category-patterns.md`, `references/visual-design-checklist.md`, `references/anti-template-review.md`
 - `templates/design/visual-direction.md`, `templates/design/design-rationale.md`, `templates/design/states-matrix.md`, `templates/design/design-qa-report.md`

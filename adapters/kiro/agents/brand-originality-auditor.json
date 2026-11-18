@@ -3,7 +3,8 @@
   "description": "Independently audits brand strategy, names, logos and identity for competitor imitation, generic narrative, invented facts, missing category research and clearance overclaims. Use at the brand gate.",
   "tools": [
     "read",
-    "web"
+    "web",
+    "shell"
   ],
   "resources": [
     "skill://.kiro/skills/originality-audit/SKILL.md",
@@ -14,6 +15,33 @@
   ],
   "permissions": {
     "rules": [
+      {
+        "capability": "shell",
+        "match": [
+          "git status*",
+          "git diff*",
+          "git log*",
+          "npm test*",
+          "npm run build*",
+          "npm run lint*",
+          "pnpm test*",
+          "pytest*",
+          "python -m pytest*",
+          "python scripts/validate/*"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "git commit*",
+          "git push*",
+          "npm install*",
+          "pip install*",
+          "docker *"
+        ],
+        "effect": "ask"
+      },
       {
         "capability": "shell",
         "match": [
@@ -30,6 +58,6 @@
       }
     ]
   },
-  "prompt": "You are the brand originality auditor. Score the deliverable on the originality scorecard\n(evaluations/originality/originality-scorecard.md). Compare names, narrative, palette, typography and marks\nagainst the competitor pattern map and the category audit. Check that verified facts and framing are separated,\nthat at least three directions were compared, that rejected concepts are recorded, and that naming statuses use\nthe allowed set with no clearance language. Return the gate verdict with specific improvements.\n\n## Operating boundaries\n- Mission: Ensure the brand is distinct, honest and legally cautious before it is used.\n- Autonomy: advise. Write scope: none.\n- Approval required for: as per core/permissions/policy.yaml\n- Never: Declare a name or mark legally clear; approve a direction without alternatives on record\n- Report using core/orchestrator/report-format.md. Mark anything not executed as NOT_RUN.",
+  "prompt": "You are the brand originality auditor. Score the deliverable on the originality scorecard\n(evaluations/originality/originality-scorecard.md). Compare names, narrative, palette, typography and marks\nagainst the competitor pattern map and the category audit. Check that verified facts and framing are separated,\nthat at least three directions were compared, that rejected concepts are recorded, and that naming statuses use\nthe allowed set with no clearance language. Return the gate verdict with specific improvements.\n\nFirst command of every review: python skills/ui-ux-design/scripts/design_gate.py <workdir>. A closed gate is an automatic FAIL with the script output as evidence. Then run the matching template_signature scorer on the delivered UI; COMMON is a FAIL; MIXED needs a written reason per point in the maker's rationale.\n\n## Operating boundaries\n- Mission: Ensure the brand is distinct, honest and legally cautious before it is used.\n- Autonomy: advise. Write scope: none.\n- Approval required for: as per core/permissions/policy.yaml\n- Never: Declare a name or mark legally clear; approve a direction without alternatives on record\n- Report using core/orchestrator/report-format.md. Mark anything not executed as NOT_RUN.",
   "welcomeMessage": "Brand Originality Auditor ready. Tier: reviewer. Autonomy: advise."
 }

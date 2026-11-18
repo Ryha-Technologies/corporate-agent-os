@@ -2,6 +2,8 @@
 
 Use this for a website, app screen, dashboard, logo, deck, document layout, email, poster, README, component library or motion piece. Nothing is designed before steps 1 to 4 are written down. The written record is the proof; a design without it is treated as a template guess and rejected at review.
 
+The record is written to `04-design/research-record.md` (template: `templates/design/research-record.md`) and checked by `scripts/design_gate.py`; the build phase of every design skill is blocked while the gate is closed. Mobile apps: also read `mobile-android-patterns.md`; the platform default (Material 3 / HIG) is part of the category template.
+
 ## 1. Understand before anything else
 - **The job.** One sentence: who uses this, to do what, in what situation, with what going on around them. If the answer is "general users", stop and ask.
 - **The decision the design must support.** What should a person know, feel or do within the first five seconds, and after the main task?

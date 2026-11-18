@@ -28,7 +28,8 @@ GROUPS: dict[str, dict] = {
         "scope": "any user-experience or interface request: new screens or flows, redesign of an existing UI, 'make it unique', design systems and tokens, accessibility, audits of existing apps and sites, motion",
         "nonneg": [
             "Research before design: category table, pattern map, psychology analysis and three scored directions exist and are shown to the user before anything is built (`skills/ui-ux-design/references/design-research-method.md`).",
-            "An existing UI is scored with `skills/ui-ux-design/scripts/template_signature.py` first; `COMMON` means redesign, not a report.",
+            "An existing UI is scored with `skills/ui-ux-design/scripts/template_signature.py` (web) or `template_signature_android.py` (Android) first; `COMMON` means redesign, not a report. The platform default (Material 3, HIG) counts as part of the category template (`skills/ui-ux-design/references/mobile-android-patterns.md`).",
+            "No screen, component, theme, logo or UI code is produced until `python skills/ui-ux-design/scripts/design_gate.py <workdir>` prints `DESIGN GATE OPEN`; a request to skip research is answered with the shortest compliant path, never by skipping.",
             "The result is re-scored, swap-tested and screenshotted at 360/768/1280 before it is called done.",
         ],
         "routes": [
