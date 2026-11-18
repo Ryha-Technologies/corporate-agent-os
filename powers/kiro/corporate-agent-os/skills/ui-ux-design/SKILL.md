@@ -1,65 +1,91 @@
 ---
 name: ui-ux-design
-description: "Design distinctive, production-grade web or mobile interfaces from flows and IA: intentional visual direction per product category, all screen states, responsive and motion specs, accessibility notes and anti-template controls, plus implementation review against rendered UI. Use for product experience and interface design."
+description: "Design or redesign web and mobile interfaces so they are distinctive, usable and production-grade: score the existing UI for template signature, research the category and the users, generate and compare several directions, build the approved one in the project's real stack with purposeful motion, and prove the result is not common with measurements, screenshots and the swap test. Use for any UI, UX, layout, screen, component or website work, including 'make it look better' and 'this looks generic'."
 license: MIT
 metadata:
   author: Velluraju C
   version: "0.2.0"
   department: design
 ---
-# UI/UX design and product experience
+# UI/UX design and redesign
 
 ## Purpose
-Give the product an experience that completes its users' tasks, fits its brand and category, specifies every state, meets WCAG 2.2 AA and does not look like a template.
+Produce interfaces that complete the user's tasks, carry the brand, specify every state, meet WCAG 2.2 AA and are recognisably this product's. When an interface already exists and measures as common, this skill does not stop at a report: it redesigns and rebuilds it, then proves the result with the same measurement.
 
 ## When to use
-- After IA and flows exist; before and during implementation.
-- When an implemented UI needs review against its specification.
+- Any request touching how a product looks or behaves: new screens, redesign, "polish", "modernise", "make it unique", "it looks like AI made it".
+- After IA and flows exist, or when the user has an existing product and no design documents (this skill then produces the minimum IA and flows it needs).
+- Implementation review of a built UI against its specification.
 
 ## Preconditions
 - **Research before design (mandatory).** Follow `references/design-research-method.md` steps 1 to 4 before producing any screen, flow, component or layout: the job statement; a dated category research table (at least three direct competitors, two adjacent, one non-digital reference) with a pattern map of the category template; the psychology analysis from `references/layout-psychology.md` with the concrete implication of each chosen principle; and at least three genuinely different directions scored against job fit, uniqueness (swap test), psychology, accessibility and cost. Present the comparison for approval. The first idea is never built.
-- PRD, brandbook or brand direction, IA and flows, design tokens (or this skill produces the first set with `design-system`).
+- A renderer for screenshots (Chrome/Chromium headless or a browser) at 360, 768 and 1280 px. Without one, visual checks are `NOT_RUN` and the work cannot be called finished.
+- Access to the project's real stack (framework, CSS approach, component library). The redesign is built in that stack, not as a separate mock.
 
 ## Inputs
-- PRD, IA, flows, research findings, brandbook, competitor pattern map, platform constraints, existing product (if any).
+- The existing product or repository (if any); PRD, IA, flows, research, brandbook, tokens where they exist; platform constraints; the user's constraints (must-not-change list, stack, budget, deadline).
 
 ## Procedure
-1. **Before designing.** Read PRD, brandbook, research, platform constraints and existing code. Inspect the current product and competitor references. Confirm primary user, task, context, device, information hierarchy and critical path. Do not start from a dashboard template.
-2. **Choose a visual direction** appropriate to the product category and audience (see `references/product-category-patterns.md`) and write the rationale. The same style must not be forced on every project.
-3. **Wireframe** the important flows in low fidelity; validate navigation and task completion against the IA.
-4. **Tokens and components.** Define or adopt tokens (colour, typography, spacing, radius, elevation, borders, motion, focus, semantic status) and a small coherent component set with variants and states (`design-system`).
-5. **Realistic content.** Real text lengths, realistic data, no lorem ipsum, fake charts, arbitrary metrics or invented testimonials.
-6. **Responsive design.** Breakpoints from content, not device names; specify how layout, navigation and density change.
-7. **Accessibility.** Keyboard behaviour, focus order, labels, error messaging, screen-reader semantics, contrast, target size, reduced motion (`accessibility-audit`).
-8. **All states** for every screen: initial, loading, empty, populated, error, offline, permission denied, expired session, success, destructive confirmation.
-9. **Anti-template review.** Run `references/anti-template-review.md`: build the comparison set (competitor pattern map, category default, three template galleries), fill the structural comparison table, apply the swap test and the job test. Purple gradients, glassmorphism, floating blobs, giant rounded cards, icon tiles, decorative charts, oversized hero copy and generic headings are flagged by the job test unless they do a stated job. Record what is deliberately different in `design-rationale.md`; measure the result with `references/visual-design-checklist.md`.
-10. **Handoff.** Specs, assets, tokens, component behaviour, acceptance tests.
-11. **Implementation review.** Inspect rendered pages at representative viewports: overflow, alignment, wrapping, focus, contrast, responsive navigation, state completeness, console errors, real task completion. Compare screenshots to spec.
+### Phase 0: measure what exists (skip only for greenfield)
+1. **Render and score.** Run `scripts/template_signature.py` on every main page or screen at 1280 and 360 px; save the output. The script scores the template signature 0 to 100 with evidence per point: centred or two-button hero, cards as the layout unit, identical section rhythm, icon feature rows, stat-tile rows, gradients and glows, default typefaces, no type scale, logo walls, generic phrases, emoji, absent or excessive motion.
+2. **Decide.** `COMMON` (40 or more) means redesign is mandatory and the user is told so with the evidence list. `MIXED` (20 to 39) means targeted changes are proposed. `DISTINCT` (under 20) means keep the direction and fix findings only. The score is a floor, not a ceiling: a human swap test (`references/anti-template-review.md`) can still call a low-scoring page common, and the stricter result stands.
+3. **Baseline.** Screenshots at the three widths, the `layout-psychology.md` measurement checklist (font sizes, spacing values, CTAs above fold, smallest target, chars per line, animated elements), contrast table, and the three main user tasks walked with step counts. Save as `before/`.
+
+### Phase 1: research (mandatory, see Preconditions)
+4. **Job and users.** Who, doing what, where, deciding what in the first five seconds and after the main task. One question to the user if unclear; no invented personas.
+5. **Category.** Capture and tabulate the references; write the pattern map: category template (do not reproduce), conventions (keep), habits (free to change), and what nobody in the category does that this product truthfully can. `references/product-category-patterns.md` gives category-specific starting points.
+6. **Psychology.** Choose the principles from `references/layout-psychology.md` that matter for this job and write the concrete implication of each for this interface.
+
+### Phase 2: directions and approval
+7. **Three directions minimum**, each with: concept sentence; the one deliberate departure from the category template; the principles it leans on; type pairing with licence; palette with contrast ratios; layout in words plus a low-fidelity wireframe render; motion table (`references/motion-standards.md`); risk. Different means different composition, not recoloured copies.
+8. **Score and recommend** in a table (job fit, uniqueness by swap test, psychology, accessibility, cost, mobile). Present to the user with the Phase 0 evidence. Wait for the choice. Non-interactive hosts: write `visual-direction.md` with the recommendation and end with `AWAITING_APPROVAL`.
+
+### Phase 3: build the approved direction (in the real stack)
+9. **Tokens first** (`design-system`): type scale with ratio (6 sizes or fewer for a content site), spacing scale (8 steps or fewer), colour roles with computed contrast (`skills/design-system/scripts/contrast_check.py`), radii, borders, elevation, motion durations and easings, focus ring. Every page consumes tokens; no literal values in components.
+10. **Per screen, before layout:** the one-line job, the single primary action, the reading order, the deliberate departure, the elements allowed to animate and why. Then wireframe in low fidelity and check task completion against the IA.
+11. **Layout from hierarchy.** Sections differ because their content differs: a ledger table, a diagram, a typographic statement, a two-column argument, an index with a side rail. A card is used only when the content is a card (a unit the user picks among peers). Breakpoints come from content, not device names; at 360 px nothing overflows and the primary action stays reachable.
+12. **Realistic content and all states.** Real text lengths, real data, no lorem ipsum, fake charts, invented metrics or testimonials. Every screen: initial, loading, empty, populated, error, offline, permission denied, expired session, success, destructive confirmation.
+13. **Motion** per `references/motion-standards.md`: a written motion table, under six moments on a content page, each with a job, 100 to 600 ms, transform and opacity only, triggered by user action or first entry into view, `prefers-reduced-motion` honoured and tested.
+14. **Accessibility** (`accessibility-audit`): keyboard order, visible focus, labels, error messages, semantics, contrast, targets at least 24 px (44 px for primary), reduced motion, 400 % zoom reflow.
+15. **Copy** written for the real product: specific claims the evidence supports, user's vocabulary, no generic marketing phrases (the scorer lists them).
+
+### Phase 4: prove it
+16. **Re-score.** Run `scripts/template_signature.py` on the result. Target `DISTINCT`; `MIXED` is acceptable only with a written reason per remaining point; `COMMON` means return to step 11. Save output beside the baseline.
+17. **Swap test and slop checklist.** Three competitors, logos removed; record who could tell and why. Zero unexplained hits on `evaluations/originality/slop-patterns.md`. Fill the structural comparison table in `references/anti-template-review.md`.
+18. **Measurements after**, same checklist as step 3, side by side with before. Screenshots at 360/768/1280 and keyboard focus states in `after/`. Automated accessibility scan output pasted. Console clean.
+19. **Implementation review** of rendered pages, not mockups: overflow, alignment, wrapping, focus, contrast, responsive navigation, state completeness, real task completion with step counts.
+20. **Handoff.** `design-rationale.md` (what is deliberately different and why), tokens, component behaviour, motion table, acceptance tests, before/after evidence, `NOT_RUN` list. Run `anti-slop-quality-gate` on the handoff; request `design-qa-auditor` review.
 
 ## Outputs
-- `04-design/visual-direction.md`, `04-design/design-rationale.md`, `04-design/wireframes/**`, `04-design/screens/**`, `04-design/responsive-spec.md`, `04-design/motion-spec.md`, `04-design/states-matrix.md`, `07-quality/design-qa-report.md` (review)
+- `04-design/research-record.md` (job, category table, pattern map, psychology analysis), `04-design/visual-direction.md` (three directions, scores, approved choice), `04-design/design-rationale.md`, `04-design/wireframes/**`, `04-design/screens/**`, `04-design/responsive-spec.md`, `04-design/motion-spec.md`, `04-design/states-matrix.md`, `04-design/evidence/before/**` and `after/**` (screenshots, `template_signature` outputs, measurements), `07-quality/design-qa-report.md` (review).
+- When building: the implemented UI in the project's stack on a branch, with tokens in one file.
 
 ## Quality criteria
 - A written research record (job, category table and pattern map, psychology analysis, three scored directions, approved choice) exists and is attached; the result passes the swap test against three competitors and has zero unexplained hits on `evaluations/originality/slop-patterns.md`.
+- `template_signature.py` before and after outputs are attached; the after result is `DISTINCT`, or `MIXED` with a written reason for each remaining point. An existing `COMMON` interface is never handed back unchanged.
 - Any motion follows `references/motion-standards.md`: every animated moment names its job, honours `prefers-reduced-motion`, and is listed in a motion table.
-- Direction rationale cites brand and research; pattern-map comparison documented.
-- All states specified per screen; realistic content throughout.
-- Accessibility notes complete for every interactive component.
-- Responsive behaviour stated per breakpoint.
-- Implementation review based on rendered UI, not mockups.
+- One primary action per screen; the accent colour and the largest motion are reserved for it or for the single element to be remembered.
+- Six or fewer type sizes with a stated ratio; eight or fewer spacing values; no horizontal overflow at 360 px; smallest target at least 24 px.
+- All states specified per screen; realistic content throughout; accessibility notes complete for every interactive component; responsive behaviour stated per breakpoint.
+- Implementation review based on rendered UI, not mockups; before and after measurements both shown.
 
 ## Failure handling
-- Brandbook missing → design on neutral tokens, flag the gap, do not invent a brand.
-- Browser unavailable for review → mark visual verification `NOT_RUN`.
+- Brandbook missing: propose two type and palette directions as part of step 7 and label "no brand existed"; do not invent a brand silently or ship on neutral tokens without saying so.
+- Renderer unavailable: `template_signature.py` falls back to static analysis and labels it; visual checks are `NOT_RUN`; the work is not called finished.
+- The after score stays `COMMON` after two passes: stop, show both attempts, and ask the user whether the constraints (stack, must-not-change list) are the cause.
+- User approves without reading the directions: still build Must-level fixes first, show a screenshot, and confirm the direction before the full build.
+- Stack forbids a chosen typeface or motion: say so and offer the nearest in-stack alternative; do not quietly drop the departure that made the direction distinct.
 
 ## Safety boundaries
-- No fake data in production flows; no unlicensed assets.
-- No copying of competitor or gallery designs.
+- No fake data in production flows; no unlicensed assets; fonts self-hosted with licence recorded.
+- No copying of competitor or gallery designs; research is for the pattern map, not for a source to trace.
+- Never ship the first idea; never skip the approval step; never report a score that was not run.
+- Work on a branch; the user merges.
 
 ## References
-- `references/product-category-patterns.md` — what differs across SaaS, enterprise, admin dashboards, marketplaces, e-commerce, social, fintech, education, healthcare, mobile, developer tools, websites and landing pages
-- `references/visual-design-checklist.md` — measurable checks for hierarchy, type, spacing, colour, states, motion, content and rendered UI
-- `references/anti-template-review.md` — structural comparison table, swap test, job test, direction-diversity check
+- `scripts/template_signature.py` (template-signature score with per-point evidence; run before and after)
+- `references/design-research-method.md`, `references/layout-psychology.md`, `references/motion-standards.md`
+- `references/product-category-patterns.md`, `references/visual-design-checklist.md`, `references/anti-template-review.md`
 - `templates/design/visual-direction.md`, `templates/design/design-rationale.md`, `templates/design/states-matrix.md`, `templates/design/design-qa-report.md`
 - `standards/design/design-standard.md`, `standards/accessibility/wcag-2.2-aa-checklist.md`
-- `references/design-research-method.md`, `references/layout-psychology.md`, `references/motion-standards.md`
+- `evaluations/originality/slop-patterns.md`
