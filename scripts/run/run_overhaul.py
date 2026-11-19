@@ -3,6 +3,8 @@
 Usage:
     python scripts/run/run_overhaul.py --project <dir> --phase audit --request "<what you want>" [--timeout-min 90]
     python scripts/run/run_overhaul.py --project <dir> --phase build [--timeout-min 240]
+    python scripts/run/run_overhaul.py --project <dir> --phase audit --resume    # continue after a network failure or timeout
+    ... --retries 2       # on a host network error, resume automatically up to N times
     python scripts/run/run_overhaul.py --project <dir> --preflight        # checks only, runs nothing
     python scripts/run/run_overhaul.py --project <dir> --check            # post-run checks on existing results
 
@@ -33,15 +35,15 @@ VERIFIED_KIRO = ("3.3.", "3.5.")  # delegation, trust flags and write-rule behav
 # Department -> (what must exist after the audit phase, as glob patterns relative to the project)
 AUDIT_COVERAGE: dict[str, list[str]] = {
     "security": ["07-quality/security*.md", "07-quality/*security*.md", "10-decisions/audit/security*.md"],
-    "code review": ["06-build/*review*.md", "07-quality/*code*.md", "10-decisions/audit/code*.md"],
-    "ux / page logic": ["04-design/*page-logic*.md", "04-design/user-flows.md", "04-design/*ux*.md", "01-research/*ux*.md"],
+    "code review": ["06-build/*review*.md", "06-build/*code*.md", "07-quality/*code*.md", "07-quality/code-review*.md"],
+    "ux / page logic": ["04-design/**/page-logic*.md", "04-design/**/element-decisions*.md", "04-design/user-flows.md"],
     "ui / template signature": ["04-design/evidence/**/signature*", "04-design/evidence/**/*.png"],
     "brand": ["03-brand/*.md"],
     "accessibility": ["07-quality/*accessib*.md", "04-design/accessibility*.md"],
     "legal / licences": ["08-legal-oss/*.md"],
     "competitors": ["01-research/competitor*.md"],
     "money (model + payments)": ["02-product/business-model.md", "02-product/payments-plan.md", "02-product/financial-model.*"],
-    "devops / performance": ["09-operations/*.md", "06-build/infra*.md", "06-build/platform/*.md"],
+    "devops / performance": ["09-operations/*.md", "06-build/infra*.md", "06-build/platform/*.md", "06-build/**/devops*.md"],
 }
 AUDIT_CORE = ["00-intake/brief.md", "00-intake/inventory.md", "00-intake/page-map.md",
               "10-decisions/audit-report.md", "10-decisions/executive-review.md", "10-decisions/overhaul-proposal.md"]
@@ -111,15 +113,35 @@ def preflight(project: Path, phase: str | None) -> list[tuple[str, bool, str]]:
     return r
 
 
-def prompt_for(phase: str, project: Path, request: str) -> str:
+def existing_outputs(project: Path) -> list[str]:
+    out = []
+    for d in sorted(project.glob("[01]*-*")):
+        if d.is_dir():
+            for f in d.rglob("*"):
+                if f.is_file() and f.name != "README.md":
+                    out.append(f.relative_to(project).as_posix())
+    return out
+
+
+def resume_prefix(project: Path) -> str:
+    done = existing_outputs(project)
+    if not done:
+        return ""
+    return ("RESUME: a previous run of this phase was interrupted. These outputs already exist on disk and are to be read, not redone: "
+            + ", ".join(done[:60]) + (" ..." if len(done) > 60 else "") +
+            ". Rebuild your state from 00-intake/ and 10-decisions/ (operating procedure step 9), delegate only the missing audits, then continue from the first incomplete step.\n\n")
+
+
+def prompt_for(phase: str, project: Path, request: str, resume: bool = False) -> str:
+    pre = resume_prefix(project) if resume else ""
     if phase == "audit":
-        return (f"{request}\n\nUse the product-overhaul-orchestrator skill. Do Mode detection and Phase 0, then Phase 1 with every audit delegated to its specialist sub-agent in parallel "
+        return pre + (f"{request}\n\nUse the product-overhaul-orchestrator skill. Do Mode detection and Phase 0, then Phase 1 with every audit delegated to its specialist sub-agent in parallel "
                 "(security, code, page-logic and UX, UI template signature with screenshots, brand, accessibility, legal and licences, competitors and pricing, money and payments, devops and performance). "
                 "Each delegated file starts with 'Made by: <agent-id>' and lives in that agent's own folder. Then Phase 2: executive review and the overhaul proposal in 10-decisions with item ids (M-, S-, C-) for approval. "
                 "Read 00-intake/owner-answers.md if it exists and use it instead of asking. Do not build or change any project file. End with AWAITING_APPROVAL.")
     ap = approvals(project)
     ids = ", ".join(a[0] for a in ap)
-    return (f"{request}\n\nUse the product-overhaul-orchestrator skill. Run Phase 3 to Phase 6 for ONLY these approved items: {ids}. Anything else in the proposal is out of scope. "
+    return pre + (f"{request}\n\nUse the product-overhaul-orchestrator skill. Run Phase 3 to Phase 6 for ONLY these approved items: {ids}. Anything else in the proposal is out of scope. "
             "Work on a branch named overhaul/<date>. Brand work only if approved. The design direction in 04-design/research-record.md is approved: run design_gate.py (it must print OPEN), tokens first, then pages; "
             "run visual_quality_loop.py with --maker set to the building agent after every pass and a reviewer file written by design-qa-auditor; the only finish is exit code DONE; exit 3 goes to the owner. "
             "Run copy_slop_check.py on all text and ownership_check.py at every gate. Security fixes first. Stop before merge, deploy or any payment switch and write release-readiness.md for the owner's approval.")
@@ -196,21 +218,43 @@ def main(argv: list[str]) -> int:
     stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
     run_dir = project / ".corporate-agent-os" / "runs" / stamp
     run_dir.mkdir(parents=True, exist_ok=True)
-    cmd = ["kiro-cli", "chat", "--agent", "corporate-orchestrator", "--no-interactive", f"--trust-tools={TRUST}", prompt_for(phase, project, request)]
+    resume = "--resume" in argv or bool(existing_outputs(project)) and phase == "audit" and (project / "00-intake" / "brief.md").exists()
+    retries = int(opt("--retries", "2"))
+    cmd = ["kiro-cli", "chat", "--agent", "corporate-orchestrator", "--no-interactive", f"--trust-tools={TRUST}", prompt_for(phase, project, request, resume)]
+    if resume:
+        print(f"Resuming: {len(existing_outputs(project))} outputs already on disk will be kept.")
     if "--dry-run" in argv:
         print("\nWould run:\n  " + " ".join(f'"{c}"' if " " in c else c for c in cmd[:5]) + ' "<prompt>"'); return 0
+    subprocess.run([sys.executable, "-B", str(ROOT / "skills/corporate-orchestrator/scripts/scaffold_workspace.py"), str(project)], check=False)
     log = run_dir / "run.log"
     print(f"\nRunning phase '{phase}' (log: {log}). This takes a while; Ctrl+C stops it and the results so far stay on disk.")
-    try:
-        with log.open("w", encoding="utf-8", errors="replace") as fh:
-            subprocess.run(cmd, cwd=project, stdout=fh, stderr=subprocess.STDOUT, timeout=int(opt("--timeout-min", "120")) * 60)
-    except subprocess.TimeoutExpired:
-        print("Timed out; checking what exists.")
-    subs = len(re.findall(r"\[tool\] Sub-agent: (\S+)", log.read_text(encoding="utf-8", errors="replace")))
+    t0 = datetime.datetime.now()
+    attempt = 0
+    while True:
+        attempt += 1
+        try:
+            with log.open("a", encoding="utf-8", errors="replace") as fh:
+                fh.write(f"\n===== attempt {attempt} at {datetime.datetime.now().isoformat(timespec='seconds')} =====\n")
+                subprocess.run(cmd, cwd=project, stdout=fh, stderr=subprocess.STDOUT, timeout=int(opt("--timeout-min", "120")) * 60)
+        except subprocess.TimeoutExpired:
+            print("Timed out; checking what exists."); break
+        tail = log.read_text(encoding="utf-8", errors="replace")[-4000:]
+        if re.search(r"ClientNetworkError|network error|retryErrorType\":\"TRANSIENT|code -32000", tail) and attempt <= retries:
+            print(f"Host network error on attempt {attempt}; resuming in 30 s (outputs on disk are kept).")
+            import time; time.sleep(30)
+            cmd[-1] = prompt_for(phase, project, request, resume=True)
+            continue
+        break
+    logtxt = log.read_text(encoding="utf-8", errors="replace")
+    subs = len(re.findall(r"\[tool\] Sub-agent: (\S+)", logtxt))
+    cost = {"elapsed_min": round((datetime.datetime.now() - t0).total_seconds() / 60, 1), "delegations": subs,
+            "tool_calls": len(re.findall(r"^\[tool\] (?!status)", logtxt, re.M)), "model_turns": len(re.findall(r"GenerateAssistantResponseCommand done", logtxt)),
+            "log_bytes": log.stat().st_size}
+    (run_dir / "cost.json").write_text(json.dumps(cost, indent=2), encoding="utf-8")
     res = check_results(project, phase)
     res.insert(0, ("work was delegated to specialist sub-agents", subs >= 3, f"{subs} delegation calls"))
     kv = subprocess.run(["kiro-cli", "--version"], capture_output=True, text=True).stdout.strip()
-    lines = [f"# Run summary: {phase} ({stamp})", "", f"Host: {kv}", "", "| Check | Result | Detail |", "|---|---|---|"]
+    lines = [f"# Run summary: {phase} ({stamp})", "", f"Host: {kv}", f"Cost: {cost['elapsed_min']} min, {cost['delegations']} delegations, {cost['tool_calls']} tool calls, {cost['model_turns']} model turns (token usage is not exposed by the host; record it from your account if needed)", "", "| Check | Result | Detail |", "|---|---|---|"]
     for n, ok, why in res:
         print(("PASS  " if ok else "FAIL  ") + n + ("" if ok else f"  -> {why}"))
         lines.append(f"| {n} | {'PASS' if ok else 'FAIL'} | {why} |")

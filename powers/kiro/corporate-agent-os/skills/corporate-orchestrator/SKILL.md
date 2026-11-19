@@ -29,7 +29,7 @@ Do not use for a small isolated change; load the single relevant skill instead.
 - Project constraints: geography, timeline, budget, platform, data sensitivity.
 
 ## Procedure
-1. **Intake.** Write `00-intake/brief.md`: problem, affected user, current workaround, desired outcome, constraints, business model, definition of success. Create the project workspace and `10-decisions/memory-ledger.jsonl`; record user statements as facts (`F-`), inferences as assumptions or hypotheses. Ask at most one blocking question; otherwise state assumptions and proceed.
+1. **Intake.** Write `00-intake/brief.md`: problem, affected user, current workaround, desired outcome, constraints, business model, definition of success. Create the project workspace with `python skills/corporate-orchestrator/scripts/scaffold_workspace.py <workdir>` (eleven fixed stage folders, each README naming who may write there; no other numbered folders are ever created) and `10-decisions/memory-ledger.jsonl`; record user statements as facts (`F-`), inferences as assumptions or hypotheses. Ask at most one blocking question; otherwise state assumptions and proceed.
 2. **Choose the workflow.** Match the trigger to `workflows/*/workflow.yaml` and record the choice as `D-001`. Decide which departments the stage actually needs; omit the rest.
 3. **Plan.** Instantiate each stage as a task contract (`core/task-management/task-contract.schema.json`) with budget defaults by risk from `core/budget-management/budget-policy.yaml`. Confirm: no cycles, disjoint outputs per parallel group, an independent reviewer on every reviewed stage, human approval flags where policy requires.
 4. **Delegate.** Use the host's delegation feature. Give each specialist its contract, inputs, relevant ledger ids and skill names. One writer per path; isolated worktrees for parallel code. Stay within `max_parallel_agents`.
@@ -68,7 +68,7 @@ Do not use for a small isolated change; load the single relevant skill instead.
 - Production, publishing, spending, legal filings, deletions, communications, personal data and access changes require explicit human approval.
 
 ## References
-- `scripts/ownership_check.py` (maker and folder ownership of every deliverable)
+- `scripts/scaffold_workspace.py` (fixed stage folders with owner READMEs), `scripts/ownership_check.py` (maker and folder ownership of every deliverable)
 - `core/orchestrator/operating-procedure.md`, `core/orchestrator/report-format.md`
 - `core/task-management/README.md`, `core/workflow-engine/README.md`, `core/quality-gates/gates.yaml`
 - `core/memory/README.md`, `core/permissions/policy.yaml`, `core/budget-management/budget-policy.yaml`

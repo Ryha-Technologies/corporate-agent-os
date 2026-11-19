@@ -45,3 +45,17 @@ def test_stray_stage_folder_detected(tmp_path):
     (tmp_path / "06-security/notes.md").write_text("x", encoding="utf-8")
     r = subprocess.run([sys.executable, "-B", str(ROOT / "skills/corporate-orchestrator/scripts/ownership_check.py"), str(tmp_path), "--agents", str(ROOT / "adapters/kiro/agents")], capture_output=True, text=True)
     assert r.returncode == 1 and "stray stage folder" in r.stdout, r.stdout
+
+
+def test_scaffold_is_idempotent_and_readmes_are_not_deliverables(tmp_path):
+    scaf = ROOT / "skills/corporate-orchestrator/scripts/scaffold_workspace.py"
+    own = ROOT / "skills/corporate-orchestrator/scripts/ownership_check.py"
+    agents = ROOT / "adapters/kiro/agents"
+    r1 = subprocess.run([sys.executable, "-B", str(scaf), str(tmp_path), "--agents", str(agents)], capture_output=True, text=True)
+    assert "11 README(s) created" in r1.stdout
+    (tmp_path / "03-brand/README.md").write_text("custom", encoding="utf-8")
+    r2 = subprocess.run([sys.executable, "-B", str(scaf), str(tmp_path), "--agents", str(agents)], capture_output=True, text=True)
+    assert "0 README(s) created" in r2.stdout and (tmp_path / "03-brand/README.md").read_text(encoding="utf-8") == "custom"
+    assert "brand-strategist" in (tmp_path / "01-research/README.md").read_text(encoding="utf-8") or "competitive-analyst" in (tmp_path / "01-research/README.md").read_text(encoding="utf-8")
+    r3 = subprocess.run([sys.executable, "-B", str(own), str(tmp_path), "--agents", str(agents)], capture_output=True, text=True)
+    assert r3.returncode == 0, r3.stdout

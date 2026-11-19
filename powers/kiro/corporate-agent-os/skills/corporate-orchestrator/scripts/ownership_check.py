@@ -13,7 +13,7 @@ Why a script and not a permission rule: in Kiro CLI 3.3.0 a sub-agent inherits i
 rules (observed 2026-11-18), so the orchestrator cannot be denied specialist folders without also
 blocking the specialists it delegates to. The check runs at every gate instead.
 
-Exit 0 when every deliverable passes; 1 otherwise. Evidence files (png, json, txt, csv) are skipped.
+Exit 0 when every deliverable passes; 1 otherwise. Non-Markdown evidence files (png, json, txt, csv) are not checked; every .md is.
 """
 from __future__ import annotations
 import json, re, sys
@@ -51,8 +51,8 @@ def check(work: Path, agents_dir: Path) -> list[dict]:
                             "problem": f"stray stage folder with {len(files)} files; stage folders are fixed ({', '.join(sorted(ALL_STAGES))}); move the files into the owning stage folder"})
     for stage in STAGES:
         for f in sorted((work / stage).rglob("*.md")) if (work / stage).exists() else []:
-            if "evidence" in f.parts:
-                continue
+            if f.name == "README.md":
+                continue  # scaffold README is not a deliverable; Markdown under evidence/ is
             text = f.read_text(encoding="utf-8", errors="replace")
             maker = (re.search(r"(?mi)^\W*made by:\s*`?([a-z0-9-]+)`?", text) or [None, None])[1]
             reviewer = (re.search(r"(?mi)^\W*reviewed by:\s*`?([a-z0-9-]+)`?", text) or [None, None])[1]
