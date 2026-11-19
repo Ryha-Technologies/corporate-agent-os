@@ -8,13 +8,13 @@ Every agent with its tier, department, skills, tools, write scope and autonomy. 
 
 | Agent | Department | Title | Skills | Tools | Write scope | Reviews gates |
 |---|---|---|---|---|---|---|
-| `corporate-orchestrator` | executive | Corporate Orchestrator (accountable delivery lead) | corporate-orchestrator, anti-slop-quality-gate, codebase-audit-upgrade | read, write, shell, web, subagent | `00-intake/**`<br>`10-decisions/**`<br>`07-quality/gate-index.md` | — |
+| `corporate-orchestrator` | executive | Corporate Orchestrator (accountable delivery lead) | corporate-orchestrator, anti-slop-quality-gate, codebase-audit-upgrade, executive-business-review | read, write, shell, web, subagent | `00-intake/**`<br>`10-decisions/**`<br>`07-quality/gate-index.md` | — |
 
 ## Executives (advise only) (8)
 
 | Agent | Department | Title | Skills | Tools | Write scope | Reviews gates |
 |---|---|---|---|---|---|---|
-| `ceo-strategy` | executive | Chief Executive Officer (strategy and decision authority) | strategy-market-sizing, business-idea-validation, anti-slop-quality-gate | read, web | — | — |
+| `ceo-strategy` | executive | Chief Executive Officer (strategy and decision authority) | executive-business-review, strategy-market-sizing, business-idea-validation, anti-slop-quality-gate, competitive-analysis, business-model-unit-economics | read, web | — | — |
 | `cfo-finance` | finance | Chief Financial Officer | business-model-unit-economics, finance-operations, anti-slop-quality-gate | read, web | — | — |
 | `ciso-security` | cybersecurity | Chief Information Security Officer | security-privacy, threat-modeling, incident-response, anti-slop-quality-gate | read, web | — | — |
 | `clo-legal` | legal | Chief Legal Officer (issue-spotting authority, not counsel) | legal-risk-governance, naming-ip-screen, oss-reuse-license, anti-slop-quality-gate | read, web | — | — |

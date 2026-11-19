@@ -138,7 +138,7 @@ GROUPS: dict[str, dict] = {
     "dept-strategy-product": {
         "title": "Strategy and product department",
         "department": "product",
-        "members": ["strategy-market-sizing", "business-idea-validation", "business-model-unit-economics", "product-discovery-prd"],
+        "members": ["executive-business-review", "strategy-market-sizing", "business-idea-validation", "business-model-unit-economics", "product-discovery-prd"],
         "reviewers": ["business-model-auditor"],
         "lead": "product-lead",
         "scope": "any strategy or product-definition request: idea validation with kill criteria, market sizing, business models and unit economics, PRDs with testable acceptance criteria",
@@ -147,6 +147,7 @@ GROUPS: dict[str, dict] = {
             "A PRD has acceptance criteria a tester can run.",
         ],
         "routes": [
+            ("Review the whole business, decide, and plan to production", "executive-business-review (commissions dept-research and business-model-unit-economics as needed) → workflows/idea-to-production"),
             ("Is this idea worth building", "business-idea-validation → strategy-market-sizing → business-model-unit-economics"),
             ("Define the product", "product-discovery-prd"),
         ],

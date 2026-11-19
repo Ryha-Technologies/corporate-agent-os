@@ -1,0 +1,318 @@
+id: idea-to-production
+name: Idea to production (complete spine with build, test, release and post-launch review)
+summary: "One orchestrator takes an idea or an existing product through research, executive review, product definition, brand, research-first design, architecture, build in vertical slices, security review, testing, documentation, release readiness, production release with human approval, and a dated post-launch review. Every stage has an owner, an output, an anti-slop self-check, and an independent review or human approval before the next stage starts."
+trigger: A user wants something taken all the way from idea or existing product to a running, released product, and wants one accountable orchestrator.
+inputs_required:
+  - The idea or the existing product (repository, URL or description), including motivation and constraints
+  - Geography, budget, timeline, platform, data sensitivity if known
+final_deliverables:
+  - 10-decisions/executive-review.md
+  - 02-product/prd.md
+  - 04-design/research-record.md and 04-design/design-rationale.md
+  - 05-architecture/architecture.md
+  - 06-build (merged increments with tests)
+  - 07-quality/security-findings.md, 07-quality/test-report.md, 07-quality/release-readiness.md
+  - 09-operations/release-record.md and 09-operations/post-launch-review.md
+retry_policy:
+  max_review_loops: 3
+  on_exhausted: escalate-to-human
+stages:
+  - id: intake
+    agent: corporate-orchestrator
+    skills: [corporate-orchestrator]
+    objective: "Clarify the request into a brief with problem, users, workaround, outcome, constraints, money and success definition; create workspace and ledger; record whether a product already exists"
+    depends_on: []
+    inputs: [user request]
+    outputs: ["00-intake/brief.md", "10-decisions/memory-ledger.jsonl"]
+    risk: low
+  - id: existing-product-audit
+    agent: design-lead
+    skills: [codebase-audit-upgrade, ui-ux-design, security-privacy]
+    objective: "If a product exists, audit it (security, UX, UI template-signature score, branding, accessibility, performance, slop) and write the findings; if none exists, record NOT_APPLICABLE"
+    depends_on: [intake]
+    condition: "00-intake/brief.md states a product or repository exists"
+    inputs: ["00-intake/brief.md"]
+    outputs: ["01-research/existing-product-audit.md"]
+    risk: medium
+  - id: research-plan
+    agent: research-lead
+    skills: [research-intelligence]
+    objective: "Frame the decisions the research informs and plan tracks with disconfirming evidence per question"
+    depends_on: [intake]
+    inputs: ["00-intake/brief.md"]
+    outputs: ["01-research/research-plan.md"]
+    risk: low
+  - id: desk-research
+    agent: research-analyst
+    skills: [research-intelligence]
+    objective: "Sourced evidence on problem, customers, market, technology and regulation with an evidence ledger"
+    depends_on: [research-plan]
+    inputs: ["01-research/research-plan.md"]
+    outputs: ["01-research/evidence-ledger.md", "01-research/problem-statement.md", "01-research/findings-market.md"]
+    parallel_group: discovery
+    timeout_minutes: 90
+    risk: medium
+  - id: competitor-analysis
+    agent: competitive-analyst
+    skills: [competitive-analysis, research-intelligence]
+    objective: "Competitors, substitutes and workarounds with dated pricing pages, revenue models, payment methods, weakest reviews, where they win and lose; competitor pattern map for design"
+    depends_on: [research-plan]
+    inputs: ["01-research/research-plan.md"]
+    outputs: ["01-research/competitor-map.md", "01-research/competitor-pricing.md", "01-research/competitor-pattern-map.md"]
+    parallel_group: discovery
+    timeout_minutes: 90
+    risk: medium
+  - id: customer-research
+    agent: customer-researcher
+    skills: [ux-research]
+    objective: "Interview plan, screener and script; synthesise customer evidence the user already has; label the rest as hypotheses"
+    depends_on: [research-plan]
+    inputs: ["01-research/research-plan.md"]
+    outputs: ["01-research/customer-research-plan.md", "01-research/customer-findings.md"]
+    parallel_group: discovery
+    risk: low
+  - id: discovery-synthesis
+    agent: research-lead
+    skills: [research-intelligence]
+    objective: "One-page research brief with confidence levels, disconfirming evidence and open questions"
+    depends_on: [desk-research, competitor-analysis, customer-research]
+    inputs: ["01-research/evidence-ledger.md", "01-research/competitor-map.md", "01-research/customer-findings.md"]
+    outputs: ["01-research/research-brief.md"]
+    gate: discovery
+    review: research-auditor
+    risk: medium
+  - id: business-model
+    agent: financial-modeler
+    skills: [business-model-unit-economics]
+    objective: "Compare at least three revenue models; payments, fees and taxes included; ranged unit economics with sensitivity, break-even and runway"
+    depends_on: [discovery-synthesis]
+    inputs: ["01-research/research-brief.md", "01-research/competitor-pricing.md"]
+    outputs: ["02-product/business-model.md", "02-product/financial-model.csv", "02-product/payments-plan.md"]
+    risk: high
+  - id: executive-review
+    agent: corporate-orchestrator
+    skills: [executive-business-review, corporate-orchestrator]
+    objective: "Full CEO review: fact sheet, competitors and positioning, revenue models, payments, unit economics, problems with severity, improvements with cheapest tests, decision (pursue, test first, pivot or stop), staged plan to production with reviews and kill criteria; the orchestrator delegates the analysis to ceo-strategy (advisory) and records the review"
+    depends_on: [business-model, existing-product-audit]
+    inputs: ["01-research/research-brief.md", "01-research/competitor-pricing.md", "02-product/business-model.md", "02-product/payments-plan.md", "01-research/existing-product-audit.md"]
+    outputs: ["10-decisions/executive-review.md", "10-decisions/opportunity-decision.md"]
+    gate: opportunity
+    review: business-model-auditor
+    human_approval: true
+    risk: high
+  - id: strategy-memo
+    agent: business-strategist
+    skills: [strategy-market-sizing]
+    objective: "One-sentence strategic choice, wedge, KPIs, kill thresholds and pre-mortem from the approved decision"
+    depends_on: [executive-review]
+    condition: "opportunity-decision recommends pursue or test first and the owner approved"
+    inputs: ["10-decisions/executive-review.md"]
+    outputs: ["02-product/strategy-memo.md"]
+    risk: medium
+  - id: product-definition
+    agent: product-manager
+    skills: [product-discovery-prd]
+    objective: "Thesis, PRD, acceptance criteria a tester can run, analytics plan and roadmap narrow enough to test the critical hypothesis"
+    depends_on: [strategy-memo]
+    inputs: ["02-product/strategy-memo.md", "01-research/customer-findings.md"]
+    outputs: ["02-product/prd.md", "02-product/acceptance-criteria.md", "02-product/analytics-plan.md", "02-product/roadmap.md"]
+    parallel_group: definition
+    gate: product
+    review: ux-auditor
+    human_approval: true
+    risk: high
+  - id: brand-foundation
+    agent: brand-strategist
+    skills: [brand-strategy-story]
+    objective: "Category audit with dated references, brand strategy, narrative and messaging with facts separated from framing"
+    depends_on: [strategy-memo]
+    inputs: ["02-product/strategy-memo.md", "01-research/competitor-pattern-map.md"]
+    outputs: ["03-brand/category-audit.md", "03-brand/brand-strategy.md", "03-brand/messaging.md", "03-brand/rejected-concepts.md"]
+    parallel_group: definition
+    risk: medium
+  - id: naming-identity
+    agent: brand-creative-director
+    skills: [naming-ip-screen, logo-design, brandbook-identity]
+    objective: "Name candidates with preliminary IP screening, identity concepts generated with the creative-ideation method (lenses, distance table), brandbook; nothing used before screening and approval"
+    depends_on: [brand-foundation]
+    inputs: ["03-brand/brand-strategy.md"]
+    outputs: ["03-brand/naming-report.md", "03-brand/identity-concepts.md", "03-brand/brandbook.md"]
+    gate: brand
+    review: brand-originality-auditor
+    human_approval: true
+    risk: high
+  - id: design-research
+    agent: design-lead
+    skills: [ux-research, information-architecture, ui-ux-design]
+    objective: "Research record for the product's design (job, dated category table, pattern map, psychology analysis, three directions from three lens families with distance table and sibling check); present directions to the owner; design_gate.py must print OPEN before the next stage"
+    depends_on: [product-definition, brand-foundation]
+    inputs: ["02-product/prd.md", "03-brand/brand-strategy.md", "01-research/competitor-pattern-map.md", "01-research/existing-product-audit.md"]
+    outputs: ["04-design/user-flows.md", "04-design/information-architecture.md", "04-design/research-record.md", "04-design/visual-direction.md"]
+    human_approval: true
+    risk: medium
+  - id: experience-design
+    agent: design-lead
+    skills: [ui-ux-design, design-system, accessibility-audit]
+    objective: "Build the approved direction: tokens, screens for every state, responsive and motion specs, accessibility review; re-score with template_signature; swap test; before/after evidence"
+    depends_on: [design-research]
+    inputs: ["04-design/research-record.md", "04-design/visual-direction.md"]
+    outputs: ["04-design/design-tokens.json", "04-design/screens/README.md", "04-design/states-matrix.md", "04-design/motion-spec.md", "04-design/design-rationale.md", "04-design/accessibility-review.md", "04-design/evidence/README.md"]
+    parallel_group: shaping
+    gate: design
+    review: design-qa-auditor
+    timeout_minutes: 180
+    risk: medium
+  - id: architecture
+    agent: software-architect
+    skills: [architecture-system-design, api-database-design, threat-modeling, oss-reuse-license]
+    objective: "Simplest viable architecture with ADRs, data model, API contract, payments integration design, threat model and cost model"
+    depends_on: [product-definition, business-model]
+    inputs: ["02-product/prd.md", "02-product/business-model.md", "02-product/payments-plan.md"]
+    outputs: ["05-architecture/architecture.md", "05-architecture/adr/README.md", "05-architecture/data-model.md", "05-architecture/api-contract.md", "05-architecture/threat-model.md", "05-architecture/cost-model.md"]
+    parallel_group: shaping
+    gate: architecture
+    review: architecture-reviewer
+    timeout_minutes: 180
+    risk: high
+  - id: build-plan
+    agent: engineering-lead
+    skills: [software-engineering, test-strategy]
+    objective: "Vertical slices with disjoint ownership, acceptance tests per slice, test strategy, integration and environment plan"
+    depends_on: [experience-design, architecture]
+    inputs: ["05-architecture/architecture.md", "04-design/design-tokens.json", "02-product/acceptance-criteria.md"]
+    outputs: ["06-build/build-plan.md", "07-quality/test-strategy.md"]
+    risk: medium
+  - id: build-backend
+    agent: backend-engineer
+    skills: [software-engineering, api-database-design]
+    objective: "Implement backend slices with tests actually run and output pasted; payments integration in sandbox mode only"
+    depends_on: [build-plan]
+    inputs: ["06-build/build-plan.md", "05-architecture/api-contract.md"]
+    outputs: ["06-build/backend/README.md", "06-build/backend-notes.md"]
+    parallel_group: build
+    timeout_minutes: 240
+    risk: high
+  - id: build-frontend
+    agent: frontend-engineer
+    skills: [software-engineering, ui-ux-design, accessibility-audit]
+    objective: "Implement the approved design from tokens in the real stack; every state; motion per spec with reduced-motion; re-score with template_signature on the built UI; screenshots at three widths or device sizes"
+    depends_on: [build-plan]
+    inputs: ["06-build/build-plan.md", "04-design/design-tokens.json", "04-design/screens/README.md", "04-design/motion-spec.md"]
+    outputs: ["06-build/frontend/README.md", "06-build/frontend-notes.md", "04-design/evidence/after/README.md"]
+    parallel_group: build
+    timeout_minutes: 240
+    risk: high
+  - id: build-platform
+    agent: devops-engineer
+    skills: [devops-sre]
+    objective: "Environments, CI with the validators and tests, secrets handling, observability, backup and rollback procedure, infrastructure cost tracked against the cost model"
+    depends_on: [build-plan]
+    inputs: ["06-build/build-plan.md", "05-architecture/architecture.md"]
+    outputs: ["06-build/platform/README.md", "09-operations/runbook.md"]
+    parallel_group: build
+    timeout_minutes: 180
+    risk: high
+  - id: integration-review
+    agent: engineering-lead
+    skills: [code-review, software-engineering]
+    objective: "Integrate slices; code review by an agent that did not write the code; build and tests green with output pasted; acceptance criteria traced"
+    depends_on: [build-backend, build-frontend, build-platform]
+    inputs: ["06-build/backend-notes.md", "06-build/frontend-notes.md", "06-build/platform/README.md", "02-product/acceptance-criteria.md"]
+    outputs: ["06-build/integration-report.md", "07-quality/traceability-matrix.md"]
+    gate: build
+    review: code-reviewer
+    risk: high
+  - id: security-review
+    agent: security-engineer
+    skills: [security-privacy, threat-modeling]
+    objective: "Dependency and secret scans with output, OWASP-mapped findings with severity and retest, payments and personal-data handling checked against the threat model"
+    depends_on: [integration-review]
+    inputs: ["06-build/integration-report.md", "05-architecture/threat-model.md"]
+    outputs: ["07-quality/security-findings.md"]
+    parallel_group: verification
+    gate: security
+    review: security-auditor
+    human_approval: true
+    risk: high
+  - id: testing
+    agent: test-engineer
+    skills: [test-strategy, qa-evaluation, accessibility-audit]
+    objective: "Execute the test strategy: functional, accessibility (scanner output), performance numbers, cross-device, payment failure paths in sandbox; defects filed; test report with what was not run"
+    depends_on: [integration-review]
+    inputs: ["07-quality/test-strategy.md", "06-build/integration-report.md"]
+    outputs: ["07-quality/test-report.md", "07-quality/defects.md"]
+    parallel_group: verification
+    gate: testing
+    review: test-auditor
+    risk: high
+  - id: documentation
+    agent: technical-writer
+    skills: [technical-documentation]
+    objective: "User, operator and developer documentation with every command executed and verified; release notes"
+    depends_on: [integration-review]
+    inputs: ["06-build/integration-report.md", "09-operations/runbook.md"]
+    outputs: ["06-build/docs/README.md", "09-operations/release-notes.md"]
+    parallel_group: verification
+    gate: documentation
+    review: documentation-auditor
+    risk: medium
+  - id: legal-compliance
+    agent: legal-researcher
+    skills: [legal-risk-governance, oss-reuse-license]
+    objective: "Issue register, licence compliance of shipped components, privacy notice and terms as drafts with counsel questions, payments and tax obligations as questions; asset provenance"
+    depends_on: [integration-review, naming-identity]
+    inputs: ["08-legal-oss/component-register.md", "03-brand/naming-report.md", "02-product/payments-plan.md"]
+    outputs: ["08-legal-oss/issue-register.md", "08-legal-oss/counsel-questions.md", "08-legal-oss/component-register.md", "08-legal-oss/asset-provenance.md"]
+    parallel_group: verification
+    gate: legal
+    review: legal-licensing-reviewer
+    human_approval: true
+    risk: high
+  - id: launch-plan
+    agent: growth-lead
+    skills: [growth-gtm, product-launch]
+    objective: "Positioning, channels, pricing page copy from the approved model, launch plan with rollback, monitoring and the metrics that test the key assumptions"
+    depends_on: [product-definition, naming-identity, build-plan]
+    inputs: ["02-product/prd.md", "03-brand/messaging.md", "02-product/business-model.md", "06-build/build-plan.md"]
+    outputs: ["09-operations/positioning.md", "09-operations/channel-plan.md", "09-operations/launch-plan.md"]
+    risk: medium
+  - id: release-readiness
+    agent: qa-lead
+    skills: [qa-evaluation, anti-slop-quality-gate]
+    objective: "GO, GO_WITH_ACCEPTED_RISKS or NO_GO from all gate verdicts, open defects, security and legal registers, rollback tested, support ready; anti-slop pass on every customer-facing artefact; ceo-strategy consulted for the business call"
+    depends_on: [security-review, testing, documentation, legal-compliance, launch-plan]
+    inputs: ["07-quality/gate-index.md", "07-quality/defects.md", "07-quality/security-findings.md", "08-legal-oss/issue-register.md", "09-operations/launch-plan.md"]
+    outputs: ["07-quality/release-readiness.md"]
+    gate: release
+    review: test-auditor
+    human_approval: true
+    risk: high
+  - id: production-release
+    agent: devops-engineer
+    skills: [devops-sre, product-launch]
+    objective: "Execute the approved release plan step by step with the human owner present; payments switched from sandbox to live only on explicit approval; record what was deployed, when, by whom, and the rollback point"
+    depends_on: [release-readiness]
+    condition: "release-readiness is GO or GO_WITH_ACCEPTED_RISKS and the owner approved"
+    inputs: ["07-quality/release-readiness.md", "09-operations/runbook.md"]
+    outputs: ["09-operations/release-record.md"]
+    human_approval: true
+    risk: critical
+  - id: post-launch-review
+    agent: corporate-orchestrator
+    skills: [executive-business-review, corporate-orchestrator]
+    objective: "At the dates set in the executive review, read real metrics against the key assumptions; confirm, adjust or stop; next staged plan; the orchestrator delegates the analysis to ceo-strategy (advisory) and records its advice"
+    depends_on: [production-release]
+    inputs: ["09-operations/release-record.md", "02-product/analytics-plan.md", "10-decisions/executive-review.md"]
+    outputs: ["09-operations/post-launch-review.md"]
+    review: business-model-auditor
+    human_approval: true
+    risk: high
+  - id: final-report
+    agent: corporate-orchestrator
+    skills: [corporate-orchestrator, anti-slop-quality-gate]
+    objective: "Ten-part orchestrator report: decision, deliverables, verification per gate, approvals, unknowns, what was not run"
+    depends_on: [post-launch-review]
+    inputs: ["07-quality/gate-index.md", "10-decisions/memory-ledger.jsonl"]
+    outputs: ["10-decisions/final-report.md"]
+    human_approval: true
+    risk: medium

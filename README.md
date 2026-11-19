@@ -47,7 +47,7 @@ It is **not** a company, a guarantee, or legal/financial/security clearance. Ski
 | Department | Skills | Produces |
 |---|---|---|
 | **Business intelligence** | research-intelligence, competitive-analysis, business-idea-validation | Evidence ledger, competitor map, opportunity assessment with kill criteria |
-| **Strategy and product** | strategy-market-sizing, business-model-unit-economics, product-discovery-prd | Strategy memo, ranged unit economics, PRD with testable acceptance criteria |
+| **Strategy and product** | executive-business-review, strategy-market-sizing, business-model-unit-economics, product-discovery-prd | CEO review (competitors with dated pricing, revenue models, payments, unit economics, problems, improvements, decision, staged plan to production), strategy memo, ranged unit economics, PRD with testable acceptance criteria |
 | **Branding** | brand-strategy-story, naming-ip-screen, logo-design, brandbook-identity, creative-production | Category audit, brand strategy, naming report with preliminary IP statuses, identity, brandbook |
 | **Product design** | ux-research, information-architecture, ui-ux-design, design-system, accessibility-audit, codebase-audit-upgrade | Flows, IA, states matrix, tokens with computed contrast, WCAG 2.2 AA review; audit of an existing repo or site (security, UX, UI, branding, slop) with a research-backed, user-approved upgrade proposal |
 | **Engineering** | architecture-system-design, api-database-design, software-engineering, code-review, devops-sre, data-ai-systems | ADRs, contracts, reviewed increments, release checklist |
@@ -57,7 +57,7 @@ It is **not** a company, a guarantee, or legal/financial/security clearance. Ski
 | **Coordination** | corporate-orchestrator | Brief, workspace, task contracts, gate verdicts, ten-part report |
 | **Department entry points** | dept-design, dept-branding, dept-engineering, dept-security, dept-quality, dept-research, dept-strategy-product, dept-growth, dept-operations, dept-legal | Hand a whole department any request in its scope; it routes to its skills, enforces its non-negotiables, gets independent review. Generated from the member skills. |
 
-50 skills · 58 agents · 22 departments / 110 roles · 9 workflows · 12 gates · 58 templates · 11 standards. Full lists: [agents directory](docs/agents/README.md), [organisation directory](docs/organization/README.md).
+51 skills · 58 agents · 22 departments / 110 roles · 10 workflows · 12 gates · 58 templates · 11 standards. Full lists: [agents directory](docs/agents/README.md), [organisation directory](docs/organization/README.md).
 
 ## How it works
 
@@ -175,8 +175,8 @@ The gate verdict for that run is **FAIL**, and that is the point: the design-QA 
 | [`core/`](core/) | Orchestrator procedure, task-contract / workflow / memory schemas, permissions, model routing, budgets, 12 quality gates | Specification + validators |
 | [`departments/`](departments/) | 22 departments, 110 roles with 15 fields each | Specification |
 | [`agents/`](agents/) | 58 canonical agent definitions (YAML) | Specification → generated adapters |
-| [`skills/`](skills/) | 50 Agent Skills with `references/`, one example token file and a contrast script | Playbooks |
-| [`workflows/`](workflows/) | 9 DAGs with generated stage tables | Specification + validator |
+| [`skills/`](skills/) | 51 Agent Skills with `references/`, one example token file and a contrast script | Playbooks |
+| [`workflows/`](workflows/) | 10 DAGs with generated stage tables | Specification + validator |
 | [`powers/`](powers/) | Kiro Power (generated from `skills/`) | Build output |
 | [`adapters/`](adapters/) | Kiro, Claude Code, Codex, portable | Generated + hand-written |
 | [`standards/`](standards/), [`templates/`](templates/) | Quality bars and fill-in documents with acceptance criteria | Specification |

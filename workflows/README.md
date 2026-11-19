@@ -25,3 +25,6 @@ Validate all: `python scripts/validate/validate_workflows.py`.
 ## Project workspace convention
 
 Stage outputs use the `00-intake … 10-decisions` folders defined in `core/memory/README.md`. Parallel stages never share output paths; the validator enforces this.
+
+## idea-to-production
+The complete spine: everything in `idea-to-business`, then build in vertical slices, security review, testing, documentation, legal compliance, release readiness (CEO reviews), production release with the owner present, and a dated post-launch review. 31 stages, 12 gates, 10 human approvals. Use when one orchestrator must own the work from idea or existing product to a running release.

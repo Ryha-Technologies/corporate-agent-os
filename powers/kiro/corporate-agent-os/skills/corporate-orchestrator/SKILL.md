@@ -15,6 +15,7 @@ Act as the accountable delivery lead: convert the user's objective into a cohere
 ## When to use
 - The request spans more than one department (research, product, brand, design, engineering, security, legal, growth).
 - The user gives a rough idea and wants a plan, a validation, a brand, a product or a launch.
+- The user wants one accountable lead from idea or existing product to a running release and beyond: use `workflows/idea-to-production/workflow.yaml`, which chains research, executive review, definition, brand, design, architecture, build, security, testing, documentation, legal, release readiness, production release and post-launch review with a reviewer or human approval at every gate.
 - A large change to an existing product needs coordinated audits and a roadmap.
 Do not use for a small isolated change; load the single relevant skill instead.
 
@@ -32,7 +33,7 @@ Do not use for a small isolated change; load the single relevant skill instead.
 2. **Choose the workflow.** Match the trigger to `workflows/*/workflow.yaml` and record the choice as `D-001`. Decide which departments the stage actually needs; omit the rest.
 3. **Plan.** Instantiate each stage as a task contract (`core/task-management/task-contract.schema.json`) with budget defaults by risk from `core/budget-management/budget-policy.yaml`. Confirm: no cycles, disjoint outputs per parallel group, an independent reviewer on every reviewed stage, human approval flags where policy requires.
 4. **Delegate.** Use the host's delegation feature. Give each specialist its contract, inputs, relevant ledger ids and skill names. One writer per path; isolated worktrees for parallel code. Stay within `max_parallel_agents`.
-5. **Integrate.** Accept only structured reports (`core/orchestrator/report-format.md`) with `CHECKS_ACTUALLY_RUN`. Append ledger entries. Route artefacts to the stage's reviewer with the gate definition. On `FAIL`, write a REWORK contract naming the failed criterion and fix; stop after the loop limit and escalate.
+5. **Integrate.** Accept only structured reports (`core/orchestrator/report-format.md`) with `CHECKS_ACTUALLY_RUN` and a completed `anti-slop-quality-gate` self-check section; a report missing either is returned to its maker unread. For design stages, `design_gate.py` output `DESIGN GATE OPEN` is part of the acceptance. Append ledger entries. Route artefacts to the stage's reviewer with the gate definition. On `FAIL`, write a REWORK contract naming the failed criterion and fix; stop after the loop limit and escalate.
 6. **Resolve conflicts.** Compare source quality, recency, method and scope; ask for the strongest counter-evidence; record the decision and residual uncertainty. Never average.
 7. **Human approval.** Pause at every `human_approval: true` stage and every action in `core/permissions/policy.yaml → human_approval_required`. Record approvals with name, date and scope.
 8. **Report.** At each gate and at the end, produce the ten-part orchestrator report. Lead with the decision, what was produced and how it was verified; end with what was not run.
@@ -69,4 +70,5 @@ Do not use for a small isolated change; load the single relevant skill instead.
 - `core/orchestrator/operating-procedure.md`, `core/orchestrator/report-format.md`
 - `core/task-management/README.md`, `core/workflow-engine/README.md`, `core/quality-gates/gates.yaml`
 - `core/memory/README.md`, `core/permissions/policy.yaml`, `core/budget-management/budget-policy.yaml`
-- `workflows/README.md`
+- `workflows/README.md`, `workflows/idea-to-production/workflow.yaml` (the complete spine)
+- `skills/executive-business-review/SKILL.md` (CEO analysis and staged plan)
