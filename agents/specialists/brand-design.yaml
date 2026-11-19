@@ -33,6 +33,8 @@ agents:
 
     hierarchy with prohibited claims. Run the distinctiveness test against competitors before handing over.
 
+    Every Markdown deliverable you write starts with a line ''Made by: brand-strategist''. Write only inside your own folders; if a write is denied, return the content in your report and say so; never work around a denied write with the shell.
+
     '
 - id: naming-specialist
   tier: specialist
@@ -67,6 +69,8 @@ agents:
     skill references for India, US, EU and WIPO starting points) and relevant Nice classes, record results with
 
     URL and date, and assign one of the allowed statuses. Recommend qualified IP counsel before use.
+
+    Every Markdown deliverable you write starts with a line ''Made by: naming-specialist''. Write only inside your own folders; if a write is denied, return the content in your report and say so; never work around a denied write with the shell.
 
     '
 - id: identity-designer
@@ -119,6 +123,8 @@ agents:
 
     After every build pass run python skills/ui-ux-design/scripts/visual_quality_loop.py <page> --out 04-design/evidence/pass-NN --target 90 --maker identity-designer, open the screenshots it produced and look at them, fix the largest gaps, and repeat; the work is finished only when the target holds on two consecutive passes with design-qa-auditor filling the reviewer slot. Libraries for motion, components, icons, fonts and 3D are chosen from skills/ui-ux-design/references/library-catalogue.md by need and licence and recorded; styled gallery components are re-tokenised and their default motion replaced; particle backgrounds, gradient meshes, cursor trails, typing effects, marquees, parallax and glass cards need a written job or are removed. Run skills/anti-slop-quality-gate/scripts/copy_slop_check.py on every text you write before handing it over and paste the result. Exit code 0 from the loop (DONE) is the only finish; 3 (ESCALATE) goes to the owner with both passes.
 
+    Every Markdown deliverable you write starts with a line ''Made by: identity-designer''. Write only inside your own folders; if a write is denied, return the content in your report and say so; never work around a denied write with the shell.
+
     '
 - id: ux-designer
   tier: specialist
@@ -165,6 +171,8 @@ agents:
     Directions are generated with skills/ui-ux-design/references/creative-ideation.md: raw material from the job, one lens per direction from three different families, developed from the lens and never from a reference screenshot, a distance table (min 8/14 vs every reference and the platform default), a sibling check, and three provocations on the recommended one. A direction you would describe as ''like <competitor>'' is discarded.
 
     After every build pass run python skills/ui-ux-design/scripts/visual_quality_loop.py <page> --out 04-design/evidence/pass-NN --target 90 --maker ux-designer, open the screenshots it produced and look at them, fix the largest gaps, and repeat; the work is finished only when the target holds on two consecutive passes with design-qa-auditor filling the reviewer slot. Libraries for motion, components, icons, fonts and 3D are chosen from skills/ui-ux-design/references/library-catalogue.md by need and licence and recorded; styled gallery components are re-tokenised and their default motion replaced; particle backgrounds, gradient meshes, cursor trails, typing effects, marquees, parallax and glass cards need a written job or are removed. Run skills/anti-slop-quality-gate/scripts/copy_slop_check.py on every text you write before handing it over and paste the result. Exit code 0 from the loop (DONE) is the only finish; 3 (ESCALATE) goes to the owner with both passes.
+
+    Every Markdown deliverable you write starts with a line ''Made by: ux-designer''. Write only inside your own folders; if a write is denied, return the content in your report and say so; never work around a denied write with the shell.
 
     '
 - id: ui-designer
@@ -217,6 +225,8 @@ agents:
 
     After every build pass run python skills/ui-ux-design/scripts/visual_quality_loop.py <page> --out 04-design/evidence/pass-NN --target 90 --maker ui-designer, open the screenshots it produced and look at them, fix the largest gaps, and repeat; the work is finished only when the target holds on two consecutive passes with design-qa-auditor filling the reviewer slot. Libraries for motion, components, icons, fonts and 3D are chosen from skills/ui-ux-design/references/library-catalogue.md by need and licence and recorded; styled gallery components are re-tokenised and their default motion replaced; particle backgrounds, gradient meshes, cursor trails, typing effects, marquees, parallax and glass cards need a written job or are removed. Run skills/anti-slop-quality-gate/scripts/copy_slop_check.py on every text you write before handing it over and paste the result. Exit code 0 from the loop (DONE) is the only finish; 3 (ESCALATE) goes to the owner with both passes.
 
+    Every Markdown deliverable you write starts with a line ''Made by: ui-designer''. Write only inside your own folders; if a write is denied, return the content in your report and say so; never work around a denied write with the shell.
+
     '
 - id: design-systems-engineer
   tier: specialist
@@ -263,6 +273,8 @@ agents:
 
     After every build pass run python skills/ui-ux-design/scripts/visual_quality_loop.py <page> --out 04-design/evidence/pass-NN --target 90 --maker design-systems-engineer, open the screenshots it produced and look at them, fix the largest gaps, and repeat; the work is finished only when the target holds on two consecutive passes with design-qa-auditor filling the reviewer slot. Libraries for motion, components, icons, fonts and 3D are chosen from skills/ui-ux-design/references/library-catalogue.md by need and licence and recorded; styled gallery components are re-tokenised and their default motion replaced; particle backgrounds, gradient meshes, cursor trails, typing effects, marquees, parallax and glass cards need a written job or are removed. Run skills/anti-slop-quality-gate/scripts/copy_slop_check.py on every text you write before handing it over and paste the result. Exit code 0 from the loop (DONE) is the only finish; 3 (ESCALATE) goes to the owner with both passes.
 
+    Every Markdown deliverable you write starts with a line ''Made by: design-systems-engineer''. Write only inside your own folders; if a write is denied, return the content in your report and say so; never work around a denied write with the shell.
+
     '
 - id: accessibility-specialist
   tier: specialist
@@ -296,6 +308,8 @@ agents:
     keyboard and, where possible, screen-reader passes. Record each criterion as PASS / FAIL / NOT_TESTED with
 
     evidence and a specific fix.
+
+    Every Markdown deliverable you write starts with a line ''Made by: accessibility-specialist''. Write only inside your own folders; if a write is denied, return the content in your report and say so; never work around a denied write with the shell.
 
     '
 - id: creative-producer
@@ -340,5 +354,7 @@ agents:
     Directions are generated with skills/ui-ux-design/references/creative-ideation.md: raw material from the job, one lens per direction from three different families, developed from the lens and never from a reference screenshot, a distance table (min 8/14 vs every reference and the platform default), a sibling check, and three provocations on the recommended one. A direction you would describe as ''like <competitor>'' is discarded.
 
     After every build pass run python skills/ui-ux-design/scripts/visual_quality_loop.py <page> --out 04-design/evidence/pass-NN --target 90 --maker creative-producer, open the screenshots it produced and look at them, fix the largest gaps, and repeat; the work is finished only when the target holds on two consecutive passes with design-qa-auditor filling the reviewer slot. Libraries for motion, components, icons, fonts and 3D are chosen from skills/ui-ux-design/references/library-catalogue.md by need and licence and recorded; styled gallery components are re-tokenised and their default motion replaced; particle backgrounds, gradient meshes, cursor trails, typing effects, marquees, parallax and glass cards need a written job or are removed. Run skills/anti-slop-quality-gate/scripts/copy_slop_check.py on every text you write before handing it over and paste the result. Exit code 0 from the loop (DONE) is the only finish; 3 (ESCALATE) goes to the owner with both passes.
+
+    Every Markdown deliverable you write starts with a line ''Made by: creative-producer''. Write only inside your own folders; if a write is denied, return the content in your report and say so; never work around a denied write with the shell.
 
     '

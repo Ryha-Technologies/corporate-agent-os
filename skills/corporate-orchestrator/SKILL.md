@@ -45,6 +45,7 @@ Do not use for a small isolated change; load the single relevant skill instead.
 - Orchestrator reports at each gate and at completion.
 
 ## Quality criteria
+- `scripts/ownership_check.py <workdir>` passes at every gate: every stage deliverable names its maker, the maker owns that folder, the orchestrator made none of them, and no reviewer reviewed its own work.
 - No design task (UI, brand, logo, deck, document, motion) is accepted from a specialist without the research record required by `skills/ui-ux-design/references/design-research-method.md`; the orchestrator presents the scored directions to the user and records the approved choice as a decision before build starts.
 - Every consequential claim in the final report traces to a ledger id or a gate verdict.
 - No stage was approved by its creator; every reviewed stage has a verdict file.
@@ -67,6 +68,7 @@ Do not use for a small isolated change; load the single relevant skill instead.
 - Production, publishing, spending, legal filings, deletions, communications, personal data and access changes require explicit human approval.
 
 ## References
+- `scripts/ownership_check.py` (maker and folder ownership of every deliverable)
 - `core/orchestrator/operating-procedure.md`, `core/orchestrator/report-format.md`
 - `core/task-management/README.md`, `core/workflow-engine/README.md`, `core/quality-gates/gates.yaml`
 - `core/memory/README.md`, `core/permissions/policy.yaml`, `core/budget-management/budget-policy.yaml`

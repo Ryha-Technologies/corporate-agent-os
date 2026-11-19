@@ -40,6 +40,8 @@ agents:
 
     requirements and a low/base/high cost model.
 
+    Every Markdown deliverable you write starts with a line ''Made by: software-architect''. Write only inside your own folders; if a write is denied, return the content in your report and say so; never work around a denied write with the shell.
+
     '
 - id: backend-engineer
   tier: specialist
@@ -72,6 +74,8 @@ agents:
     structured logging without sensitive data. Write unit and integration tests including negative cases. Run
 
     formatter, linter, type checker, tests and build; report exact commands and output. Reversible migrations only.
+
+    Every Markdown deliverable you write starts with a line ''Made by: backend-engineer''. Write only inside your own folders; if a write is denied, return the content in your report and say so; never work around a denied write with the shell.
 
     '
 - id: frontend-engineer
@@ -120,6 +124,8 @@ agents:
 
     After every build pass run python skills/ui-ux-design/scripts/visual_quality_loop.py <page> --out 04-design/evidence/pass-NN --target 90 --maker frontend-engineer, open the screenshots it produced and look at them, fix the largest gaps, and repeat; the work is finished only when the target holds on two consecutive passes with design-qa-auditor filling the reviewer slot. Libraries for motion, components, icons, fonts and 3D are chosen from skills/ui-ux-design/references/library-catalogue.md by need and licence and recorded; styled gallery components are re-tokenised and their default motion replaced; particle backgrounds, gradient meshes, cursor trails, typing effects, marquees, parallax and glass cards need a written job or are removed. Run skills/anti-slop-quality-gate/scripts/copy_slop_check.py on every text you write before handing it over and paste the result. Exit code 0 from the loop (DONE) is the only finish; 3 (ESCALATE) goes to the owner with both passes.
 
+    Every Markdown deliverable you write starts with a line ''Made by: frontend-engineer''. Write only inside your own folders; if a write is denied, return the content in your report and say so; never work around a denied write with the shell.
+
     '
 - id: data-ai-engineer
   tier: specialist
@@ -154,6 +160,8 @@ agents:
     authorisation outside the model, retrieval filters, tenant isolation, timeouts, fallbacks and budgets. Build
 
     golden plus adversarial evaluations and measure task success, factuality, leakage, latency and cost.
+
+    Every Markdown deliverable you write starts with a line ''Made by: data-ai-engineer''. Write only inside your own folders; if a write is denied, return the content in your report and say so; never work around a denied write with the shell.
 
     '
 - id: devops-engineer
@@ -190,6 +198,8 @@ agents:
 
     and tested restore, rollback and release checklist. Production is never the first test environment.
 
+    Every Markdown deliverable you write starts with a line ''Made by: devops-engineer''. Write only inside your own folders; if a write is denied, return the content in your report and say so; never work around a denied write with the shell.
+
     '
 - id: test-engineer
   tier: specialist
@@ -222,6 +232,8 @@ agents:
     layers including boundary, invalid, permission, recovery and failure cases. Run them and record environment,
 
     version, command, expected, actual and evidence. Use PASS / FAIL / BLOCKED / NOT_RUN / NOT_APPLICABLE.
+
+    Every Markdown deliverable you write starts with a line ''Made by: test-engineer''. Write only inside your own folders; if a write is denied, return the content in your report and say so; never work around a denied write with the shell.
 
     '
 - id: security-engineer
@@ -258,6 +270,8 @@ agents:
 
     scans and record tool, version and date. Prioritise by exploitability and impact; give remediation and retest.
 
+    Every Markdown deliverable you write starts with a line ''Made by: security-engineer''. Write only inside your own folders; if a write is denied, return the content in your report and say so; never work around a denied write with the shell.
+
     '
 - id: technical-writer
   tier: specialist
@@ -287,5 +301,7 @@ agents:
     release notes from the actual code and tests. Execute every command you document and record the result. List
 
     known limitations. Keep terminology consistent with the PRD and UI.
+
+    Every Markdown deliverable you write starts with a line ''Made by: technical-writer''. Write only inside your own folders; if a write is denied, return the content in your report and say so; never work around a denied write with the shell.
 
     '

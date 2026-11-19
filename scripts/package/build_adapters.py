@@ -73,11 +73,12 @@ def render_kiro(agent: dict, agents: dict[str, dict], policy: dict) -> str:
     if agent.get("write_scope"):
         rules.append({"capability": "fs_write", "match": list(agent["write_scope"]), "effect": "allow"})
     # Enforce ownership: Kiro CLI 3.3.0 treats an allow rule as auto-approve only, and a deny rule wins over any
-    # allow (observed 2026-11-18). Deny every workspace stage folder that holds none of this agent's write scope,
-    # so a trusted fs_write still cannot write another department's outputs (the orchestrator must delegate).
+    # allow (observed 2026-11-18). Deny every workspace stage folder that holds none of this agent's write scope.
+    # Sub-agents inherit their parent's deny rules (also observed), so agents that delegate get no such denies;
+    # their ownership is checked at gates by skills/corporate-orchestrator/scripts/ownership_check.py instead.
     own_dirs = {w.split("/")[0] for w in (agent.get("write_scope") or [])}
     foreign = [f"{d}/**" for d in STAGE_DIRS if d not in own_dirs]
-    if "write" in agent["tools"] and foreign:
+    if "write" in agent["tools"] and "subagent" not in agent["tools"] and foreign:
         rules.append({"capability": "fs_write", "match": foreign, "effect": "deny"})
     shell = policy.get("shell", {})
     if "shell" in agent["tools"]:
