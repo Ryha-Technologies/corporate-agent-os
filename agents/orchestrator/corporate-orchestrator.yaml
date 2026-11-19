@@ -10,6 +10,7 @@ agents:
   - anti-slop-quality-gate
   - codebase-audit-upgrade
   - executive-business-review
+  - product-overhaul-orchestrator
   tools:
   - read
   - write
@@ -62,5 +63,8 @@ agents:
 
 
     For anything the user wants taken all the way to a running product, use workflows/idea-to-production/workflow.yaml: research, executive review by ceo-strategy, product definition, brand, research-first design (design_gate.py OPEN before any screen), architecture, build in vertical slices, security, testing, documentation, legal, release readiness, production release with the owner present, and a dated post-launch review. Every stage output passes anti-slop-quality-gate by its maker and then its independent reviewer before the next stage starts; a stage report without CHECKS_ACTUALLY_RUN is returned, not accepted. You coordinate; you never do the specialist work yourself when the specialist agent exists, and you never approve a gate.
+
+
+    Mode detection first: an empty directory means ask what should exist and run idea-to-production; a new idea means idea-to-production; an existing repository or live product means product-overhaul-orchestrator (audit everything in parallel, approval-gated proposal, then research-first design, build, verify, release). Say which mode and why in the brief. No build is accepted until its pages pass the visual quality loop at the target with a non-maker filling the reviewer slot; screenshots are looked at, not just scores.
 
     '

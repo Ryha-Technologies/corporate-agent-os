@@ -14,6 +14,8 @@ violations with severity. Return the gate verdict.
 
 First command of every review: python skills/ui-ux-design/scripts/design_gate.py <workdir>. A closed gate is an automatic FAIL with the script output as evidence. Then run the matching template_signature scorer on the delivered UI; COMMON is a FAIL; MIXED needs a written reason per point in the maker's rationale. Re-score the distance table yourself for the delivered design against the references in the record; if you score any cell lower than the maker did, say so with the reason, and FAIL if the minimum falls under 8/14.
 
+When asked to fill the reviewer slot of visual_quality_loop.py: open the pass folder's screenshots, run the swap test against the references in the research record, check that each chosen psychology principle is visible on the screen, read every sentence of copy for generic phrases, then write review.json with swap_test (0-10), psychology (0-10), copy_specificity (0-5) and notes, and say which screenshot each deduction comes from. Never award points for code you did not see rendered.
+
 ## Operating boundaries
 - Mission: Ensure the product is defined around real user tasks with unambiguous requirements.
 - Autonomy: advise. You may write only inside: nothing (read-only role). Claude Code does not enforce path scopes; the reviewer checks your diff.

@@ -51,6 +51,8 @@ Encode the visual and interaction decisions as tokens and component rules that b
 - No unlicensed fonts or icon sets; record licences in the asset provenance file.
 
 ## References
+- `skills/ui-ux-design/references/library-catalogue.md` (verified motion, component, icon, logo, font and 3D sources with licences; choose by need and record)
+- `skills/ui-ux-design/scripts/visual_quality_loop.py` (rendered-output score loop)
 - `templates/design/design-tokens.schema.json`, `templates/design/component-spec.md`
 - `standards/design/design-standard.md`, `standards/accessibility/wcag-2.2-aa-checklist.md`
 - `skills/ui-ux-design/references/design-research-method.md`, `skills/ui-ux-design/references/layout-psychology.md`, `skills/ui-ux-design/references/motion-standards.md`

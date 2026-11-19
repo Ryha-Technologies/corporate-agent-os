@@ -8,7 +8,7 @@ Every agent with its tier, department, skills, tools, write scope and autonomy. 
 
 | Agent | Department | Title | Skills | Tools | Write scope | Reviews gates |
 |---|---|---|---|---|---|---|
-| `corporate-orchestrator` | executive | Corporate Orchestrator (accountable delivery lead) | corporate-orchestrator, anti-slop-quality-gate, codebase-audit-upgrade, executive-business-review | read, write, shell, web, subagent | `00-intake/**`<br>`10-decisions/**`<br>`07-quality/gate-index.md` | — |
+| `corporate-orchestrator` | executive | Corporate Orchestrator (accountable delivery lead) | corporate-orchestrator, anti-slop-quality-gate, codebase-audit-upgrade, executive-business-review, product-overhaul-orchestrator | read, write, shell, web, subagent | `00-intake/**`<br>`10-decisions/**`<br>`07-quality/gate-index.md` | — |
 
 ## Executives (advise only) (8)
 

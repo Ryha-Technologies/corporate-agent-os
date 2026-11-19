@@ -47,11 +47,12 @@ Gate check first: `python scripts/design_gate.py <workdir>` must be OPEN. Paste 
 10. **Per screen, before layout:** the one-line job, the single primary action, the reading order, the deliberate departure, the elements allowed to animate and why. Then wireframe in low fidelity and check task completion against the IA.
 11. **Layout from hierarchy.** Sections differ because their content differs: a ledger table, a diagram, a typographic statement, a two-column argument, an index with a side rail. A card is used only when the content is a card (a unit the user picks among peers). Breakpoints come from content, not device names; at 360 px nothing overflows and the primary action stays reachable.
 12. **Realistic content and all states.** Real text lengths, real data, no lorem ipsum, fake charts, invented metrics or testimonials. Every screen: initial, loading, empty, populated, error, offline, permission denied, expired session, success, destructive confirmation.
-13. **Motion** per `references/motion-standards.md`: a written motion table, under six moments on a content page, each with a job, 100 to 600 ms, transform and opacity only, triggered by user action or first entry into view, `prefers-reduced-motion` honoured and tested.
+13. **Libraries.** Choose animation engines, component primitives, icon sets, fonts and any 3D from `references/library-catalogue.md` by need, stack, licence and ownership of look; record each in the component register; styled gallery components are re-tokenised and their default motion replaced. Then **motion** per `references/motion-standards.md`: a written motion table, under six moments on a content page, each with a job, 100 to 600 ms, transform and opacity only, triggered by user action or first entry into view, `prefers-reduced-motion` honoured and tested.
 14. **Accessibility** (`accessibility-audit`): keyboard order, visible focus, labels, error messages, semantics, contrast, targets at least 24 px (44 px for primary), reduced motion, 400 % zoom reflow.
 15. **Copy** written for the real product: specific claims the evidence supports, user's vocabulary, no generic marketing phrases (the scorer lists them).
 
-### Phase 4: prove it
+### Phase 4: prove it, in a loop
+The build is not finished when it compiles. It is finished when the rendered result scores. Run `python scripts/visual_quality_loop.py <page> --out 04-design/evidence/pass-NN --target 90` on every main page: it screenshots at 360/768/1280 (true widths), measures template signature, overflow, contrast, targets, type and spacing discipline, hierarchy, motion restraint and semantics (75 points), and leaves 25 points for a reviewer who did not make the design (swap test, psychology fit, copy specificity, supplied as `--reviewer-json`). **Look at every screenshot** before deciding the next pass; the numbers do not see composition. Fix the largest gaps, rebuild, run the next pass. Stop when the target is met on two consecutive passes with the reviewer slot filled, or after two passes with no improvement (then escalate with both score files). Every pass folder is kept as evidence.
 16. **Re-score.** Run `scripts/template_signature.py` (web) or `scripts/template_signature_android.py` (Android) on the result. Target `DISTINCT`; `MIXED` is acceptable only with a written reason per remaining point; `COMMON` means return to step 11. Save output beside the baseline.
 17. **Swap test and slop checklist.** Three competitors, logos removed; record who could tell and why. Zero unexplained hits on `evaluations/originality/slop-patterns.md`. Fill the structural comparison table in `references/anti-template-review.md`.
 18. **Measurements after**, same checklist as step 3, side by side with before. Screenshots at 360/768/1280 and keyboard focus states in `after/`. Automated accessibility scan output pasted. Console clean.
@@ -64,6 +65,7 @@ Gate check first: `python scripts/design_gate.py <workdir>` must be OPEN. Paste 
 
 ## Quality criteria
 - A written research record (job, category table and pattern map, psychology analysis, three scored directions, approved choice) exists and is attached; the result passes the swap test against three competitors and has zero unexplained hits on `evaluations/originality/slop-patterns.md`.
+- `visual_quality_loop.py` pass folders are attached; the final pass meets the target (90 unless the owner set another) with the reviewer slot filled by a non-maker; every library used is in the component register with its licence.
 - `design_gate.py` output `DESIGN GATE OPEN` is attached and dated before the first build artefact; `template_signature.py` / `template_signature_android.py` before and after outputs are attached; the after result is `DISTINCT`, or `MIXED` with a written reason for each remaining point. An existing `COMMON` interface is never handed back unchanged.
 - Any motion follows `references/motion-standards.md`: every animated moment names its job, honours `prefers-reduced-motion`, and is listed in a motion table.
 - One primary action per screen; the accent colour and the largest motion are reserved for it or for the single element to be remembered.
@@ -86,6 +88,9 @@ Gate check first: `python scripts/design_gate.py <workdir>` must be OPEN. Paste 
 - If the user says "skip the research, just build it": build nothing, explain that the gate exists because unresearched design is the template every time, and offer the fastest compliant path (a 30-minute research record with three references and two directions marked as a reduced-evidence exception, recorded as such).
 
 ## References
+- `scripts/visual_quality_loop.py` (screenshot, measure, score 0 to 100, loop until the target)
+- `references/library-catalogue.md` (verified animation, component, icon, logo, font and 3D sources with licences)
+- `references/page-logic-crawl.md`, `references/slop-mechanics.md`
 - `scripts/design_gate.py` (blocks the build phase until `research-record.md` is complete and approved)
 - `scripts/template_signature.py` (web) and `scripts/template_signature_android.py` (Android) template-signature scores with per-point evidence; run before and after
 - `references/mobile-android-patterns.md` (the Android/Material template, platform conventions to keep, where identity lives on mobile)

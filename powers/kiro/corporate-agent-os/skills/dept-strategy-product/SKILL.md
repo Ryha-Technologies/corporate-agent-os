@@ -37,6 +37,7 @@ Let a user hand the whole department a request and get the complete result: the 
 ### Routing table
 | Request | Skills in order |
 |---|---|
+| Take an existing repo (or empty dir, or idea) all the way: audit, approve, rebrand, redesign, build, test, release, earn | product-overhaul-orchestrator (detects mode; spawns departments in parallel; visual quality loop to the target) |
 | Review the whole business, decide, and plan to production | executive-business-review (commissions dept-research and business-model-unit-economics as needed) → workflows/idea-to-production |
 | Is this idea worth building | business-idea-validation → strategy-market-sizing → business-model-unit-economics |
 | Define the product | product-discovery-prd |
@@ -44,6 +45,7 @@ Let a user hand the whole department a request and get the complete result: the 
 ### Member skills
 | Skill | Does |
 |---|---|
+| `product-overhaul-orchestrator` | Single entry point that takes an existing code repository from "do your work" to a rebranded, redesigned, production-ready, published and monetised product. |
 | `executive-business-review` | CEO-level review of a product, company or idea that reads everything the organisation has produced, analyses competitors, revenue models, payments and pricing, costs and unit economics, risks and the problems they imply, then decides what to improve and lays out a staged plan with reviews from now to production. |
 | `strategy-market-sizing` | Develop a differentiated company or product strategy with a one-sentence strategic choice, behavioural segmentation, bottom-up market sizing, differentiation basis, wedge, KPIs, kill thresholds and a pre-mortem. |
 | `business-idea-validation` | Investigate whether a rough or generic business idea is worth pursuing before any plan is written, by discovering the real problem, grading the evidence, assessing the opportunity, comparing business models, defining validation experiments, kill criteria and an MVP proposal. |

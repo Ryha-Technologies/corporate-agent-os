@@ -74,6 +74,8 @@ For any design item: `python skills/ui-ux-design/scripts/design_gate.py <workdir
 - Never rebrand a product without written approval of a specific direction.
 - Secrets found during the audit are reported by location only, never copied into the report.
 ## References
+- `skills/ui-ux-design/references/library-catalogue.md` (verified motion, component, icon, logo, font and 3D sources with licences; choose by need and record)
+- `skills/ui-ux-design/scripts/visual_quality_loop.py` (rendered-output score loop)
 - `skills/ui-ux-design/references/design-research-method.md` (mandatory research, idea comparison and uniqueness proof for any design)
 - `skills/ui-ux-design/references/layout-psychology.md` (principles and how to measure against them)
 - `skills/ui-ux-design/references/motion-standards.md` (when and how to animate)

@@ -50,6 +50,8 @@ Deliver creative work that communicates one clear idea to a specific audience, f
 - Public assets need human approval.
 
 ## References
+- `skills/ui-ux-design/references/library-catalogue.md` (verified motion, component, icon, logo, font and 3D sources with licences; choose by need and record)
+- `skills/ui-ux-design/scripts/visual_quality_loop.py` (rendered-output score loop)
 - `templates/branding/asset-provenance.md`, `templates/branding/creative-brief.md`
 - `standards/brand/brand-standard.md`
 - `skills/ui-ux-design/references/design-research-method.md`, `skills/ui-ux-design/references/layout-psychology.md`, `skills/ui-ux-design/references/motion-standards.md`

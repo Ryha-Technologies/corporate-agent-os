@@ -14,7 +14,7 @@ Formats verified 2026-11-18 (`research/source-register.md` S16). Live host testi
 
 ## Context budget
 
-Codex lists skills within roughly 2% of the model's context window and shortens descriptions first. With 51 skills, install a subset for a given project:
+Codex lists skills within roughly 2% of the model's context window and shortens descriptions first. With 52 skills, install a subset for a given project:
 
 ```bash
 python scripts/install/install.py --target codex --destination <project> --skills corporate-orchestrator,anti-slop-quality-gate,business-idea-validation,research-intelligence,competitive-analysis,business-model-unit-economics

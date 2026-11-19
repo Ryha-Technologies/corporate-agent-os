@@ -12,7 +12,7 @@
 ├───────────────────────────────────────────────────────────────────────┤
 │ Workflows: DAGs of stages → gates → reviewers → human approvals       │  coordination
 ├───────────────────────────────────────────────────────────────────────┤
-│ Skills: 51 portable playbooks + references                             │  how work is done
+│ Skills: 52 portable playbooks + references                             │  how work is done
 ├───────────────────────────────────────────────────────────────────────┤
 │ Core: task contracts · memory ledger · permissions · budgets · gates  │  rules and schemas
 ├───────────────────────────────────────────────────────────────────────┤

@@ -31,7 +31,8 @@ GROUPS: dict[str, dict] = {
             "An existing UI is scored with `skills/ui-ux-design/scripts/template_signature.py` (web) or `template_signature_android.py` (Android) first; `COMMON` means redesign, not a report. The platform default (Material 3, HIG) counts as part of the category template (`skills/ui-ux-design/references/mobile-android-patterns.md`).",
             "Directions come from `skills/ui-ux-design/references/creative-ideation.md`: a lens per direction from three families, derived from the job and never from a reference, with a distance table (minimum 8/14 against every reference) and a sibling check; 'like <competitor>' is discarded.",
             "No screen, component, theme, logo or UI code is produced until `python skills/ui-ux-design/scripts/design_gate.py <workdir>` prints `DESIGN GATE OPEN`; a request to skip research is answered with the shortest compliant path, never by skipping.",
-            "The result is re-scored, swap-tested and screenshotted at 360/768/1280 before it is called done.",
+            "The result is re-scored, swap-tested and screenshotted at 360/768/1280 before it is called done; `skills/ui-ux-design/scripts/visual_quality_loop.py` runs after every build pass until the target (90 by default) holds on two consecutive passes with a non-maker filling the reviewer slot; screenshots are looked at, not only scores.",
+            "Libraries for motion, components, icons, logos, fonts and 3D come from `skills/ui-ux-design/references/library-catalogue.md` by need and licence, recorded in the component register; styled gallery components are re-tokenised.",
         ],
         "routes": [
             ("Redesign or 'it looks generic / AI-made'", "ui-ux-design (Phase 0 score → research → directions → approval → build → re-score), design-system, accessibility-audit"),
@@ -138,7 +139,7 @@ GROUPS: dict[str, dict] = {
     "dept-strategy-product": {
         "title": "Strategy and product department",
         "department": "product",
-        "members": ["executive-business-review", "strategy-market-sizing", "business-idea-validation", "business-model-unit-economics", "product-discovery-prd"],
+        "members": ["product-overhaul-orchestrator", "executive-business-review", "strategy-market-sizing", "business-idea-validation", "business-model-unit-economics", "product-discovery-prd"],
         "reviewers": ["business-model-auditor"],
         "lead": "product-lead",
         "scope": "any strategy or product-definition request: idea validation with kill criteria, market sizing, business models and unit economics, PRDs with testable acceptance criteria",
@@ -147,6 +148,7 @@ GROUPS: dict[str, dict] = {
             "A PRD has acceptance criteria a tester can run.",
         ],
         "routes": [
+            ("Take an existing repo (or empty dir, or idea) all the way: audit, approve, rebrand, redesign, build, test, release, earn", "product-overhaul-orchestrator (detects mode; spawns departments in parallel; visual quality loop to the target)"),
             ("Review the whole business, decide, and plan to production", "executive-business-review (commissions dept-research and business-model-unit-economics as needed) → workflows/idea-to-production"),
             ("Is this idea worth building", "business-idea-validation → strategy-market-sizing → business-model-unit-economics"),
             ("Define the product", "product-discovery-prd"),

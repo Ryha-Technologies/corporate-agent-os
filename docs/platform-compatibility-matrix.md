@@ -32,4 +32,4 @@ Verification date for all platform facts: 2026-11-18 (`research/source-register.
 
 ## What "not yet tested live" would take
 
-Open each host in a clean project after `install.py`, confirm the skills list shows the 51 skills with their descriptions, invoke `/corporate-orchestrator` (or `$corporate-orchestrator`), confirm the agents appear (Kiro agent picker; Claude Code `@` mention), run regression case E15 and E18, and record the results in `evaluations/benchmark-reports/`.
+Open each host in a clean project after `install.py`, confirm the skills list shows the 52 skills with their descriptions, invoke `/corporate-orchestrator` (or `$corporate-orchestrator`), confirm the agents appear (Kiro agent picker; Claude Code `@` mention), run regression case E15 and E18, and record the results in `evaluations/benchmark-reports/`.
