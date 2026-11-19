@@ -19,6 +19,7 @@ One accountable lead for the whole arc on an existing product: understand it com
 Not for greenfield ideas (use `idea-to-production`), nor for a single bug or page (use the department skill).
 
 ## Preconditions
+- Kiro CLI non-interactive runs must trust delegation and skill loading: `kiro-cli chat --agent corporate-orchestrator --no-interactive --trust-tools="fs_read,fs_write,shell,disclose_context,subagent*"`. Without `subagent*` every delegation is denied and without `disclose_context` skills cannot load; both were observed live.
 - Read access to the repository and a way to run it; the owner's constraints (stack lock-in, must-not-change list, budget, deadline, geography, risk appetite); any analytics, revenue or support data.
 - The host offers real sub-agents. If not, say so and run the departments sequentially; never simulate parallel work.
 - Research before any design (`skills/ui-ux-design/references/design-research-method.md`); `design_gate.py` is in force for every design output.
@@ -37,10 +38,11 @@ Look at what you were given and pick one mode; say which and why in the brief.
 ### Phase 0: understand (orchestrator alone, read-only)
 1. **Intake.** `00-intake/brief.md`: what the product is, who uses it, how it earns or should, what the owner wants in one sentence, constraints, definition of done. Record facts (`F-`) and assumptions. One blocking question at most.
 2. **Inventory.** Stack, entry points, build and test commands (run them, paste output), dependency manifests, hosting, third-party services, payments provider if any, repository health (last commits, open issues, CI). `00-intake/inventory.md`.
-3. **Page map.** Run the spider from `skills/ui-ux-design/references/page-logic-crawl.md` §1: every page, screen, route, state and transition. `01-research/page-map.md`.
+3. **Page map.** Run the spider from `skills/ui-ux-design/references/page-logic-crawl.md` §1: every page, screen, route, state and transition. `00-intake/page-map.md`.
 4. **Plan the audit.** Instantiate task contracts (`core/task-management/`) for the parallel audit below, disjoint write paths, one reviewer per gate, budgets by risk.
 
 ### Phase 1: audit everything at once (spawn, in parallel, up to `max_parallel_agents`)
+Delegation is real, not narrated: in Kiro each specialist is a `subagent_<agent-id>` tool and the orchestrator's write permissions deny every stage folder except `00-intake/` and `10-decisions/`, so audit, design and build files can only be produced by the owning agent. Each delegated task names the output path inside that agent's scope. If a delegation call fails, record it and stop that track; never write the specialist's file yourself.
 5. Spawn with the named skills; each returns a structured report with `CHECKS_ACTUALLY_RUN`, `NOT_RUN` and an `anti-slop-quality-gate` self-check or it is returned unread:
    - `security-engineer` with `security-privacy`, `threat-modeling`: secrets, dependencies, auth, injection, headers, payments and personal-data handling; OWASP-mapped findings with file:line and severity.
    - `code-reviewer` with `code-review`, `software-engineering`: architecture intent, duplication, dead code, test coverage of the paths that matter, slop code tells (`skills/ui-ux-design/references/slop-mechanics.md` §2).
@@ -50,7 +52,7 @@ Look at what you were given and pick one mode; say which and why in the brief.
    - `accessibility-specialist` with `accessibility-audit`: scanner output plus manual WCAG 2.2 AA; `devops-engineer` with `devops-sre`: performance numbers, CI, environments, observability, cost.
    - `legal-researcher` with `oss-reuse-license`, `legal-risk-governance`: licence compliance of what ships, asset provenance, name and mark conflicts (preliminary), privacy and payments obligations as counsel questions.
    - `competitive-analyst` + `financial-modeler` with `competitive-analysis`, `business-model-unit-economics`: competitors with dated pricing and payment methods, revenue models for this product, payments plan, ranged unit economics.
-6. **Integrate** into `01-research/audit-report.md`: one findings table (id, department, severity, evidence, user impact, fix, effort, behaviour change), the page map with per-page verdicts, the element decision counts, the template-signature scores, the brand verdict, the money picture. Route to `research-auditor` and `design-qa-auditor` for the audit gate.
+6. **Integrate** into `10-decisions/audit-report.md`: one findings table (id, department, severity, evidence, user impact, fix, effort, behaviour change), the page map with per-page verdicts, the element decision counts, the template-signature scores, the brand verdict, the money picture. Route to `research-auditor` and `design-qa-auditor` for the audit gate.
 
 ### Phase 2: decide with the owner (stop here)
 7. **Executive review.** Delegate to `ceo-strategy` with `executive-business-review`: competitors, revenue models, payments, unit economics, problems rated kills/wounds/annoys, improvements with cheapest tests, recommendation. Record as `10-decisions/executive-review.md`.
@@ -84,7 +86,7 @@ Look at what you were given and pick one mode; say which and why in the brief.
 20. **Final report** (ten parts, `core/orchestrator/report-format.md`): what was asked, decided, built, verified per gate, approved, not run, how to roll back.
 
 ## Outputs
-- `00-intake/brief.md`, `00-intake/inventory.md`, `01-research/page-map.md`, `01-research/audit-report.md`, `10-decisions/executive-review.md`, `10-decisions/overhaul-proposal.md`, `10-decisions/approvals.md`, `04-design/research-record.md`, `04-design/**`, build branch with integration report, `07-quality/**` verdicts, `07-quality/release-readiness.md`, `09-operations/release-record.md`, `09-operations/post-launch-review.md`, `10-decisions/final-report.md`.
+- `00-intake/brief.md`, `00-intake/inventory.md`, `00-intake/page-map.md`, `10-decisions/audit-report.md`, `10-decisions/executive-review.md`, `10-decisions/overhaul-proposal.md`, `10-decisions/approvals.md`, `04-design/research-record.md`, `04-design/**`, build branch with integration report, `07-quality/**` verdicts, `07-quality/release-readiness.md`, `09-operations/release-record.md`, `09-operations/post-launch-review.md`, `10-decisions/final-report.md`.
 
 ## Quality criteria
 - Every page in the product appears in the page map with a job, a primary action and a keep/change/merge/remove/add decision backed by a reason; every removed element has a written "no user job" or "duplicate" justification.

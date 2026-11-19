@@ -53,6 +53,10 @@ def _delegates(agent: dict, agents: dict[str, dict]) -> list[str]:
     return []
 
 
+STAGE_DIRS = ["00-intake", "01-research", "02-product", "03-brand", "04-design", "05-architecture",
+              "06-build", "07-quality", "08-legal-oss", "09-operations", "10-decisions"]
+
+
 def render_kiro(agent: dict, agents: dict[str, dict], policy: dict) -> str:
     """Kiro custom agent in JSON. Kiro documents Markdown and JSON with identical fields; Kiro CLI 3.3.0 was observed
     (2026-11-18) to discover only JSON files under .kiro/agents, so JSON is the shipped format."""
@@ -68,6 +72,13 @@ def render_kiro(agent: dict, agents: dict[str, dict], policy: dict) -> str:
     rules: list[dict] = []
     if agent.get("write_scope"):
         rules.append({"capability": "fs_write", "match": list(agent["write_scope"]), "effect": "allow"})
+    # Enforce ownership: Kiro CLI 3.3.0 treats an allow rule as auto-approve only, and a deny rule wins over any
+    # allow (observed 2026-11-18). Deny every workspace stage folder that holds none of this agent's write scope,
+    # so a trusted fs_write still cannot write another department's outputs (the orchestrator must delegate).
+    own_dirs = {w.split("/")[0] for w in (agent.get("write_scope") or [])}
+    foreign = [f"{d}/**" for d in STAGE_DIRS if d not in own_dirs]
+    if "write" in agent["tools"] and foreign:
+        rules.append({"capability": "fs_write", "match": foreign, "effect": "deny"})
     shell = policy.get("shell", {})
     if "shell" in agent["tools"]:
         rules.append({"capability": "shell", "match": list(shell.get("allow_without_prompt", [])), "effect": "allow"})

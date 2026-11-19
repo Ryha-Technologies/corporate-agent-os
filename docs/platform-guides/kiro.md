@@ -35,3 +35,11 @@ Kiro supports looping a stage back on a trigger word with `max_iterations` 1–1
 ## Troubleshooting
 
 Agents not listed → workspace not trusted, or files not under `.kiro/agents/`. Skills not activating → custom agents load skills only through `resources: skill://`; the generated agents include them. Sub-agent prompts for every tool call → add the sub-agent's allow rules to the parent agent or your user `permissions.yaml`.
+
+## Running the orchestrator non-interactively (live-verified with Kiro CLI 3.3.0)
+```
+kiro-cli chat --agent corporate-orchestrator --no-interactive --trust-tools="fs_read,fs_write,shell,disclose_context,subagent*" "<your request>"
+```
+- `subagent*` is required: each specialist is a separate tool named `subagent_<agent-id>`; trusting `subagent` alone denies every delegation.
+- `disclose_context` is required for the agent to load skills in non-interactive mode.
+- Write ownership is enforced by generated `deny` rules: each agent is denied every workspace stage folder (`00-intake` … `10-decisions`) that contains none of its own outputs, because Kiro treats `allow` rules as auto-approve only and a `deny` rule wins over any `allow`. The orchestrator can write only `00-intake/` and `10-decisions/`.

@@ -34,6 +34,22 @@
         "effect": "allow"
       },
       {
+        "capability": "fs_write",
+        "match": [
+          "00-intake/**",
+          "01-research/**",
+          "02-product/**",
+          "03-brand/**",
+          "05-architecture/**",
+          "06-build/**",
+          "07-quality/**",
+          "08-legal-oss/**",
+          "09-operations/**",
+          "10-decisions/**"
+        ],
+        "effect": "deny"
+      },
+      {
         "capability": "shell",
         "match": [
           "git status*",
