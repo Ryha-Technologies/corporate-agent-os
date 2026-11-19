@@ -19,7 +19,7 @@ Delegation: the host's sub-agent feature was not used. The roles (discovery, IA,
 | 8 | Alt text | Scan: every `<img>` has `alt`; banner alt transcribes its text and describes the diagram | PASS |
 | 9 | No horizontal scroll at 360, 768, 1280 | Headless Edge, each page in an iframe at each width, compared `scrollWidth` to `clientWidth` | PASS, all 12 combinations |
 | 10 | Visual check at 1280 | Headless Edge screenshot of `index.html`, viewed | PASS (found and fixed: missing space in the brand name, orphaned count tile) |
-| 11 | Placeholder text | Search for lorem, TODO, TBD, placeholder. The only hit is the word "placeholders" inside the `anti-slop-quality-gate` skill description, quoted from the repo. | PASS |
+| 11 | Placeholder text <!-- slop-ignore: describes the search itself --> | Search for lorem, TODO, TBD, placeholder. The only hit is the word "placeholders" inside the `anti-slop-quality-gate` skill description, quoted from the repo. | PASS |
 | 12 | Fake metrics, testimonials, logos, user counts, readiness claims | Manual read of all copy. Numbers shown are repo counts from the brief. Only Kiro CLI 3.3.0 is described as live-verified. | PASS |
 | 13 | Third-party requests | No external CSS, fonts, scripts or images. System font stack, so no font licence applies. | PASS |
 

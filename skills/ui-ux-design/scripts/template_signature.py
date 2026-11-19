@@ -22,6 +22,7 @@ GENERIC_PHRASES = [
     "all-in-one", "powerful", "effortless", "revolutioni", "game-chang", "10x", "elevate",
     "empower", "transform your", "the future of", "trusted by", "loved by", "join thousands",
     "get started for free", "start your journey", "welcome to", "cutting-edge", "state-of-the-art",
+    "reimagined", "meet the", "delve", "game changer", "leverage", "harness the power", "in today's", "built for the modern",
 ]
 
 JS = r"""
@@ -74,6 +75,18 @@ JS = r"""
   out.centredContainer = mains.some(m => { const s = cs(m); return s.marginLeft === s.marginRight && s.marginLeft !== '0px' && s.maxWidth !== 'none'; });
   const rows = sections.map(s => [...s.children].filter(c => cs(c).display === 'grid').length);
   out.gridSections = rows.filter(n => n > 0).length;
+  // 12. Researched tells (slop-mechanics.md section 2)
+  const hs = [...document.querySelectorAll('h1, h2')];
+  out.accentedHeadlineWord = hs.filter(h => [...h.querySelectorAll('span, em, strong, i, b, mark')].some(k => { const words = (k.innerText || '').trim().split(/\s+/).filter(Boolean).length; const ks = cs(k), hs_ = cs(h); return words >= 1 && words <= 3 && (ks.color !== hs_.color || ks.fontStyle !== hs_.fontStyle || ks.backgroundImage.includes('gradient')); })).length;
+  out.capsLabels = all.filter(e => e.children.length === 0 && cs(e).textTransform === 'uppercase' && (e.innerText || '').trim().length > 0 && (e.innerText || '').trim().length < 32).length;
+  out.numberedMarkers = all.filter(e => e.children.length === 0 && /^\s*0\d\s*[.\/]?\s*$/.test(e.innerText || '')).length;
+  const UA_LINKS = ["rgb(0, 0, 238)", "rgb(85, 26, 139)", "rgb(0, 0, 255)", "rgb(158, 158, 255)", "rgb(208, 173, 240)"]; const hue = c => { if (UA_LINKS.includes(c)) return null; const m = (c || '').match(/\d+(\.\d+)?/g); if (!m) return null; let [r, g, b] = m.slice(0, 3).map(Number).map(v => v / 255); const mx = Math.max(r, g, b), mn = Math.min(r, g, b), d = mx - mn; if (d < 0.15) return null; let h = mx === r ? ((g - b) / d) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4; h = Math.round(h * 60); return h < 0 ? h + 360 : h; };
+  const actionEls = all.filter(e => ['A', 'BUTTON'].includes(e.tagName) || /btn|button|cta/i.test(e.className || ''));
+  out.indigoActions = actionEls.filter(e => { const h1_ = hue(cs(e).backgroundColor), h2_ = hue(cs(e).color); return (h1_ !== null && h1_ >= 235 && h1_ <= 285) || (h2_ !== null && h2_ >= 235 && h2_ <= 285 && cs(e).backgroundColor === 'rgba(0, 0, 0, 0)'); }).length;
+  out.indigoColours = [...new Set(actionEls.flatMap(e => [cs(e).backgroundColor, cs(e).color]).filter(c => { const h_ = hue(c); return h_ !== null && h_ >= 235 && h_ <= 285; }))].slice(0, 4);
+  out.popularPill = !!all.find(e => e.children.length === 0 && /^(most popular|recommended|best value|popular)$/i.test((e.innerText || '').trim()));
+  out.revealClasses = document.querySelectorAll('[data-aos], [class*="fade-up"], [class*="fadeUp"], [class*="reveal"], [class*="animate-in"], [class*="slide-up"], [data-animate]').length;
+  out.headlineWeight700 = hs.filter(h => parseInt(cs(h).fontWeight) >= 700 && /inter|roboto|system-ui|segoe|helvetica|arial|geist/i.test(cs(h).fontFamily)).length;
   // 11. Text
   out.text = document.body.innerText.slice(0, 20000);
   out.h1 = h1 ? h1.innerText.trim() : '';
@@ -153,6 +166,10 @@ def static_fallback(target: str) -> dict:
         "animated": len(re.findall(r"@keyframes|animation:", html)), "transitions": len(re.findall(r"transition:", html)),
         "centredContainer": bool(re.search(r"margin:\s*0\s+auto", html)),
         "gridSections": grid_secs, "text": text[:20000], "h1": "", "width": 0, "static": True,
+        "accentedHeadlineWord": len(re.findall(r"<h[12][^>]*>[^<]*<(span|em|strong|i|mark)[^>]*class=[\"\'][^\"\']*(gradient|accent|highlight|text-)", html, re.I)),
+        "capsLabels": len(re.findall(r"uppercase", html)), "numberedMarkers": len(re.findall(r">\s*0\d\s*<", html)),
+        "indigoActions": len(re.findall(r"(indigo|violet|purple)-[4-7]00", html)), "popularPill": bool(re.search(r">\s*(most popular|recommended)\s*<", html, re.I)),
+        "revealClasses": len(re.findall(r"data-aos|fade-up|fadeUp|reveal|animate-in|slide-up", html)), "headlineWeight700": 0,
     }
 
 def score(m: dict) -> tuple[int, list[str]]:
@@ -194,6 +211,20 @@ def score(m: dict) -> tuple[int, list[str]]:
         pts.append((6, "'Trusted by' / logo-wall section"))
     if m["emoji"] >= 3:
         pts.append((5, f"{m['emoji']} emoji used as decoration or bullets"))
+    if m.get("accentedHeadlineWord", 0) >= 1:
+        pts.append((6, f"{m['accentedHeadlineWord']} headline(s) accent one to three words in a different colour, style or gradient"))
+    if m.get("capsLabels", 0) >= 3:
+        pts.append((4, f"{m['capsLabels']} all-caps short labels (eyebrow labels)"))
+    if m.get("numberedMarkers", 0) >= 3:
+        pts.append((4, f"{m['numberedMarkers']} numbered markers (01 / 02 / 03); only valid if the content is a sequence"))
+    if m.get("indigoActions", 0) >= 2:
+        pts.append((6, f"{m['indigoActions']} actions in the indigo/violet hue band (235-285 deg), the measured AI default primary: " + ", ".join(m.get("indigoColours", []))))
+    if m.get("popularPill"):
+        pts.append((5, "'Most popular' / 'Recommended' pricing pill"))
+    if m.get("revealClasses", 0) >= 4:
+        pts.append((5, f"{m['revealClasses']} elements with fade-up/reveal-on-scroll hooks (scattered entrance motion)"))
+    if m.get("headlineWeight700", 0) >= 2:
+        pts.append((4, f"{m['headlineWeight700']} headlines in a default sans at weight 700+"))
     text = (m.get("text") or "").lower()
     hits = sorted({p for p in GENERIC_PHRASES if p in text})
     if hits:

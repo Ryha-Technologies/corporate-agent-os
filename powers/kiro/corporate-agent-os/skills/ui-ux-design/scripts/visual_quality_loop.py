@@ -19,9 +19,22 @@ Loop protocol (used by ui-ux-design Phase 4 and product-overhaul-orchestrator):
   100 means every measured criterion is at its ceiling and the reviewer awarded full marks; it is rare
   and the script never reports it from measurements alone.
 
-Reviewer JSON (optional):
-  {"swap_test": 0-10, "psychology": 0-10, "copy_specificity": 0-5, "notes": "..."}
-If absent, those 25 points are reported as NOT_RUN and the maximum achievable score is 75.
+Reviewer JSON (optional, written by an agent that did not make the design):
+  {"reviewer": "design-qa-auditor", "screenshots_viewed": ["index-360.png", "index-768.png", "index-1280.png"],
+   "swap_test": 0-10, "psychology": 0-10, "copy_specificity": 0-5, "notes": "..."}
+The slot is rejected when the reviewer equals --maker, when no reviewer id is given, or when
+screenshots_viewed does not list every screenshot of this pass. Measured copy slop on the rendered text
+(copy_slop_check.py, weighted hits > 5) caps copy_specificity at 2. If absent or rejected, those 25 points
+are NOT_RUN and the maximum achievable score is 75.
+
+Loop enforcement (score-history.json next to the pass folders, or --history):
+  exit 0  DONE      target met on the last two passes, both reviewed by a non-maker
+  exit 1  CONTINUE  below target, unreviewed, or met only once
+  exit 3  ESCALATE  two passes without improvement over the pass before them
+  exit 2  could not render
+A pass whose largest screenshot is byte-identical to the previous pass is flagged: nothing visible changed.
+
+Options: --maker <agent-id>  --history <path>  --target <n>  --widths <list>  --reviewer-json <path>
 """
 from __future__ import annotations
 import json, os, pathlib, re, subprocess, sys
@@ -176,17 +189,75 @@ def main(argv: list[str]) -> int:
     tsm = ts.render(target, 1280, chrome)
     tscore, treasons = ts.score(tsm) if tsm else (100, ["render failed"])
     tsig = {"score": tscore, "verdict": "COMMON" if tscore >= 40 else "MIXED" if tscore >= 20 else "DISTINCT", "reasons": treasons}
+    shots = [f"{name}-{w}.png" for w in widths]
+    maker = opt("--maker", None)
+    problems: list[str] = []
+    # Reviewer validity: a different agent, who names this pass's screenshots.
+    if reviewer is not None:
+        who = str(reviewer.get("reviewer", "")).strip()
+        viewed = set(reviewer.get("screenshots_viewed", []))
+        if not who:
+            problems.append("review.json has no 'reviewer' id; reviewer slot rejected")
+        elif maker and who.lower() == maker.lower():
+            problems.append(f"reviewer '{who}' is the maker; a maker cannot fill the reviewer slot")
+        if not set(shots) <= viewed:
+            problems.append("review.json 'screenshots_viewed' does not list every screenshot of this pass: " + ", ".join(sorted(set(shots) - viewed)))
+        if problems:
+            reviewer = None
+    # Copy slop measured on the rendered text caps the reviewer's copy score.
+    copy_hits = 0
+    try:
+        sys.path.insert(0, str(HERE.parents[1] / "anti-slop-quality-gate" / "scripts"))
+        import copy_slop_check as csc  # noqa: E402
+        tmp_txt = out / "_rendered_text.txt"
+        tmp_txt.write_text((tsm or {}).get("text", ""), encoding="utf-8")
+        copy_hits = csc.scan([tmp_txt])["weighted"]
+        tmp_txt.unlink()
+    except Exception as e:  # pragma: no cover
+        problems.append(f"copy slop check not run: {e}")
+    if reviewer is not None and copy_hits > 5:
+        reviewer = dict(reviewer, copy_specificity=min(int(reviewer.get("copy_specificity", 0)), 2))
     total, mx, rows = score(meas, tsig, reviewer)
-    (out / "measurements.json").write_text(json.dumps({"target": target, "widths": meas, "template_signature": tsig, "reviewer": reviewer}, indent=2), encoding="utf-8")
-    lines = [f"# Visual quality score: {total}/{mx} (target {goal})", "", f"Target: `{target}`  Screenshots: " + ", ".join(f"`{name}-{w}.png`" for w in widths), "",
+    if reviewer is None:
+        rows = [r for r in rows if not r[0].startswith("Reviewer")] + [("Reviewer: swap test / psychology / copy (NOT_RUN or rejected; see problems)", 0, 25, "; ".join(problems) or "NOT_RUN: provide --reviewer-json from a non-maker")]
+        total = sum(r[1] for r in rows)
+    # Score history and loop decision.
+    import hashlib, datetime
+    hist_path = pathlib.Path(opt("--history", str(out.parent / "score-history.json")))
+    history = json.loads(hist_path.read_text(encoding="utf-8")) if hist_path.exists() else []
+    big = out / shots[-1]
+    shot_hash = hashlib.sha256(big.read_bytes()).hexdigest()[:16] if big.exists() else None
+    if history and history[-1].get("pass") == str(out):
+        history = history[:-1]  # re-running the same pass replaces it
+    if history and shot_hash and history[-1].get("hash") == shot_hash:
+        problems.append("screenshots are identical to the previous pass: nothing visible changed")
+    history.append({"pass": str(out), "score": total, "reviewed": reviewer is not None, "maker": maker,
+                    "reviewer": (reviewer or {}).get("reviewer"), "hash": shot_hash, "copy_hits": copy_hits,
+                    "at": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")})
+    hist_path.write_text(json.dumps(history, indent=2), encoding="utf-8")
+    last2 = history[-2:]
+    if len(last2) == 2 and all(h["score"] >= goal and h["reviewed"] for h in last2):
+        status, code = "DONE: target met on two consecutive reviewed passes", 0
+    elif len(history) >= 3 and max(h["score"] for h in history[-2:]) <= history[-3]["score"]:
+        status, code = "ESCALATE: two passes without improvement; show the owner both passes and ask whether constraints are the cause", 3
+    elif total >= goal and reviewer is not None:
+        status, code = "CONTINUE: target met once; one more reviewed pass must confirm it", 1
+    else:
+        status, code = "CONTINUE: below target or not reviewed; fix the largest gaps and run the next pass", 1
+    (out / "measurements.json").write_text(json.dumps({"target": target, "widths": meas, "template_signature": tsig, "reviewer": reviewer, "copy_hits": copy_hits, "problems": problems}, indent=2), encoding="utf-8")
+    lines = [f"# Visual quality score: {total}/{mx} (target {goal})", "", f"**Loop status: {status}**", "",
+             f"Target: `{target}`  Screenshots: " + ", ".join(f"`{s_}`" for s_ in shots), f"Copy slop hits on rendered text: {copy_hits}", "",
              "| Criterion | Points | Max | Evidence |", "|---|---|---|---|"]
     for c, p, m_, e in rows:
         lines.append(f"| {c} | {p} | {m_} | {e} |")
-    lines += ["", "## Next pass", "Fix the criteria with the largest gap first. LOOK at every screenshot before deciding; the numbers do not see composition.",
-              "Stop when the score meets the target on two consecutive passes with the reviewer slot filled by someone who did not make the design."]
+    if problems:
+        lines += ["", "## Problems", *[f"- {p_}" for p_ in problems]]
+    lines += ["", "## History", "| Pass | Score | Reviewed by |", "|---|---|---|", *[f"| {pathlib.Path(h['pass']).name} | {h['score']} | {h.get('reviewer') or 'not reviewed'} |" for h in history],
+              "", "## Next pass", "Fix the criteria with the largest gap first. LOOK at every screenshot before deciding; the numbers do not see composition.",
+              "The reviewer (not the maker) writes review.json with reviewer, screenshots_viewed, swap_test, psychology, copy_specificity and notes."]
     (out / "score.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     print("\n".join(lines))
-    return 0 if total >= goal else 1
+    return code
 
 if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))
