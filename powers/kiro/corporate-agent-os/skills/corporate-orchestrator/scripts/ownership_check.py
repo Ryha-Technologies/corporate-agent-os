@@ -37,9 +37,18 @@ def owned_stages(agents_dir: Path) -> dict[str, set[str]]:
         owners[j.get("name", f.stem)] = dirs
     return owners
 
+ALL_STAGES = set(STAGES) | {"00-intake", "10-decisions"}
+
+
 def check(work: Path, agents_dir: Path) -> list[dict]:
     owners = owned_stages(agents_dir)
     results = []
+    # Stray stage folders (e.g. an agent inventing 06-security/) escape both the write rules and the ownership map.
+    for d in sorted(work.iterdir()) if work.exists() else []:
+        if d.is_dir() and re.match(r"^\d\d-", d.name) and d.name not in ALL_STAGES:
+            files = [f for f in d.rglob("*") if f.is_file()]
+            results.append({"file": d.name + "/", "maker": None, "reviewer": None, "ok": False,
+                            "problem": f"stray stage folder with {len(files)} files; stage folders are fixed ({', '.join(sorted(ALL_STAGES))}); move the files into the owning stage folder"})
     for stage in STAGES:
         for f in sorted((work / stage).rglob("*.md")) if (work / stage).exists() else []:
             if "evidence" in f.parts:
